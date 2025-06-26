@@ -3,9 +3,11 @@ import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 
 import { theme } from "~/styles/theme";
+
+import { FallbackPage } from "./fallback";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -29,7 +31,7 @@ const RootLayout = ({
       <AppRouterCacheProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          {children}
+          <Suspense fallback={<FallbackPage />}>{children}</Suspense>
         </ThemeProvider>
       </AppRouterCacheProvider>
     </body>
