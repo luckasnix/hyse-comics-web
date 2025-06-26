@@ -3,21 +3,10 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/navigation";
 
-import { ComicCard, type ComicCardProps } from "~/components/comic-card";
-import thumbnail from "~/storage/metaverse-cavalry-thumbnail.webp";
+import { ComicCard } from "~/components/comic-card";
+import { comicsMock } from "~/mocks/comics";
 
-const metaverseCavalryComic: Omit<ComicCardProps, "onReadButtonClick"> = {
-  id: "1",
-  title: "Metaverse Cavalry",
-  description:
-    "In a vast medieval world set within the Metaverse, a young warrior is summoned to face a looming threat that corrupts the very fabric of this digital reality: a powerful demon bent on destruction.",
-  image: {
-    src: thumbnail.src,
-    altText: "Metaverse Cavalry thumbnail",
-  },
-};
-
-const Home = () => {
+const HomePage = () => {
   const router = useRouter();
 
   const handleReadButtonClick = (id: string) => {
@@ -28,11 +17,17 @@ const Home = () => {
     <Grid container direction="column" alignItems="center">
       <Typography variant="h1">Hyse Comics</Typography>
       <ComicCard
-        {...metaverseCavalryComic}
+        id={comicsMock[0].id}
+        title={comicsMock[0].title}
+        description={comicsMock[0].description}
+        image={{
+          src: comicsMock[0].imageUrl,
+          altText: comicsMock[0].imageAltText,
+        }}
         onReadButtonClick={handleReadButtonClick}
       />
     </Grid>
   );
 };
 
-export default Home;
+export default HomePage;
