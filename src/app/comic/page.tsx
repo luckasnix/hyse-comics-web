@@ -2,6 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 
+import { ComicReaderController } from "~/components/comic-reader-controller";
 import { comicPanelsMock } from "~/mocks/comics";
 
 const ComicPage = () => {
@@ -20,6 +21,10 @@ const ComicPage = () => {
       <h1>Comic Page</h1>
       <p>Comic ID: {comicId}</p>
       <pre>{JSON.stringify(comicPanels, null, 2)}</pre>
+      <ComicReaderController
+        onBackButtonClick={() => {}}
+        onForwardButtonClick={() => {}}
+      />
     </div>
   );
 };
