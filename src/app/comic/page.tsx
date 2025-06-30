@@ -22,8 +22,8 @@ const ComicPage = () => {
       <p>Comic ID: {comicId}</p>
       <pre>{JSON.stringify(comicPanels, null, 2)}</pre>
       <ComicReaderController
-        onBackButtonClick={() => {}}
-        onForwardButtonClick={() => {}}
+        onPrevButtonClick={() => {}}
+        onNextButtonClick={() => {}}
       />
     </div>
   );

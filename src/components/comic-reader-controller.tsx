@@ -17,22 +17,22 @@ const iconButtonStyle: SxProps<Theme> = {
 };
 
 export type ComicReaderControllerProps = Readonly<{
-  onBackButtonClick: () => void;
-  onForwardButtonClick: () => void;
+  onPrevButtonClick: () => void;
+  onNextButtonClick: () => void;
 }>;
 
 export const ComicReaderController = ({
-  onBackButtonClick,
-  onForwardButtonClick,
+  onPrevButtonClick,
+  onNextButtonClick,
 }: ComicReaderControllerProps) => (
   <Stack direction="row" spacing={2} sx={containerStyle}>
-    <Tooltip title="Back">
-      <IconButton sx={iconButtonStyle} onClick={onBackButtonClick}>
+    <Tooltip title="Prev panel">
+      <IconButton sx={iconButtonStyle} onClick={onPrevButtonClick}>
         <ArrowBackIcon />
       </IconButton>
     </Tooltip>
-    <Tooltip title="Forward">
-      <IconButton sx={iconButtonStyle} onClick={onForwardButtonClick}>
+    <Tooltip title="Next panel">
+      <IconButton sx={iconButtonStyle} onClick={onNextButtonClick}>
         <ArrowForwardIcon />
       </IconButton>
     </Tooltip>
