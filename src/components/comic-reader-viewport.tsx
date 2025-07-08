@@ -4,7 +4,7 @@ import type { EmblaViewportRefType } from "embla-carousel-react";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 
-import type { ComicPanel } from "~/mocks/comics";
+import type { ComicPanel } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   overflow: "hidden",

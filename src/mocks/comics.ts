@@ -2,23 +2,7 @@ import metaverseCavalryThumbnail from "~/storage/metaverse-cavalry-thumbnail.web
 import metaverseCavalryPanel1 from "~/storage/metaverse-cavalry-panel-1.webp";
 import metaverseCavalryPanel2 from "~/storage/metaverse-cavalry-panel-2.webp";
 import metaverseCavalryPanel3 from "~/storage/metaverse-cavalry-panel-3.webp";
-
-export type Comic = {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  imageAltText: string;
-};
-
-export type ComicPanel = {
-  id: string;
-  comicId: string;
-  imageUrl: string;
-  imageWidth: number;
-  imageHeight: number;
-  imageAltText: string;
-};
+import type { Comic, ComicPanel } from "~/types/comics";
 
 export const comicsMock: Array<Comic> = [
   {
