@@ -2,8 +2,9 @@
 import Stack from "@mui/material/Stack";
 import useEmblaCarousel from "embla-carousel-react";
 import type { SxProps, Theme } from "@mui/material/styles";
+import { useFullscreen } from "ahooks";
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 
 import { ComicReaderController } from "~/components/comic-reader-controller";
 import { ComicReaderViewport } from "~/components/comic-reader-viewport";
@@ -15,6 +16,8 @@ const containerStyle: SxProps<Theme> = {
 };
 
 export const ComicReaderSection = () => {
+  const containerRef = useRef<HTMLElement>(null);
+
   const searchParams = useSearchParams();
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ axis: "y" });
@@ -24,6 +27,9 @@ export const ComicReaderSection = () => {
   const { canNavigatePrev, canNavigateNext, navigatePrev, navigateNext } =
     useCarouselNavigation(emblaApi);
 
+  const [isFullscreen, { enterFullscreen, exitFullscreen }] =
+    useFullscreen(containerRef);
+
   const comicPanels = useMemo(
     () =>
       comicPanelsMock.filter((comicPanel) => comicPanel.comicId === comicId),
@@ -31,13 +37,16 @@ export const ComicReaderSection = () => {
   );
 
   return (
-    <Stack component="section" sx={containerStyle}>
+    <Stack component="section" ref={containerRef} sx={containerStyle}>
       <ComicReaderViewport viewportRef={emblaRef} comicPanels={comicPanels} />
       <ComicReaderController
         isPrevButtonDisabled={!canNavigatePrev}
         isNextButtonDisabled={!canNavigateNext}
         onPrevButtonClick={navigatePrev}
         onNextButtonClick={navigateNext}
+        isFullscreen={isFullscreen}
+        onEnterFullscreen={enterFullscreen}
+        onExitFullscreen={exitFullscreen}
       />
     </Stack>
   );

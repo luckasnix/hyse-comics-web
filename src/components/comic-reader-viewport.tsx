@@ -8,6 +8,7 @@ import type { ComicPanel } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   overflow: "hidden",
+  bgcolor: "background.default",
 };
 
 const innerContainerStyle: SxProps<Theme> = {
