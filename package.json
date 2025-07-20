@@ -1,42 +1,42 @@
 {
-	"name": "hyse-comics-web",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev --turbopack",
-		"build": "next build",
-		"start": "next start",
-		"type:check": "tsc --noEmit",
-		"format:check": "biome format",
-		"format:write": "biome format --write",
-		"lint:check": "biome lint",
-		"lint:write": "biome lint --write",
-		"check-all": "biome check",
-		"write-all": "biome check --write",
-		"prepare": "husky"
-	},
-	"dependencies": {
-		"@emotion/cache": "11.14.0",
-		"@emotion/react": "11.14.0",
-		"@emotion/styled": "11.14.1",
-		"@mui/icons-material": "7.2.0",
-		"@mui/material": "7.2.0",
-		"@mui/material-nextjs": "7.2.0",
-		"ahooks": "3.9.0",
-		"embla-carousel": "8.6.0",
-		"embla-carousel-react": "8.6.0",
-		"next": "15.3.5",
-		"react": "19.1.0",
-		"react-dom": "19.1.0"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "2.1.2",
-		"@commitlint/cli": "19.8.1",
-		"@commitlint/config-conventional": "19.8.1",
-		"@types/node": "20.19.4",
-		"@types/react": "19.1.8",
-		"@types/react-dom": "19.1.6",
-		"husky": "9.1.7",
-		"typescript": "5.8.3"
-	}
+  "name": "hyse-comics-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "type:check": "tsc --noEmit",
+    "format:check": "biome format",
+    "format:write": "biome format --write",
+    "lint:check": "biome lint",
+    "lint:write": "biome lint --write",
+    "check-all": "biome check",
+    "write-all": "biome check --write",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@emotion/cache": "11.14.0",
+    "@emotion/react": "11.14.0",
+    "@emotion/styled": "11.14.1",
+    "@mui/icons-material": "7.2.0",
+    "@mui/material": "7.2.0",
+    "@mui/material-nextjs": "7.2.0",
+    "ahooks": "3.9.0",
+    "embla-carousel": "8.6.0",
+    "embla-carousel-react": "8.6.0",
+    "next": "15.3.5",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.1.2",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "@types/node": "20.19.4",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "husky": "9.1.7",
+    "typescript": "5.8.3"
+  }
 }

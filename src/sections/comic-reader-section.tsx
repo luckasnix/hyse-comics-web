@@ -12,42 +12,42 @@ import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
 import { comicPanelsMock } from "~/mocks/comics";
 
 const containerStyle: SxProps<Theme> = {
-	height: "100dvh",
+  height: "100dvh",
 };
 
 export const ComicReaderSection = () => {
-	const containerRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
 
-	const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
 
-	const [emblaRef, emblaApi] = useEmblaCarousel({ axis: "y" });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ axis: "y" });
 
-	const comicId = searchParams.get("id");
+  const comicId = searchParams.get("id");
 
-	const { canNavigatePrev, canNavigateNext, navigatePrev, navigateNext } =
-		useCarouselNavigation(emblaApi);
+  const { canNavigatePrev, canNavigateNext, navigatePrev, navigateNext } =
+    useCarouselNavigation(emblaApi);
 
-	const [isFullscreen, { enterFullscreen, exitFullscreen }] =
-		useFullscreen(containerRef);
+  const [isFullscreen, { enterFullscreen, exitFullscreen }] =
+    useFullscreen(containerRef);
 
-	const comicPanels = useMemo(
-		() =>
-			comicPanelsMock.filter((comicPanel) => comicPanel.comicId === comicId),
-		[comicId],
-	);
+  const comicPanels = useMemo(
+    () =>
+      comicPanelsMock.filter((comicPanel) => comicPanel.comicId === comicId),
+    [comicId],
+  );
 
-	return (
-		<Stack component="section" ref={containerRef} sx={containerStyle}>
-			<ComicReaderViewport viewportRef={emblaRef} comicPanels={comicPanels} />
-			<ComicReaderController
-				isPrevButtonDisabled={!canNavigatePrev}
-				isNextButtonDisabled={!canNavigateNext}
-				onPrevButtonClick={navigatePrev}
-				onNextButtonClick={navigateNext}
-				isFullscreen={isFullscreen}
-				onEnterFullscreen={enterFullscreen}
-				onExitFullscreen={exitFullscreen}
-			/>
-		</Stack>
-	);
+  return (
+    <Stack component="section" ref={containerRef} sx={containerStyle}>
+      <ComicReaderViewport viewportRef={emblaRef} comicPanels={comicPanels} />
+      <ComicReaderController
+        isPrevButtonDisabled={!canNavigatePrev}
+        isNextButtonDisabled={!canNavigateNext}
+        onPrevButtonClick={navigatePrev}
+        onNextButtonClick={navigateNext}
+        isFullscreen={isFullscreen}
+        onEnterFullscreen={enterFullscreen}
+        onExitFullscreen={exitFullscreen}
+      />
+    </Stack>
+  );
 };
