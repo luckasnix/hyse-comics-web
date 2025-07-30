@@ -27,16 +27,16 @@
     "embla-carousel": "8.6.0",
     "embla-carousel-react": "8.6.0",
     "next": "15.3.5",
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
   },
   "devDependencies": {
     "@biomejs/biome": "2.1.2",
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@types/node": "20.19.9",
-    "@types/react": "19.1.8",
-    "@types/react-dom": "19.1.6",
+    "@types/react": "19.1.9",
+    "@types/react-dom": "19.1.7",
     "husky": "9.1.7",
     "typescript": "5.8.3"
   }
