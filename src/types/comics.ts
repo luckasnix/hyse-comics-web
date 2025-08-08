@@ -1,7 +1,7 @@
 export type Comic = {
   id: string;
   title: string;
-  description: string;
+  summary: string;
   imageUrl: string;
   imageAltText: string;
 };

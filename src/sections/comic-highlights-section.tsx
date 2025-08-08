@@ -27,7 +27,7 @@ export const ComicHighlightsSection = () => {
           key={comic.id}
           id={comic.id}
           title={comic.title}
-          description={comic.description}
+          summary={comic.summary}
           image={{
             src: comic.imageUrl,
             altText: comic.imageAltText,

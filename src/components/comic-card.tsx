@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 export type ComicCardProps = Readonly<{
   id: string;
   title: string;
-  description: string;
+  summary: string;
   image: {
     src: string;
     altText: string;
@@ -19,7 +19,7 @@ export type ComicCardProps = Readonly<{
 export const ComicCard = ({
   id,
   title,
-  description,
+  summary,
   image,
   onReadButtonClick,
 }: ComicCardProps) => (
@@ -34,7 +34,7 @@ export const ComicCard = ({
         {title}
       </Typography>
       <Typography variant="body2" sx={{ color: "text.secondary" }}>
-        {description}
+        {summary}
       </Typography>
     </CardContent>
     <CardActions>

@@ -8,7 +8,7 @@ export const comicsMock: Array<Comic> = [
   {
     id: "hsGYfEuPQH-U",
     title: "Metaverse Cavalry",
-    description:
+    summary:
       "In a vast medieval world set within the Metaverse, a young warrior is summoned to face a looming threat that corrupts the very fabric of this digital reality: a powerful demon bent on destruction.",
     imageUrl: metaverseCavalryThumbnail.src,
     imageAltText: "Metaverse Cavalry thumbnail",
