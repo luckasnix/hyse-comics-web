@@ -30,7 +30,7 @@ export const ComicCard = ({
       title={image.altText}
     />
     <CardContent>
-      <Typography gutterBottom variant="h5">
+      <Typography variant="h5" gutterBottom>
         {title}
       </Typography>
       <Typography variant="body2" sx={{ color: "text.secondary" }}>
