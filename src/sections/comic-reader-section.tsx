@@ -24,8 +24,16 @@ export const ComicReaderSection = () => {
 
   const comicId = searchParams.get("id");
 
-  const { canNavigatePrev, canNavigateNext, navigatePrev, navigateNext } =
-    useCarouselNavigation(emblaApi);
+  const {
+    canNavigateFirst,
+    canNavigatePrev,
+    canNavigateNext,
+    canNavigateLast,
+    navigateFirst,
+    navigatePrev,
+    navigateNext,
+    navigateLast,
+  } = useCarouselNavigation(emblaApi);
 
   const [isFullscreen, { enterFullscreen, exitFullscreen }] =
     useFullscreen(containerRef);
@@ -40,10 +48,14 @@ export const ComicReaderSection = () => {
     <Stack component="section" ref={containerRef} sx={containerStyle}>
       <ComicReaderViewport viewportRef={emblaRef} comicPanels={comicPanels} />
       <ComicReaderController
+        isFirstButtonDisabled={!canNavigateFirst}
         isPrevButtonDisabled={!canNavigatePrev}
         isNextButtonDisabled={!canNavigateNext}
+        isLastButtonDisabled={!canNavigateLast}
+        onFirstButtonClick={navigateFirst}
         onPrevButtonClick={navigatePrev}
         onNextButtonClick={navigateNext}
+        onLastButtonClick={navigateLast}
         isFullscreen={isFullscreen}
         onEnterFullscreen={enterFullscreen}
         onExitFullscreen={exitFullscreen}

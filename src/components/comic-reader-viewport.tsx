@@ -12,7 +12,7 @@ const containerStyle: SxProps<Theme> = {
 };
 
 const innerContainerStyle: SxProps<Theme> = {
-  height: "calc(100dvh - 64px)",
+  height: "calc(100dvh - 56px)",
   touchAction: "pan-x pinch-zoom",
   display: "flex",
   flexDirection: "column",
