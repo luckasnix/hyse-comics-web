@@ -8,7 +8,6 @@ import { useMemo, useRef } from "react";
 
 import { ComicReaderController } from "~/components/comic-reader-controller";
 import { ComicReaderViewport } from "~/components/comic-reader-viewport";
-import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
 import { comicPanelsMock } from "~/mocks/comics";
 
 const containerStyle: SxProps<Theme> = {
@@ -24,17 +23,6 @@ export const ComicReaderSection = () => {
 
   const comicId = searchParams.get("id");
 
-  const {
-    canNavigateFirst,
-    canNavigatePrev,
-    canNavigateNext,
-    canNavigateLast,
-    navigateFirst,
-    navigatePrev,
-    navigateNext,
-    navigateLast,
-  } = useCarouselNavigation(emblaApi);
-
   const [isFullscreen, { enterFullscreen, exitFullscreen }] =
     useFullscreen(containerRef);
 
@@ -48,14 +36,7 @@ export const ComicReaderSection = () => {
     <Stack component="section" ref={containerRef} sx={containerStyle}>
       <ComicReaderViewport viewportRef={emblaRef} comicPanels={comicPanels} />
       <ComicReaderController
-        isFirstButtonDisabled={!canNavigateFirst}
-        isPrevButtonDisabled={!canNavigatePrev}
-        isNextButtonDisabled={!canNavigateNext}
-        isLastButtonDisabled={!canNavigateLast}
-        onFirstButtonClick={navigateFirst}
-        onPrevButtonClick={navigatePrev}
-        onNextButtonClick={navigateNext}
-        onLastButtonClick={navigateLast}
+        controllerApi={emblaApi}
         isFullscreen={isFullscreen}
         onEnterFullscreen={enterFullscreen}
         onExitFullscreen={exitFullscreen}

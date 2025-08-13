@@ -1,3 +1,4 @@
+"use client";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
@@ -9,6 +10,8 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
+import type { EmblaCarouselType } from "embla-carousel";
+import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
 
 const containerStyle: SxProps<Theme> = {
   height: "56px",
@@ -22,93 +25,92 @@ const iconButtonStyle: SxProps<Theme> = {
 };
 
 export type ComicReaderControllerProps = Readonly<{
-  isFirstButtonDisabled: boolean;
-  isPrevButtonDisabled: boolean;
-  isNextButtonDisabled: boolean;
-  isLastButtonDisabled: boolean;
-  onFirstButtonClick: () => void;
-  onPrevButtonClick: () => void;
-  onNextButtonClick: () => void;
-  onLastButtonClick: () => void;
+  controllerApi: EmblaCarouselType | undefined;
   isFullscreen: boolean;
   onEnterFullscreen: () => void;
   onExitFullscreen: () => void;
 }>;
 
 export const ComicReaderController = ({
-  isFirstButtonDisabled,
-  isPrevButtonDisabled,
-  isNextButtonDisabled,
-  isLastButtonDisabled,
-  onFirstButtonClick,
-  onPrevButtonClick,
-  onNextButtonClick,
-  onLastButtonClick,
+  controllerApi,
   isFullscreen,
   onEnterFullscreen,
   onExitFullscreen,
-}: ComicReaderControllerProps) => (
-  <Stack direction="row" spacing={2} sx={containerStyle}>
-    <Tooltip title="First panel">
-      <Box component="span">
-        <IconButton
-          sx={iconButtonStyle}
-          disabled={isFirstButtonDisabled}
-          onClick={onFirstButtonClick}
-        >
-          <FirstPageIcon />
-        </IconButton>
-      </Box>
-    </Tooltip>
-    <Tooltip title="Previous panel">
-      <Box component="span">
-        <IconButton
-          sx={iconButtonStyle}
-          disabled={isPrevButtonDisabled}
-          onClick={onPrevButtonClick}
-        >
-          <NavigateBeforeIcon />
-        </IconButton>
-      </Box>
-    </Tooltip>
-    <Tooltip title="Next panel">
-      <Box component="span">
-        <IconButton
-          sx={iconButtonStyle}
-          disabled={isNextButtonDisabled}
-          onClick={onNextButtonClick}
-        >
-          <NavigateNextIcon />
-        </IconButton>
-      </Box>
-    </Tooltip>
-    <Tooltip title="Last panel">
-      <Box component="span">
-        <IconButton
-          sx={iconButtonStyle}
-          disabled={isLastButtonDisabled}
-          onClick={onLastButtonClick}
-        >
-          <LastPageIcon />
-        </IconButton>
-      </Box>
-    </Tooltip>
-    {isFullscreen ? (
-      <Tooltip title="Exit fullscreen">
+}: ComicReaderControllerProps) => {
+  const {
+    canNavigateFirst,
+    canNavigatePrev,
+    canNavigateNext,
+    canNavigateLast,
+    navigateFirst,
+    navigatePrev,
+    navigateNext,
+    navigateLast,
+  } = useCarouselNavigation(controllerApi);
+
+  return (
+    <Stack direction="row" spacing={2} sx={containerStyle}>
+      <Tooltip title="First panel">
         <Box component="span">
-          <IconButton sx={iconButtonStyle} onClick={onExitFullscreen}>
-            <FullscreenExitIcon />
+          <IconButton
+            sx={iconButtonStyle}
+            disabled={!canNavigateFirst}
+            onClick={navigateFirst}
+          >
+            <FirstPageIcon />
           </IconButton>
         </Box>
       </Tooltip>
-    ) : (
-      <Tooltip title="Enter fullscreen">
+      <Tooltip title="Previous panel">
         <Box component="span">
-          <IconButton sx={iconButtonStyle} onClick={onEnterFullscreen}>
-            <FullscreenIcon />
+          <IconButton
+            sx={iconButtonStyle}
+            disabled={!canNavigatePrev}
+            onClick={navigatePrev}
+          >
+            <NavigateBeforeIcon />
           </IconButton>
         </Box>
       </Tooltip>
-    )}
-  </Stack>
-);
+      <Tooltip title="Next panel">
+        <Box component="span">
+          <IconButton
+            sx={iconButtonStyle}
+            disabled={!canNavigateNext}
+            onClick={navigateNext}
+          >
+            <NavigateNextIcon />
+          </IconButton>
+        </Box>
+      </Tooltip>
+      <Tooltip title="Last panel">
+        <Box component="span">
+          <IconButton
+            sx={iconButtonStyle}
+            disabled={!canNavigateLast}
+            onClick={navigateLast}
+          >
+            <LastPageIcon />
+          </IconButton>
+        </Box>
+      </Tooltip>
+      {isFullscreen ? (
+        <Tooltip title="Exit fullscreen">
+          <Box component="span">
+            <IconButton sx={iconButtonStyle} onClick={onExitFullscreen}>
+              <FullscreenExitIcon />
+            </IconButton>
+          </Box>
+        </Tooltip>
+      ) : (
+        <Tooltip title="Enter fullscreen">
+          <Box component="span">
+            <IconButton sx={iconButtonStyle} onClick={onEnterFullscreen}>
+              <FullscreenIcon />
+            </IconButton>
+          </Box>
+        </Tooltip>
+      )}
+    </Stack>
+  );
+};
