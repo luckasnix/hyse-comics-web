@@ -4,10 +4,14 @@ import { useCallback, useEffect, useState } from "react";
 export const useCarouselNavigation = (
   carouselApi: EmblaCarouselType | undefined,
 ) => {
-  const [canNavigateFirst, setCanNavigateFirst] = useState(false);
-  const [canNavigatePrev, setCanNavigatePrev] = useState(false);
-  const [canNavigateNext, setCanNavigateNext] = useState(false);
-  const [canNavigateLast, setCanNavigateLast] = useState(false);
+  const [currentPanelNumber, setCurrentPanelNumber] = useState<number | null>(
+    null,
+  );
+  const [panelsLength, setPanelsLength] = useState<number | null>(null);
+  const [canNavigateFirst, setCanNavigateFirst] = useState<boolean>(false);
+  const [canNavigatePrev, setCanNavigatePrev] = useState<boolean>(false);
+  const [canNavigateNext, setCanNavigateNext] = useState<boolean>(false);
+  const [canNavigateLast, setCanNavigateLast] = useState<boolean>(false);
 
   const navigateFirst = useCallback(() => {
     carouselApi?.scrollTo(0);
@@ -29,11 +33,13 @@ export const useCarouselNavigation = (
 
   const onSelect = useCallback((carouselApi: EmblaCarouselType) => {
     const currentIndex = carouselApi.selectedScrollSnap();
-    const lastIndex = carouselApi.scrollSnapList().length - 1;
+    const length = carouselApi.scrollSnapList().length;
+    setCurrentPanelNumber(currentIndex + 1);
+    setPanelsLength(length);
     setCanNavigateFirst(currentIndex > 0);
     setCanNavigatePrev(carouselApi.canScrollPrev());
     setCanNavigateNext(carouselApi.canScrollNext());
-    setCanNavigateLast(currentIndex < lastIndex);
+    setCanNavigateLast(currentIndex < length - 1);
   }, []);
 
   useEffect(() => {
@@ -43,6 +49,8 @@ export const useCarouselNavigation = (
   }, [carouselApi, onSelect]);
 
   return {
+    currentPanelNumber,
+    panelsLength,
     canNavigateFirst,
     canNavigatePrev,
     canNavigateNext,

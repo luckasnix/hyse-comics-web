@@ -10,7 +10,9 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 import type { EmblaCarouselType } from "embla-carousel";
+
 import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
 
 const containerStyle: SxProps<Theme> = {
@@ -22,6 +24,13 @@ const containerStyle: SxProps<Theme> = {
 
 const iconButtonStyle: SxProps<Theme> = {
   color: "primary.contrastText",
+};
+
+const panelCounterStyle: SxProps<Theme> = {
+  bgcolor: "primary.dark",
+  px: 2,
+  py: 1,
+  borderRadius: 2,
 };
 
 export type ComicReaderControllerProps = Readonly<{
@@ -38,6 +47,8 @@ export const ComicReaderController = ({
   onExitFullscreen,
 }: ComicReaderControllerProps) => {
   const {
+    currentPanelNumber,
+    panelsLength,
     canNavigateFirst,
     canNavigatePrev,
     canNavigateNext,
@@ -72,6 +83,11 @@ export const ComicReaderController = ({
           </IconButton>
         </Box>
       </Tooltip>
+      <Box component="span" sx={panelCounterStyle}>
+        <Typography variant="body1" sx={{ color: "primary.contrastText" }}>
+          {currentPanelNumber ?? "?"} / {panelsLength ?? "?"}
+        </Typography>
+      </Box>
       <Tooltip title="Next panel">
         <Box component="span">
           <IconButton
