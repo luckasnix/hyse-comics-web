@@ -21,7 +21,9 @@ export const ComicHighlightsSection = () => {
 
   return (
     <Box component="section" sx={containerStyle}>
-      <Typography variant="h3">Featured Comics</Typography>
+      <Typography variant="h4" gutterBottom>
+        Featured Comics
+      </Typography>
       {comicsMock.map((comic) => (
         <ComicCard
           key={comic.id}
