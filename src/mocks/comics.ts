@@ -7,6 +7,9 @@ import type { Comic, ComicPanel } from "~/types/comics";
 export const comicsMock: Array<Comic> = [
   {
     id: "hsGYfEuPQH-U",
+    structure: "single-panel",
+    orientation: "landscape",
+    genres: ["action", "adventure", "fantasy", "sci-fi"],
     title: "Metaverse Cavalry",
     summary:
       "In a vast medieval world set within the Metaverse, a young warrior is summoned to face a looming threat that corrupts the very fabric of this digital reality: a powerful demon bent on destruction.",

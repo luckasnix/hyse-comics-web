@@ -28,6 +28,7 @@ export const ComicHighlightsSection = () => {
         <ComicCard
           key={comic.id}
           id={comic.id}
+          genres={comic.genres}
           title={comic.title}
           summary={comic.summary}
           image={{

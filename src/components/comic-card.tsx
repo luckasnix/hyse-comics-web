@@ -3,10 +3,15 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+
+import type { ComicGenre } from "~/types/comics";
 
 export type ComicCardProps = Readonly<{
   id: string;
+  genres: Array<ComicGenre>;
   title: string;
   summary: string;
   image: {
@@ -18,6 +23,7 @@ export type ComicCardProps = Readonly<{
 
 export const ComicCard = ({
   id,
+  genres,
   title,
   summary,
   image,
@@ -33,9 +39,14 @@ export const ComicCard = ({
       <Typography variant="h5" gutterBottom>
         {title}
       </Typography>
-      <Typography variant="body2" sx={{ color: "text.secondary" }}>
+      <Typography variant="body2" gutterBottom sx={{ color: "text.secondary" }}>
         {summary}
       </Typography>
+      <Stack direction="row" spacing={1}>
+        {genres.map((genre) => (
+          <Chip key={genre} color="primary" label={genre} />
+        ))}
+      </Stack>
     </CardContent>
     <CardActions>
       <Button
