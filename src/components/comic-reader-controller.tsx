@@ -2,6 +2,7 @@
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+import HomeIcon from "@mui/icons-material/Home";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -12,6 +13,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import type { EmblaCarouselType } from "embla-carousel";
+import Link from "next/link";
 
 import { useComicReaderNavigation } from "~/hooks/use-comic-reader-navigation";
 
@@ -61,6 +63,13 @@ export const ComicReaderController = ({
 
   return (
     <Stack direction="row" spacing={2} sx={containerStyle}>
+      <Tooltip title="Home">
+        <Link href="/">
+          <IconButton sx={iconButtonStyle}>
+            <HomeIcon />
+          </IconButton>
+        </Link>
+      </Tooltip>
       <Tooltip title="First panel">
         <Box component="span">
           <IconButton
