@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import type { EmblaCarouselType } from "embla-carousel";
 
-import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
+import { useComicReaderNavigation } from "~/hooks/use-comic-reader-navigation";
 
 const containerStyle: SxProps<Theme> = {
   height: "56px",
@@ -57,7 +57,7 @@ export const ComicReaderController = ({
     navigatePrev,
     navigateNext,
     navigateLast,
-  } = useCarouselNavigation(controllerApi);
+  } = useComicReaderNavigation(controllerApi);
 
   return (
     <Stack direction="row" spacing={2} sx={containerStyle}>

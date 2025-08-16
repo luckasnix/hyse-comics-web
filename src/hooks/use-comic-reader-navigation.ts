@@ -1,7 +1,7 @@
 import type { EmblaCarouselType } from "embla-carousel";
 import { useCallback, useEffect, useState } from "react";
 
-export const useCarouselNavigation = (
+export const useComicReaderNavigation = (
   carouselApi: EmblaCarouselType | undefined,
 ) => {
   const [currentPanelNumber, setCurrentPanelNumber] = useState<number | null>(
