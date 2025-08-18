@@ -7,8 +7,8 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
@@ -24,11 +24,16 @@ const containerStyle: SxProps<Theme> = {
   alignItems: "center",
 };
 
+const innerContainerStyle: SxProps<Theme> = {
+  maxWidth: "1200px",
+};
+
 const iconButtonStyle: SxProps<Theme> = {
   color: "primary.contrastText",
 };
 
 const panelCounterStyle: SxProps<Theme> = {
+  display: "inline-flex",
   bgcolor: "primary.dark",
   px: 2,
   py: 1,
@@ -62,80 +67,88 @@ export const ComicReaderController = ({
   } = useComicReaderNavigation(controllerApi);
 
   return (
-    <Stack direction="row" spacing={2} sx={containerStyle}>
-      <Tooltip title="Home">
-        <Link href="/">
-          <IconButton sx={iconButtonStyle}>
-            <HomeIcon />
-          </IconButton>
-        </Link>
-      </Tooltip>
-      <Tooltip title="First panel">
-        <Box component="span">
-          <IconButton
-            sx={iconButtonStyle}
-            disabled={!canNavigateFirst}
-            onClick={navigateFirst}
-          >
-            <FirstPageIcon />
-          </IconButton>
-        </Box>
-      </Tooltip>
-      <Tooltip title="Previous panel">
-        <Box component="span">
-          <IconButton
-            sx={iconButtonStyle}
-            disabled={!canNavigatePrev}
-            onClick={navigatePrev}
-          >
-            <NavigateBeforeIcon />
-          </IconButton>
-        </Box>
-      </Tooltip>
-      <Box component="span" sx={panelCounterStyle}>
-        <Typography variant="body1" sx={{ color: "primary.contrastText" }}>
-          {currentPanelNumber ?? "?"} / {panelsLength ?? "?"}
-        </Typography>
-      </Box>
-      <Tooltip title="Next panel">
-        <Box component="span">
-          <IconButton
-            sx={iconButtonStyle}
-            disabled={!canNavigateNext}
-            onClick={navigateNext}
-          >
-            <NavigateNextIcon />
-          </IconButton>
-        </Box>
-      </Tooltip>
-      <Tooltip title="Last panel">
-        <Box component="span">
-          <IconButton
-            sx={iconButtonStyle}
-            disabled={!canNavigateLast}
-            onClick={navigateLast}
-          >
-            <LastPageIcon />
-          </IconButton>
-        </Box>
-      </Tooltip>
-      {isFullscreen ? (
-        <Tooltip title="Exit fullscreen">
-          <Box component="span">
-            <IconButton sx={iconButtonStyle} onClick={onExitFullscreen}>
-              <FullscreenExitIcon />
-            </IconButton>
+    <Grid container sx={containerStyle}>
+      <Grid container size="grow" sx={innerContainerStyle}>
+        <Grid size={2} spacing={2} display="flex" justifyContent="start">
+          <Tooltip title="Home">
+            <Link href="/">
+              <IconButton sx={iconButtonStyle}>
+                <HomeIcon />
+              </IconButton>
+            </Link>
+          </Tooltip>
+        </Grid>
+        <Grid size="grow" spacing={2} display="flex" justifyContent="center">
+          <Tooltip title="First panel">
+            <Box component="span">
+              <IconButton
+                sx={iconButtonStyle}
+                disabled={!canNavigateFirst}
+                onClick={navigateFirst}
+              >
+                <FirstPageIcon />
+              </IconButton>
+            </Box>
+          </Tooltip>
+          <Tooltip title="Previous panel">
+            <Box component="span">
+              <IconButton
+                sx={iconButtonStyle}
+                disabled={!canNavigatePrev}
+                onClick={navigatePrev}
+              >
+                <NavigateBeforeIcon />
+              </IconButton>
+            </Box>
+          </Tooltip>
+          <Box component="span" sx={panelCounterStyle}>
+            <Typography variant="body1" sx={{ color: "primary.contrastText" }}>
+              {currentPanelNumber ?? "?"} / {panelsLength ?? "?"}
+            </Typography>
           </Box>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Enter fullscreen">
-          <Box component="span">
-            <IconButton sx={iconButtonStyle} onClick={onEnterFullscreen}>
-              <FullscreenIcon />
-            </IconButton>
-          </Box>
-        </Tooltip>
-      )}
-    </Stack>
+          <Tooltip title="Next panel">
+            <Box component="span">
+              <IconButton
+                sx={iconButtonStyle}
+                disabled={!canNavigateNext}
+                onClick={navigateNext}
+              >
+                <NavigateNextIcon />
+              </IconButton>
+            </Box>
+          </Tooltip>
+          <Tooltip title="Last panel">
+            <Box component="span">
+              <IconButton
+                sx={iconButtonStyle}
+                disabled={!canNavigateLast}
+                onClick={navigateLast}
+              >
+                <LastPageIcon />
+              </IconButton>
+            </Box>
+          </Tooltip>
+        </Grid>
+        <Grid size={2} spacing={2} display="flex" justifyContent="end">
+          {isFullscreen ? (
+            <Tooltip title="Exit fullscreen">
+              <Box component="span">
+                <IconButton sx={iconButtonStyle} onClick={onExitFullscreen}>
+                  <FullscreenExitIcon />
+                </IconButton>
+              </Box>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Enter fullscreen">
+              <Box component="span">
+                <IconButton sx={iconButtonStyle} onClick={onEnterFullscreen}>
+                  <FullscreenIcon />
+                </IconButton>
+              </Box>
+            </Tooltip>
+          )}
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
