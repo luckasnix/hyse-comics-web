@@ -16,6 +16,10 @@ const innerContainerStyle: SxProps<Theme> = {
   touchAction: "pan-x pinch-zoom",
   display: "flex",
   flexDirection: "column",
+  cursor: "grab",
+  "&:active": {
+    cursor: "grabbing",
+  },
 };
 
 const panelStyle: SxProps<Theme> = {
