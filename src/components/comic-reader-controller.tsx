@@ -19,6 +19,7 @@ import { useComicReaderNavigation } from "~/hooks/use-comic-reader-navigation";
 
 const containerStyle: SxProps<Theme> = {
   height: "56px",
+  paddingX: "20px",
   bgcolor: "primary.main",
   justifyContent: "center",
   alignItems: "center",
