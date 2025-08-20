@@ -12,6 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import { useEventListener } from "ahooks";
 import type { EmblaCarouselType } from "embla-carousel";
 import Link from "next/link";
 
@@ -44,15 +45,17 @@ const panelCounterStyle: SxProps<Theme> = {
 export type ComicReaderControllerProps = Readonly<{
   controllerApi: EmblaCarouselType | undefined;
   isFullscreen: boolean;
-  onEnterFullscreen: () => void;
-  onExitFullscreen: () => void;
+  enterFullscreen: () => void;
+  exitFullscreen: () => void;
+  toggleFullscreen: () => void;
 }>;
 
 export const ComicReaderController = ({
   controllerApi,
   isFullscreen,
-  onEnterFullscreen,
-  onExitFullscreen,
+  enterFullscreen,
+  exitFullscreen,
+  toggleFullscreen,
 }: ComicReaderControllerProps) => {
   const {
     currentPanelNumber,
@@ -67,6 +70,27 @@ export const ComicReaderController = ({
     navigateLast,
   } = useComicReaderNavigation(controllerApi);
 
+  useEventListener("keydown", ({ key, shiftKey }) => {
+    if (shiftKey) {
+      if (key === "ArrowLeft") {
+        navigateFirst();
+      }
+      if (key === "ArrowRight") {
+        navigateLast();
+      }
+    } else {
+      if (key === "ArrowLeft") {
+        navigatePrev();
+      }
+      if (key === "ArrowRight") {
+        navigateNext();
+      }
+      if (key === "f") {
+        toggleFullscreen();
+      }
+    }
+  });
+
   return (
     <Grid container sx={containerStyle}>
       <Grid container size="grow" sx={innerContainerStyle}>
@@ -80,7 +104,7 @@ export const ComicReaderController = ({
           </Tooltip>
         </Grid>
         <Grid size="grow" spacing={2} display="flex" justifyContent="center">
-          <Tooltip title="First panel">
+          <Tooltip title="First panel (shift + ←)">
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
@@ -91,7 +115,7 @@ export const ComicReaderController = ({
               </IconButton>
             </Box>
           </Tooltip>
-          <Tooltip title="Previous panel">
+          <Tooltip title="Previous panel (←)">
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
@@ -107,7 +131,7 @@ export const ComicReaderController = ({
               {currentPanelNumber ?? "?"} / {panelsLength ?? "?"}
             </Typography>
           </Box>
-          <Tooltip title="Next panel">
+          <Tooltip title="Next panel (→)">
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
@@ -118,7 +142,7 @@ export const ComicReaderController = ({
               </IconButton>
             </Box>
           </Tooltip>
-          <Tooltip title="Last panel">
+          <Tooltip title="Last panel (shift + →)">
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
@@ -132,17 +156,17 @@ export const ComicReaderController = ({
         </Grid>
         <Grid size={2} spacing={2} display="flex" justifyContent="end">
           {isFullscreen ? (
-            <Tooltip title="Exit fullscreen">
+            <Tooltip title="Exit fullscreen (f)">
               <Box component="span">
-                <IconButton sx={iconButtonStyle} onClick={onExitFullscreen}>
+                <IconButton sx={iconButtonStyle} onClick={exitFullscreen}>
                   <FullscreenExitIcon />
                 </IconButton>
               </Box>
             </Tooltip>
           ) : (
-            <Tooltip title="Enter fullscreen">
+            <Tooltip title="Enter fullscreen (f)">
               <Box component="span">
-                <IconButton sx={iconButtonStyle} onClick={onEnterFullscreen}>
+                <IconButton sx={iconButtonStyle} onClick={enterFullscreen}>
                   <FullscreenIcon />
                 </IconButton>
               </Box>

@@ -23,7 +23,7 @@ export const ComicReaderSection = () => {
 
   const comicId = searchParams.get("id");
 
-  const [isFullscreen, { enterFullscreen, exitFullscreen }] =
+  const [isFullscreen, { enterFullscreen, exitFullscreen, toggleFullscreen }] =
     useFullscreen(containerRef);
 
   const comicPanels = useMemo(
@@ -38,8 +38,9 @@ export const ComicReaderSection = () => {
       <ComicReaderController
         controllerApi={emblaApi}
         isFullscreen={isFullscreen}
-        onEnterFullscreen={enterFullscreen}
-        onExitFullscreen={exitFullscreen}
+        enterFullscreen={enterFullscreen}
+        exitFullscreen={exitFullscreen}
+        toggleFullscreen={toggleFullscreen}
       />
     </Stack>
   );
