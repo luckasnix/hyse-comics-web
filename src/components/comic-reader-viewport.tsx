@@ -26,6 +26,7 @@ const panelStyle: SxProps<Theme> = {
   flex: "0 0 100%",
   display: "flex",
   justifyContent: "center",
+  alignItems: "center",
 };
 
 const imageStyle: CSSProperties = {
