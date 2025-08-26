@@ -2,19 +2,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
 import { type ReactNode, Suspense } from "react";
 
+import { notoSans } from "~/styles/fonts";
 import { theme } from "~/styles/theme";
 
 import { FallbackPage } from "./fallback";
-
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-roboto",
-});
 
 export const metadata: Metadata = {
   title: "Hyse Comics",
@@ -27,7 +20,7 @@ const RootLayout = ({
   children: ReactNode;
 }>) => (
   <html lang="en">
-    <body className={roboto.variable}>
+    <body className={notoSans.variable}>
       <AppRouterCacheProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
