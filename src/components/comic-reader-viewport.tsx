@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { EmblaViewportRefType } from "embla-carousel-react";
-import Image from "next/image";
 import type { CSSProperties } from "react";
 
 import type { ComicPanel } from "~/types/comics";
@@ -48,7 +47,8 @@ export const ComicReaderViewport = ({
       {comicPanels.map(
         ({ id, imageUrl, imageWidth, imageHeight, imageAltText }) => (
           <Box key={id} sx={panelStyle}>
-            <Image
+            {/** biome-ignore lint/performance/noImgElement: <Migration to Tanstack Start> */}
+            <img
               src={imageUrl}
               width={imageWidth}
               height={imageHeight}
