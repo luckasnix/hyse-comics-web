@@ -2,10 +2,12 @@
   "name": "hyse-comics-web",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
+    "dev": "vite dev",
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
     "type:check": "tsc --noEmit",
     "format:check": "biome format",
     "format:write": "biome format --write",
@@ -20,24 +22,28 @@
     "@emotion/cache": "11.14.0",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
+    "@fontsource-variable/noto-sans": "5.2.10",
     "@mui/icons-material": "7.3.3",
     "@mui/material": "7.3.3",
-    "@mui/material-nextjs": "7.3.3",
+    "@tanstack/react-router": "1.132.31",
+    "@tanstack/react-start": "1.132.31",
     "ahooks": "3.9.5",
     "embla-carousel": "8.6.0",
     "embla-carousel-react": "8.6.0",
-    "next": "15.5.4",
-    "react": "19.1.1",
-    "react-dom": "19.1.1"
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.4",
+    "@biomejs/biome": "2.2.5",
     "@commitlint/cli": "20.1.0",
     "@commitlint/config-conventional": "20.0.0",
     "@types/node": "20.19.19",
-    "@types/react": "19.1.17",
-    "@types/react-dom": "19.1.10",
+    "@types/react": "19.2.0",
+    "@types/react-dom": "19.2.0",
+    "@vitejs/plugin-react": "5.0.4",
     "husky": "9.1.7",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vite": "7.1.8",
+    "vite-tsconfig-paths": "5.1.4"
   }
 }

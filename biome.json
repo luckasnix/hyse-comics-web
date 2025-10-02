@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
   "vcs": {
     "enabled": false,
     "clientKind": "git",
@@ -8,12 +8,13 @@
   "files": {
     "includes": [
       ".vscode/**",
+      "public/**",
       "src/**",
+      "!src/routeTree.gen.ts",
       "biome.json",
       "commitlint.config.ts",
-      "next.config.ts",
-      "package.json",
-      "tsconfig.json"
+      "tsconfig.json",
+      "vite.config.ts"
     ],
     "ignoreUnknown": false
   },

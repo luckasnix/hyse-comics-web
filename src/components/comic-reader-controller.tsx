@@ -1,4 +1,3 @@
-"use client";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
@@ -12,9 +11,9 @@ import IconButton from "@mui/material/IconButton";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import { Link } from "@tanstack/react-router";
 import { useEventListener } from "ahooks";
 import type { EmblaCarouselType } from "embla-carousel";
-import Link from "next/link";
 
 import { useComicReaderNavigation } from "~/hooks/use-comic-reader-navigation";
 
@@ -96,7 +95,7 @@ export const ComicReaderController = ({
       <Grid container size="grow" sx={innerContainerStyle}>
         <Grid size={2} spacing={2} display="flex" justifyContent="start">
           <Tooltip title="Home">
-            <Link href="/">
+            <Link to="/">
               <IconButton sx={iconButtonStyle}>
                 <HomeIcon />
               </IconButton>

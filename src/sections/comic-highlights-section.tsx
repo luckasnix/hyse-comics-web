@@ -1,8 +1,7 @@
-"use client";
 import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "@tanstack/react-router";
 
 import { ComicCard } from "~/components/comic-card";
 import { comicsMock } from "~/mocks/comics";
@@ -13,10 +12,10 @@ const containerStyle: SxProps<Theme> = {
 };
 
 export const ComicHighlightsSection = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handleReadButtonClick = (id: string) => {
-    router.push(`/comic?id=${id}`);
+    navigate({ to: "/comics/$comicId", params: { comicId: id } });
   };
 
   return (

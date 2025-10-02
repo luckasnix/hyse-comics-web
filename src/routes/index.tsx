@@ -1,4 +1,5 @@
 import Grid from "@mui/material/Grid";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { ComicHighlightsSection } from "~/sections/comic-highlights-section";
 import { HeaderSection } from "~/sections/header-section";
@@ -10,4 +11,6 @@ const HomePage = () => (
   </Grid>
 );
 
-export default HomePage;
+export const Route = createFileRoute("/")({
+  component: HomePage,
+});

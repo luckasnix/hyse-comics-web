@@ -1,7 +1,4 @@
-"use client";
 import { createTheme } from "@mui/material/styles";
-
-import { notoSans } from "~/styles/fonts";
 
 export const theme = createTheme({
   cssVariables: true,
@@ -14,6 +11,6 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: [notoSans.style.fontFamily, "sans-serif"].join(","),
+    fontFamily: "'Noto Sans Variable', sans-serif",
   },
 });

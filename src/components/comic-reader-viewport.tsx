@@ -47,7 +47,6 @@ export const ComicReaderViewport = ({
       {comicPanels.map(
         ({ id, imageUrl, imageWidth, imageHeight, imageAltText }) => (
           <Box key={id} sx={panelStyle}>
-            {/** biome-ignore lint/performance/noImgElement: <Migration to Tanstack Start> */}
             <img
               src={imageUrl}
               width={imageWidth}

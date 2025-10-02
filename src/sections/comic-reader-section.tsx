@@ -1,9 +1,8 @@
-"use client";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
+import { useParams } from "@tanstack/react-router";
 import { useFullscreen } from "ahooks";
 import useEmblaCarousel from "embla-carousel-react";
-import { useSearchParams } from "next/navigation";
 import { useMemo, useRef } from "react";
 
 import { ComicReaderController } from "~/components/comic-reader-controller";
@@ -17,11 +16,9 @@ const containerStyle: SxProps<Theme> = {
 export const ComicReaderSection = () => {
   const containerRef = useRef<HTMLElement>(null);
 
-  const searchParams = useSearchParams();
+  const { comicId } = useParams({ strict: false });
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ axis: "y" });
-
-  const comicId = searchParams.get("id");
 
   const [isFullscreen, { enterFullscreen, exitFullscreen, toggleFullscreen }] =
     useFullscreen(containerRef);
