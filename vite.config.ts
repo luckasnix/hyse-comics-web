@@ -3,7 +3,7 @@ import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import viteTsConfigPaths from "vite-tsconfig-paths";
 
-const config = defineConfig({
+const viteConfig = defineConfig({
   server: {
     port: 3000,
   },
@@ -16,4 +16,4 @@ const config = defineConfig({
   ],
 });
 
-export default config;
+export default viteConfig;

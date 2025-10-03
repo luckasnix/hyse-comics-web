@@ -23,10 +23,10 @@
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
     "@fontsource-variable/noto-sans": "5.2.10",
-    "@mui/icons-material": "7.3.3",
-    "@mui/material": "7.3.3",
-    "@tanstack/react-router": "1.132.31",
-    "@tanstack/react-start": "1.132.31",
+    "@mui/icons-material": "7.3.4",
+    "@mui/material": "7.3.4",
+    "@tanstack/react-router": "1.132.33",
+    "@tanstack/react-start": "1.132.34",
     "ahooks": "3.9.5",
     "embla-carousel": "8.6.0",
     "embla-carousel-react": "8.6.0",
@@ -43,7 +43,7 @@
     "@vitejs/plugin-react": "5.0.4",
     "husky": "9.1.7",
     "typescript": "5.9.3",
-    "vite": "7.1.8",
+    "vite": "7.1.9",
     "vite-tsconfig-paths": "5.1.4"
   }
 }
