@@ -6,8 +6,10 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useMemo, useRef } from "react";
 
 import { ComicReaderController } from "~/components/comic-reader-controller";
+import { ComicReaderDrawer } from "~/components/comic-reader-drawer";
 import { ComicReaderViewport } from "~/components/comic-reader-viewport";
-import { comicPanelsMock } from "~/mocks/comics";
+import { useComicReaderDrawer } from "~/hooks/use-comic-reader-drawer";
+import { comicPanelsMock, comicsMock } from "~/mocks/comics";
 
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",
@@ -23,9 +25,18 @@ export const ComicReaderSection = () => {
   const [isFullscreen, { enterFullscreen, exitFullscreen, toggleFullscreen }] =
     useFullscreen(containerRef);
 
+  const { isDrawerOpen, closeDrawer, toggleDrawer } = useComicReaderDrawer();
+
+  const comic = useMemo(
+    () => comicsMock.find((curComic) => curComic.id === comicId),
+    [comicId],
+  );
+
   const comicPanels = useMemo(
     () =>
-      comicPanelsMock.filter((comicPanel) => comicPanel.comicId === comicId),
+      comicPanelsMock.filter(
+        (curComicPanel) => curComicPanel.comicId === comicId,
+      ),
     [comicId],
   );
 
@@ -38,6 +49,12 @@ export const ComicReaderSection = () => {
         enterFullscreen={enterFullscreen}
         exitFullscreen={exitFullscreen}
         toggleFullscreen={toggleFullscreen}
+        toggleDrawer={toggleDrawer}
+      />
+      <ComicReaderDrawer
+        isOpen={isDrawerOpen}
+        onClose={closeDrawer}
+        comic={comic}
       />
     </Stack>
   );

@@ -1,6 +1,7 @@
 import metaverseCavalryPanel1 from "~/storage/metaverse-cavalry-panel-1.webp?url";
 import metaverseCavalryPanel2 from "~/storage/metaverse-cavalry-panel-2.webp?url";
 import metaverseCavalryPanel3 from "~/storage/metaverse-cavalry-panel-3.webp?url";
+import metaverseCavalryPanel4 from "~/storage/metaverse-cavalry-panel-4.webp?url";
 import metaverseCavalryThumbnail from "~/storage/metaverse-cavalry-thumbnail.webp?url";
 import type { Comic, ComicPanel } from "~/types/comics";
 
@@ -42,5 +43,13 @@ export const comicPanelsMock: Array<ComicPanel> = [
     imageWidth: 1080,
     imageHeight: 720,
     imageAltText: "Metaverse Cavalry panel 3",
+  },
+  {
+    id: "0d656322-0491-4d0a-a3db-f5393b57edc3",
+    comicId: "hsGYfEuPQH-U",
+    imageUrl: metaverseCavalryPanel4,
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "Metaverse Cavalry panel 4",
   },
 ];

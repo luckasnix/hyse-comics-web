@@ -5,6 +5,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
@@ -47,6 +48,7 @@ export type ComicReaderControllerProps = Readonly<{
   enterFullscreen: () => void;
   exitFullscreen: () => void;
   toggleFullscreen: () => void;
+  toggleDrawer: () => void;
 }>;
 
 export const ComicReaderController = ({
@@ -55,6 +57,7 @@ export const ComicReaderController = ({
   enterFullscreen,
   exitFullscreen,
   toggleFullscreen,
+  toggleDrawer,
 }: ComicReaderControllerProps) => {
   const {
     currentPanelNumber,
@@ -86,6 +89,9 @@ export const ComicReaderController = ({
       }
       if (key === "f") {
         toggleFullscreen();
+      }
+      if (key === "m") {
+        toggleDrawer();
       }
     }
   });
@@ -171,6 +177,17 @@ export const ComicReaderController = ({
               </Box>
             </Tooltip>
           )}
+          <Tooltip title="More (m)">
+            <Box component="span">
+              <IconButton
+                sx={iconButtonStyle}
+                disabled={isFullscreen}
+                onClick={toggleDrawer}
+              >
+                <ReadMoreIcon />
+              </IconButton>
+            </Box>
+          </Tooltip>
         </Grid>
       </Grid>
     </Grid>
