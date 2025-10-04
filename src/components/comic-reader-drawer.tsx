@@ -1,0 +1,36 @@
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+
+import type { Comic } from "~/types/comics";
+
+const containerStyle: SxProps<Theme> = {
+  width: "420px",
+  padding: "20px",
+};
+
+export type ComicReaderDrawerProps = Readonly<{
+  isOpen: boolean;
+  onClose: () => void;
+  comic: Comic | undefined;
+}>;
+
+export const ComicReaderDrawer = ({
+  isOpen,
+  onClose,
+  comic,
+}: ComicReaderDrawerProps) => (
+  <Drawer open={isOpen} anchor="right" onClose={onClose}>
+    <Box sx={containerStyle}>
+      {comic && (
+        <Box>
+          <Typography variant="h4" gutterBottom>
+            {comic.title}
+          </Typography>
+          <Typography variant="body1">{comic.summary}</Typography>
+        </Box>
+      )}
+    </Box>
+  </Drawer>
+);
