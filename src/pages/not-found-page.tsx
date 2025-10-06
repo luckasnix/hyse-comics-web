@@ -15,12 +15,8 @@ const textContainer: SxProps<Theme> = {
   textAlign: "center",
 };
 
-export const NotFound = () => {
+export const NotFoundPage = () => {
   const navigate = useNavigate();
-
-  const handleBackButtonClick = () => {
-    navigate({ to: "/" });
-  };
 
   return (
     <Stack direction="column" spacing={2} sx={containerStyle}>
@@ -33,7 +29,9 @@ export const NotFound = () => {
       <Button
         variant="contained"
         startIcon={<HomeIcon />}
-        onClick={handleBackButtonClick}
+        onClick={() => {
+          navigate({ to: "/" });
+        }}
       >
         Back to home
       </Button>

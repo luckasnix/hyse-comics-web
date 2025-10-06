@@ -6,8 +6,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { type ReactNode, Suspense } from "react";
 
-import { FallbackPage } from "~/pages/fallback";
-import { NotFound } from "~/pages/not-found";
+import { FallbackPage } from "~/pages/fallback-page";
+import { NotFoundPage } from "~/pages/not-found-page";
 import { theme } from "~/styles/theme";
 
 const emotionCache = createCache({ key: "css" });
@@ -81,6 +81,6 @@ export const Route = createRootRoute({
       },
     ],
   }),
-  notFoundComponent: NotFound,
+  notFoundComponent: NotFoundPage,
   shellComponent: RootDocument,
 });

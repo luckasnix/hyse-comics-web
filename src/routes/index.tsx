@@ -4,7 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ComicHighlightsSection } from "~/sections/comic-highlights-section";
 import { HeaderSection } from "~/sections/header-section";
 
-const HomePage = () => (
+const HomeRoute = () => (
   <Grid container direction="column" alignItems="center">
     <HeaderSection />
     <ComicHighlightsSection />
@@ -12,5 +12,5 @@ const HomePage = () => (
 );
 
 export const Route = createFileRoute("/")({
-  component: HomePage,
+  component: HomeRoute,
 });
