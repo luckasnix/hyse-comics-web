@@ -5,9 +5,30 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
 import type { ComicGenre } from "~/types/comics";
+
+const containerStyle: SxProps<Theme> = {
+  minWidth: 320,
+  width: 320,
+};
+
+const imageStyle: SxProps<Theme> = {
+  width: 320,
+  height: 240,
+};
+
+const titleStyle: SxProps<Theme> = {
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+};
+
+const summaryStyle: SxProps<Theme> = {
+  color: "text.secondary",
+};
 
 export type ComicCardProps = Readonly<{
   id: string;
@@ -29,17 +50,13 @@ export const ComicCard = ({
   image,
   onReadButtonClick,
 }: ComicCardProps) => (
-  <Card sx={{ width: 320 }}>
-    <CardMedia
-      sx={{ width: 320, height: 240 }}
-      image={image.src}
-      title={image.altText}
-    />
+  <Card sx={containerStyle}>
+    <CardMedia sx={imageStyle} image={image.src} title={image.altText} />
     <CardContent>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" gutterBottom sx={titleStyle}>
         {title}
       </Typography>
-      <Typography variant="body2" gutterBottom sx={{ color: "text.secondary" }}>
+      <Typography variant="body2" gutterBottom sx={summaryStyle}>
         {summary}
       </Typography>
       <Stack direction="row" spacing={1}>
