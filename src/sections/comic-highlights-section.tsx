@@ -9,7 +9,8 @@ import { comicsMock } from "~/mocks/comics";
 
 const containerStyle: SxProps<Theme> = {
   width: "100%",
-  padding: "20px 40px",
+  paddingY: 3,
+  paddingX: 5,
 };
 
 export const ComicHighlightsSection = () => {
