@@ -8,6 +8,7 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
+import { useUi } from "~/contexts/ui-context";
 import type { ComicGenre } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
@@ -49,31 +50,58 @@ export const ComicCard = ({
   summary,
   image,
   onReadButtonClick,
-}: ComicCardProps) => (
-  <Card sx={containerStyle}>
-    <CardMedia sx={imageStyle} image={image.src} title={image.altText} />
-    <CardContent>
-      <Typography variant="h5" gutterBottom sx={titleStyle}>
-        {title}
-      </Typography>
-      <Typography variant="body2" gutterBottom sx={summaryStyle}>
-        {summary}
-      </Typography>
-      <Stack direction="row" spacing={1}>
-        {genres.map((genre) => (
-          <Chip key={genre} color="primary" label={genre} />
-        ))}
-      </Stack>
-    </CardContent>
-    <CardActions>
-      <Button
-        size="small"
-        onClick={() => {
-          onReadButtonClick(id);
-        }}
-      >
-        Read
-      </Button>
-    </CardActions>
-  </Card>
-);
+}: ComicCardProps) => {
+  const { showToast } = useUi();
+
+  const shareLink = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast({
+        severity: "success",
+        message: "Link copied to clipboard.",
+      });
+    } catch {
+      showToast({
+        severity: "error",
+        message: "Failed to copy link to clipboard. Please try again.",
+      });
+    }
+  };
+
+  return (
+    <Card sx={containerStyle}>
+      <CardMedia sx={imageStyle} image={image.src} title={image.altText} />
+      <CardContent>
+        <Typography variant="h5" gutterBottom sx={titleStyle}>
+          {title}
+        </Typography>
+        <Typography variant="body2" gutterBottom sx={summaryStyle}>
+          {summary}
+        </Typography>
+        <Stack direction="row" spacing={1}>
+          {genres.map((genre) => (
+            <Chip key={genre} color="primary" label={genre} />
+          ))}
+        </Stack>
+      </CardContent>
+      <CardActions>
+        <Button
+          size="small"
+          onClick={() => {
+            shareLink(`https://comics.hyse.app/comics/${id}`);
+          }}
+        >
+          Share
+        </Button>
+        <Button
+          size="small"
+          onClick={() => {
+            onReadButtonClick(id);
+          }}
+        >
+          Read
+        </Button>
+      </CardActions>
+    </Card>
+  );
+};
