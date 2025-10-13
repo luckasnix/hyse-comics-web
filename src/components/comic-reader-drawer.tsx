@@ -6,8 +6,8 @@ import Typography from "@mui/material/Typography";
 import type { Comic } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
-  width: "420px",
-  padding: "20px",
+  width: 420,
+  padding: 3,
 };
 
 export type ComicReaderDrawerProps = Readonly<{

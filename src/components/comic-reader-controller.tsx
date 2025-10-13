@@ -19,15 +19,15 @@ import type { EmblaCarouselType } from "embla-carousel";
 import { useComicReaderNavigation } from "~/hooks/use-comic-reader-navigation";
 
 const containerStyle: SxProps<Theme> = {
-  height: "56px",
-  paddingX: "20px",
+  height: 56,
+  paddingX: 3,
   bgcolor: "primary.main",
   justifyContent: "center",
   alignItems: "center",
 };
 
 const innerContainerStyle: SxProps<Theme> = {
-  maxWidth: "1200px",
+  maxWidth: 1200,
 };
 
 const iconButtonStyle: SxProps<Theme> = {
@@ -37,8 +37,8 @@ const iconButtonStyle: SxProps<Theme> = {
 const panelCounterStyle: SxProps<Theme> = {
   display: "inline-flex",
   bgcolor: "primary.dark",
-  px: 2,
-  py: 1,
+  paddingX: 2,
+  paddingY: 1,
   borderRadius: 2,
 };
 
