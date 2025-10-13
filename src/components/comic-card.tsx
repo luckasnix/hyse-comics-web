@@ -53,9 +53,14 @@ export const ComicCard = ({
 }: ComicCardProps) => {
   const { showToast } = useUi();
 
-  const shareLink = async (text: string) => {
+  const shareComicLink = async () => {
+    const baseUrl =
+      import.meta.env.MODE === "development"
+        ? "http://localhost:3000"
+        : "https://comics.hyse.app";
+
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(`${baseUrl}/comics/${id}`);
       showToast({
         severity: "success",
         message: "Link copied to clipboard.",
@@ -66,6 +71,10 @@ export const ComicCard = ({
         message: "Failed to copy link to clipboard. Please try again.",
       });
     }
+  };
+
+  const readComic = () => {
+    onReadButtonClick(id);
   };
 
   return (
@@ -85,20 +94,10 @@ export const ComicCard = ({
         </Stack>
       </CardContent>
       <CardActions>
-        <Button
-          size="small"
-          onClick={() => {
-            shareLink(`https://comics.hyse.app/comics/${id}`);
-          }}
-        >
+        <Button size="small" onClick={shareComicLink}>
           Share
         </Button>
-        <Button
-          size="small"
-          onClick={() => {
-            onReadButtonClick(id);
-          }}
-        >
+        <Button size="small" onClick={readComic}>
           Read
         </Button>
       </CardActions>
