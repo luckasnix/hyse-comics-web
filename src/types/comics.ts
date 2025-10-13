@@ -5,14 +5,27 @@ export type ComicOrientation = "landscape" | "portrait";
 export type ComicGenre =
   | "action"
   | "adventure"
+  | "biography"
   | "comedy"
   | "crime"
   | "drama"
+  | "educational"
   | "fantasy"
+  | "historical"
   | "horror"
   | "mystery"
+  | "post-apocalyptic"
+  | "psychological"
   | "romance"
-  | "sci-fi";
+  | "satire"
+  | "sci-fi"
+  | "slice-of-life"
+  | "sport"
+  | "superhero"
+  | "supernatural"
+  | "thriller"
+  | "war"
+  | "western";
 
 export type Comic = {
   id: string;
