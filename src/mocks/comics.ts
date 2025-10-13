@@ -5,7 +5,7 @@ export const comicsMock: Array<Comic> = [
     id: "hsGYfEuPQH-U",
     structure: "single-panel",
     orientation: "landscape",
-    genres: ["action", "adventure", "fantasy", "sci-fi"],
+    genres: ["action", "adventure", "fantasy", "sci-fi", "supernatural"],
     title: "Metaverse Cavalry",
     summary:
       "In a vast medieval world set within the Metaverse, a young warrior is summoned to face a looming threat that corrupts the very fabric of this digital reality: a powerful demon bent on destruction.",
@@ -17,13 +17,25 @@ export const comicsMock: Array<Comic> = [
     id: "eAvdmZnEgri3",
     structure: "single-panel",
     orientation: "landscape",
-    genres: ["action", "adventure", "mystery"],
+    genres: ["action", "adventure", "historical", "mystery"],
     title: "Forbidden Treasures",
     summary:
       "In a world where ancient civilizations left secrets buried in forgotten temples, a young archaeologist embarks on risky expeditions in search of relics that could change the fate of humanity.",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/thumbnail.webp",
     imageAltText: "Forbidden Treasures thumbnail",
+  },
+  {
+    id: "HmRdP9Q8iXOH",
+    structure: "single-panel",
+    orientation: "landscape",
+    genres: ["action", "sport"],
+    title: "Skate Champion",
+    summary:
+      "From the streets to the world stage, a young skater chases his dream of becoming the greatest of all time. With every trick, every fall, and every victory, his passion burns brighter.",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/thumbnail.webp",
+    imageAltText: "Skate Champion thumbnail",
   },
 ];
 
@@ -90,5 +102,32 @@ export const comicPanelsMock: Array<ComicPanel> = [
     imageWidth: 1080,
     imageHeight: 720,
     imageAltText: "Forbidden Treasures panel 3",
+  },
+  {
+    id: "77834591-4e58-44e7-82fc-9fb5115638db",
+    comicId: "HmRdP9Q8iXOH",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/panel-1.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "Skate Champion panel 1",
+  },
+  {
+    id: "19d688a6-de37-476f-a73c-968fba98c389",
+    comicId: "HmRdP9Q8iXOH",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/panel-2.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "Skate Champion panel 2",
+  },
+  {
+    id: "039fe50b-fa05-4c6e-a17e-cdafb6a821bc",
+    comicId: "HmRdP9Q8iXOH",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/panel-3.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "Skate Champion panel 3",
   },
 ];
