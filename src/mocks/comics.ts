@@ -37,6 +37,18 @@ export const comicsMock: Array<Comic> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/thumbnail.webp",
     imageAltText: "Skate Champion thumbnail",
   },
+  {
+    id: "5G2IKgBnc2ns",
+    structure: "single-panel",
+    orientation: "landscape",
+    genres: ["action", "adventure", "historical"],
+    title: "Blood and Gold",
+    summary:
+      "On the high seas, a fearless pirate captain with an iron will, a missing leg, and a single eye chases the ultimate treasure. With his loyal crew by his side, he battles storms, enemies, and fate itself.",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/blood-and-gold/thumbnail.webp",
+    imageAltText: "Blood and Gold thumbnail",
+  },
 ];
 
 export const comicPanelsMock: Array<ComicPanel> = [
@@ -129,5 +141,41 @@ export const comicPanelsMock: Array<ComicPanel> = [
     imageWidth: 1080,
     imageHeight: 720,
     imageAltText: "Skate Champion panel 3",
+  },
+  {
+    id: "b0c5d640-cd94-4581-a54d-a7c8663a65ff",
+    comicId: "5G2IKgBnc2ns",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/blood-and-gold/panel-1.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "Blood and Gold panel 1",
+  },
+  {
+    id: "290bfa89-f20d-450b-8997-987758c85b4f",
+    comicId: "5G2IKgBnc2ns",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/blood-and-gold/panel-2.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "Blood and Gold panel 2",
+  },
+  {
+    id: "c59adf66-2689-409c-9e6a-0a93963ee06c",
+    comicId: "5G2IKgBnc2ns",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/blood-and-gold/panel-3.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "Blood and Gold panel 3",
+  },
+  {
+    id: "4a0bc7c5-0d7d-4d46-a187-721173acfc5d",
+    comicId: "5G2IKgBnc2ns",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/blood-and-gold/panel-4.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "Blood and Gold panel 4",
   },
 ];
