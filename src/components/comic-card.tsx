@@ -14,6 +14,7 @@ import type { ComicGenre } from "~/types/comics";
 const containerStyle: SxProps<Theme> = {
   minWidth: 320,
   width: 320,
+  height: 504,
 };
 
 const imageStyle: SxProps<Theme> = {
