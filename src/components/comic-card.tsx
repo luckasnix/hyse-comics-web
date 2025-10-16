@@ -30,6 +30,10 @@ const titleStyle: SxProps<Theme> = {
 
 const summaryStyle: SxProps<Theme> = {
   color: "text.secondary",
+  display: "-webkit-box",
+  WebkitBoxOrient: "vertical",
+  WebkitLineClamp: 5,
+  overflow: "hidden",
 };
 
 export type ComicCardProps = Readonly<{
