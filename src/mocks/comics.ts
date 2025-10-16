@@ -49,6 +49,18 @@ export const comicsMock: Array<Comic> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/blood-and-gold/thumbnail.webp",
     imageAltText: "Blood and Gold thumbnail",
   },
+  {
+    id: "3tu2mLgN53E-",
+    structure: "single-panel",
+    orientation: "landscape",
+    genres: ["adventure", "fantasy"],
+    title: "Apprentice of Witchcraft",
+    summary:
+      "In a grand academy of magic, a young girl begins her journey as an apprentice of witchcraft. Between brewing potions, casting spells, and facing mysterious trials, she must prove her courage and unlock her true power.",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/thumbnail.webp",
+    imageAltText: "Apprentice of Witchcraft thumbnail",
+  },
 ];
 
 export const comicPanelsMock: Array<ComicPanel> = [
@@ -177,5 +189,32 @@ export const comicPanelsMock: Array<ComicPanel> = [
     imageWidth: 1080,
     imageHeight: 720,
     imageAltText: "Blood and Gold panel 4",
+  },
+  {
+    id: "b18c7dd8-a76d-485f-b217-5a23741c1b39",
+    comicId: "3tu2mLgN53E-",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/panel-1.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "Apprentice of Witchcraft panel 1",
+  },
+  {
+    id: "8ef69b6c-dc5a-4c26-bf43-bdd6c56a28f2",
+    comicId: "3tu2mLgN53E-",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/panel-2.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "Apprentice of Witchcraft panel 2",
+  },
+  {
+    id: "2ff8175c-bcd1-43b6-84ed-24b110be9a37",
+    comicId: "3tu2mLgN53E-",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/panel-3.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "Apprentice of Witchcraft panel 3",
   },
 ];
