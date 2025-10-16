@@ -11,6 +11,7 @@ const containerStyle: SxProps<Theme> = {
   width: "100%",
   paddingY: 3,
   paddingX: 5,
+  overflowX: "scroll",
 };
 
 export const ComicHighlightsSection = () => {
