@@ -14,7 +14,7 @@ import type { ComicGenre } from "~/types/comics";
 const containerStyle: SxProps<Theme> = {
   minWidth: 320,
   width: 320,
-  height: 504,
+  height: 500,
 };
 
 const imageStyle: SxProps<Theme> = {
@@ -63,7 +63,6 @@ export const ComicCard = ({
       import.meta.env.MODE === "development"
         ? "http://localhost:3000"
         : "https://comics.hyse.app";
-
     try {
       await navigator.clipboard.writeText(`${baseUrl}/comics/${id}`);
       showToast({
@@ -94,7 +93,7 @@ export const ComicCard = ({
         </Typography>
         <Stack direction="row" spacing={1}>
           {genres.map((genre) => (
-            <Chip key={genre} color="primary" label={genre} />
+            <Chip key={genre} size="small" color="primary" label={genre} />
           ))}
         </Stack>
       </CardContent>
