@@ -14,7 +14,7 @@ import type { ComicGenre } from "~/types/comics";
 const containerStyle: SxProps<Theme> = {
   minWidth: 320,
   width: 320,
-  height: 500,
+  height: 480,
 };
 
 const imageStyle: SxProps<Theme> = {
@@ -32,7 +32,7 @@ const summaryStyle: SxProps<Theme> = {
   color: "text.secondary",
   display: "-webkit-box",
   WebkitBoxOrient: "vertical",
-  WebkitLineClamp: 5,
+  WebkitLineClamp: 4,
   overflow: "hidden",
 };
 
