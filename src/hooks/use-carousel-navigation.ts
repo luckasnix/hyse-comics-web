@@ -1,13 +1,13 @@
 import type { EmblaCarouselType } from "embla-carousel";
 import { useCallback, useEffect, useState } from "react";
 
-export const useComicReaderNavigation = (
+export const useCarouselNavigation = (
   carouselApi: EmblaCarouselType | undefined,
 ) => {
-  const [currentPanelNumber, setCurrentPanelNumber] = useState<number | null>(
+  const [currentSlideNumber, setCurrentSlideNumber] = useState<number | null>(
     null,
   );
-  const [panelsLength, setPanelsLength] = useState<number | null>(null);
+  const [slidesLength, setSlidesLength] = useState<number | null>(null);
   const [canNavigateFirst, setCanNavigateFirst] = useState<boolean>(false);
   const [canNavigatePrev, setCanNavigatePrev] = useState<boolean>(false);
   const [canNavigateNext, setCanNavigateNext] = useState<boolean>(false);
@@ -34,8 +34,8 @@ export const useComicReaderNavigation = (
   const onSelect = useCallback((carouselApi: EmblaCarouselType) => {
     const currentIndex = carouselApi.selectedScrollSnap();
     const length = carouselApi.scrollSnapList().length;
-    setCurrentPanelNumber(currentIndex + 1);
-    setPanelsLength(length);
+    setCurrentSlideNumber(currentIndex + 1);
+    setSlidesLength(length);
     setCanNavigateFirst(currentIndex > 0);
     setCanNavigatePrev(carouselApi.canScrollPrev());
     setCanNavigateNext(carouselApi.canScrollNext());
@@ -49,8 +49,8 @@ export const useComicReaderNavigation = (
   }, [carouselApi, onSelect]);
 
   return {
-    currentPanelNumber,
-    panelsLength,
+    currentSlideNumber,
+    slidesLength,
     canNavigateFirst,
     canNavigatePrev,
     canNavigateNext,

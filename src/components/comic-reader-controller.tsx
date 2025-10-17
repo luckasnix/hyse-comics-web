@@ -16,7 +16,7 @@ import { Link } from "@tanstack/react-router";
 import { useEventListener } from "ahooks";
 import type { EmblaCarouselType } from "embla-carousel";
 
-import { useComicReaderNavigation } from "~/hooks/use-comic-reader-navigation";
+import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
 
 const containerStyle: SxProps<Theme> = {
   height: 56,
@@ -60,8 +60,8 @@ export const ComicReaderController = ({
   toggleDrawer,
 }: ComicReaderControllerProps) => {
   const {
-    currentPanelNumber,
-    panelsLength,
+    currentSlideNumber,
+    slidesLength,
     canNavigateFirst,
     canNavigatePrev,
     canNavigateNext,
@@ -70,7 +70,7 @@ export const ComicReaderController = ({
     navigatePrev,
     navigateNext,
     navigateLast,
-  } = useComicReaderNavigation(controllerApi);
+  } = useCarouselNavigation(controllerApi);
 
   useEventListener("keydown", ({ key, shiftKey }) => {
     if (shiftKey) {
@@ -133,7 +133,7 @@ export const ComicReaderController = ({
           </Tooltip>
           <Box component="span" sx={panelCounterStyle}>
             <Typography variant="body1" sx={{ color: "primary.contrastText" }}>
-              {currentPanelNumber ?? "?"} / {panelsLength ?? "?"}
+              {currentSlideNumber ?? "?"} / {slidesLength ?? "?"}
             </Typography>
           </Box>
           <Tooltip title="Next panel (→)">
