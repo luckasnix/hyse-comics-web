@@ -11,7 +11,7 @@ const containerStyle: SxProps<Theme> = {
 
 export const ComicHighlightsSection = () => (
   <Stack direction="column" spacing={2} sx={containerStyle}>
-    <ComicShelf title="Trending" comics={comicsMock} />
-    <ComicShelf title="Keep reading" comics={comicsMock} />
+    <ComicShelf title="Trending now" comics={comicsMock} />
+    <ComicShelf title="Continue reading" comics={comicsMock} />
   </Stack>
 );

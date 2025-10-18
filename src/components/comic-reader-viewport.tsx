@@ -8,10 +8,10 @@ import type { ComicPanel } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   overflow: "hidden",
-  bgcolor: "background.default",
+  backgroundColor: "background.default",
 };
 
-const innerContainerStyle: SxProps<Theme> = {
+const slideContainerStyle: SxProps<Theme> = {
   height: `calc(100dvh - ${comicReaderControllerHeight}px)`,
   touchAction: "pan-x pinch-zoom",
   display: "flex",
@@ -44,7 +44,7 @@ export const ComicReaderViewport = ({
   comicPanels,
 }: ComicReaderViewportProps) => (
   <Box ref={viewportRef} sx={containerStyle}>
-    <Box sx={innerContainerStyle}>
+    <Box sx={slideContainerStyle}>
       {comicPanels.map(
         ({ id, imageUrl, imageWidth, imageHeight, imageAltText }) => (
           <Box key={id} sx={panelStyle}>
