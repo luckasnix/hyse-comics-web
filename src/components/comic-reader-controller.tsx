@@ -16,10 +16,11 @@ import { Link } from "@tanstack/react-router";
 import { useEventListener } from "ahooks";
 import type { EmblaCarouselType } from "embla-carousel";
 
+import { comicReaderControllerHeight } from "~/constants/layout";
 import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
 
 const containerStyle: SxProps<Theme> = {
-  height: 56,
+  height: comicReaderControllerHeight,
   paddingX: 3,
   bgcolor: "primary.main",
   justifyContent: "center",

@@ -3,6 +3,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import type { EmblaViewportRefType } from "embla-carousel-react";
 import type { CSSProperties } from "react";
 
+import { comicReaderControllerHeight } from "~/constants/layout";
 import type { ComicPanel } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
@@ -11,7 +12,7 @@ const containerStyle: SxProps<Theme> = {
 };
 
 const innerContainerStyle: SxProps<Theme> = {
-  height: "calc(100dvh - 56px)",
+  height: `calc(100dvh - ${comicReaderControllerHeight}px)`,
   touchAction: "pan-x pinch-zoom",
   display: "flex",
   flexDirection: "column",
