@@ -5,6 +5,7 @@ export const comicsMock: Array<Comic> = [
     id: "hsGYfEuPQH-U",
     structure: "single-panel",
     orientation: "landscape",
+    direction: "western",
     genres: ["action", "adventure", "fantasy", "sci-fi", "supernatural"],
     title: "Metaverse Cavalry",
     summary:
@@ -17,6 +18,7 @@ export const comicsMock: Array<Comic> = [
     id: "eAvdmZnEgri3",
     structure: "single-panel",
     orientation: "landscape",
+    direction: "western",
     genres: ["action", "adventure", "historical", "mystery"],
     title: "Forbidden Treasures",
     summary:
@@ -29,6 +31,7 @@ export const comicsMock: Array<Comic> = [
     id: "HmRdP9Q8iXOH",
     structure: "single-panel",
     orientation: "landscape",
+    direction: "western",
     genres: ["action", "sport"],
     title: "Skate Champion",
     summary:
@@ -41,6 +44,7 @@ export const comicsMock: Array<Comic> = [
     id: "5G2IKgBnc2ns",
     structure: "single-panel",
     orientation: "landscape",
+    direction: "western",
     genres: ["action", "adventure", "historical"],
     title: "Blood and Gold",
     summary:
@@ -53,6 +57,7 @@ export const comicsMock: Array<Comic> = [
     id: "3tu2mLgN53E-",
     structure: "single-panel",
     orientation: "landscape",
+    direction: "western",
     genres: ["adventure", "fantasy"],
     title: "Apprentice of Witchcraft",
     summary:

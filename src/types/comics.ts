@@ -2,6 +2,8 @@ export type ComicStructure = "single-panel" | "traditional" | "long-scroll";
 
 export type ComicOrientation = "landscape" | "portrait";
 
+export type ComicDirection = "western" | "eastern";
+
 export type ComicGenre =
   | "action"
   | "adventure"
@@ -31,6 +33,7 @@ export type Comic = {
   id: string;
   structure: ComicStructure;
   orientation: ComicOrientation;
+  direction: ComicDirection;
   genres: Array<ComicGenre>;
   title: string;
   summary: string;
