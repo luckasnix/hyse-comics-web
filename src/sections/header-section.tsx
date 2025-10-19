@@ -1,25 +1,14 @@
-import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
-import Toolbar from "@mui/material/Toolbar";
-import { Link } from "@tanstack/react-router";
-import type { CSSProperties } from "react";
 
-const toolbarStyle: SxProps<Theme> = {
+const containerStyle: SxProps<Theme> = {
+  width: "100%",
   display: "flex",
-  justifyContent: "start",
-};
-
-const logoLinkStyle: CSSProperties = {
-  display: "flex",
-  alignItems: "center",
+  justifyContent: "center",
 };
 
 export const HeaderSection = () => (
-  <AppBar position="static" color="transparent" elevation={1}>
-    <Toolbar sx={toolbarStyle}>
-      <Link to="/" style={logoLinkStyle}>
-        <img src="/logo.svg" width={256} height={64} alt="Hyse Comics logo" />
-      </Link>
-    </Toolbar>
-  </AppBar>
+  <Box sx={containerStyle}>
+    <img src="/logo.svg" width={384} height={96} alt="Hyse Comics logo" />
+  </Box>
 );
