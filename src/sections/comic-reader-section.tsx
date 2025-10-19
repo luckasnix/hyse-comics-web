@@ -1,14 +1,13 @@
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { useParams } from "@tanstack/react-router";
-import { useFullscreen } from "ahooks";
+import { useBoolean, useFullscreen } from "ahooks";
 import useEmblaCarousel from "embla-carousel-react";
 import { useMemo, useRef } from "react";
 
 import { ComicReaderController } from "~/components/comic-reader-controller";
 import { ComicReaderDrawer } from "~/components/comic-reader-drawer";
 import { ComicReaderViewport } from "~/components/comic-reader-viewport";
-import { useComicReaderDrawer } from "~/hooks/use-comic-reader-drawer";
 import { comicPanelsMock, comicsMock } from "~/mocks/comics";
 
 const containerStyle: SxProps<Theme> = {
@@ -25,7 +24,8 @@ export const ComicReaderSection = () => {
   const [isFullscreen, { enterFullscreen, exitFullscreen, toggleFullscreen }] =
     useFullscreen(containerRef);
 
-  const { isDrawerOpen, closeDrawer, toggleDrawer } = useComicReaderDrawer();
+  const [isDrawerOpen, { setFalse: closeDrawer, toggle: toggleDrawer }] =
+    useBoolean(false);
 
   const comic = useMemo(
     () => comicsMock.find((curComic) => curComic.id === comicId),
