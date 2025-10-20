@@ -8,7 +8,7 @@ const containerStyle: SxProps<Theme> = {
 };
 
 export const HeaderSection = () => (
-  <Box sx={containerStyle}>
+  <Box component="header" sx={containerStyle}>
     <img src="/logo.svg" width={384} height={96} alt="Hyse Comics logo" />
   </Box>
 );
