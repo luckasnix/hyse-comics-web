@@ -1,4 +1,5 @@
 import fontsourceVariableNotoSansCss from "@fontsource-variable/noto-sans?url";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { type ReactNode, Suspense } from "react";
 
@@ -6,15 +7,19 @@ import { UiProvider } from "~/contexts/ui-context";
 import { FallbackPage } from "~/pages/fallback-page";
 import { NotFoundPage } from "~/pages/not-found-page";
 
+const queryClient = new QueryClient();
+
 const RootDocument = ({ children }: { children: ReactNode }) => (
   <html lang="en">
     <head>
       <HeadContent />
     </head>
     <body>
-      <UiProvider>
-        <Suspense fallback={<FallbackPage />}>{children}</Suspense>
-      </UiProvider>
+      <QueryClientProvider client={queryClient}>
+        <UiProvider>
+          <Suspense fallback={<FallbackPage />}>{children}</Suspense>
+        </UiProvider>
+      </QueryClientProvider>
       <Scripts />
     </body>
   </html>
