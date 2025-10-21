@@ -66,6 +66,19 @@ export const comicsMock: Array<Comic> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/thumbnail.webp",
     imageAltText: "Apprentice of Witchcraft thumbnail",
   },
+  {
+    id: "OtRo2Kj4Lym7",
+    structure: "single-panel",
+    orientation: "landscape",
+    direction: "western",
+    genres: ["action", "horror", "supernatural", "psychological"],
+    title: "The Purifier",
+    summary:
+      "In a world where demons prey upon human souls, a warrior priest walks the line between faith and fury. Armed with his sacred blade, he battles the darkness within mankind — and within himself.",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/thumbnail.webp",
+    imageAltText: "The Purifier thumbnail",
+  },
 ];
 
 export const comicPanelsMock: Array<ComicPanel> = [
@@ -221,5 +234,41 @@ export const comicPanelsMock: Array<ComicPanel> = [
     imageWidth: 1080,
     imageHeight: 720,
     imageAltText: "Apprentice of Witchcraft panel 3",
+  },
+  {
+    id: "5586aa59-1fae-4b5f-acb2-346ec0a487a8",
+    comicId: "OtRo2Kj4Lym7",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/panel-1.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "The Purifier panel 1",
+  },
+  {
+    id: "cc0472f3-fee5-42ce-8f41-fe01e9179062",
+    comicId: "OtRo2Kj4Lym7",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/panel-2.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "The Purifier panel 2",
+  },
+  {
+    id: "9a21c6dc-0edb-4c1d-ae95-b8c207dd24ab",
+    comicId: "OtRo2Kj4Lym7",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/panel-3.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "The Purifier panel 3",
+  },
+  {
+    id: "1843a560-6fa2-46de-8c28-9d3b1bfd1362",
+    comicId: "OtRo2Kj4Lym7",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/panel-4.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+    imageAltText: "The Purifier panel 4",
   },
 ];
