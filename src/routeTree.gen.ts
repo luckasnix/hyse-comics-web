@@ -10,8 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ComicsComicIdRouteImport } from './routes/comics.$comicId'
-import { Route as ApiComicsChar123ComicIdChar125RouteImport } from './routes/api/comics.{-$comicId}'
+import { Route as ComicsComicIdRouteImport } from './routes/comics/$comicId'
+import { Route as ApiComicsChar123ComicIdChar125RouteImport } from './routes/api/comics/{-$comicId}'
+import { Route as ApiComicsComicIdPagesChar123PageIdChar125RouteImport } from './routes/api/comics/$comicId.pages.{-$pageId}'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,35 +30,58 @@ const ApiComicsChar123ComicIdChar125Route =
     path: '/api/comics/{-$comicId}',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiComicsComicIdPagesChar123PageIdChar125Route =
+  ApiComicsComicIdPagesChar123PageIdChar125RouteImport.update({
+    id: '/api/comics/$comicId/pages/{-$pageId}',
+    path: '/api/comics/$comicId/pages/{-$pageId}',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
+  '/api/comics/$comicId/pages/{-$pageId}': typeof ApiComicsComicIdPagesChar123PageIdChar125Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
+  '/api/comics/$comicId/pages/{-$pageId}': typeof ApiComicsComicIdPagesChar123PageIdChar125Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
+  '/api/comics/$comicId/pages/{-$pageId}': typeof ApiComicsComicIdPagesChar123PageIdChar125Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/comics/$comicId' | '/api/comics/{-$comicId}'
+  fullPaths:
+    | '/'
+    | '/comics/$comicId'
+    | '/api/comics/{-$comicId}'
+    | '/api/comics/$comicId/pages/{-$pageId}'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/comics/$comicId' | '/api/comics/{-$comicId}'
-  id: '__root__' | '/' | '/comics/$comicId' | '/api/comics/{-$comicId}'
+  to:
+    | '/'
+    | '/comics/$comicId'
+    | '/api/comics/{-$comicId}'
+    | '/api/comics/$comicId/pages/{-$pageId}'
+  id:
+    | '__root__'
+    | '/'
+    | '/comics/$comicId'
+    | '/api/comics/{-$comicId}'
+    | '/api/comics/$comicId/pages/{-$pageId}'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComicsComicIdRoute: typeof ComicsComicIdRoute
   ApiComicsChar123ComicIdChar125Route: typeof ApiComicsChar123ComicIdChar125Route
+  ApiComicsComicIdPagesChar123PageIdChar125Route: typeof ApiComicsComicIdPagesChar123PageIdChar125Route
 }
 
 declare module '@tanstack/react-router' {
@@ -83,6 +107,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiComicsChar123ComicIdChar125RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/comics/$comicId/pages/{-$pageId}': {
+      id: '/api/comics/$comicId/pages/{-$pageId}'
+      path: '/api/comics/$comicId/pages/{-$pageId}'
+      fullPath: '/api/comics/$comicId/pages/{-$pageId}'
+      preLoaderRoute: typeof ApiComicsComicIdPagesChar123PageIdChar125RouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -90,6 +121,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComicsComicIdRoute: ComicsComicIdRoute,
   ApiComicsChar123ComicIdChar125Route: ApiComicsChar123ComicIdChar125Route,
+  ApiComicsComicIdPagesChar123PageIdChar125Route:
+    ApiComicsComicIdPagesChar123PageIdChar125Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
