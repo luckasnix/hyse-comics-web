@@ -1,4 +1,4 @@
-import type { Comic, ComicPanel } from "~/types/comics";
+import type { Comic, ComicPage } from "~/types/comics";
 
 export const comicsMock: Array<Comic> = [
   {
@@ -81,7 +81,7 @@ export const comicsMock: Array<Comic> = [
   },
 ];
 
-export const comicPanelsMock: Array<ComicPanel> = [
+export const comicPagesMock: Array<ComicPage> = [
   {
     id: "79e80cb6-5d66-49c6-a350-f2efd013ae63",
     comicId: "hsGYfEuPQH-U",

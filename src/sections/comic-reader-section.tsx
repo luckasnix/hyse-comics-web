@@ -8,7 +8,7 @@ import { useMemo, useRef } from "react";
 import { ComicReaderController } from "~/components/comic-reader-controller";
 import { ComicReaderDrawer } from "~/components/comic-reader-drawer";
 import { ComicReaderViewport } from "~/components/comic-reader-viewport";
-import { comicPanelsMock, comicsMock } from "~/mocks/comics";
+import { comicPagesMock, comicsMock } from "~/mocks/comics";
 
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",
@@ -28,21 +28,21 @@ export const ComicReaderSection = () => {
     useBoolean(false);
 
   const comic = useMemo(
-    () => comicsMock.find((curComic) => curComic.id === comicId),
+    () => comicsMock.find((currentComic) => currentComic.id === comicId),
     [comicId],
   );
 
-  const comicPanels = useMemo(
+  const comicPages = useMemo(
     () =>
-      comicPanelsMock.filter(
-        (curComicPanel) => curComicPanel.comicId === comicId,
+      comicPagesMock.filter(
+        (currentComicPage) => currentComicPage.comicId === comicId,
       ),
     [comicId],
   );
 
   return (
     <Stack component="section" ref={containerRef} sx={containerStyle}>
-      <ComicReaderViewport viewportRef={emblaRef} comicPanels={comicPanels} />
+      <ComicReaderViewport viewportRef={emblaRef} comicPages={comicPages} />
       <ComicReaderController
         controllerApi={emblaApi}
         isFullscreen={isFullscreen}

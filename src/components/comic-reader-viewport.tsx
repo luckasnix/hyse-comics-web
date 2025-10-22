@@ -4,7 +4,7 @@ import type { EmblaViewportRefType } from "embla-carousel-react";
 import type { CSSProperties } from "react";
 
 import { comicReaderControllerHeight } from "~/constants/layout";
-import type { ComicPanel } from "~/types/comics";
+import type { ComicPage } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   overflow: "hidden",
@@ -22,7 +22,7 @@ const slideContainerStyle: SxProps<Theme> = {
   },
 };
 
-const panelStyle: SxProps<Theme> = {
+const pageStyle: SxProps<Theme> = {
   flex: "0 0 100%",
   display: "flex",
   justifyContent: "center",
@@ -36,28 +36,26 @@ const imageStyle: CSSProperties = {
 
 export type ComicReaderViewportProps = Readonly<{
   viewportRef: EmblaViewportRefType;
-  comicPanels: Array<ComicPanel>;
+  comicPages: Array<ComicPage>;
 }>;
 
 export const ComicReaderViewport = ({
   viewportRef,
-  comicPanels,
+  comicPages,
 }: ComicReaderViewportProps) => (
   <Box ref={viewportRef} sx={containerStyle}>
     <Box sx={slideContainerStyle}>
-      {comicPanels.map(
-        ({ id, imageUrl, imageWidth, imageHeight, imageAltText }) => (
-          <Box key={id} sx={panelStyle}>
-            <img
-              src={imageUrl}
-              width={imageWidth}
-              height={imageHeight}
-              alt={imageAltText}
-              style={imageStyle}
-            />
-          </Box>
-        ),
-      )}
+      {comicPages.map((comicPage) => (
+        <Box key={comicPage.id} sx={pageStyle}>
+          <img
+            src={comicPage.imageUrl}
+            width={comicPage.imageWidth}
+            height={comicPage.imageHeight}
+            alt={comicPage.imageAltText}
+            style={imageStyle}
+          />
+        </Box>
+      ))}
     </Box>
   </Box>
 );

@@ -35,7 +35,7 @@ const iconButtonStyle: SxProps<Theme> = {
   color: "primary.contrastText",
 };
 
-const panelCounterStyle: SxProps<Theme> = {
+const pageCounterStyle: SxProps<Theme> = {
   display: "inline-flex",
   bgcolor: "primary.dark",
   paddingX: 2,
@@ -110,7 +110,7 @@ export const ComicReaderController = ({
           </Tooltip>
         </Grid>
         <Grid size="grow" spacing={2} display="flex" justifyContent="center">
-          <Tooltip title="First panel (shift + ←)">
+          <Tooltip title="First page (shift + ←)">
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
@@ -121,7 +121,7 @@ export const ComicReaderController = ({
               </IconButton>
             </Box>
           </Tooltip>
-          <Tooltip title="Previous panel (←)">
+          <Tooltip title="Previous page (←)">
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
@@ -132,12 +132,12 @@ export const ComicReaderController = ({
               </IconButton>
             </Box>
           </Tooltip>
-          <Box component="span" sx={panelCounterStyle}>
+          <Box component="span" sx={pageCounterStyle}>
             <Typography variant="body1" sx={{ color: "primary.contrastText" }}>
               {currentSlideNumber ?? "?"} / {slidesLength ?? "?"}
             </Typography>
           </Box>
-          <Tooltip title="Next panel (→)">
+          <Tooltip title="Next page (→)">
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
@@ -148,7 +148,7 @@ export const ComicReaderController = ({
               </IconButton>
             </Box>
           </Tooltip>
-          <Tooltip title="Last panel (shift + →)">
+          <Tooltip title="Last page (shift + →)">
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}

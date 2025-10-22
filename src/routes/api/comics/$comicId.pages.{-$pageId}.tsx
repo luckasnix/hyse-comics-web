@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { json } from "@tanstack/react-start";
 
-import { comicPanelsMock } from "~/mocks/comics";
+import { comicPagesMock } from "~/mocks/comics";
 
 export const Route = createFileRoute("/api/comics/$comicId/pages/{-$pageId}")({
   server: {
@@ -9,23 +9,28 @@ export const Route = createFileRoute("/api/comics/$comicId/pages/{-$pageId}")({
       GET: async ({ params }) => {
         const { comicId, pageId } = params;
         if (!pageId) {
-          const pages = comicPanelsMock.filter(
-            (panel) => panel.comicId === comicId,
+          const comicPages = comicPagesMock.filter(
+            (currentComicPage) => currentComicPage.comicId === comicId,
           );
-          return json(pages);
+          return json(comicPages);
         }
-        const page = comicPanelsMock.find(
-          (panel) => panel.comicId === comicId && panel.id === pageId,
+        const comicPage = comicPagesMock.find(
+          (currentComicPage) =>
+            currentComicPage.comicId === comicId &&
+            currentComicPage.id === pageId,
         );
-        if (!page) {
-          return new Response(JSON.stringify({ message: "Page not found" }), {
-            status: 404,
-            headers: {
-              "Content-Type": "application/json",
+        if (!comicPage) {
+          return new Response(
+            JSON.stringify({ message: "Comic page not found" }),
+            {
+              status: 404,
+              headers: {
+                "Content-Type": "application/json",
+              },
             },
-          });
+          );
         }
-        return json(page);
+        return json(comicPage);
       },
     },
   },
