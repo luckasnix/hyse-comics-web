@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComicsComicIdRouteImport } from './routes/comics.$comicId'
+import { Route as ApiComicsChar123ComicIdChar125RouteImport } from './routes/api/comics.{-$comicId}'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,41 @@ const ComicsComicIdRoute = ComicsComicIdRouteImport.update({
   path: '/comics/$comicId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiComicsChar123ComicIdChar125Route =
+  ApiComicsChar123ComicIdChar125RouteImport.update({
+    id: '/api/comics/{-$comicId}',
+    path: '/api/comics/{-$comicId}',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
+  '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
+  '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
+  '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/comics/$comicId'
+  fullPaths: '/' | '/comics/$comicId' | '/api/comics/{-$comicId}'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/comics/$comicId'
-  id: '__root__' | '/' | '/comics/$comicId'
+  to: '/' | '/comics/$comicId' | '/api/comics/{-$comicId}'
+  id: '__root__' | '/' | '/comics/$comicId' | '/api/comics/{-$comicId}'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComicsComicIdRoute: typeof ComicsComicIdRoute
+  ApiComicsChar123ComicIdChar125Route: typeof ApiComicsChar123ComicIdChar125Route
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +76,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComicsComicIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/comics/{-$comicId}': {
+      id: '/api/comics/{-$comicId}'
+      path: '/api/comics/{-$comicId}'
+      fullPath: '/api/comics/{-$comicId}'
+      preLoaderRoute: typeof ApiComicsChar123ComicIdChar125RouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComicsComicIdRoute: ComicsComicIdRoute,
+  ApiComicsChar123ComicIdChar125Route: ApiComicsChar123ComicIdChar125Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
