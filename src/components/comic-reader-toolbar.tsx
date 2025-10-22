@@ -16,11 +16,11 @@ import { Link } from "@tanstack/react-router";
 import { useEventListener } from "ahooks";
 import type { EmblaCarouselType } from "embla-carousel";
 
-import { comicReaderControllerHeight } from "~/constants/layout";
+import { comicReaderToolbarHeight } from "~/constants/layout";
 import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
 
 const containerStyle: SxProps<Theme> = {
-  height: comicReaderControllerHeight,
+  height: comicReaderToolbarHeight,
   paddingX: 3,
   bgcolor: "primary.main",
   justifyContent: "center",
@@ -43,7 +43,7 @@ const pageCounterStyle: SxProps<Theme> = {
   borderRadius: 2,
 };
 
-export type ComicReaderControllerProps = Readonly<{
+export type ComicReaderToolbarProps = Readonly<{
   controllerApi: EmblaCarouselType | undefined;
   isFullscreen: boolean;
   enterFullscreen: () => void;
@@ -52,14 +52,14 @@ export type ComicReaderControllerProps = Readonly<{
   toggleDrawer: () => void;
 }>;
 
-export const ComicReaderController = ({
+export const ComicReaderToolbar = ({
   controllerApi,
   isFullscreen,
   enterFullscreen,
   exitFullscreen,
   toggleFullscreen,
   toggleDrawer,
-}: ComicReaderControllerProps) => {
+}: ComicReaderToolbarProps) => {
   const {
     currentSlideNumber,
     slidesLength,

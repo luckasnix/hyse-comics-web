@@ -5,8 +5,8 @@ import { useBoolean, useFullscreen } from "ahooks";
 import useEmblaCarousel from "embla-carousel-react";
 import { useMemo, useRef } from "react";
 
-import { ComicReaderController } from "~/components/comic-reader-controller";
 import { ComicReaderDrawer } from "~/components/comic-reader-drawer";
+import { ComicReaderToolbar } from "~/components/comic-reader-toolbar";
 import { ComicReaderViewport } from "~/components/comic-reader-viewport";
 import { comicPagesMock, comicsMock } from "~/mocks/comics";
 
@@ -43,7 +43,7 @@ export const ComicReaderSection = () => {
   return (
     <Stack component="section" ref={containerRef} sx={containerStyle}>
       <ComicReaderViewport viewportRef={emblaRef} comicPages={comicPages} />
-      <ComicReaderController
+      <ComicReaderToolbar
         controllerApi={emblaApi}
         isFullscreen={isFullscreen}
         enterFullscreen={enterFullscreen}

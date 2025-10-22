@@ -1,1 +1,1 @@
-export const comicReaderControllerHeight = 56;
+export const comicReaderToolbarHeight = 56;
