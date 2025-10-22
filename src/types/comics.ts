@@ -36,7 +36,7 @@ export type Comic = {
   direction: ComicDirection;
   genres: Array<ComicGenre>;
   title: string;
-  summary: string;
+  synopsis: string;
   imageUrl: string;
   imageAltText: string;
 };

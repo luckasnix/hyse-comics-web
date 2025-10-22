@@ -28,7 +28,7 @@ export const ComicReaderDrawer = ({
           <Typography variant="h4" gutterBottom>
             {comic.title}
           </Typography>
-          <Typography variant="body1">{comic.summary}</Typography>
+          <Typography variant="body1">{comic.synopsis}</Typography>
         </Box>
       )}
     </Box>

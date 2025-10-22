@@ -28,7 +28,7 @@ const titleStyle: SxProps<Theme> = {
   whiteSpace: "nowrap",
 };
 
-const summaryStyle: SxProps<Theme> = {
+const synopsisStyle: SxProps<Theme> = {
   color: "text.secondary",
   display: "-webkit-box",
   WebkitBoxOrient: "vertical",
@@ -40,7 +40,7 @@ export type ComicCardProps = Readonly<{
   id: string;
   genres: Array<ComicGenre>;
   title: string;
-  summary: string;
+  synopsis: string;
   image: {
     src: string;
     altText: string;
@@ -52,7 +52,7 @@ export const ComicCard = ({
   id,
   genres,
   title,
-  summary,
+  synopsis,
   image,
   onReadButtonClick,
 }: ComicCardProps) => {
@@ -88,8 +88,8 @@ export const ComicCard = ({
         <Typography variant="h5" gutterBottom sx={titleStyle}>
           {title}
         </Typography>
-        <Typography variant="body2" gutterBottom sx={summaryStyle}>
-          {summary}
+        <Typography variant="body2" gutterBottom sx={synopsisStyle}>
+          {synopsis}
         </Typography>
         <Stack direction="row" spacing={1}>
           {genres.map((genre) => (

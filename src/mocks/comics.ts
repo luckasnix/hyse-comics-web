@@ -8,7 +8,7 @@ export const comicsMock: Array<Comic> = [
     direction: "western",
     genres: ["action", "adventure", "fantasy", "sci-fi", "supernatural"],
     title: "Metaverse Cavalry",
-    summary:
+    synopsis:
       "In a vast medieval world set within the Metaverse, a young warrior is summoned to face a looming threat that corrupts the very fabric of this digital reality: a powerful demon bent on destruction.",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/metaverse-cavalry/thumbnail.webp",
@@ -21,7 +21,7 @@ export const comicsMock: Array<Comic> = [
     direction: "western",
     genres: ["action", "adventure", "historical", "mystery"],
     title: "Forbidden Treasures",
-    summary:
+    synopsis:
       "In a world where ancient civilizations left secrets buried in forgotten temples, a young archaeologist embarks on risky expeditions in search of relics that could change the fate of humanity.",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/thumbnail.webp",
@@ -34,7 +34,7 @@ export const comicsMock: Array<Comic> = [
     direction: "western",
     genres: ["action", "sport"],
     title: "Skate Champion",
-    summary:
+    synopsis:
       "From the streets to the world stage, a young skater chases his dream of becoming the greatest of all time. With every trick, every fall, and every victory, his passion burns brighter.",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/thumbnail.webp",
@@ -47,7 +47,7 @@ export const comicsMock: Array<Comic> = [
     direction: "western",
     genres: ["action", "adventure", "historical"],
     title: "Blood and Gold",
-    summary:
+    synopsis:
       "On the high seas, a fearless pirate captain with an iron will, a missing leg, and a single eye chases the ultimate treasure. With his loyal crew by his side, he battles storms, enemies, and fate itself.",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/blood-and-gold/thumbnail.webp",
@@ -60,7 +60,7 @@ export const comicsMock: Array<Comic> = [
     direction: "western",
     genres: ["adventure", "fantasy"],
     title: "Apprentice of Witchcraft",
-    summary:
+    synopsis:
       "In a grand academy of magic, a young girl begins her journey as an apprentice of witchcraft. Between brewing potions, casting spells, and facing mysterious trials, she must prove her courage and unlock her true power.",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/thumbnail.webp",
@@ -73,7 +73,7 @@ export const comicsMock: Array<Comic> = [
     direction: "western",
     genres: ["action", "horror", "supernatural", "psychological"],
     title: "The Purifier",
-    summary:
+    synopsis:
       "In a world where demons prey upon human souls, a warrior priest walks the line between faith and fury. Armed with his sacred blade, he battles the darkness within mankind — and within himself.",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/thumbnail.webp",

@@ -100,7 +100,7 @@ export const ComicShelf = ({ title, comics }: ComicShelfProps) => {
                 id={comic.id}
                 genres={comic.genres}
                 title={comic.title}
-                summary={comic.summary}
+                synopsis={comic.synopsis}
                 image={{
                   src: comic.imageUrl,
                   altText: comic.imageAltText,
