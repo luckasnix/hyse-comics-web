@@ -13,7 +13,7 @@ const containerStyle: SxProps<Theme> = {
 export type ComicReaderDrawerProps = Readonly<{
   isOpen: boolean;
   onClose: () => void;
-  comic: Comic | undefined;
+  comic: Comic;
 }>;
 
 export const ComicReaderDrawer = ({
@@ -23,14 +23,12 @@ export const ComicReaderDrawer = ({
 }: ComicReaderDrawerProps) => (
   <Drawer open={isOpen} anchor="right" onClose={onClose}>
     <Box sx={containerStyle}>
-      {comic && (
-        <Box>
-          <Typography variant="h4" gutterBottom>
-            {comic.title}
-          </Typography>
-          <Typography variant="body1">{comic.synopsis}</Typography>
-        </Box>
-      )}
+      <Box>
+        <Typography variant="h4" gutterBottom>
+          {comic.title}
+        </Typography>
+        <Typography variant="body1">{comic.synopsis}</Typography>
+      </Box>
     </Box>
   </Drawer>
 );
