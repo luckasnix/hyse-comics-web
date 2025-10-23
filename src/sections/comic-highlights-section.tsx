@@ -2,15 +2,21 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 
 import { ComicShelf } from "~/components/comic-shelf";
-import { comicsMock } from "~/mocks/comics";
+import type { Comic } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   width: "100%",
 };
 
-export const ComicHighlightsSection = () => (
+export type ComicHighlightsSectionProps = Readonly<{
+  comics: Array<Comic>;
+}>;
+
+export const ComicHighlightsSection = ({
+  comics,
+}: ComicHighlightsSectionProps) => (
   <Stack direction="column" spacing={2} sx={containerStyle}>
-    <ComicShelf title="Trending now" comics={comicsMock} />
-    <ComicShelf title="Continue reading" comics={comicsMock} />
+    <ComicShelf title="Trending now" comics={comics} />
+    <ComicShelf title="Continue reading" comics={comics} />
   </Stack>
 );

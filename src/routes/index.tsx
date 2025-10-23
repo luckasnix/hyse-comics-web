@@ -4,15 +4,29 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ComicHighlightsSection } from "~/sections/comic-highlights-section";
 import { FooterSection } from "~/sections/footer-section";
 import { HeaderSection } from "~/sections/header-section";
+import { getComics } from "~/services/comics";
 
-const HomeRoute = () => (
-  <Grid container direction="column" alignItems="center">
-    <HeaderSection />
-    <ComicHighlightsSection />
-    <FooterSection />
-  </Grid>
-);
+const HomeRoute = () => {
+  // TODO: Show an error component if there was one in the loader data
+  const { comics } = Route.useLoaderData();
+
+  return (
+    <Grid container direction="column" alignItems="center">
+      <HeaderSection />
+      <ComicHighlightsSection comics={comics} />
+      <FooterSection />
+    </Grid>
+  );
+};
 
 export const Route = createFileRoute("/")({
   component: HomeRoute,
+  loader: async () => {
+    // TODO: Handle errors that may occur in the request
+    const comics = await getComics();
+
+    return {
+      comics,
+    };
+  },
 });
