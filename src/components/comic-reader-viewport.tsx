@@ -3,7 +3,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import type { EmblaViewportRefType } from "embla-carousel-react";
 import type { CSSProperties } from "react";
 
-import { comicReaderToolbarHeight } from "~/constants/layout";
+import { comicReaderToolbarHeight } from "~/constants/comics";
 import type { ComicPage } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {

@@ -16,7 +16,7 @@ import { Link } from "@tanstack/react-router";
 import { useEventListener } from "ahooks";
 import type { EmblaCarouselType } from "embla-carousel";
 
-import { comicReaderToolbarHeight } from "~/constants/layout";
+import { comicReaderToolbarHeight } from "~/constants/comics";
 import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
 
 const containerStyle: SxProps<Theme> = {
