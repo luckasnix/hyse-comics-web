@@ -46,7 +46,7 @@ export const FooterSection = () => (
       </IconButton>
       <IconButton
         component="a"
-        href="https://www.instagram.com/luc.kasnix/"
+        href="https://www.instagram.com/luckasnix/"
         target="_blank"
         rel="noopener noreferrer"
         sx={iconButtonStyle}
