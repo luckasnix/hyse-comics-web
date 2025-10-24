@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { ComicHighlightsSection } from "~/sections/comic-highlights-section";
+import { ComicRecommendationsSection } from "~/sections/comic-recommendations-section";
 import { FooterSection } from "~/sections/footer-section";
 import { HeaderSection } from "~/sections/header-section";
 import { getComics } from "~/services/comics";
@@ -13,7 +13,7 @@ const HomeRoute = () => {
   return (
     <Grid container direction="column" alignItems="center">
       <HeaderSection />
-      <ComicHighlightsSection comics={comics} />
+      <ComicRecommendationsSection comics={comics} />
       <FooterSection />
     </Grid>
   );

@@ -8,14 +8,14 @@ const containerStyle: SxProps<Theme> = {
   width: "100%",
 };
 
-export type ComicHighlightsSectionProps = Readonly<{
+export type ComicRecommendationsSectionProps = Readonly<{
   comics: Array<Comic>;
 }>;
 
 // TODO: Create endpoint that generates lists of comics based on themes
-export const ComicHighlightsSection = ({
+export const ComicRecommendationsSection = ({
   comics,
-}: ComicHighlightsSectionProps) => (
+}: ComicRecommendationsSectionProps) => (
   <Stack direction="column" spacing={2} sx={containerStyle}>
     <ComicShelf title="Trending now" comics={comics} />
     <ComicShelf title="Continue reading" comics={comics} />
