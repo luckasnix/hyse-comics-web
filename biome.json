@@ -26,6 +26,9 @@
     "enabled": true,
     "rules": {
       "recommended": true
+    },
+    "domains": {
+      "react": "all"
     }
   },
   "assist": {
