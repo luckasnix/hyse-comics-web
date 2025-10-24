@@ -52,6 +52,7 @@ export type ComicReaderToolbarProps = Readonly<{
   toggleDrawer: () => void;
 }>;
 
+// TODO: Adapt reading to the comic's "orientation" and "direction" settings
 export const ComicReaderToolbar = ({
   controllerApi,
   isFullscreen,

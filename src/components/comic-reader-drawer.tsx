@@ -16,6 +16,7 @@ export type ComicReaderDrawerProps = Readonly<{
   comic: Comic;
 }>;
 
+// TODO: Add navigation between comic chapters
 export const ComicReaderDrawer = ({
   isOpen,
   onClose,

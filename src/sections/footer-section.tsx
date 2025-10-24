@@ -24,6 +24,7 @@ const logoStyle: CSSProperties = {
   filter: "brightness(0) invert(1)",
 };
 
+// TODO: Use Hyse's social media
 export const FooterSection = () => (
   <Box component="footer" sx={containerStyle}>
     <img

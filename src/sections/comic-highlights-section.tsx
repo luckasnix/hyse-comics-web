@@ -12,6 +12,7 @@ export type ComicHighlightsSectionProps = Readonly<{
   comics: Array<Comic>;
 }>;
 
+// TODO: Create endpoint that generates lists of comics based on themes
 export const ComicHighlightsSection = ({
   comics,
 }: ComicHighlightsSectionProps) => (

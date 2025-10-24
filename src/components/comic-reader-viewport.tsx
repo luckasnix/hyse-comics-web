@@ -39,6 +39,7 @@ export type ComicReaderViewportProps = Readonly<{
   comicPages: Array<ComicPage>;
 }>;
 
+// TODO: Make image responsive
 export const ComicReaderViewport = ({
   viewportRef,
   comicPages,

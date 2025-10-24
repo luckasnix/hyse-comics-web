@@ -24,6 +24,7 @@ export const ComicReaderSection = ({
 }: ComicReaderSectionProps) => {
   const containerRef = useRef<HTMLElement>(null);
 
+  // TODO: Adapt reading to user's "axis" settings
   const [emblaRef, emblaApi] = useEmblaCarousel({
     axis: "y",
   });
