@@ -23,7 +23,7 @@ import type { Comic } from "~/types/comics";
 const containerStyle: SxProps<Theme> = {
   height: comicReaderToolbarHeight,
   paddingX: 3,
-  bgcolor: "primary.main",
+  backgroundColor: "primary.main",
   justifyContent: "center",
   alignItems: "center",
 };
@@ -38,7 +38,7 @@ const iconButtonStyle: SxProps<Theme> = {
 
 const pageCounterStyle: SxProps<Theme> = {
   display: "inline-flex",
-  bgcolor: "primary.dark",
+  backgroundColor: "primary.dark",
   paddingX: 2,
   paddingY: 1,
   borderRadius: 2,
