@@ -46,7 +46,7 @@ const pageCounterStyle: SxProps<Theme> = {
 
 export type ComicReaderToolbarProps = Readonly<{
   comic: Comic;
-  controllerApi: EmblaCarouselType | undefined;
+  carouselApi: EmblaCarouselType | undefined;
   isFullscreen: boolean;
   enterFullscreen: () => void;
   exitFullscreen: () => void;
@@ -60,7 +60,7 @@ export type ComicReaderToolbarProps = Readonly<{
 // TODO: Add zoom to images
 export const ComicReaderToolbar = ({
   comic,
-  controllerApi,
+  carouselApi,
   isFullscreen,
   enterFullscreen,
   exitFullscreen,
@@ -78,7 +78,7 @@ export const ComicReaderToolbar = ({
     navigatePrev,
     navigateNext,
     navigateLast,
-  } = useCarouselNavigation(controllerApi);
+  } = useCarouselNavigation(carouselApi);
 
   const isWestern = comic.direction === "western";
 

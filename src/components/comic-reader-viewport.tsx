@@ -51,7 +51,7 @@ export type ComicReaderViewportProps = Readonly<{
   user: User;
   comic: Comic;
   comicPages: Array<ComicPage>;
-  viewportRef: EmblaViewportRefType;
+  carouselRef: EmblaViewportRefType;
 }>;
 
 // TODO: Make image responsive
@@ -59,9 +59,9 @@ export const ComicReaderViewport = ({
   user,
   comic,
   comicPages,
-  viewportRef,
+  carouselRef,
 }: ComicReaderViewportProps) => (
-  <Box ref={viewportRef} sx={containerStyle}>
+  <Box ref={carouselRef} sx={containerStyle}>
     <Box sx={getSlideContainerStyle(user.reading.axis, comic.direction)}>
       {comicPages.map((comicPage) => (
         <Box key={comicPage.id} sx={pageStyle}>
