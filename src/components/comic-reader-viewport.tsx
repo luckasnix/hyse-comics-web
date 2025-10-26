@@ -4,22 +4,35 @@ import type { EmblaViewportRefType } from "embla-carousel-react";
 import type { CSSProperties } from "react";
 
 import { comicReaderToolbarHeight } from "~/constants/comics";
-import type { ComicPage } from "~/types/comics";
+import type { Comic, ComicDirection, ComicPage } from "~/types/comics";
+import type { User, UserReadingAxis } from "~/types/users";
 
 const containerStyle: SxProps<Theme> = {
   overflow: "hidden",
   backgroundColor: "background.default",
 };
 
-const slideContainerStyle: SxProps<Theme> = {
-  height: `calc(100dvh - ${comicReaderToolbarHeight}px)`,
-  touchAction: "pan-x pinch-zoom",
-  display: "flex",
-  flexDirection: "column",
-  cursor: "grab",
-  "&:active": {
-    cursor: "grabbing",
-  },
+const getSlideContainerStyle = (
+  userReadingAxis: UserReadingAxis,
+  comicDirection: ComicDirection,
+): SxProps<Theme> => {
+  // TODO: Improve typing
+  let flexDirection: "column" | "row" | "row-reverse" = "column";
+
+  if (userReadingAxis === "horizontal") {
+    flexDirection = comicDirection === "western" ? "row" : "row-reverse";
+  }
+
+  return {
+    height: `calc(100dvh - ${comicReaderToolbarHeight}px)`,
+    touchAction: "pan-x pinch-zoom",
+    display: "flex",
+    flexDirection,
+    cursor: "grab",
+    "&:active": {
+      cursor: "grabbing",
+    },
+  };
 };
 
 const pageStyle: SxProps<Theme> = {
@@ -35,17 +48,21 @@ const imageStyle: CSSProperties = {
 };
 
 export type ComicReaderViewportProps = Readonly<{
-  viewportRef: EmblaViewportRefType;
+  user: User;
+  comic: Comic;
   comicPages: Array<ComicPage>;
+  viewportRef: EmblaViewportRefType;
 }>;
 
 // TODO: Make image responsive
 export const ComicReaderViewport = ({
-  viewportRef,
+  user,
+  comic,
   comicPages,
+  viewportRef,
 }: ComicReaderViewportProps) => (
   <Box ref={viewportRef} sx={containerStyle}>
-    <Box sx={slideContainerStyle}>
+    <Box sx={getSlideContainerStyle(user.reading.axis, comic.direction)}>
       {comicPages.map((comicPage) => (
         <Box key={comicPage.id} sx={pageStyle}>
           <img

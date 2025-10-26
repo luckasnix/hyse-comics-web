@@ -5,7 +5,7 @@ export const comicsMock: Array<Comic> = [
     id: "hsGYfEuPQH-U",
     structure: "single-panel",
     orientation: "landscape",
-    direction: "western",
+    direction: "eastern",
     genres: ["action", "adventure", "fantasy", "sci-fi", "supernatural"],
     title: "Metaverse Cavalry",
     synopsis:
@@ -44,7 +44,7 @@ export const comicsMock: Array<Comic> = [
     id: "5G2IKgBnc2ns",
     structure: "single-panel",
     orientation: "landscape",
-    direction: "western",
+    direction: "eastern",
     genres: ["action", "adventure", "historical"],
     title: "Blood and Gold",
     synopsis:

@@ -11,16 +11,16 @@ const containerStyle: SxProps<Theme> = {
 };
 
 export type ComicReaderDrawerProps = Readonly<{
+  comic: Comic;
   isOpen: boolean;
   onClose: () => void;
-  comic: Comic;
 }>;
 
 // TODO: Add navigation between comic chapters
 export const ComicReaderDrawer = ({
+  comic,
   isOpen,
   onClose,
-  comic,
 }: ComicReaderDrawerProps) => (
   <Drawer open={isOpen} anchor="right" onClose={onClose}>
     <Box sx={containerStyle}>

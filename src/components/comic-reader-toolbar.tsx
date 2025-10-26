@@ -18,6 +18,7 @@ import type { EmblaCarouselType } from "embla-carousel";
 
 import { comicReaderToolbarHeight } from "~/constants/comics";
 import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
+import type { Comic } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   height: comicReaderToolbarHeight,
@@ -44,6 +45,7 @@ const pageCounterStyle: SxProps<Theme> = {
 };
 
 export type ComicReaderToolbarProps = Readonly<{
+  comic: Comic;
   controllerApi: EmblaCarouselType | undefined;
   isFullscreen: boolean;
   enterFullscreen: () => void;
@@ -52,8 +54,12 @@ export type ComicReaderToolbarProps = Readonly<{
   toggleDrawer: () => void;
 }>;
 
-// TODO: Adapt reading to the comic's "orientation" and "direction" settings
+// TODO: Adapt reading to the comic's "orientation" settings
+// TODO: Add thumbnail navigation
+// TODO: Add touch navigation
+// TODO: Add zoom to images
 export const ComicReaderToolbar = ({
+  comic,
   controllerApi,
   isFullscreen,
   enterFullscreen,
@@ -74,20 +80,22 @@ export const ComicReaderToolbar = ({
     navigateLast,
   } = useCarouselNavigation(controllerApi);
 
+  const isWestern = comic.direction === "western";
+
   useEventListener("keydown", ({ key, shiftKey }) => {
     if (shiftKey) {
       if (key === "ArrowLeft") {
-        navigateFirst();
+        isWestern ? navigateFirst() : navigateLast();
       }
       if (key === "ArrowRight") {
-        navigateLast();
+        isWestern ? navigateLast() : navigateFirst();
       }
     } else {
       if (key === "ArrowLeft") {
-        navigatePrev();
+        isWestern ? navigatePrev() : navigateNext();
       }
       if (key === "ArrowRight") {
-        navigateNext();
+        isWestern ? navigateNext() : navigatePrev();
       }
       if (key === "f") {
         toggleFullscreen();
@@ -111,23 +119,25 @@ export const ComicReaderToolbar = ({
           </Tooltip>
         </Grid>
         <Grid size="grow" spacing={2} display="flex" justifyContent="center">
-          <Tooltip title="First page (shift + ←)">
+          <Tooltip
+            title={`${isWestern ? "First page" : "Last page"} (shift + ←)`}
+          >
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
-                disabled={!canNavigateFirst}
-                onClick={navigateFirst}
+                disabled={isWestern ? !canNavigateFirst : !canNavigateLast}
+                onClick={isWestern ? navigateFirst : navigateLast}
               >
                 <FirstPageIcon />
               </IconButton>
             </Box>
           </Tooltip>
-          <Tooltip title="Previous page (←)">
+          <Tooltip title={`${isWestern ? "Previous page" : "Next page"} (←)`}>
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
-                disabled={!canNavigatePrev}
-                onClick={navigatePrev}
+                disabled={isWestern ? !canNavigatePrev : !canNavigateNext}
+                onClick={isWestern ? navigatePrev : navigateNext}
               >
                 <NavigateBeforeIcon />
               </IconButton>
@@ -138,23 +148,25 @@ export const ComicReaderToolbar = ({
               {currentSlideNumber ?? "?"} / {slidesLength ?? "?"}
             </Typography>
           </Box>
-          <Tooltip title="Next page (→)">
+          <Tooltip title={`${isWestern ? "Next page" : "Previous page"} (→)`}>
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
-                disabled={!canNavigateNext}
-                onClick={navigateNext}
+                disabled={isWestern ? !canNavigateNext : !canNavigatePrev}
+                onClick={isWestern ? navigateNext : navigatePrev}
               >
                 <NavigateNextIcon />
               </IconButton>
             </Box>
           </Tooltip>
-          <Tooltip title="Last page (shift + →)">
+          <Tooltip
+            title={`${isWestern ? "Last page" : "First page"} (shift + →)`}
+          >
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
-                disabled={!canNavigateLast}
-                onClick={navigateLast}
+                disabled={isWestern ? !canNavigateLast : !canNavigateFirst}
+                onClick={isWestern ? navigateLast : navigateFirst}
               >
                 <LastPageIcon />
               </IconButton>
