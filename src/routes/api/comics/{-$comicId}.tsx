@@ -23,6 +23,7 @@ export const Route = createFileRoute("/api/comics/{-$comicId}")({
             },
           });
         }
+
         return json(comic);
       },
     },

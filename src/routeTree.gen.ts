@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComicsComicIdRouteImport } from './routes/comics/$comicId'
 import { Route as ApiComicsChar123ComicIdChar125RouteImport } from './routes/api/comics/{-$comicId}'
+import { Route as ApiComicsRecommendationsRouteImport } from './routes/api/comics/recommendations'
 import { Route as ApiComicsComicIdPagesChar123PageIdChar125RouteImport } from './routes/api/comics/$comicId.pages.{-$pageId}'
 
 const IndexRoute = IndexRouteImport.update({
@@ -30,6 +31,12 @@ const ApiComicsChar123ComicIdChar125Route =
     path: '/api/comics/{-$comicId}',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiComicsRecommendationsRoute =
+  ApiComicsRecommendationsRouteImport.update({
+    id: '/api/comics/recommendations',
+    path: '/api/comics/recommendations',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiComicsComicIdPagesChar123PageIdChar125Route =
   ApiComicsComicIdPagesChar123PageIdChar125RouteImport.update({
     id: '/api/comics/$comicId/pages/{-$pageId}',
@@ -40,12 +47,14 @@ const ApiComicsComicIdPagesChar123PageIdChar125Route =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
+  '/api/comics/recommendations': typeof ApiComicsRecommendationsRoute
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
   '/api/comics/$comicId/pages/{-$pageId}': typeof ApiComicsComicIdPagesChar123PageIdChar125Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
+  '/api/comics/recommendations': typeof ApiComicsRecommendationsRoute
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
   '/api/comics/$comicId/pages/{-$pageId}': typeof ApiComicsComicIdPagesChar123PageIdChar125Route
 }
@@ -53,6 +62,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
+  '/api/comics/recommendations': typeof ApiComicsRecommendationsRoute
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
   '/api/comics/$comicId/pages/{-$pageId}': typeof ApiComicsComicIdPagesChar123PageIdChar125Route
 }
@@ -61,18 +71,21 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/comics/$comicId'
+    | '/api/comics/recommendations'
     | '/api/comics/{-$comicId}'
     | '/api/comics/$comicId/pages/{-$pageId}'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/comics/$comicId'
+    | '/api/comics/recommendations'
     | '/api/comics/{-$comicId}'
     | '/api/comics/$comicId/pages/{-$pageId}'
   id:
     | '__root__'
     | '/'
     | '/comics/$comicId'
+    | '/api/comics/recommendations'
     | '/api/comics/{-$comicId}'
     | '/api/comics/$comicId/pages/{-$pageId}'
   fileRoutesById: FileRoutesById
@@ -80,6 +93,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComicsComicIdRoute: typeof ComicsComicIdRoute
+  ApiComicsRecommendationsRoute: typeof ApiComicsRecommendationsRoute
   ApiComicsChar123ComicIdChar125Route: typeof ApiComicsChar123ComicIdChar125Route
   ApiComicsComicIdPagesChar123PageIdChar125Route: typeof ApiComicsComicIdPagesChar123PageIdChar125Route
 }
@@ -107,6 +121,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiComicsChar123ComicIdChar125RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/comics/recommendations': {
+      id: '/api/comics/recommendations'
+      path: '/api/comics/recommendations'
+      fullPath: '/api/comics/recommendations'
+      preLoaderRoute: typeof ApiComicsRecommendationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/comics/$comicId/pages/{-$pageId}': {
       id: '/api/comics/$comicId/pages/{-$pageId}'
       path: '/api/comics/$comicId/pages/{-$pageId}'
@@ -120,6 +141,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComicsComicIdRoute: ComicsComicIdRoute,
+  ApiComicsRecommendationsRoute: ApiComicsRecommendationsRoute,
   ApiComicsChar123ComicIdChar125Route: ApiComicsChar123ComicIdChar125Route,
   ApiComicsComicIdPagesChar123PageIdChar125Route:
     ApiComicsComicIdPagesChar123PageIdChar125Route,

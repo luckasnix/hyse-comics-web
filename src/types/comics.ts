@@ -49,3 +49,9 @@ export type ComicPage = {
   imageHeight: number;
   imageAltText: string;
 };
+
+export type ComicRecommendation = {
+  id: string;
+  title: string;
+  comics: Array<Comic>;
+};

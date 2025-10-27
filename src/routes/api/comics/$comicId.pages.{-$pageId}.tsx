@@ -31,6 +31,7 @@ export const Route = createFileRoute("/api/comics/$comicId/pages/{-$pageId}")({
             },
           );
         }
+
         return json(comicPage);
       },
     },
