@@ -43,6 +43,8 @@ const pageStyle: SxProps<Theme> = {
 };
 
 const imageStyle: CSSProperties = {
+  width: "auto",
+  maxWidth: "100%",
   padding: "40px",
   objectFit: "contain",
 };
@@ -54,7 +56,6 @@ export type ComicReaderViewportProps = Readonly<{
   carouselRef: EmblaViewportRefType;
 }>;
 
-// TODO: Make image responsive
 export const ComicReaderViewport = ({
   user,
   comic,
