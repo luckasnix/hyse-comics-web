@@ -1,5 +1,9 @@
 import Box from "@mui/material/Box";
-import type { SxProps, Theme } from "@mui/material/styles";
+import type {
+  CSSProperties as SxCSSProperties,
+  SxProps,
+  Theme,
+} from "@mui/material/styles";
 import type { EmblaViewportRefType } from "embla-carousel-react";
 import type { CSSProperties } from "react";
 
@@ -16,8 +20,7 @@ const getSlideContainerStyle = (
   userReadingAxis: UserReadingAxis,
   comicDirection: ComicDirection,
 ): SxProps<Theme> => {
-  // TODO: Improve typing
-  let flexDirection: "column" | "row" | "row-reverse" = "column";
+  let flexDirection: SxCSSProperties["flexDirection"] = "column";
 
   if (userReadingAxis === "horizontal") {
     flexDirection = comicDirection === "western" ? "row" : "row-reverse";
