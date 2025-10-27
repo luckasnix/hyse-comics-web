@@ -1,4 +1,4 @@
-import type { Comic, ComicPage } from "~/types/comics";
+import type { Comic, ComicPage, ComicRecommendation } from "~/types/comics";
 
 export const getComics = async (): Promise<Array<Comic>> => {
   const response = await fetch("/api/comics");
@@ -49,6 +49,20 @@ export const getComicPage = async (
     );
   }
   const data = (await response.json()) as ComicPage;
+
+  return data;
+};
+
+export const getComicRecommendations = async (): Promise<
+  Array<ComicRecommendation>
+> => {
+  const response = await fetch("/api/comics/recommendations");
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch comic recommendations: ${response.status} ${response.statusText}`,
+    );
+  }
+  const data = (await response.json()) as Array<ComicRecommendation>;
 
   return data;
 };
