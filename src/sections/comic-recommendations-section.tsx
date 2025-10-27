@@ -2,22 +2,26 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 
 import { ComicShelf } from "~/components/comic-shelf";
-import type { Comic } from "~/types/comics";
+import type { ComicRecommendation } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   width: "100%",
 };
 
 export type ComicRecommendationsSectionProps = Readonly<{
-  comics: Array<Comic>;
+  comicRecommendations: Array<ComicRecommendation>;
 }>;
 
-// TODO: Create endpoint that generates lists of comics based on themes
 export const ComicRecommendationsSection = ({
-  comics,
+  comicRecommendations,
 }: ComicRecommendationsSectionProps) => (
   <Stack direction="column" spacing={2} sx={containerStyle}>
-    <ComicShelf title="Trending now" comics={comics} />
-    <ComicShelf title="Continue reading" comics={comics} />
+    {comicRecommendations.map((comicRecommendation) => (
+      <ComicShelf
+        key={comicRecommendation.id}
+        title={comicRecommendation.title}
+        comics={comicRecommendation.comics}
+      />
+    ))}
   </Stack>
 );
