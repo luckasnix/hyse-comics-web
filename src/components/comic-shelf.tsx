@@ -68,9 +68,8 @@ export type ComicShelfProps = Readonly<{
 export const ComicShelf = ({ title, comics }: ComicShelfProps) => {
   const navigate = useNavigate();
 
-  // TODO: Make the number of scrolled slides consistent with the device
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    slidesToScroll: 3,
+    slidesToScroll: "auto",
   });
 
   const { canNavigatePrev, canNavigateNext, navigatePrev, navigateNext } =
