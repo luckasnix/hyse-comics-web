@@ -1,13 +1,10 @@
 import fontsourceVariableNotoSansCss from "@fontsource-variable/noto-sans?url";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { type ReactNode, Suspense } from "react";
 
 import { UiProvider } from "~/contexts/ui-context";
 import { FallbackPage } from "~/pages/fallback-page";
 import { NotFoundPage } from "~/pages/not-found-page";
-
-const queryClient = new QueryClient();
 
 const RootDocument = ({ children }: { children: ReactNode }) => (
   // TODO: Add internationalization with American English and Brazilian Portuguese
@@ -16,11 +13,9 @@ const RootDocument = ({ children }: { children: ReactNode }) => (
       <HeadContent />
     </head>
     <body>
-      <QueryClientProvider client={queryClient}>
-        <UiProvider>
-          <Suspense fallback={<FallbackPage />}>{children}</Suspense>
-        </UiProvider>
-      </QueryClientProvider>
+      <UiProvider>
+        <Suspense fallback={<FallbackPage />}>{children}</Suspense>
+      </UiProvider>
       <Scripts />
     </body>
   </html>

@@ -25,7 +25,6 @@
     "@fontsource-variable/noto-sans": "5.2.10",
     "@mui/icons-material": "7.3.4",
     "@mui/material": "7.3.4",
-    "@tanstack/react-query": "5.90.5",
     "@tanstack/react-router": "1.133.27",
     "@tanstack/react-start": "1.133.27",
     "ahooks": "3.9.5",
