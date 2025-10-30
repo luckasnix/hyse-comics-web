@@ -16,8 +16,11 @@ import { Link } from "@tanstack/react-router";
 import { useEventListener } from "ahooks";
 import type { EmblaCarouselType } from "embla-carousel";
 
-import { comicReaderToolbarHeight } from "~/constants/comics";
-import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
+import {
+  carouselDirectionFrom,
+  comicReaderToolbarHeight,
+} from "~/constants/comics";
+import { useCarouselDirectionalNavigation } from "~/hooks/use-carousel-directional-navigation";
 import type { Comic } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
@@ -67,35 +70,26 @@ export const ComicReaderToolbar = ({
   toggleFullscreen,
   toggleDrawer,
 }: ComicReaderToolbarProps) => {
-  const {
-    currentSlideNumber,
-    slidesLength,
-    canNavigateFirst,
-    canNavigatePrev,
-    canNavigateNext,
-    canNavigateLast,
-    navigateFirst,
-    navigatePrev,
-    navigateNext,
-    navigateLast,
-  } = useCarouselNavigation(carouselApi);
-
-  const isWestern = comic.direction === "western";
+  const { buttons, currentSlideNumber, slidesLength } =
+    useCarouselDirectionalNavigation(
+      carouselApi,
+      carouselDirectionFrom[comic.direction],
+    );
 
   useEventListener("keydown", ({ key, shiftKey }) => {
     if (shiftKey) {
       if (key === "ArrowLeft") {
-        isWestern ? navigateFirst() : navigateLast();
+        buttons.farLeft.onClick();
       }
       if (key === "ArrowRight") {
-        isWestern ? navigateLast() : navigateFirst();
+        buttons.farRight.onClick();
       }
     } else {
       if (key === "ArrowLeft") {
-        isWestern ? navigatePrev() : navigateNext();
+        buttons.left.onClick();
       }
       if (key === "ArrowRight") {
-        isWestern ? navigateNext() : navigatePrev();
+        buttons.right.onClick();
       }
       if (key === "f") {
         toggleFullscreen();
@@ -119,25 +113,23 @@ export const ComicReaderToolbar = ({
           </Tooltip>
         </Grid>
         <Grid size="grow" spacing={2} display="flex" justifyContent="center">
-          <Tooltip
-            title={`${isWestern ? "First page" : "Last page"} (shift + ←)`}
-          >
+          <Tooltip title={buttons.farLeft.label}>
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
-                disabled={isWestern ? !canNavigateFirst : !canNavigateLast}
-                onClick={isWestern ? navigateFirst : navigateLast}
+                disabled={buttons.farLeft.disabled}
+                onClick={buttons.farLeft.onClick}
               >
                 <FirstPageIcon />
               </IconButton>
             </Box>
           </Tooltip>
-          <Tooltip title={`${isWestern ? "Previous page" : "Next page"} (←)`}>
+          <Tooltip title={buttons.left.label}>
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
-                disabled={isWestern ? !canNavigatePrev : !canNavigateNext}
-                onClick={isWestern ? navigatePrev : navigateNext}
+                disabled={buttons.left.disabled}
+                onClick={buttons.left.onClick}
               >
                 <NavigateBeforeIcon />
               </IconButton>
@@ -148,25 +140,23 @@ export const ComicReaderToolbar = ({
               {currentSlideNumber ?? "?"} / {slidesLength ?? "?"}
             </Typography>
           </Box>
-          <Tooltip title={`${isWestern ? "Next page" : "Previous page"} (→)`}>
+          <Tooltip title={buttons.right.label}>
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
-                disabled={isWestern ? !canNavigateNext : !canNavigatePrev}
-                onClick={isWestern ? navigateNext : navigatePrev}
+                disabled={buttons.right.disabled}
+                onClick={buttons.right.onClick}
               >
                 <NavigateNextIcon />
               </IconButton>
             </Box>
           </Tooltip>
-          <Tooltip
-            title={`${isWestern ? "Last page" : "First page"} (shift + →)`}
-          >
+          <Tooltip title={buttons.farRight.label}>
             <Box component="span">
               <IconButton
                 sx={iconButtonStyle}
-                disabled={isWestern ? !canNavigateLast : !canNavigateFirst}
-                onClick={isWestern ? navigateLast : navigateFirst}
+                disabled={buttons.farRight.disabled}
+                onClick={buttons.farRight.onClick}
               >
                 <LastPageIcon />
               </IconButton>
