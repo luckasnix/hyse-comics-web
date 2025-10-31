@@ -2,8 +2,7 @@ import type { EmblaCarouselType } from "embla-carousel";
 import { useMemo } from "react";
 
 import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
-
-export type NavigationDirection = "ltr" | "rtl";
+import type { AxisDirectionOptionType } from "~/types/comics";
 
 export type NavigationButtonPosition =
   | "farLeft"
@@ -24,7 +23,7 @@ export type NavigationConfig = Record<
 
 export const useCarouselDirectionalNavigation = (
   carouselApi: EmblaCarouselType | undefined,
-  direction: NavigationDirection,
+  direction: AxisDirectionOptionType,
 ) => {
   const {
     canNavigateFirst,
@@ -85,7 +84,7 @@ export const useCarouselDirectionalNavigation = (
       },
     };
 
-    const buttonsFrom: Record<NavigationDirection, NavigationConfig> = {
+    const buttonsFrom: Record<AxisDirectionOptionType, NavigationConfig> = {
       ltr,
       rtl,
     };
