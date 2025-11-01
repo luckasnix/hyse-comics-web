@@ -47,9 +47,15 @@ export type Comic = {
   imageAltText: string;
 };
 
-export type ComicPage = {
+export type ComicChapter = {
   id: string;
   comicId: string;
+  title: string;
+};
+
+export type ComicPage = {
+  id: string;
+  chapterId: string;
   imageUrl: string;
   imageWidth: number;
   imageHeight: number;

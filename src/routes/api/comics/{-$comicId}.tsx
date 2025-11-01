@@ -9,12 +9,15 @@ export const Route = createFileRoute("/api/comics/{-$comicId}")({
       // TODO: Connect to Supabase and fetch data from there
       GET: async ({ params }) => {
         const { comicId } = params;
+
         if (!comicId) {
           return json(comicsMock);
         }
+
         const comic = comicsMock.find(
           (currentComic) => currentComic.id === comicId,
         );
+
         if (!comic) {
           return new Response(JSON.stringify({ message: "Comic not found" }), {
             status: 404,

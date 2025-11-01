@@ -1,8 +1,13 @@
-import type { Comic, ComicPage, ComicRecommendation } from "~/types/comics";
+import type {
+  Comic,
+  ComicChapter,
+  ComicPage,
+  ComicRecommendation,
+} from "~/types/comics";
 
 export const comicsMock: Array<Comic> = [
   {
-    id: "hsGYfEuPQH-U",
+    id: "iXSE",
     structure: "single-panel",
     orientation: "landscape",
     direction: "eastern",
@@ -15,7 +20,7 @@ export const comicsMock: Array<Comic> = [
     imageAltText: "Metaverse Cavalry thumbnail",
   },
   {
-    id: "eAvdmZnEgri3",
+    id: "erZ7",
     structure: "single-panel",
     orientation: "landscape",
     direction: "western",
@@ -28,7 +33,7 @@ export const comicsMock: Array<Comic> = [
     imageAltText: "Forbidden Treasures thumbnail",
   },
   {
-    id: "HmRdP9Q8iXOH",
+    id: "FSOK",
     structure: "single-panel",
     orientation: "landscape",
     direction: "western",
@@ -41,7 +46,7 @@ export const comicsMock: Array<Comic> = [
     imageAltText: "Skate Champion thumbnail",
   },
   {
-    id: "5G2IKgBnc2ns",
+    id: "lfUQ",
     structure: "single-panel",
     orientation: "landscape",
     direction: "eastern",
@@ -54,7 +59,7 @@ export const comicsMock: Array<Comic> = [
     imageAltText: "Blood and Gold thumbnail",
   },
   {
-    id: "3tu2mLgN53E-",
+    id: "tAip",
     structure: "single-panel",
     orientation: "landscape",
     direction: "western",
@@ -67,7 +72,7 @@ export const comicsMock: Array<Comic> = [
     imageAltText: "Apprentice of Witchcraft thumbnail",
   },
   {
-    id: "OtRo2Kj4Lym7",
+    id: "LAeD",
     structure: "single-panel",
     orientation: "landscape",
     direction: "western",
@@ -81,10 +86,43 @@ export const comicsMock: Array<Comic> = [
   },
 ];
 
+export const comicChaptersMock: Array<ComicChapter> = [
+  {
+    id: "vNH8ZOb8",
+    comicId: "iXSE",
+    title: "The Summoning",
+  },
+  {
+    id: "a6pJNagm",
+    comicId: "erZ7",
+    title: "The Temple of Secrets",
+  },
+  {
+    id: "KoEb6BNw",
+    comicId: "FSOK",
+    title: "First Trick",
+  },
+  {
+    id: "cFCqsYye",
+    comicId: "lfUQ",
+    title: "The Captain's Quest",
+  },
+  {
+    id: "dKtiDz0q",
+    comicId: "tAip",
+    title: "The First Spell",
+  },
+  {
+    id: "ocxHyVie",
+    comicId: "LAeD",
+    title: "The Sacred Blade",
+  },
+];
+
 export const comicPagesMock: Array<ComicPage> = [
   {
     id: "79e80cb6-5d66-49c6-a350-f2efd013ae63",
-    comicId: "hsGYfEuPQH-U",
+    chapterId: "vNH8ZOb8",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/metaverse-cavalry/panel-1.webp",
     imageWidth: 1080,
@@ -93,7 +131,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "925eb9c5-fe49-44bb-8c29-2495e0e3eb4f",
-    comicId: "hsGYfEuPQH-U",
+    chapterId: "vNH8ZOb8",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/metaverse-cavalry/panel-2.webp",
     imageWidth: 1080,
@@ -102,7 +140,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "5616800f-ed96-4995-b802-bb0ca3bed992",
-    comicId: "hsGYfEuPQH-U",
+    chapterId: "vNH8ZOb8",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/metaverse-cavalry/panel-3.webp",
     imageWidth: 1080,
@@ -111,7 +149,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "0d656322-0491-4d0a-a3db-f5393b57edc3",
-    comicId: "hsGYfEuPQH-U",
+    chapterId: "vNH8ZOb8",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/metaverse-cavalry/panel-4.webp",
     imageWidth: 1080,
@@ -120,7 +158,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "3e3ff617-908f-45cd-aa8d-096d7681de3c",
-    comicId: "eAvdmZnEgri3",
+    chapterId: "a6pJNagm",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/panel-1.webp",
     imageWidth: 1080,
@@ -129,7 +167,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "9b6fdfb9-9ff1-4aa3-9a35-39462164e1ac",
-    comicId: "eAvdmZnEgri3",
+    chapterId: "a6pJNagm",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/panel-2.webp",
     imageWidth: 1080,
@@ -138,7 +176,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "af693116-e36b-4718-9b1d-276eadf53d56",
-    comicId: "eAvdmZnEgri3",
+    chapterId: "a6pJNagm",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/panel-3.webp",
     imageWidth: 1080,
@@ -147,7 +185,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "77834591-4e58-44e7-82fc-9fb5115638db",
-    comicId: "HmRdP9Q8iXOH",
+    chapterId: "KoEb6BNw",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/panel-1.webp",
     imageWidth: 1080,
@@ -156,7 +194,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "19d688a6-de37-476f-a73c-968fba98c389",
-    comicId: "HmRdP9Q8iXOH",
+    chapterId: "KoEb6BNw",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/panel-2.webp",
     imageWidth: 1080,
@@ -165,7 +203,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "039fe50b-fa05-4c6e-a17e-cdafb6a821bc",
-    comicId: "HmRdP9Q8iXOH",
+    chapterId: "KoEb6BNw",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/panel-3.webp",
     imageWidth: 1080,
@@ -174,7 +212,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "b0c5d640-cd94-4581-a54d-a7c8663a65ff",
-    comicId: "5G2IKgBnc2ns",
+    chapterId: "cFCqsYye",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/blood-and-gold/panel-1.webp",
     imageWidth: 1080,
@@ -183,7 +221,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "290bfa89-f20d-450b-8997-987758c85b4f",
-    comicId: "5G2IKgBnc2ns",
+    chapterId: "cFCqsYye",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/blood-and-gold/panel-2.webp",
     imageWidth: 1080,
@@ -192,7 +230,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "c59adf66-2689-409c-9e6a-0a93963ee06c",
-    comicId: "5G2IKgBnc2ns",
+    chapterId: "cFCqsYye",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/blood-and-gold/panel-3.webp",
     imageWidth: 1080,
@@ -201,7 +239,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "4a0bc7c5-0d7d-4d46-a187-721173acfc5d",
-    comicId: "5G2IKgBnc2ns",
+    chapterId: "cFCqsYye",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/blood-and-gold/panel-4.webp",
     imageWidth: 1080,
@@ -210,7 +248,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "b18c7dd8-a76d-485f-b217-5a23741c1b39",
-    comicId: "3tu2mLgN53E-",
+    chapterId: "dKtiDz0q",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/panel-1.webp",
     imageWidth: 1080,
@@ -219,7 +257,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "8ef69b6c-dc5a-4c26-bf43-bdd6c56a28f2",
-    comicId: "3tu2mLgN53E-",
+    chapterId: "dKtiDz0q",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/panel-2.webp",
     imageWidth: 1080,
@@ -228,7 +266,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "2ff8175c-bcd1-43b6-84ed-24b110be9a37",
-    comicId: "3tu2mLgN53E-",
+    chapterId: "dKtiDz0q",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/panel-3.webp",
     imageWidth: 1080,
@@ -237,7 +275,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "5586aa59-1fae-4b5f-acb2-346ec0a487a8",
-    comicId: "OtRo2Kj4Lym7",
+    chapterId: "ocxHyVie",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/panel-1.webp",
     imageWidth: 1080,
@@ -246,7 +284,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "cc0472f3-fee5-42ce-8f41-fe01e9179062",
-    comicId: "OtRo2Kj4Lym7",
+    chapterId: "ocxHyVie",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/panel-2.webp",
     imageWidth: 1080,
@@ -255,7 +293,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "9a21c6dc-0edb-4c1d-ae95-b8c207dd24ab",
-    comicId: "OtRo2Kj4Lym7",
+    chapterId: "ocxHyVie",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/panel-3.webp",
     imageWidth: 1080,
@@ -264,7 +302,7 @@ export const comicPagesMock: Array<ComicPage> = [
   },
   {
     id: "1843a560-6fa2-46de-8c28-9d3b1bfd1362",
-    comicId: "OtRo2Kj4Lym7",
+    chapterId: "ocxHyVie",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/panel-4.webp",
     imageWidth: 1080,
