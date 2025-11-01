@@ -3,9 +3,9 @@ import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import HomeIcon from "@mui/icons-material/Home";
 import LastPageIcon from "@mui/icons-material/LastPage";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
@@ -54,6 +54,7 @@ export type ComicReaderToolbarProps = Readonly<{
   enterFullscreen: () => void;
   exitFullscreen: () => void;
   toggleFullscreen: () => void;
+  openDrawer: () => void;
   toggleDrawer: () => void;
 }>;
 
@@ -68,6 +69,7 @@ export const ComicReaderToolbar = ({
   enterFullscreen,
   exitFullscreen,
   toggleFullscreen,
+  openDrawer,
   toggleDrawer,
 }: ComicReaderToolbarProps) => {
   const { buttons, currentSlideNumber, slidesLength } =
@@ -186,9 +188,9 @@ export const ComicReaderToolbar = ({
               <IconButton
                 sx={iconButtonStyle}
                 disabled={isFullscreen}
-                onClick={toggleDrawer}
+                onClick={openDrawer}
               >
-                <ReadMoreIcon />
+                <MenuOpenIcon />
               </IconButton>
             </Box>
           </Tooltip>

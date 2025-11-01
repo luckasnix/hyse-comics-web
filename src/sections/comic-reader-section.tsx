@@ -38,8 +38,10 @@ export const ComicReaderSection = ({
   const [isFullscreen, { enterFullscreen, exitFullscreen, toggleFullscreen }] =
     useFullscreen(containerRef);
 
-  const [isDrawerOpen, { setFalse: closeDrawer, toggle: toggleDrawer }] =
-    useBoolean(false);
+  const [
+    isDrawerOpen,
+    { setTrue: openDrawer, setFalse: closeDrawer, toggle: toggleDrawer },
+  ] = useBoolean(false);
 
   return (
     <Stack component="section" ref={containerRef} sx={containerStyle}>
@@ -56,6 +58,7 @@ export const ComicReaderSection = ({
         enterFullscreen={enterFullscreen}
         exitFullscreen={exitFullscreen}
         toggleFullscreen={toggleFullscreen}
+        openDrawer={openDrawer}
         toggleDrawer={toggleDrawer}
       />
       <ComicReaderDrawer
