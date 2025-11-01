@@ -1,10 +1,13 @@
+import CloseIcon from "@mui/icons-material/Close";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
@@ -12,10 +15,17 @@ import type { Comic, ComicChapter } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   width: 420,
+  paddingTop: 1,
+};
+
+const headerActionsStyle: SxProps<Theme> = {
+  paddingX: 3,
+  display: "flex",
+  justifyContent: "end",
 };
 
 const overviewStyle: SxProps<Theme> = {
-  padding: 3,
+  paddingX: 3,
 };
 
 const avatarStyle: SxProps<Theme> = {
@@ -43,7 +53,12 @@ export const ComicReaderDrawer = ({
   onClose,
 }: ComicReaderDrawerProps) => (
   <Drawer open={isOpen} anchor="right" onClose={onClose}>
-    <Box sx={containerStyle}>
+    <Stack spacing={1} sx={containerStyle}>
+      <Box sx={headerActionsStyle}>
+        <IconButton onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      </Box>
       <Box sx={overviewStyle}>
         <Typography variant="h4" gutterBottom>
           {comic.title}
@@ -81,6 +96,6 @@ export const ComicReaderDrawer = ({
           );
         })}
       </List>
-    </Box>
+    </Stack>
   </Drawer>
 );
