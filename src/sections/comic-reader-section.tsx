@@ -24,6 +24,7 @@ export type ComicReaderSectionProps = Readonly<{
 
 export const ComicReaderSection = ({
   comic,
+  comicChapters,
   comicPages,
 }: ComicReaderSectionProps) => {
   const containerRef = useRef<HTMLElement>(null);
@@ -59,6 +60,7 @@ export const ComicReaderSection = ({
       />
       <ComicReaderDrawer
         comic={comic}
+        comicChapters={comicChapters}
         isOpen={isDrawerOpen}
         onClose={closeDrawer}
       />
