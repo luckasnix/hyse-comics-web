@@ -1,9 +1,4 @@
-import type {
-  Comic,
-  ComicChapter,
-  ComicPage,
-  ComicRecommendation,
-} from "~/types/comics";
+import type { Comic, ComicChapter, ComicPage } from "~/types/comics";
 
 export const comicsMock: Array<Comic> = [
   {
@@ -320,18 +315,5 @@ export const comicPagesMock: Array<ComicPage> = [
     imageWidth: 1080,
     imageHeight: 720,
     imageAltText: "The Purifier panel 4",
-  },
-];
-
-export const comicRecommendationsMock: Array<ComicRecommendation> = [
-  {
-    id: "aiEFHUOj",
-    title: "Trending now",
-    comics: comicsMock,
-  },
-  {
-    id: "JASVe5Aj",
-    title: "Continue reading",
-    comics: comicsMock,
   },
 ];

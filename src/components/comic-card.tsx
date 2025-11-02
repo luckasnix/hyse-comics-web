@@ -38,6 +38,7 @@ const synopsisStyle: SxProps<Theme> = {
 
 export type ComicCardProps = Readonly<{
   id: string;
+  chapterId: string;
   genres: Array<ComicGenre>;
   title: string;
   synopsis: string;
@@ -45,11 +46,12 @@ export type ComicCardProps = Readonly<{
     src: string;
     altText: string;
   };
-  onReadButtonClick: (id: string) => void;
+  onReadButtonClick: (id: string, chapterId: string) => void;
 }>;
 
 export const ComicCard = ({
   id,
+  chapterId,
   genres,
   title,
   synopsis,
@@ -64,7 +66,9 @@ export const ComicCard = ({
         ? "http://localhost:3000"
         : "https://comics.hyse.app";
     try {
-      await navigator.clipboard.writeText(`${baseUrl}/comics/${id}`);
+      await navigator.clipboard.writeText(
+        `${baseUrl}/comics/${id}/chapters/${chapterId}`,
+      );
       showToast({
         severity: "success",
         message: "Link copied to clipboard.",
@@ -78,7 +82,7 @@ export const ComicCard = ({
   };
 
   const readComic = () => {
-    onReadButtonClick(id);
+    onReadButtonClick(id, chapterId);
   };
 
   return (

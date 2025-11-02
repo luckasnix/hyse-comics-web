@@ -20,7 +20,7 @@ export const ComicRecommendationsSection = ({
       <ComicShelf
         key={comicRecommendation.id}
         title={comicRecommendation.title}
-        comics={comicRecommendation.comics}
+        items={comicRecommendation.items}
       />
     ))}
   </Stack>

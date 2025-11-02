@@ -63,8 +63,12 @@ export type ComicPage = {
   imageAltText: string;
 };
 
+export type ComicChapterWithComic = ComicChapter & {
+  comic: Comic;
+};
+
 export type ComicRecommendation = {
   id: string;
   title: string;
-  comics: Array<Comic>;
+  items: Array<ComicChapterWithComic>;
 };

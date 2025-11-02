@@ -9,7 +9,7 @@ import useEmblaCarousel from "embla-carousel-react";
 
 import { ComicCard } from "~/components/comic-card";
 import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
-import type { Comic } from "~/types/comics";
+import type { ComicChapterWithComic } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   width: "100%",
@@ -62,10 +62,10 @@ const nextButtonStyle: SxProps<Theme> = {
 
 export type ComicShelfProps = Readonly<{
   title: string;
-  comics: Array<Comic>;
+  items: Array<ComicChapterWithComic>;
 }>;
 
-export const ComicShelf = ({ title, comics }: ComicShelfProps) => {
+export const ComicShelf = ({ title, items }: ComicShelfProps) => {
   const navigate = useNavigate();
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -75,8 +75,11 @@ export const ComicShelf = ({ title, comics }: ComicShelfProps) => {
   const { canNavigatePrev, canNavigateNext, navigatePrev, navigateNext } =
     useCarouselNavigation(emblaApi);
 
-  const handleReadButtonClick = (id: string) => {
-    navigate({ to: "/comics/$comicId", params: { comicId: id } });
+  const handleReadButtonClick = (id: string, chapterId: string) => {
+    navigate({
+      to: "/comics/$comicId/chapters/$chapterId",
+      params: { comicId: id, chapterId: chapterId },
+    });
   };
 
   return (
@@ -94,10 +97,11 @@ export const ComicShelf = ({ title, comics }: ComicShelfProps) => {
         </IconButton>
         <Box ref={emblaRef} sx={viewportStyle}>
           <Box sx={slideContainerStyle}>
-            {comics.map((comic) => (
+            {items.map(({ comic, ...comicChapter }) => (
               <ComicCard
-                key={comic.id}
+                key={comicChapter.id}
                 id={comic.id}
+                chapterId={comicChapter.id}
                 genres={comic.genres}
                 title={comic.title}
                 synopsis={comic.synopsis}
