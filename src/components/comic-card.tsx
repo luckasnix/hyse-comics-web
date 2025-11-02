@@ -9,6 +9,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
 import { useUi } from "~/contexts/ui-context";
+import { getClampedTextStyles } from "~/styles/common";
 import type { ComicGenre } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
@@ -30,10 +31,7 @@ const titleStyle: SxProps<Theme> = {
 
 const synopsisStyle: SxProps<Theme> = {
   color: "text.secondary",
-  display: "-webkit-box",
-  WebkitBoxOrient: "vertical",
-  WebkitLineClamp: 4,
-  overflow: "hidden",
+  ...getClampedTextStyles(4),
 };
 
 export type ComicCardProps = Readonly<{

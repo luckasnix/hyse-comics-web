@@ -10,6 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { getClampedTextStyles } from "~/styles/common";
 
 import type { Comic, ComicChapter } from "~/types/comics";
 
@@ -28,12 +29,16 @@ const overviewStyle: SxProps<Theme> = {
   paddingX: 3,
 };
 
+const synopsisStyle: SxProps<Theme> = {
+  color: "text.secondary",
+  ...getClampedTextStyles(4),
+};
+
 const avatarStyle: SxProps<Theme> = {
   backgroundColor: "primary.main",
 };
 
 const chapterTextStyle: SxProps<Theme> = {
-  maxWidth: "100%",
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
@@ -60,10 +65,12 @@ export const ComicReaderDrawer = ({
         </IconButton>
       </Box>
       <Box sx={overviewStyle}>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" gutterBottom sx={getClampedTextStyles(2)}>
           {comic.title}
         </Typography>
-        <Typography variant="body1">{comic.synopsis}</Typography>
+        <Typography variant="body1" sx={synopsisStyle}>
+          {comic.synopsis}
+        </Typography>
       </Box>
       <List>
         {comicChapters.map((comicChapter, index) => {
