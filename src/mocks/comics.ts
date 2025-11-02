@@ -15,9 +15,9 @@ export const comicsMock: Array<Comic> = [
     title: "Metaverse Cavalry",
     synopsis:
       "In a vast medieval world set within the Metaverse, a young warrior is summoned to face a looming threat that corrupts the very fabric of this digital reality: a powerful demon bent on destruction.",
-    imageUrl:
+    thumbnailUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/metaverse-cavalry/thumbnail.webp",
-    imageAltText: "Metaverse Cavalry thumbnail",
+    thumbnailAltText: "Metaverse Cavalry thumbnail",
   },
   {
     id: "erZ7",
@@ -28,9 +28,9 @@ export const comicsMock: Array<Comic> = [
     title: "Forbidden Treasures",
     synopsis:
       "In a world where ancient civilizations left secrets buried in forgotten temples, a young archaeologist embarks on risky expeditions in search of relics that could change the fate of humanity.",
-    imageUrl:
+    thumbnailUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/thumbnail.webp",
-    imageAltText: "Forbidden Treasures thumbnail",
+    thumbnailAltText: "Forbidden Treasures thumbnail",
   },
   {
     id: "FSOK",
@@ -41,9 +41,9 @@ export const comicsMock: Array<Comic> = [
     title: "Skate Champion",
     synopsis:
       "From the streets to the world stage, a young skater chases his dream of becoming the greatest of all time. With every trick, every fall, and every victory, his passion burns brighter.",
-    imageUrl:
+    thumbnailUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/thumbnail.webp",
-    imageAltText: "Skate Champion thumbnail",
+    thumbnailAltText: "Skate Champion thumbnail",
   },
   {
     id: "lfUQ",
@@ -54,9 +54,9 @@ export const comicsMock: Array<Comic> = [
     title: "Blood and Gold",
     synopsis:
       "On the high seas, a fearless pirate captain with an iron will, a missing leg, and a single eye chases the ultimate treasure. With his loyal crew by his side, he battles storms, enemies, and fate itself.",
-    imageUrl:
+    thumbnailUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/blood-and-gold/thumbnail.webp",
-    imageAltText: "Blood and Gold thumbnail",
+    thumbnailAltText: "Blood and Gold thumbnail",
   },
   {
     id: "tAip",
@@ -67,9 +67,9 @@ export const comicsMock: Array<Comic> = [
     title: "Apprentice of Witchcraft",
     synopsis:
       "In a grand academy of magic, a young girl begins her journey as an apprentice of witchcraft. Between brewing potions, casting spells, and facing mysterious trials, she must prove her courage and unlock her true power.",
-    imageUrl:
+    thumbnailUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/thumbnail.webp",
-    imageAltText: "Apprentice of Witchcraft thumbnail",
+    thumbnailAltText: "Apprentice of Witchcraft thumbnail",
   },
   {
     id: "LAeD",
@@ -80,9 +80,9 @@ export const comicsMock: Array<Comic> = [
     title: "The Purifier",
     synopsis:
       "In a world where demons prey upon human souls, a warrior priest walks the line between faith and fury. Armed with his sacred blade, he battles the darkness within mankind — and within himself.",
-    imageUrl:
+    thumbnailUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/thumbnail.webp",
-    imageAltText: "The Purifier thumbnail",
+    thumbnailAltText: "The Purifier thumbnail",
   },
 ];
 
@@ -90,32 +90,44 @@ export const comicChaptersMock: Array<ComicChapter> = [
   {
     id: "vNH8ZOb8",
     comicId: "iXSE",
-    title: "The Summoning",
+    title: "The Knight's Departure",
+    synopsis:
+      "Clad in advanced armor, the warrior bids a heartfelt goodbye to the familiar smiles of the village, stepping into an unknown that lies beyond the tranquil community.",
   },
   {
     id: "a6pJNagm",
     comicId: "erZ7",
-    title: "The Temple of Secrets",
+    title: "The Idol of Aztal'Kha",
+    synopsis:
+      "Amid the ruins, a hidden idol reveals its golden light, a discovery that may change everything, or unleash what was never meant to be found.",
   },
   {
     id: "KoEb6BNw",
     comicId: "FSOK",
-    title: "First Trick",
+    title: "Rise Above",
+    synopsis:
+      "In front of a roaring crowd, one jump decides it all, the moment between falling short and becoming a legend.",
   },
   {
     id: "cFCqsYye",
     comicId: "lfUQ",
-    title: "The Captain's Quest",
+    title: "Treasure Island",
+    synopsis:
+      "The crew lands on hostile shores, their captain leading the charge, where every wave brings the promise of blood and conquest.",
   },
   {
     id: "dKtiDz0q",
     comicId: "tAip",
-    title: "The First Spell",
+    title: "The Forest Trial",
+    synopsis:
+      "Lost in the dark woods, a young witch faces her first true test, where courage must burn brighter than fear.",
   },
   {
     id: "ocxHyVie",
     comicId: "LAeD",
-    title: "The Sacred Blade",
+    title: "The Midnight Exorcism",
+    synopsis:
+      "As the moon rises, faith is tested and fear takes form, only one will survive the night's unholy battle.",
   },
 ];
 

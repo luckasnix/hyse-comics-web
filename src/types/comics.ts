@@ -43,14 +43,15 @@ export type Comic = {
   genres: Array<ComicGenre>;
   title: string;
   synopsis: string;
-  imageUrl: string;
-  imageAltText: string;
+  thumbnailUrl: string;
+  thumbnailAltText: string;
 };
 
 export type ComicChapter = {
   id: string;
   comicId: string;
   title: string;
+  synopsis: string;
 };
 
 export type ComicPage = {

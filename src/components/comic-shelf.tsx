@@ -62,7 +62,7 @@ const nextButtonStyle: SxProps<Theme> = {
 
 export type ComicShelfProps = Readonly<{
   title: string;
-  comics: Comic[];
+  comics: Array<Comic>;
 }>;
 
 export const ComicShelf = ({ title, comics }: ComicShelfProps) => {
@@ -102,8 +102,8 @@ export const ComicShelf = ({ title, comics }: ComicShelfProps) => {
                 title={comic.title}
                 synopsis={comic.synopsis}
                 image={{
-                  src: comic.imageUrl,
-                  altText: comic.imageAltText,
+                  src: comic.thumbnailUrl,
+                  altText: comic.thumbnailAltText,
                 }}
                 onReadButtonClick={handleReadButtonClick}
               />
