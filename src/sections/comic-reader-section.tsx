@@ -9,24 +9,16 @@ import { ComicReaderToolbar } from "~/components/comic-reader-toolbar";
 import { ComicReaderViewport } from "~/components/comic-reader-viewport";
 import { carouselDirectionFrom } from "~/constants/comics";
 import { carouselAxisFrom } from "~/constants/users";
+import { useComicContext } from "~/contexts/comic-context";
 import { userMock } from "~/mocks/users";
-import type { Comic, ComicChapter, ComicPage } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",
 };
 
-export type ComicReaderSectionProps = Readonly<{
-  comic: Comic;
-  comicChapters: Array<ComicChapter>;
-  comicPages: Array<ComicPage>;
-}>;
+export const ComicReaderSection = () => {
+  const { comic } = useComicContext();
 
-export const ComicReaderSection = ({
-  comic,
-  comicChapters,
-  comicPages,
-}: ComicReaderSectionProps) => {
   const containerRef = useRef<HTMLElement>(null);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -45,14 +37,8 @@ export const ComicReaderSection = ({
 
   return (
     <Stack component="section" ref={containerRef} sx={containerStyle}>
-      <ComicReaderViewport
-        user={userMock}
-        comic={comic}
-        comicPages={comicPages}
-        carouselRef={emblaRef}
-      />
+      <ComicReaderViewport user={userMock} carouselRef={emblaRef} />
       <ComicReaderToolbar
-        comic={comic}
         carouselApi={emblaApi}
         isFullscreen={isFullscreen}
         enterFullscreen={enterFullscreen}
@@ -61,12 +47,7 @@ export const ComicReaderSection = ({
         openDrawer={openDrawer}
         toggleDrawer={toggleDrawer}
       />
-      <ComicReaderDrawer
-        comic={comic}
-        comicChapters={comicChapters}
-        isOpen={isDrawerOpen}
-        onClose={closeDrawer}
-      />
+      <ComicReaderDrawer isOpen={isDrawerOpen} onClose={closeDrawer} />
     </Stack>
   );
 };

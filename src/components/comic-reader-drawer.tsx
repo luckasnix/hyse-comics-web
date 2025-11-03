@@ -10,9 +10,8 @@ import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { useComicContext } from "~/contexts/comic-context";
 import { getClampedTextStyles } from "~/styles/common";
-
-import type { Comic, ComicChapter } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   width: 420,
@@ -45,64 +44,64 @@ const chapterTextStyle: SxProps<Theme> = {
 };
 
 export type ComicReaderDrawerProps = Readonly<{
-  comic: Comic;
-  comicChapters: Array<ComicChapter>;
   isOpen: boolean;
   onClose: () => void;
 }>;
 
 export const ComicReaderDrawer = ({
-  comic,
-  comicChapters,
   isOpen,
   onClose,
-}: ComicReaderDrawerProps) => (
-  <Drawer open={isOpen} anchor="right" onClose={onClose}>
-    <Stack spacing={1} sx={containerStyle}>
-      <Box sx={headerActionsStyle}>
-        <IconButton onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      </Box>
-      <Box sx={overviewStyle}>
-        <Typography variant="h4" gutterBottom sx={getClampedTextStyles(2)}>
-          {comic.title}
-        </Typography>
-        <Typography variant="body1" sx={synopsisStyle}>
-          {comic.synopsis}
-        </Typography>
-      </Box>
-      <List>
-        {comicChapters.map((comicChapter, index) => {
-          const comicChapterNumber = index + 1;
+}: ComicReaderDrawerProps) => {
+  const { comic, comicChapters, currentComicChapterId } = useComicContext();
 
-          return (
-            <ListItemButton
-              key={comicChapter.id}
-              selected={false} // TODO: Select the current chapter
-              onClick={() => {}} // TODO: Navigate between chapters with clicks
-            >
-              <ListItemAvatar>
-                <Avatar variant="rounded" sx={avatarStyle}>
-                  {comicChapterNumber}
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary={`Chapter ${comicChapterNumber}`}
-                secondary={comicChapter.title}
-                slotProps={{
-                  primary: {
-                    sx: chapterTextStyle,
-                  },
-                  secondary: {
-                    sx: chapterTextStyle,
-                  },
-                }}
-              />
-            </ListItemButton>
-          );
-        })}
-      </List>
-    </Stack>
-  </Drawer>
-);
+  return (
+    <Drawer open={isOpen} anchor="right" onClose={onClose}>
+      <Stack spacing={1} sx={containerStyle}>
+        <Box sx={headerActionsStyle}>
+          <IconButton onClick={onClose}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+        <Box sx={overviewStyle}>
+          <Typography variant="h4" gutterBottom sx={getClampedTextStyles(2)}>
+            {comic.title}
+          </Typography>
+          <Typography variant="body1" sx={synopsisStyle}>
+            {comic.synopsis}
+          </Typography>
+        </Box>
+        <List>
+          {comicChapters.map((comicChapter, index) => {
+            const comicChapterNumber = index + 1;
+
+            return (
+              <ListItemButton
+                key={comicChapter.id}
+                selected={comicChapter.id === currentComicChapterId}
+                onClick={() => {}} // TODO: Navigate between chapters with clicks
+              >
+                <ListItemAvatar>
+                  <Avatar variant="rounded" sx={avatarStyle}>
+                    {comicChapterNumber}
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={`Chapter ${comicChapterNumber}`}
+                  secondary={comicChapter.title}
+                  slotProps={{
+                    primary: {
+                      sx: chapterTextStyle,
+                    },
+                    secondary: {
+                      sx: chapterTextStyle,
+                    },
+                  }}
+                />
+              </ListItemButton>
+            );
+          })}
+        </List>
+      </Stack>
+    </Drawer>
+  );
+};

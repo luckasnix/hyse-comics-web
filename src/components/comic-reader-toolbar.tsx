@@ -20,8 +20,8 @@ import {
   carouselDirectionFrom,
   comicReaderToolbarHeight,
 } from "~/constants/comics";
+import { useComicContext } from "~/contexts/comic-context";
 import { useCarouselDirectionalNavigation } from "~/hooks/use-carousel-directional-navigation";
-import type { Comic } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   height: comicReaderToolbarHeight,
@@ -48,7 +48,6 @@ const pageCounterStyle: SxProps<Theme> = {
 };
 
 export type ComicReaderToolbarProps = Readonly<{
-  comic: Comic;
   carouselApi: EmblaCarouselType | undefined;
   isFullscreen: boolean;
   enterFullscreen: () => void;
@@ -63,7 +62,6 @@ export type ComicReaderToolbarProps = Readonly<{
 // TODO: Add touch navigation
 // TODO: Add zoom to images
 export const ComicReaderToolbar = ({
-  comic,
   carouselApi,
   isFullscreen,
   enterFullscreen,
@@ -72,6 +70,8 @@ export const ComicReaderToolbar = ({
   openDrawer,
   toggleDrawer,
 }: ComicReaderToolbarProps) => {
+  const { comic } = useComicContext();
+
   const { buttons, currentSlideNumber, slidesLength } =
     useCarouselDirectionalNavigation(
       carouselApi,

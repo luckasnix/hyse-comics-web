@@ -8,7 +8,8 @@ import type { EmblaViewportRefType } from "embla-carousel-react";
 import type { CSSProperties } from "react";
 
 import { comicReaderToolbarHeight } from "~/constants/comics";
-import type { Comic, ComicDirection, ComicPage } from "~/types/comics";
+import { useComicContext } from "~/contexts/comic-context";
+import type { ComicDirection } from "~/types/comics";
 import type { User, UserReadingAxis } from "~/types/users";
 
 const containerStyle: SxProps<Theme> = {
@@ -54,30 +55,30 @@ const imageStyle: CSSProperties = {
 
 export type ComicReaderViewportProps = Readonly<{
   user: User;
-  comic: Comic;
-  comicPages: Array<ComicPage>;
   carouselRef: EmblaViewportRefType;
 }>;
 
 export const ComicReaderViewport = ({
   user,
-  comic,
-  comicPages,
   carouselRef,
-}: ComicReaderViewportProps) => (
-  <Box ref={carouselRef} sx={containerStyle}>
-    <Box sx={getSlideContainerStyle(user.reading.axis, comic.direction)}>
-      {comicPages.map((comicPage) => (
-        <Box key={comicPage.id} sx={pageStyle}>
-          <img
-            src={comicPage.imageUrl}
-            width={comicPage.imageWidth}
-            height={comicPage.imageHeight}
-            alt={comicPage.imageAltText}
-            style={imageStyle}
-          />
-        </Box>
-      ))}
+}: ComicReaderViewportProps) => {
+  const { comic, comicPages } = useComicContext();
+
+  return (
+    <Box ref={carouselRef} sx={containerStyle}>
+      <Box sx={getSlideContainerStyle(user.reading.axis, comic.direction)}>
+        {comicPages.map((comicPage) => (
+          <Box key={comicPage.id} sx={pageStyle}>
+            <img
+              src={comicPage.imageUrl}
+              width={comicPage.imageWidth}
+              height={comicPage.imageHeight}
+              alt={comicPage.imageAltText}
+              style={imageStyle}
+            />
+          </Box>
+        ))}
+      </Box>
     </Box>
-  </Box>
-);
+  );
+};

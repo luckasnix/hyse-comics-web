@@ -1,18 +1,29 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { ComicProvider } from "~/contexts/comic-context";
 import { ComicReaderSection } from "~/sections/comic-reader-section";
 import { getComic, getComicChapters, getComicPages } from "~/services/comics";
 
 const ComicChaptersRoute = () => {
   // TODO: Show an error component if there was one in the loader data
-  const { comic, comicChapters, comicPages } = Route.useLoaderData();
+  const {
+    comic,
+    comicChapters,
+    comicPages,
+    currentComicId,
+    currentComicChapterId,
+  } = Route.useLoaderData();
 
   return (
-    <ComicReaderSection
+    <ComicProvider
       comic={comic}
       comicChapters={comicChapters}
       comicPages={comicPages}
-    />
+      currentComicId={currentComicId}
+      currentComicChapterId={currentComicChapterId}
+    >
+      <ComicReaderSection />
+    </ComicProvider>
   );
 };
 
@@ -30,6 +41,8 @@ export const Route = createFileRoute("/comics/$comicId/chapters/$chapterId")({
       comic,
       comicChapters,
       comicPages,
+      currentComicId: comicId,
+      currentComicChapterId: chapterId,
     };
   },
 });
