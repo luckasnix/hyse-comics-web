@@ -9,8 +9,9 @@ import type { CSSProperties } from "react";
 
 import { comicReaderToolbarHeight } from "~/constants/comics";
 import { useComicContext } from "~/contexts/comic-context";
+import { useUserContext } from "~/contexts/user-context";
 import type { ComicDirection } from "~/types/comics";
-import type { User, UserReadingAxis } from "~/types/users";
+import type { UserReadingAxis } from "~/types/users";
 
 const containerStyle: SxProps<Theme> = {
   overflow: "hidden",
@@ -54,14 +55,14 @@ const imageStyle: CSSProperties = {
 };
 
 export type ComicReaderViewportProps = Readonly<{
-  user: User;
   carouselRef: EmblaViewportRefType;
 }>;
 
 export const ComicReaderViewport = ({
-  user,
   carouselRef,
 }: ComicReaderViewportProps) => {
+  const { user } = useUserContext();
+
   const { comic, comicPages } = useComicContext();
 
   return (
