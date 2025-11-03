@@ -10,6 +10,8 @@ import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "@tanstack/react-router";
+
 import { useComicContext } from "~/contexts/comic-context";
 import { getClampedTextStyles } from "~/styles/common";
 
@@ -54,6 +56,15 @@ export const ComicReaderDrawer = ({
 }: ComicReaderDrawerProps) => {
   const { comic, comicChapters, currentComicChapterId } = useComicContext();
 
+  const navigate = useNavigate();
+
+  const navigateToChapter = (id: string, chapterId: string) => {
+    navigate({
+      to: "/comics/$comicId/chapters/$chapterId",
+      params: { comicId: id, chapterId: chapterId },
+    });
+  };
+
   return (
     <Drawer open={isOpen} anchor="right" onClose={onClose}>
       <Stack spacing={1} sx={containerStyle}>
@@ -78,7 +89,9 @@ export const ComicReaderDrawer = ({
               <ListItemButton
                 key={comicChapter.id}
                 selected={comicChapter.id === currentComicChapterId}
-                onClick={() => {}} // TODO: Navigate between chapters with clicks
+                onClick={() => {
+                  navigateToChapter(comic.id, comicChapter.id);
+                }}
               >
                 <ListItemAvatar>
                   <Avatar variant="rounded" sx={avatarStyle}>

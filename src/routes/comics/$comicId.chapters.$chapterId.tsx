@@ -22,7 +22,9 @@ const ComicChaptersRoute = () => {
       currentComicId={currentComicId}
       currentComicChapterId={currentComicChapterId}
     >
-      <ComicReaderSection />
+      {/* A prop "key" is important here to isolate the carousel state during navigation between chapters. */}
+      {/* When navigating between chapters, the "currentComicChapterId" changes, and this helps reset the pagination. */}
+      <ComicReaderSection key={currentComicChapterId} />
     </ComicProvider>
   );
 };
