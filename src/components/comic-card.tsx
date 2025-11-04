@@ -40,10 +40,7 @@ export type ComicCardProps = Readonly<{
   genres: Array<ComicGenre>;
   title: string;
   synopsis: string;
-  image: {
-    src: string;
-    altText: string;
-  };
+  imageUrl: string;
   onReadButtonClick: (id: string, chapterId: string) => void;
 }>;
 
@@ -53,7 +50,7 @@ export const ComicCard = ({
   genres,
   title,
   synopsis,
-  image,
+  imageUrl,
   onReadButtonClick,
 }: ComicCardProps) => {
   const { showToast } = useUi();
@@ -85,7 +82,11 @@ export const ComicCard = ({
 
   return (
     <Card sx={containerStyle}>
-      <CardMedia sx={imageStyle} image={image.src} title={image.altText} />
+      <CardMedia
+        sx={imageStyle}
+        image={imageUrl}
+        title={`${title} thumbnail`}
+      />
       <CardContent>
         <Typography variant="h5" gutterBottom sx={titleStyle}>
           {title}

@@ -82,37 +82,33 @@ export const ComicReaderDrawer = ({
           </Typography>
         </Box>
         <List>
-          {comicChapters.map((comicChapter, index) => {
-            const comicChapterNumber = index + 1;
-
-            return (
-              <ListItemButton
-                key={comicChapter.id}
-                selected={comicChapter.id === currentComicChapterId}
-                onClick={() => {
-                  navigateToChapter(comic.id, comicChapter.id);
+          {comicChapters.map((comicChapter, index) => (
+            <ListItemButton
+              key={comicChapter.id}
+              selected={comicChapter.id === currentComicChapterId}
+              onClick={() => {
+                navigateToChapter(comic.id, comicChapter.id);
+              }}
+            >
+              <ListItemAvatar>
+                <Avatar variant="rounded" sx={avatarStyle}>
+                  {index + 1}
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={comicChapter.title}
+                secondary={comicChapter.synopsis}
+                slotProps={{
+                  primary: {
+                    sx: chapterTextStyle,
+                  },
+                  secondary: {
+                    sx: chapterTextStyle,
+                  },
                 }}
-              >
-                <ListItemAvatar>
-                  <Avatar variant="rounded" sx={avatarStyle}>
-                    {comicChapterNumber}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={`Chapter ${comicChapterNumber}`}
-                  secondary={comicChapter.title}
-                  slotProps={{
-                    primary: {
-                      sx: chapterTextStyle,
-                    },
-                    secondary: {
-                      sx: chapterTextStyle,
-                    },
-                  }}
-                />
-              </ListItemButton>
-            );
-          })}
+              />
+            </ListItemButton>
+          ))}
         </List>
       </Stack>
     </Drawer>

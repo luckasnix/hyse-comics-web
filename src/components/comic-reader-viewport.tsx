@@ -74,7 +74,7 @@ export const ComicReaderViewport = ({
               src={comicPage.imageUrl}
               width={comicPage.imageWidth}
               height={comicPage.imageHeight}
-              alt={comicPage.imageAltText}
+              alt={`${comic.title} page`}
               style={imageStyle}
             />
           </Box>

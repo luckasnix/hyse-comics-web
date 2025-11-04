@@ -44,7 +44,6 @@ export type Comic = {
   title: string;
   synopsis: string;
   thumbnailUrl: string;
-  thumbnailAltText: string;
 };
 
 export type ComicChapter = {
@@ -60,7 +59,6 @@ export type ComicPage = {
   imageUrl: string;
   imageWidth: number;
   imageHeight: number;
-  imageAltText: string;
 };
 
 export type ComicChapterWithComic = ComicChapter & {
