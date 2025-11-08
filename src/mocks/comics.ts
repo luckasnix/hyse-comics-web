@@ -126,6 +126,13 @@ export const comicChaptersMock: Array<ComicChapter> = [
       "Lost in the dark woods, a young witch faces her first true test, where courage must burn brighter than fear.",
   },
   {
+    id: "awI4jabe",
+    comicId: "tAip",
+    title: "The Awakening of the Djinn",
+    synopsis:
+      "A curious young witch accidentally unleashes a powerful Djinn from an ancient spellbook. Now, she must face the consequences of her mistake.",
+  },
+  {
     id: "ocxHyVie",
     comicId: "LAeD",
     title: "The Midnight Exorcism",
@@ -316,6 +323,46 @@ export const comicPagesMock: Array<ComicPage> = [
     chapterId: "dKtiDz0q",
     imageUrl:
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch1-pg3.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+  },
+  {
+    id: "51a1d969-93b8-472a-a0c9-3add83c5e144",
+    chapterId: "awI4jabe",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch2-pg1.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+  },
+  {
+    id: "418c62bf-a9df-4cc9-b6b1-78f88cc75833",
+    chapterId: "awI4jabe",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch2-pg2.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+  },
+  {
+    id: "942c7860-3205-4f21-9ccb-4234e2e9b523",
+    chapterId: "awI4jabe",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch2-pg3.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+  },
+  {
+    id: "affc4cf6-c14f-433e-9472-28fc4c72e83b",
+    chapterId: "awI4jabe",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch2-pg4.webp",
+    imageWidth: 1080,
+    imageHeight: 720,
+  },
+  {
+    id: "2790db6f-3bc9-469e-9e57-9e2c63858b29",
+    chapterId: "awI4jabe",
+    imageUrl:
+      "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch2-pg5.webp",
     imageWidth: 1080,
     imageHeight: 720,
   },
