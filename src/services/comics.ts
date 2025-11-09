@@ -44,13 +44,12 @@ export const getComicChapters = async (
 };
 
 export const getComicChapter = async (
-  comicId: string,
   chapterId: string,
 ): Promise<ComicChapter> => {
-  const response = await fetch(`/api/comics/${comicId}/chapters/${chapterId}`);
+  const response = await fetch(`/api/chapters/${chapterId}`);
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch chapter "${chapterId}" for comic "${comicId}": ${response.status} ${response.statusText}`,
+      `Failed to fetch chapter "${chapterId}": ${response.status} ${response.statusText}`,
     );
   }
   const data = (await response.json()) as ComicChapter;
@@ -59,15 +58,12 @@ export const getComicChapter = async (
 };
 
 export const getComicPages = async (
-  comicId: string,
   chapterId: string,
 ): Promise<Array<ComicPage>> => {
-  const response = await fetch(
-    `/api/comics/${comicId}/chapters/${chapterId}/pages`,
-  );
+  const response = await fetch(`/api/chapters/${chapterId}/pages`);
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch pages for chapter "${chapterId}" in comic "${comicId}": ${response.status} ${response.statusText}`,
+      `Failed to fetch pages for chapter "${chapterId}": ${response.status} ${response.statusText}`,
     );
   }
   const data = (await response.json()) as Array<ComicPage>;
@@ -75,17 +71,11 @@ export const getComicPages = async (
   return data;
 };
 
-export const getComicPage = async (
-  comicId: string,
-  chapterId: string,
-  pageId: string,
-): Promise<ComicPage> => {
-  const response = await fetch(
-    `/api/comics/${comicId}/chapters/${chapterId}/pages/${pageId}`,
-  );
+export const getComicPage = async (pageId: string): Promise<ComicPage> => {
+  const response = await fetch(`/api/pages/${pageId}`);
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch page "${pageId}" for chapter "${chapterId}" in comic "${comicId}": ${response.status} ${response.statusText}`,
+      `Failed to fetch page "${pageId}": ${response.status} ${response.statusText}`,
     );
   }
   const data = (await response.json()) as ComicPage;

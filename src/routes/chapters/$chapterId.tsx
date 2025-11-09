@@ -2,9 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { ComicProvider } from "~/contexts/comic-context";
 import { ComicReaderSection } from "~/sections/comic-reader-section";
-import { getComic, getComicChapters, getComicPages } from "~/services/comics";
+import {
+  getComic,
+  getComicChapter,
+  getComicChapters,
+  getComicPages,
+} from "~/services/comics";
 
-const ComicChaptersRoute = () => {
+const ComicChapterRoute = () => {
   // TODO: Show an error component if there was one in the loader data
   const {
     comic,
@@ -29,21 +34,22 @@ const ComicChaptersRoute = () => {
   );
 };
 
-export const Route = createFileRoute("/comics/$comicId/chapters/$chapterId")({
-  component: ComicChaptersRoute,
-  loader: async ({ params: { comicId, chapterId } }) => {
+export const Route = createFileRoute("/chapters/$chapterId")({
+  component: ComicChapterRoute,
+  loader: async ({ params: { chapterId } }) => {
     // TODO: Handle errors that may occur in the request
+    const comicChapter = await getComicChapter(chapterId);
     const [comic, comicChapters, comicPages] = await Promise.all([
-      getComic(comicId),
-      getComicChapters(comicId),
-      getComicPages(comicId, chapterId),
+      getComic(comicChapter.comicId),
+      getComicChapters(comicChapter.comicId),
+      getComicPages(chapterId),
     ]);
 
     return {
       comic,
       comicChapters,
       comicPages,
-      currentComicId: comicId,
+      currentComicId: comicChapter.comicId,
       currentComicChapterId: chapterId,
     };
   },

@@ -58,10 +58,10 @@ export const ComicReaderDrawer = ({
 
   const navigate = useNavigate();
 
-  const navigateToChapter = (id: string, chapterId: string) => {
+  const navigateToChapter = (chapterId: string) => {
     navigate({
-      to: "/comics/$comicId/chapters/$chapterId",
-      params: { comicId: id, chapterId: chapterId },
+      to: "/chapters/$chapterId",
+      params: { chapterId: chapterId },
     });
   };
 
@@ -87,7 +87,7 @@ export const ComicReaderDrawer = ({
               key={comicChapter.id}
               selected={comicChapter.id === currentComicChapterId}
               onClick={() => {
-                navigateToChapter(comic.id, comicChapter.id);
+                navigateToChapter(comicChapter.id);
               }}
             >
               <ListItemAvatar>

@@ -75,10 +75,10 @@ export const ComicShelf = ({ title, items }: ComicShelfProps) => {
   const { canNavigatePrev, canNavigateNext, navigatePrev, navigateNext } =
     useCarouselNavigation(emblaApi);
 
-  const handleReadButtonClick = (id: string, chapterId: string) => {
+  const handleReadButtonClick = (chapterId: string) => {
     navigate({
-      to: "/comics/$comicId/chapters/$chapterId",
-      params: { comicId: id, chapterId: chapterId },
+      to: "/chapters/$chapterId",
+      params: { chapterId: chapterId },
     });
   };
 
@@ -100,7 +100,6 @@ export const ComicShelf = ({ title, items }: ComicShelfProps) => {
             {items.map(({ comic, ...comicChapter }) => (
               <ComicCard
                 key={comicChapter.id}
-                id={comic.id}
                 chapterId={comicChapter.id}
                 genres={comic.genres}
                 title={comic.title}
