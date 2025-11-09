@@ -37,6 +37,7 @@ const innerContainerStyle: SxProps<Theme> = {
 
 const iconButtonStyle: SxProps<Theme> = {
   color: "primary.contrastText",
+  borderRadius: 1,
 };
 
 const pageCounterStyle: SxProps<Theme> = {
@@ -44,7 +45,7 @@ const pageCounterStyle: SxProps<Theme> = {
   backgroundColor: "primary.dark",
   paddingX: 2,
   paddingY: 1,
-  borderRadius: 2,
+  borderRadius: 1,
 };
 
 export type ComicReaderToolbarProps = Readonly<{
@@ -105,7 +106,7 @@ export const ComicReaderToolbar = ({
   return (
     <Grid container sx={containerStyle}>
       <Grid container size="grow" sx={innerContainerStyle}>
-        <Grid size={2} spacing={2} display="flex" justifyContent="start">
+        <Grid size={2} display="flex" justifyContent="start">
           <Tooltip title="Home">
             <Link to="/">
               <IconButton sx={iconButtonStyle}>
@@ -114,7 +115,7 @@ export const ComicReaderToolbar = ({
             </Link>
           </Tooltip>
         </Grid>
-        <Grid size="grow" spacing={2} display="flex" justifyContent="center">
+        <Grid size="grow" display="flex" justifyContent="center">
           <Tooltip title={buttons.farLeft.label}>
             <Box component="span">
               <IconButton
@@ -165,7 +166,7 @@ export const ComicReaderToolbar = ({
             </Box>
           </Tooltip>
         </Grid>
-        <Grid size={2} spacing={2} display="flex" justifyContent="end">
+        <Grid size={2} display="flex" justifyContent="end">
           {isFullscreen ? (
             <Tooltip title="Exit fullscreen (f)">
               <Box component="span">
