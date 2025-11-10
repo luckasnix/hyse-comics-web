@@ -19,12 +19,7 @@ export const Route = createFileRoute("/api/comics/{-$comicId}")({
         );
 
         if (!comic) {
-          return new Response(JSON.stringify({ message: "Comic not found" }), {
-            status: 404,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
+          return json({ message: "Comic not found" }, { status: 404 });
         }
 
         return json(comic);

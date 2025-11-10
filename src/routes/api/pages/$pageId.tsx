@@ -15,12 +15,7 @@ export const Route = createFileRoute("/api/pages/$pageId")({
         );
 
         if (!page) {
-          return new Response(JSON.stringify({ message: "Page not found" }), {
-            status: 404,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
+          return json({ message: "Page not found" }, { status: 404 });
         }
 
         return json(page);

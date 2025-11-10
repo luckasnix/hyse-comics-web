@@ -15,15 +15,7 @@ export const Route = createFileRoute("/api/chapters/$chapterId")({
         );
 
         if (!chapter) {
-          return new Response(
-            JSON.stringify({ message: "Chapter not found" }),
-            {
-              status: 404,
-              headers: {
-                "Content-Type": "application/json",
-              },
-            },
-          );
+          return json({ message: "Chapter not found" }, { status: 404 });
         }
 
         return json(chapter);

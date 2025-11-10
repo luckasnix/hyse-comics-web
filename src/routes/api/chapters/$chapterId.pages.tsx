@@ -11,7 +11,7 @@ export const Route = createFileRoute("/api/chapters/$chapterId/pages")({
         const { chapterId } = params;
 
         const pages = comicPagesMock.filter(
-          (page) => page.chapterId === chapterId,
+          (currentPage) => currentPage.chapterId === chapterId,
         );
 
         return json(pages);

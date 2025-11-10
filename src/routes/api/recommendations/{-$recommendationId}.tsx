@@ -76,14 +76,9 @@ export const Route = createFileRoute(
           );
 
           if (!recommendation) {
-            return new Response(
-              JSON.stringify({ message: "Recommendation not found" }),
-              {
-                status: 404,
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              },
+            return json(
+              { message: "Recommendation not found" },
+              { status: 404 },
             );
           }
 
