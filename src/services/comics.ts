@@ -86,13 +86,27 @@ export const getComicPage = async (pageId: string): Promise<ComicPage> => {
 export const getComicRecommendations = async (): Promise<
   Array<ComicRecommendation>
 > => {
-  const response = await fetch("/api/comics/recommendations");
+  const response = await fetch("/api/recommendations");
   if (!response.ok) {
     throw new Error(
       `Failed to fetch comic recommendations: ${response.status} ${response.statusText}`,
     );
   }
   const data = (await response.json()) as Array<ComicRecommendation>;
+
+  return data;
+};
+
+export const getComicRecommendation = async (
+  recommendationId: string,
+): Promise<ComicRecommendation> => {
+  const response = await fetch(`/api/recommendations/${recommendationId}`);
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch recommendation "${recommendationId}": ${response.status} ${response.statusText}`,
+    );
+  }
+  const data = (await response.json()) as ComicRecommendation;
 
   return data;
 };
