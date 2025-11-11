@@ -5,10 +5,10 @@ import type { Comic, ComicChapter, ComicPage } from "~/types/comics";
 
 export type ComicContextValue = {
   comic: Comic;
-  comicChapters: Array<ComicChapter>;
-  comicPages: Array<ComicPage>;
-  currentComicId: string;
-  currentComicChapterId: string;
+  chapters: Array<ComicChapter>;
+  pages: Array<ComicPage>;
+  currentComicId: string | null;
+  currentChapterId: string | null;
 };
 
 export type ComicProviderProps = Readonly<
@@ -22,20 +22,20 @@ export const ComicContext = createContext<ComicContextValue | null>(null);
 export const ComicProvider = ({
   children,
   comic,
-  comicChapters,
-  comicPages,
+  chapters,
+  pages,
   currentComicId,
-  currentComicChapterId,
+  currentChapterId,
 }: ComicProviderProps) => {
   const value = useMemo(
     () => ({
       comic,
-      comicChapters,
-      comicPages,
+      chapters,
+      pages,
       currentComicId,
-      currentComicChapterId,
+      currentChapterId,
     }),
-    [comic, comicChapters, comicPages, currentComicId, currentComicChapterId],
+    [comic, chapters, pages, currentComicId, currentChapterId],
   );
 
   return (

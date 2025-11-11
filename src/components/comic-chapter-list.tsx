@@ -19,7 +19,7 @@ const chapterTextStyle: SxProps<Theme> = {
 
 export type ComicChapterListProps = Readonly<{
   chapters: Array<ComicChapter>;
-  selectedChapterId?: string;
+  selectedChapterId: string | null;
   onChapterClick: (chapterId: string) => void;
 }>;
 

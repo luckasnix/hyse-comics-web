@@ -41,7 +41,7 @@ export const ComicReaderDrawer = ({
   isOpen,
   onClose,
 }: ComicReaderDrawerProps) => {
-  const { comic, comicChapters, currentComicChapterId } = useComicContext();
+  const { comic, chapters, currentChapterId } = useComicContext();
 
   const navigate = useNavigate();
 
@@ -69,8 +69,8 @@ export const ComicReaderDrawer = ({
           </Typography>
         </Box>
         <ComicChapterList
-          chapters={comicChapters}
-          selectedChapterId={currentComicChapterId}
+          chapters={chapters}
+          selectedChapterId={currentChapterId}
           onChapterClick={navigateToChapter}
         />
       </Stack>

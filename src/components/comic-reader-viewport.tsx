@@ -63,17 +63,17 @@ export const ComicReaderViewport = ({
 }: ComicReaderViewportProps) => {
   const { user } = useUserContext();
 
-  const { comic, comicPages } = useComicContext();
+  const { comic, pages } = useComicContext();
 
   return (
     <Box ref={carouselRef} sx={containerStyle}>
       <Box sx={getSlideContainerStyle(user.reading.axis, comic.direction)}>
-        {comicPages.map((comicPage) => (
-          <Box key={comicPage.id} sx={pageStyle}>
+        {pages.map((page) => (
+          <Box key={page.id} sx={pageStyle}>
             <img
-              src={comicPage.imageUrl}
-              width={comicPage.imageWidth}
-              height={comicPage.imageHeight}
+              src={page.imageUrl}
+              width={page.imageWidth}
+              height={page.imageHeight}
               alt={`${comic.title} page`}
               style={imageStyle}
             />
