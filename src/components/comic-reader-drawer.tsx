@@ -1,12 +1,7 @@
 import CloseIcon from "@mui/icons-material/Close";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
@@ -14,6 +9,8 @@ import { useNavigate } from "@tanstack/react-router";
 
 import { useComicContext } from "~/contexts/comic-context";
 import { getClampedTextStyles } from "~/styles/common";
+
+import { ComicChapterList } from "./comic-chapter-list";
 
 const containerStyle: SxProps<Theme> = {
   width: 420,
@@ -33,16 +30,6 @@ const overviewStyle: SxProps<Theme> = {
 const synopsisStyle: SxProps<Theme> = {
   color: "text.secondary",
   ...getClampedTextStyles(4),
-};
-
-const avatarStyle: SxProps<Theme> = {
-  backgroundColor: "primary.main",
-};
-
-const chapterTextStyle: SxProps<Theme> = {
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
 };
 
 export type ComicReaderDrawerProps = Readonly<{
@@ -81,35 +68,11 @@ export const ComicReaderDrawer = ({
             {comic.synopsis}
           </Typography>
         </Box>
-        <List>
-          {comicChapters.map((comicChapter, index) => (
-            <ListItemButton
-              key={comicChapter.id}
-              selected={comicChapter.id === currentComicChapterId}
-              onClick={() => {
-                navigateToChapter(comicChapter.id);
-              }}
-            >
-              <ListItemAvatar>
-                <Avatar variant="rounded" sx={avatarStyle}>
-                  {index + 1}
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary={comicChapter.title}
-                secondary={comicChapter.synopsis}
-                slotProps={{
-                  primary: {
-                    sx: chapterTextStyle,
-                  },
-                  secondary: {
-                    sx: chapterTextStyle,
-                  },
-                }}
-              />
-            </ListItemButton>
-          ))}
-        </List>
+        <ComicChapterList
+          chapters={comicChapters}
+          selectedChapterId={currentComicChapterId}
+          onChapterClick={navigateToChapter}
+        />
       </Stack>
     </Drawer>
   );
