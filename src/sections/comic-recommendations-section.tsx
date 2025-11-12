@@ -9,18 +9,18 @@ const containerStyle: SxProps<Theme> = {
 };
 
 export type ComicRecommendationsSectionProps = Readonly<{
-  comicRecommendations: Array<ComicRecommendation>;
+  recommendations: Array<ComicRecommendation>;
 }>;
 
 export const ComicRecommendationsSection = ({
-  comicRecommendations,
+  recommendations,
 }: ComicRecommendationsSectionProps) => (
   <Stack direction="column" spacing={2} sx={containerStyle}>
-    {comicRecommendations.map((comicRecommendation) => (
+    {recommendations.map((recommendation) => (
       <ComicShelf
-        key={comicRecommendation.id}
-        title={comicRecommendation.title}
-        items={comicRecommendation.items}
+        key={recommendation.id}
+        title={recommendation.title}
+        items={recommendation.items}
       />
     ))}
   </Stack>

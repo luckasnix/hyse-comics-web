@@ -29,7 +29,7 @@ export const getComic = async (comicId: string): Promise<Comic> => {
   return data;
 };
 
-export const getComicChapters = async (
+export const getChapters = async (
   comicId: string,
 ): Promise<Array<ComicChapter>> => {
   const response = await fetch(`/api/comics/${comicId}/chapters`);
@@ -43,9 +43,7 @@ export const getComicChapters = async (
   return data;
 };
 
-export const getComicChapter = async (
-  chapterId: string,
-): Promise<ComicChapter> => {
+export const getChapter = async (chapterId: string): Promise<ComicChapter> => {
   const response = await fetch(`/api/chapters/${chapterId}`);
   if (!response.ok) {
     throw new Error(
@@ -57,7 +55,7 @@ export const getComicChapter = async (
   return data;
 };
 
-export const getComicPages = async (
+export const getPages = async (
   chapterId: string,
 ): Promise<Array<ComicPage>> => {
   const response = await fetch(`/api/chapters/${chapterId}/pages`);
@@ -71,7 +69,7 @@ export const getComicPages = async (
   return data;
 };
 
-export const getComicPage = async (pageId: string): Promise<ComicPage> => {
+export const getPage = async (pageId: string): Promise<ComicPage> => {
   const response = await fetch(`/api/pages/${pageId}`);
   if (!response.ok) {
     throw new Error(
@@ -83,7 +81,7 @@ export const getComicPage = async (pageId: string): Promise<ComicPage> => {
   return data;
 };
 
-export const getComicRecommendations = async (): Promise<
+export const getRecommendations = async (): Promise<
   Array<ComicRecommendation>
 > => {
   const response = await fetch("/api/recommendations");
@@ -97,7 +95,7 @@ export const getComicRecommendations = async (): Promise<
   return data;
 };
 
-export const getComicRecommendation = async (
+export const getRecommendation = async (
   recommendationId: string,
 ): Promise<ComicRecommendation> => {
   const response = await fetch(`/api/recommendations/${recommendationId}`);
