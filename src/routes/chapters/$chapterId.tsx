@@ -5,7 +5,6 @@ import { ComicReaderSection } from "~/sections/comic-reader-section";
 import { getChapter, getChapters, getComic, getPages } from "~/services/comics";
 
 const ChapterRoute = () => {
-  // TODO: Show an error component if there was one in the loader data
   const { comic, chapters, pages, currentComicId, currentChapterId } =
     Route.useLoaderData();
 
@@ -27,7 +26,6 @@ const ChapterRoute = () => {
 export const Route = createFileRoute("/chapters/$chapterId")({
   component: ChapterRoute,
   loader: async ({ params: { chapterId } }) => {
-    // TODO: Handle errors that may occur in the request
     const chapter = await getChapter(chapterId);
     const [comic, chapters, pages] = await Promise.all([
       getComic(chapter.comicId),

@@ -7,7 +7,6 @@ import { HeaderSection } from "~/sections/header-section";
 import { getRecommendations } from "~/services/comics";
 
 const HomeRoute = () => {
-  // TODO: Show an error component if there was one in the loader data
   const { recommendations } = Route.useLoaderData();
 
   return (
@@ -22,7 +21,6 @@ const HomeRoute = () => {
 export const Route = createFileRoute("/")({
   component: HomeRoute,
   loader: async () => {
-    // TODO: Handle errors that may occur in the request
     const recommendations = await getRecommendations();
 
     return {

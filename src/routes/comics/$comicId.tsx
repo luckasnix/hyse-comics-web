@@ -13,7 +13,6 @@ const containerStyle: SxProps<Theme> = {
 };
 
 const ComicRoute = () => {
-  // TODO: Show an error component if there was one in the loader data
   const { comic, chapters } = Route.useLoaderData();
 
   const navigate = Route.useNavigate();
@@ -43,7 +42,6 @@ const ComicRoute = () => {
 export const Route = createFileRoute("/comics/$comicId")({
   component: ComicRoute,
   loader: async ({ params: { comicId } }) => {
-    // TODO: Handle errors that may occur in the request
     const [comic, chapters] = await Promise.all([
       getComic(comicId),
       getChapters(comicId),
