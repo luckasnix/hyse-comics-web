@@ -6,6 +6,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "@tanstack/react-router";
 import useEmblaCarousel from "embla-carousel-react";
+import { Activity } from "react";
 
 import { ComicCard } from "~/components/comic-card";
 import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
@@ -88,13 +89,15 @@ export const ComicShelf = ({ title, items }: ComicShelfProps) => {
         {title}
       </Typography>
       <Box sx={carouselStyle}>
-        <IconButton
-          sx={prevButtonStyle}
-          disabled={!canNavigatePrev}
-          onClick={navigatePrev}
-        >
-          <ChevronLeftIcon />
-        </IconButton>
+        <Activity mode={canNavigatePrev ? "visible" : "hidden"}>
+          <IconButton
+            sx={prevButtonStyle}
+            disabled={!canNavigatePrev}
+            onClick={navigatePrev}
+          >
+            <ChevronLeftIcon />
+          </IconButton>
+        </Activity>
         <Box ref={emblaRef} sx={viewportStyle}>
           <Box sx={slideContainerStyle}>
             {items.map(({ comic, ...comicChapter }) => (
@@ -110,13 +113,15 @@ export const ComicShelf = ({ title, items }: ComicShelfProps) => {
             ))}
           </Box>
         </Box>
-        <IconButton
-          sx={nextButtonStyle}
-          disabled={!canNavigateNext}
-          onClick={navigateNext}
-        >
-          <ChevronRightIcon />
-        </IconButton>
+        <Activity mode={canNavigateNext ? "visible" : "hidden"}>
+          <IconButton
+            sx={nextButtonStyle}
+            disabled={!canNavigateNext}
+            onClick={navigateNext}
+          >
+            <ChevronRightIcon />
+          </IconButton>
+        </Activity>
       </Box>
     </Box>
   );
