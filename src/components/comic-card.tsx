@@ -27,11 +27,17 @@ const titleStyle: SxProps<Theme> = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
+  userSelect: "none",
 };
 
 const synopsisStyle: SxProps<Theme> = {
   color: "text.secondary",
+  userSelect: "none",
   ...getClampedTextStyle(4),
+};
+
+const genreStyle: SxProps<Theme> = {
+  userSelect: "none",
 };
 
 export type ComicCardProps = Readonly<{
@@ -92,7 +98,13 @@ export const ComicCard = ({
         </Typography>
         <Stack direction="row" spacing={1}>
           {genres.map((genre) => (
-            <Chip key={genre} size="small" color="primary" label={genre} />
+            <Chip
+              key={genre}
+              size="small"
+              color="primary"
+              label={genre}
+              sx={genreStyle}
+            />
           ))}
         </Stack>
       </CardContent>
