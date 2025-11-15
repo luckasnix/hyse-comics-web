@@ -49,7 +49,9 @@ const pageStyle: SxProps<Theme> = {
 
 const imageStyle: CSSProperties = {
   width: "auto",
+  height: "auto",
   maxWidth: "100%",
+  maxHeight: "100%",
   padding: "40px",
 };
 
