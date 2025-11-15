@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import { useNavigate } from "@tanstack/react-router";
 
 import { useComicContext } from "~/contexts/comic-context";
-import { getClampedTextStyles } from "~/styles/common";
+import { getClampedTextStyle } from "~/styles/common";
 
 import { ComicChapterList } from "./comic-chapter-list";
 
@@ -29,7 +29,7 @@ const overviewStyle: SxProps<Theme> = {
 
 const synopsisStyle: SxProps<Theme> = {
   color: "text.secondary",
-  ...getClampedTextStyles(4),
+  ...getClampedTextStyle(4),
 };
 
 export type ComicReaderDrawerProps = Readonly<{
@@ -61,7 +61,7 @@ export const ComicReaderDrawer = ({
           </IconButton>
         </Box>
         <Box sx={overviewStyle}>
-          <Typography variant="h4" gutterBottom sx={getClampedTextStyles(2)}>
+          <Typography variant="h4" gutterBottom sx={getClampedTextStyle(2)}>
             {comic.title}
           </Typography>
           <Typography variant="body1" sx={synopsisStyle}>
