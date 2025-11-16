@@ -1,20 +1,16 @@
-import Grid from "@mui/material/Grid";
 import { createFileRoute } from "@tanstack/react-router";
 
+import { PageLayout } from "~/layouts/page-layout";
 import { ComicRecommendationsSection } from "~/sections/comic-recommendations-section";
-import { FooterSection } from "~/sections/footer-section";
-import { HeaderSection } from "~/sections/header-section";
 import { getRecommendations } from "~/services/comics";
 
 const HomeRoute = () => {
   const { recommendations } = Route.useLoaderData();
 
   return (
-    <Grid container direction="column" alignItems="center">
-      <HeaderSection />
+    <PageLayout>
       <ComicRecommendationsSection recommendations={recommendations} />
-      <FooterSection />
-    </Grid>
+    </PageLayout>
   );
 };
 

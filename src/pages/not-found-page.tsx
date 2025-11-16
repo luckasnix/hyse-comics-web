@@ -11,7 +11,7 @@ const containerStyle: SxProps<Theme> = {
   alignItems: "center",
 };
 
-const textContainer: SxProps<Theme> = {
+const textContainerStyle: SxProps<Theme> = {
   textAlign: "center",
 };
 
@@ -20,7 +20,7 @@ export const NotFoundPage = () => {
 
   return (
     <Stack direction="column" spacing={2} sx={containerStyle}>
-      <Stack direction="column" spacing={1} sx={textContainer}>
+      <Stack direction="column" spacing={1} sx={textContainerStyle}>
         <Typography variant="h3">Page not found</Typography>
         <Typography variant="body1">
           Sorry, the page you are looking for does not exist.

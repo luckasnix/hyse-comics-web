@@ -1,16 +1,11 @@
-import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
-import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { createFileRoute } from "@tanstack/react-router";
 import { ComicChapterList } from "~/components/comic-chapter-list";
 import { ComicOverview } from "~/components/comic-overview";
 
+import { PageLayout } from "~/layouts/page-layout";
 import { getChapters, getComic } from "~/services/comics";
-
-const containerStyle: SxProps<Theme> = {
-  paddingY: 4,
-};
 
 const ComicRoute = () => {
   const { comic, chapters } = Route.useLoaderData();
@@ -25,7 +20,7 @@ const ComicRoute = () => {
   };
 
   return (
-    <Container maxWidth="md" sx={containerStyle}>
+    <PageLayout>
       <ComicOverview comic={comic} />
       <Stack spacing={2}>
         <Typography variant="h4">Chapters</Typography>
@@ -35,7 +30,7 @@ const ComicRoute = () => {
           onChapterClick={navigateToChapter}
         />
       </Stack>
-    </Container>
+    </PageLayout>
   );
 };
 
