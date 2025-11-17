@@ -5,7 +5,8 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
+import type { CSSProperties } from "react";
 
 import { useComicContext } from "~/contexts/comic-context";
 import { getClampedTextStyle } from "~/styles/common";
@@ -21,6 +22,11 @@ const headerActionsStyle: SxProps<Theme> = {
   paddingX: 3,
   display: "flex",
   justifyContent: "end",
+};
+
+const comicLinkStyle: CSSProperties = {
+  color: "inherit",
+  textDecoration: "none",
 };
 
 const overviewStyle: SxProps<Theme> = {
@@ -60,14 +66,20 @@ export const ComicReaderDrawer = ({
             <CloseIcon />
           </IconButton>
         </Box>
-        <Box sx={overviewStyle}>
-          <Typography variant="h4" gutterBottom sx={getClampedTextStyle(2)}>
-            {comic.title}
-          </Typography>
-          <Typography variant="body1" sx={synopsisStyle}>
-            {comic.synopsis}
-          </Typography>
-        </Box>
+        <Link
+          to="/comics/$comicId"
+          params={{ comicId: comic.id }}
+          style={comicLinkStyle}
+        >
+          <Box sx={overviewStyle}>
+            <Typography variant="h4" gutterBottom sx={getClampedTextStyle(2)}>
+              {comic.title}
+            </Typography>
+            <Typography variant="body1" sx={synopsisStyle}>
+              {comic.synopsis}
+            </Typography>
+          </Box>
+        </Link>
         <ComicChapterList
           chapters={chapters}
           selectedChapterId={currentChapterId}
