@@ -10,7 +10,7 @@ import { Activity } from "react";
 
 import { ComicCard } from "~/components/comic-card";
 import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
-import type { ComicChapterWithComic } from "~/types/comics";
+import type { ChapterWithComic } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   width: "100%",
@@ -63,7 +63,7 @@ const nextButtonStyle: SxProps<Theme> = {
 
 export type ComicShelfProps = Readonly<{
   title: string;
-  items: Array<ComicChapterWithComic>;
+  items: Array<ChapterWithComic>;
 }>;
 
 export const ComicShelf = ({ title, items }: ComicShelfProps) => {
@@ -100,10 +100,10 @@ export const ComicShelf = ({ title, items }: ComicShelfProps) => {
         </Activity>
         <Box ref={emblaRef} sx={viewportStyle}>
           <Box sx={slideContainerStyle}>
-            {items.map(({ comic, ...comicChapter }) => (
+            {items.map(({ comic, ...chapter }) => (
               <ComicCard
-                key={comicChapter.id}
-                chapterId={comicChapter.id}
+                key={chapter.id}
+                chapterId={chapter.id}
                 genres={comic.genres}
                 title={comic.title}
                 synopsis={comic.synopsis}

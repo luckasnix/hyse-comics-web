@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { json } from "@tanstack/react-start";
 
-import { comicPagesMock } from "~/mocks/comics";
+import { pagesMock } from "~/mocks/comics";
 
 export const Route = createFileRoute("/api/chapters/$chapterId/pages")({
   server: {
@@ -10,7 +10,7 @@ export const Route = createFileRoute("/api/chapters/$chapterId/pages")({
       GET: async ({ params }) => {
         const { chapterId } = params;
 
-        const pages = comicPagesMock.filter(
+        const pages = pagesMock.filter(
           (currentPage) => currentPage.chapterId === chapterId,
         );
 

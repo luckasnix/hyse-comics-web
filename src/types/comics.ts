@@ -47,14 +47,14 @@ export type Comic = {
   coverUrl: string;
 };
 
-export type ComicChapter = {
+export type Chapter = {
   id: string;
   comicId: string;
   title: string;
   synopsis: string;
 };
 
-export type ComicPage = {
+export type Page = {
   id: string;
   chapterId: string;
   imageUrl: string;
@@ -62,12 +62,12 @@ export type ComicPage = {
   imageHeight: number;
 };
 
-export type ComicChapterWithComic = ComicChapter & {
+export type ChapterWithComic = Chapter & {
   comic: Comic;
 };
 
-export type ComicRecommendation = {
+export type Recommendation = {
   id: string;
   title: string;
-  items: Array<ComicChapterWithComic>;
+  items: Array<ChapterWithComic>;
 };

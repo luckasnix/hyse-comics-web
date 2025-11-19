@@ -1,43 +1,35 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { json } from "@tanstack/react-start";
 
-import { comicChaptersMock, comicsMock } from "~/mocks/comics";
-import type {
-  ComicChapterWithComic,
-  ComicRecommendation,
-} from "~/types/comics";
+import { chaptersMock, comicsMock } from "~/mocks/comics";
+import type { ChapterWithComic, Recommendation } from "~/types/comics";
 
-const generateComicChaptersWithComic = (
+const generateChaptersWithComic = (
   chapterIds: Array<string>,
-): Array<ComicChapterWithComic> => {
-  return chapterIds
+): Array<ChapterWithComic> =>
+  chapterIds
     .map((chapterId) => {
-      const comicChapter = comicChaptersMock.find(
-        (chapter) => chapter.id === chapterId,
-      );
-      if (!comicChapter) {
+      const chapter = chaptersMock.find((chapter) => chapter.id === chapterId);
+      if (!chapter) {
         return null;
       }
-      const comic = comicsMock.find(
-        (comic) => comic.id === comicChapter.comicId,
-      );
+      const comic = comicsMock.find((comic) => comic.id === chapter.comicId);
       if (!comic) {
         return null;
       }
 
       return {
-        ...comicChapter,
+        ...chapter,
         comic,
       };
     })
     .filter((chapter) => chapter !== null);
-};
 
-const comicRecommendations: Array<ComicRecommendation> = [
+const recommendations: Array<Recommendation> = [
   {
     id: "trending-now",
     title: "Trending now",
-    items: generateComicChaptersWithComic([
+    items: generateChaptersWithComic([
       "vNH8ZOb8",
       "Uxg6G2c4",
       "KoEb6BNw",
@@ -49,7 +41,7 @@ const comicRecommendations: Array<ComicRecommendation> = [
   {
     id: "continue-reading",
     title: "Continue reading",
-    items: generateComicChaptersWithComic([
+    items: generateChaptersWithComic([
       "vNH8ZOb8",
       "Uxg6G2c4",
       "KoEb6BNw",
@@ -70,9 +62,9 @@ export const Route = createFileRoute(
         const { recommendationId } = params;
 
         if (recommendationId) {
-          const recommendation = comicRecommendations.find(
-            (comicRecommendation) =>
-              comicRecommendation.id === recommendationId,
+          const recommendation = recommendations.find(
+            (currentRecommendation) =>
+              currentRecommendation.id === recommendationId,
           );
 
           if (!recommendation) {
@@ -85,7 +77,7 @@ export const Route = createFileRoute(
           return json(recommendation);
         }
 
-        return json(comicRecommendations);
+        return json(recommendations);
       },
     },
   },

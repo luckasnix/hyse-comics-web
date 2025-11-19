@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { json } from "@tanstack/react-start";
 
-import { comicChaptersMock } from "~/mocks/comics";
+import { chaptersMock } from "~/mocks/comics";
 
 export const Route = createFileRoute("/api/chapters/$chapterId")({
   server: {
@@ -10,7 +10,7 @@ export const Route = createFileRoute("/api/chapters/$chapterId")({
       GET: async ({ params }) => {
         const { chapterId } = params;
 
-        const chapter = comicChaptersMock.find(
+        const chapter = chaptersMock.find(
           (currentChapter) => currentChapter.id === chapterId,
         );
 

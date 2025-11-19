@@ -59,7 +59,7 @@ export const ComicCard = ({
 }: ComicCardProps) => {
   const { showToast } = useUi();
 
-  const shareComicLink = async () => {
+  const shareChapterLink = async () => {
     const baseUrl =
       import.meta.env.MODE === "development"
         ? "http://localhost:3000"
@@ -109,7 +109,7 @@ export const ComicCard = ({
         </Stack>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={shareComicLink}>
+        <Button size="small" onClick={shareChapterLink}>
           Share
         </Button>
         <Button size="small" onClick={readComic}>

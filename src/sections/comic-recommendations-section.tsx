@@ -2,14 +2,14 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 
 import { ComicShelf } from "~/components/comic-shelf";
-import type { ComicRecommendation } from "~/types/comics";
+import type { Recommendation } from "~/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   width: "100%",
 };
 
 export type ComicRecommendationsSectionProps = Readonly<{
-  recommendations: Array<ComicRecommendation>;
+  recommendations: Array<Recommendation>;
 }>;
 
 export const ComicRecommendationsSection = ({

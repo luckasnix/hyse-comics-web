@@ -1,4 +1,4 @@
-import type { Comic, ComicChapter, ComicPage } from "~/types/comics";
+import type { Chapter, Comic, Page } from "~/types/comics";
 
 export const comicsMock: Array<Comic> = [
   {
@@ -87,7 +87,7 @@ export const comicsMock: Array<Comic> = [
   },
 ];
 
-export const comicChaptersMock: Array<ComicChapter> = [
+export const chaptersMock: Array<Chapter> = [
   {
     id: "vNH8ZOb8",
     comicId: "iXSE",
@@ -153,7 +153,7 @@ export const comicChaptersMock: Array<ComicChapter> = [
   },
 ];
 
-export const comicPagesMock: Array<ComicPage> = [
+export const pagesMock: Array<Page> = [
   {
     id: "79e80cb6-5d66-49c6-a350-f2efd013ae63",
     chapterId: "vNH8ZOb8",

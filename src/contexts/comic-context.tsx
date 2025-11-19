@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import { createContext, useContext, useMemo } from "react";
 
-import type { Comic, ComicChapter, ComicPage } from "~/types/comics";
+import type { Chapter, Comic, Page } from "~/types/comics";
 
 export type ComicContextValue = {
   comic: Comic;
-  chapters: Array<ComicChapter>;
-  pages: Array<ComicPage>;
+  chapters: Array<Chapter>;
+  pages: Array<Page>;
   currentComicId: string | null;
   currentChapterId: string | null;
 };
