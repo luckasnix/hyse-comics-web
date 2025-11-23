@@ -17,17 +17,17 @@ const chapterTextStyle: SxProps<Theme> = {
   whiteSpace: "nowrap",
 };
 
-export type ComicChapterListProps = Readonly<{
+export type ChapterListProps = Readonly<{
   chapters: Array<Chapter>;
   selectedChapterId: string | null;
   onChapterClick: (chapterId: string) => void;
 }>;
 
-export const ComicChapterList = ({
+export const ChapterList = ({
   chapters,
   selectedChapterId,
   onChapterClick,
-}: ComicChapterListProps) => (
+}: ChapterListProps) => (
   <List>
     {chapters.map((chapter, index) => (
       <ListItemButton

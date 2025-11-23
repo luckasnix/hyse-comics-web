@@ -40,7 +40,7 @@ const genreStyle: SxProps<Theme> = {
   userSelect: "none",
 };
 
-export type ComicCardProps = Readonly<{
+export type RecommendationCardProps = Readonly<{
   chapterId: string;
   genres: Array<ComicGenre>;
   title: string;
@@ -49,14 +49,14 @@ export type ComicCardProps = Readonly<{
   onReadButtonClick: (chapterId: string) => void;
 }>;
 
-export const ComicCard = ({
+export const RecommendationCard = ({
   chapterId,
   genres,
   title,
   synopsis,
   imageUrl,
   onReadButtonClick,
-}: ComicCardProps) => {
+}: RecommendationCardProps) => {
   const { showToast } = useUi();
 
   const shareChapterLink = async () => {

@@ -8,7 +8,7 @@ import { useNavigate } from "@tanstack/react-router";
 import useEmblaCarousel from "embla-carousel-react";
 import { Activity } from "react";
 
-import { ComicCard } from "~/components/comic-card";
+import { RecommendationCard } from "~/components/recommendation-card";
 import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
 import type { ChapterWithComic } from "~/types/comics";
 
@@ -61,12 +61,15 @@ const nextButtonStyle: SxProps<Theme> = {
   right: -24,
 };
 
-export type ComicShelfProps = Readonly<{
+export type RecommendationShelfProps = Readonly<{
   title: string;
   items: Array<ChapterWithComic>;
 }>;
 
-export const ComicShelf = ({ title, items }: ComicShelfProps) => {
+export const RecommendationShelf = ({
+  title,
+  items,
+}: RecommendationShelfProps) => {
   const navigate = useNavigate();
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -101,7 +104,7 @@ export const ComicShelf = ({ title, items }: ComicShelfProps) => {
         <Box ref={emblaRef} sx={viewportStyle}>
           <Box sx={slideContainerStyle}>
             {items.map(({ comic, ...chapter }) => (
-              <ComicCard
+              <RecommendationCard
                 key={chapter.id}
                 chapterId={chapter.id}
                 genres={comic.genres}

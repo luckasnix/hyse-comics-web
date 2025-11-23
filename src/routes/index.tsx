@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PageLayout } from "~/layouts/page-layout";
-import { ComicRecommendationsSection } from "~/sections/comic-recommendations-section";
+import { RecommendationsSection } from "~/sections/recommendations-section";
 import { getRecommendations } from "~/services/comics";
 
 const HomeRoute = () => {
@@ -9,7 +9,7 @@ const HomeRoute = () => {
 
   return (
     <PageLayout>
-      <ComicRecommendationsSection recommendations={recommendations} />
+      <RecommendationsSection recommendations={recommendations} />
     </PageLayout>
   );
 };

@@ -1,9 +1,9 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { createFileRoute } from "@tanstack/react-router";
-import { ComicChapterList } from "~/components/comic-chapter-list";
-import { ComicOverview } from "~/components/comic-overview";
 
+import { ChapterList } from "~/components/chapter-list";
+import { ComicOverview } from "~/components/comic-overview";
 import { PageLayout } from "~/layouts/page-layout";
 import { getChapters, getComic } from "~/services/comics";
 
@@ -24,7 +24,7 @@ const ComicRoute = () => {
       <ComicOverview comic={comic} />
       <Stack spacing={2}>
         <Typography variant="h4">Chapters</Typography>
-        <ComicChapterList
+        <ChapterList
           chapters={chapters}
           selectedChapterId={null}
           onChapterClick={navigateToChapter}

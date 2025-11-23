@@ -11,7 +11,7 @@ import type { CSSProperties } from "react";
 import { useComicContext } from "~/contexts/comic-context";
 import { getClampedTextStyle } from "~/styles/common";
 
-import { ComicChapterList } from "./comic-chapter-list";
+import { ChapterList } from "./chapter-list";
 
 const containerStyle: SxProps<Theme> = {
   width: 420,
@@ -80,7 +80,7 @@ export const ComicReaderDrawer = ({
             </Typography>
           </Box>
         </Link>
-        <ComicChapterList
+        <ChapterList
           chapters={chapters}
           selectedChapterId={currentChapterId}
           onChapterClick={navigateToChapter}
