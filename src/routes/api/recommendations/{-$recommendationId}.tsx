@@ -29,7 +29,7 @@ const recommendations: Array<Recommendation> = [
   {
     id: "trending-now",
     title: "Trending now",
-    items: generateChaptersWithComic([
+    chapters: generateChaptersWithComic([
       "vNH8ZOb8",
       "Uxg6G2c4",
       "KoEb6BNw",
@@ -41,7 +41,7 @@ const recommendations: Array<Recommendation> = [
   {
     id: "continue-reading",
     title: "Continue reading",
-    items: generateChaptersWithComic([
+    chapters: generateChaptersWithComic([
       "vNH8ZOb8",
       "Uxg6G2c4",
       "KoEb6BNw",

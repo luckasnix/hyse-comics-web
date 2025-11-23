@@ -69,5 +69,5 @@ export type ChapterWithComic = Chapter & {
 export type Recommendation = {
   id: string;
   title: string;
-  items: Array<ChapterWithComic>;
+  chapters: Array<ChapterWithComic>;
 };

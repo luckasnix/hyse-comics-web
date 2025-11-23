@@ -63,12 +63,12 @@ const nextButtonStyle: SxProps<Theme> = {
 
 export type RecommendationShelfProps = Readonly<{
   title: string;
-  items: Array<ChapterWithComic>;
+  chapters: Array<ChapterWithComic>;
 }>;
 
 export const RecommendationShelf = ({
   title,
-  items,
+  chapters,
 }: RecommendationShelfProps) => {
   const navigate = useNavigate();
 
@@ -103,7 +103,7 @@ export const RecommendationShelf = ({
         </Activity>
         <Box ref={emblaRef} sx={viewportStyle}>
           <Box sx={slideContainerStyle}>
-            {items.map(({ comic, ...chapter }) => (
+            {chapters.map(({ comic, ...chapter }) => (
               <RecommendationCard
                 key={chapter.id}
                 chapterId={chapter.id}
