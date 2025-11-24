@@ -48,6 +48,10 @@ const pageCounterStyle: SxProps<Theme> = {
   borderRadius: 1,
 };
 
+const pageCounterTextStyle: SxProps<Theme> = {
+  color: "primary.contrastText",
+};
+
 export type ComicReaderToolbarProps = Readonly<{
   carouselApi: EmblaCarouselType | undefined;
   isFullscreen: boolean;
@@ -138,7 +142,7 @@ export const ComicReaderToolbar = ({
             </Box>
           </Tooltip>
           <Box component="span" sx={pageCounterStyle}>
-            <Typography variant="body1" sx={{ color: "primary.contrastText" }}>
+            <Typography variant="body1" sx={pageCounterTextStyle}>
               {currentSlideNumber ?? "?"} / {slidesLength ?? "?"}
             </Typography>
           </Box>
