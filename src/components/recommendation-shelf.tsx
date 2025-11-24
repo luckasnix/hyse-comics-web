@@ -107,7 +107,6 @@ export const RecommendationShelf = ({
               <RecommendationCard
                 key={chapter.id}
                 chapterId={chapter.id}
-                genres={comic.genres}
                 title={comic.title}
                 synopsis={comic.synopsis}
                 imageUrl={comic.thumbnailUrl}

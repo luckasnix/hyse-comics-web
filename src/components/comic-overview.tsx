@@ -1,3 +1,4 @@
+import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
@@ -17,6 +18,10 @@ const imageStyle: CSSProperties = {
   objectFit: "cover",
 };
 
+const genreStyle: SxProps<Theme> = {
+  userSelect: "none",
+};
+
 export type ComicOverviewProps = Readonly<{
   comic: Comic;
 }>;
@@ -28,5 +33,10 @@ export const ComicOverview = ({ comic }: ComicOverviewProps) => (
     <Typography variant="body1" color="text.secondary">
       {comic.synopsis}
     </Typography>
+    <Stack direction="row" spacing={1}>
+      {comic.genres.map((genre) => (
+        <Chip key={genre} color="primary" label={genre} sx={genreStyle} />
+      ))}
+    </Stack>
   </Stack>
 );
