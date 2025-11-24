@@ -21,7 +21,7 @@ export type NavigationConfig = Record<
   NavigationButtonConfig
 >;
 
-export const useCarouselDirectionalNavigation = (
+export const useComicReaderToolbar = (
   carouselApi: EmblaCarouselType | undefined,
   direction: AxisDirectionOptionType,
 ) => {

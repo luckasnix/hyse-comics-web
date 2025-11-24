@@ -21,7 +21,7 @@ import {
   comicReaderToolbarHeight,
 } from "~/constants/comics";
 import { useComicContext } from "~/contexts/comic-context";
-import { useCarouselDirectionalNavigation } from "~/hooks/use-carousel-directional-navigation";
+import { useComicReaderToolbar } from "~/hooks/use-comic-reader-toolbar";
 
 const containerStyle: SxProps<Theme> = {
   height: comicReaderToolbarHeight,
@@ -73,11 +73,10 @@ export const ComicReaderToolbar = ({
 }: ComicReaderToolbarProps) => {
   const { comic } = useComicContext();
 
-  const { buttons, currentSlideNumber, slidesLength } =
-    useCarouselDirectionalNavigation(
-      carouselApi,
-      carouselDirectionFrom[comic.direction],
-    );
+  const { buttons, currentSlideNumber, slidesLength } = useComicReaderToolbar(
+    carouselApi,
+    carouselDirectionFrom[comic.direction],
+  );
 
   useEventListener("keydown", ({ key, shiftKey }) => {
     if (shiftKey) {
