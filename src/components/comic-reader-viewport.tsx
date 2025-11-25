@@ -10,7 +10,7 @@ import type { CSSProperties } from "react";
 import { comicReaderToolbarHeight } from "~/constants/comics";
 import { useComicContext } from "~/contexts/comic-context";
 import { useUserContext } from "~/contexts/user-context";
-import type { ComicDirection } from "~/types/comics";
+import type { ComicDirection, PageBackgroundTexture } from "~/types/comics";
 import type { UserReadingAxis } from "~/types/users";
 
 const containerStyle: SxProps<Theme> = {
@@ -40,12 +40,19 @@ const getSlideContainerStyle = (
   };
 };
 
-const pageStyle: SxProps<Theme> = {
+const getPageStyle = (
+  backgroundTexture: PageBackgroundTexture | null,
+): SxProps<Theme> => ({
   flex: "0 0 100%",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-};
+  ...(backgroundTexture && {
+    backgroundImage: `url(/textures/${backgroundTexture}.webp)`,
+    backgroundRepeat: "repeat",
+    backgroundSize: "auto",
+  }),
+});
 
 const imageStyle: CSSProperties = {
   width: "auto",
@@ -70,7 +77,7 @@ export const ComicReaderViewport = ({
     <Box ref={carouselRef} sx={containerStyle}>
       <Box sx={getSlideContainerStyle(user.reading.axis, comic.direction)}>
         {pages.map((page) => (
-          <Box key={page.id} sx={pageStyle}>
+          <Box key={page.id} sx={getPageStyle(page.backgroundTexture)}>
             <img
               src={page.imageUrl}
               width={page.imageWidth}
