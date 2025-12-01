@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComicsComicIdRouteImport } from './routes/comics/$comicId'
 import { Route as ChaptersChapterIdRouteImport } from './routes/chapters/$chapterId'
@@ -19,6 +20,11 @@ import { Route as ApiChaptersChapterIdRouteImport } from './routes/api/chapters/
 import { Route as ApiComicsComicIdChaptersRouteImport } from './routes/api/comics/$comicId.chapters'
 import { Route as ApiChaptersChapterIdPagesRouteImport } from './routes/api/chapters/$chapterId.pages'
 
+const SignInRoute = SignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -71,6 +77,7 @@ const ApiChaptersChapterIdPagesRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/sign-in': typeof SignInRoute
   '/chapters/$chapterId': typeof ChaptersChapterIdRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
   '/api/chapters/$chapterId': typeof ApiChaptersChapterIdRouteWithChildren
@@ -82,6 +89,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/sign-in': typeof SignInRoute
   '/chapters/$chapterId': typeof ChaptersChapterIdRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
   '/api/chapters/$chapterId': typeof ApiChaptersChapterIdRouteWithChildren
@@ -94,6 +102,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/sign-in': typeof SignInRoute
   '/chapters/$chapterId': typeof ChaptersChapterIdRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
   '/api/chapters/$chapterId': typeof ApiChaptersChapterIdRouteWithChildren
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/sign-in'
     | '/chapters/$chapterId'
     | '/comics/$comicId'
     | '/api/chapters/$chapterId'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/sign-in'
     | '/chapters/$chapterId'
     | '/comics/$comicId'
     | '/api/chapters/$chapterId'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/sign-in'
     | '/chapters/$chapterId'
     | '/comics/$comicId'
     | '/api/chapters/$chapterId'
@@ -141,6 +153,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SignInRoute: typeof SignInRoute
   ChaptersChapterIdRoute: typeof ChaptersChapterIdRoute
   ComicsComicIdRoute: typeof ComicsComicIdRoute
   ApiChaptersChapterIdRoute: typeof ApiChaptersChapterIdRouteWithChildren
@@ -152,6 +165,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sign-in': {
+      id: '/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof SignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -231,6 +251,7 @@ const ApiChaptersChapterIdRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SignInRoute: SignInRoute,
   ChaptersChapterIdRoute: ChaptersChapterIdRoute,
   ComicsComicIdRoute: ComicsComicIdRoute,
   ApiChaptersChapterIdRoute: ApiChaptersChapterIdRouteWithChildren,

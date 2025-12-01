@@ -1,4 +1,4 @@
-import Container from "@mui/material/Container";
+import Container, { type ContainerOwnProps } from "@mui/material/Container";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { ReactNode } from "react";
 
@@ -11,12 +11,13 @@ const containerStyle: SxProps<Theme> = {
 
 export type PageLayoutProps = Readonly<{
   children: ReactNode;
+  maxWidth?: ContainerOwnProps["maxWidth"];
 }>;
 
-export const PageLayout = ({ children }: PageLayoutProps) => (
+export const PageLayout = ({ children, maxWidth = "md" }: PageLayoutProps) => (
   <>
     <HeaderSection />
-    <Container maxWidth="md" sx={containerStyle}>
+    <Container maxWidth={maxWidth} sx={containerStyle}>
       {children}
     </Container>
     <FooterSection />
