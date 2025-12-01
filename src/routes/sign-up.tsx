@@ -1,6 +1,6 @@
 import Apple from "@mui/icons-material/Apple";
 import Google from "@mui/icons-material/Google";
-import Login from "@mui/icons-material/Login";
+import PersonAdd from "@mui/icons-material/PersonAdd";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
@@ -14,7 +14,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import type { CSSProperties } from "react";
 
 import { PageLayout } from "~/layouts/page-layout";
-import { signInSchema } from "~/schemas/users";
+import { signUpSchema } from "~/schemas/users";
 import { linkResetStyle } from "~/styles/common";
 
 const formContainerStyle: SxProps<Theme> = {
@@ -30,7 +30,7 @@ const dividerStyle: SxProps<Theme> = {
   marginY: 2,
 };
 
-const signUpPromptStyle: SxProps<Theme> = {
+const signInPromptStyle: SxProps<Theme> = {
   marginTop: 2,
   textAlign: "center",
 };
@@ -40,14 +40,15 @@ const linkStyle: CSSProperties = {
   fontWeight: "bold",
 };
 
-const SignInRoute = () => {
+const SignUpRoute = () => {
   const form = useForm({
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
     },
     validators: {
-      onSubmit: signInSchema,
+      onSubmit: signUpSchema,
     },
     onSubmit: async ({ value, formApi }) => {
       console.log("Form submitted:", value);
@@ -60,7 +61,7 @@ const SignInRoute = () => {
       <Paper elevation={2} sx={formContainerStyle}>
         <Box component="form">
           <Typography variant="h3" sx={titleStyle}>
-            Sign In
+            Sign Up
           </Typography>
           <Stack spacing={2}>
             <form.Field name="email">
@@ -93,6 +94,21 @@ const SignInRoute = () => {
                 />
               )}
             </form.Field>
+            <form.Field name="confirmPassword">
+              {(field) => (
+                <TextField
+                  fullWidth
+                  label="Confirm Password"
+                  type="password"
+                  value={field.state.value}
+                  onChange={(event) => {
+                    field.handleChange(event.target.value);
+                  }}
+                  error={field.state.meta.errors.length > 0}
+                  helperText={field.state.meta.errors[0]?.message}
+                />
+              )}
+            </form.Field>
             <form.Subscribe
               selector={(state) => ({
                 canSubmit: state.canSubmit,
@@ -106,13 +122,13 @@ const SignInRoute = () => {
                   type="submit"
                   disabled={!canSubmit || isSubmitting}
                   loading={isSubmitting}
-                  startIcon={<Login />}
+                  startIcon={<PersonAdd />}
                   onClick={(event) => {
                     event.preventDefault();
                     form.handleSubmit();
                   }}
                 >
-                  Sign In
+                  Sign Up
                 </Button>
               )}
             </form.Subscribe>
@@ -122,26 +138,26 @@ const SignInRoute = () => {
               fullWidth
               startIcon={<Google />}
               onClick={() => {
-                console.log("Sign in with Google");
+                console.log("Sign up with Google");
               }}
             >
-              Sign in with Google
+              Sign up with Google
             </Button>
             <Button
               variant="outlined"
               fullWidth
               startIcon={<Apple />}
               onClick={() => {
-                console.log("Sign in with Apple");
+                console.log("Sign up with Apple");
               }}
             >
-              Sign in with Apple
+              Sign up with Apple
             </Button>
           </Stack>
-          <Typography variant="body2" sx={signUpPromptStyle}>
-            Don't have an account?{" "}
-            <Link to="/sign-up" style={linkStyle}>
-              Sign up.
+          <Typography variant="body2" sx={signInPromptStyle}>
+            Already have an account?{" "}
+            <Link to="/sign-in" style={linkStyle}>
+              Sign in.
             </Link>
           </Typography>
         </Box>
@@ -150,6 +166,6 @@ const SignInRoute = () => {
   );
 };
 
-export const Route = createFileRoute("/sign-in")({
-  component: SignInRoute,
+export const Route = createFileRoute("/sign-up")({
+  component: SignUpRoute,
 });

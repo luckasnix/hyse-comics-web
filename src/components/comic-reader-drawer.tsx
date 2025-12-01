@@ -6,10 +6,9 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { Link, useNavigate } from "@tanstack/react-router";
-import type { CSSProperties } from "react";
 
 import { useComicContext } from "~/contexts/comic-context";
-import { getClampedTextStyle } from "~/styles/common";
+import { getClampedTextStyle, linkResetStyle } from "~/styles/common";
 
 import { ChapterList } from "./chapter-list";
 
@@ -22,11 +21,6 @@ const headerActionsStyle: SxProps<Theme> = {
   paddingX: 3,
   display: "flex",
   justifyContent: "end",
-};
-
-const comicLinkStyle: CSSProperties = {
-  color: "inherit",
-  textDecoration: "none",
 };
 
 const overviewStyle: SxProps<Theme> = {
@@ -69,7 +63,7 @@ export const ComicReaderDrawer = ({
         <Link
           to="/comics/$comicId"
           params={{ comicId: comic.id }}
-          style={comicLinkStyle}
+          style={linkResetStyle}
         >
           <Box sx={overviewStyle}>
             <Typography variant="h4" gutterBottom sx={getClampedTextStyle(2)}>
