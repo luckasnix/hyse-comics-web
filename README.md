@@ -26,12 +26,22 @@ Follow the steps below to set up and run the project in your local environment.
     npm install
     ```
 
-4. Run the development server:
+4. Set up environment variables:
+
+    Copy the `.env.example` file to `.env`:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    Update the values in `.env` if needed. By default, it uses `http://localhost:3000` as the base URL.
+
+5. Run the development server:
 
     ```bash
     npm run dev
     ```
 
-5. Open in your browser:
+6. Open in your browser:
 
     Open [http://localhost:3000](http://localhost:3000) in your browser to view the result.
