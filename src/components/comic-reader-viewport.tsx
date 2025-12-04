@@ -43,6 +43,7 @@ const getSlideContainerStyle = (
 const getPageStyle = (
   backgroundTexture: PageBackgroundTexture | null,
 ): SxProps<Theme> => ({
+  minHeight: 0,
   flex: "0 0 100%",
   display: "flex",
   justifyContent: "center",
