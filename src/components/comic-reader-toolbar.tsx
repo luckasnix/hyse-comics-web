@@ -109,7 +109,7 @@ export const ComicReaderToolbar = ({
   return (
     <Grid container sx={containerStyle}>
       <Grid container size="grow" sx={innerContainerStyle}>
-        <Grid size={2} display="flex" justifyContent="start">
+        <Grid size={2} display="flex" justifyContent="start" gap="4px">
           <Tooltip title="Home">
             <Link to="/">
               <IconButton sx={iconButtonStyle}>
@@ -118,7 +118,7 @@ export const ComicReaderToolbar = ({
             </Link>
           </Tooltip>
         </Grid>
-        <Grid size="grow" display="flex" justifyContent="center">
+        <Grid size="grow" display="flex" justifyContent="center" gap="4px">
           <Tooltip title={buttons.farLeft.label}>
             <Box component="span">
               <IconButton
@@ -169,7 +169,7 @@ export const ComicReaderToolbar = ({
             </Box>
           </Tooltip>
         </Grid>
-        <Grid size={2} display="flex" justifyContent="end">
+        <Grid size={2} display="flex" justifyContent="end" gap="4px">
           {isFullscreen ? (
             <Tooltip title="Exit fullscreen (f)">
               <Box component="span">
