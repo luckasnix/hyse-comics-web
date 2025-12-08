@@ -5,7 +5,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import type { SxProps, Theme } from "@mui/material/styles";
 
-import type { Chapter } from "~/types/comics";
+import type { Chapter } from "#/types/comics";
 
 const avatarStyle: SxProps<Theme> = {
   backgroundColor: "primary.main",

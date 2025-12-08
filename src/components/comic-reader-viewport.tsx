@@ -7,11 +7,11 @@ import type {
 import type { EmblaViewportRefType } from "embla-carousel-react";
 import type { CSSProperties } from "react";
 
-import { comicReaderToolbarHeight } from "~/constants/comics";
-import { useComicContext } from "~/contexts/comic-context";
-import { useUserContext } from "~/contexts/user-context";
-import type { ComicDirection, PageBackgroundTexture } from "~/types/comics";
-import type { UserReadingAxis } from "~/types/users";
+import { comicReaderToolbarHeight } from "#/constants/comics";
+import { useComicContext } from "#/contexts/comic-context";
+import { useUserContext } from "#/contexts/user-context";
+import type { ComicDirection, PageBackgroundTexture } from "#/types/comics";
+import type { UserReadingAxis } from "#/types/users";
 
 const containerStyle: SxProps<Theme> = {
   overflow: "hidden",

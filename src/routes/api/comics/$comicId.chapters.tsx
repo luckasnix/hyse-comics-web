@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { json } from "@tanstack/react-start";
 
-import { chaptersMock } from "~/mocks/comics";
+import { chaptersMock } from "#/mocks/comics";
 
 export const Route = createFileRoute("/api/comics/$comicId/chapters")({
   server: {

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { json } from "@tanstack/react-start";
 
-import { chaptersMock, comicsMock } from "~/mocks/comics";
-import type { ChapterWithComic, Recommendation } from "~/types/comics";
+import { chaptersMock, comicsMock } from "#/mocks/comics";
+import type { ChapterWithComic, Recommendation } from "#/types/comics";
 
 const generateChaptersWithComic = (
   chapterIds: Array<string>,

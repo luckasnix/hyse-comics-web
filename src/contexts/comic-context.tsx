@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { createContext, useContext, useMemo } from "react";
 
-import type { Chapter, Comic, Page } from "~/types/comics";
+import type { Chapter, Comic, Page } from "#/types/comics";
 
 export type ComicContextValue = {
   comic: Comic;

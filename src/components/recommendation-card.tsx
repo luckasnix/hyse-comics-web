@@ -6,8 +6,8 @@ import CardMedia from "@mui/material/CardMedia";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
-import { useUi } from "~/contexts/ui-context";
-import { getClampedTextStyle } from "~/styles/common";
+import { useUi } from "#/contexts/ui-context";
+import { getClampedTextStyle } from "#/styles/common";
 
 const containerStyle: SxProps<Theme> = {
   minWidth: 320,

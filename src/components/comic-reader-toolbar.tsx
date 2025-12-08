@@ -19,9 +19,9 @@ import type { EmblaCarouselType } from "embla-carousel";
 import {
   carouselDirectionFrom,
   comicReaderToolbarHeight,
-} from "~/constants/comics";
-import { useComicContext } from "~/contexts/comic-context";
-import { useComicReaderToolbar } from "~/hooks/use-comic-reader-toolbar";
+} from "#/constants/comics";
+import { useComicContext } from "#/contexts/comic-context";
+import { useComicReaderToolbar } from "#/hooks/use-comic-reader-toolbar";
 
 const containerStyle: SxProps<Theme> = {
   height: comicReaderToolbarHeight,

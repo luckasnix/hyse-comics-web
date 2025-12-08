@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { ComicProvider } from "~/contexts/comic-context";
-import { ComicReaderSection } from "~/sections/comic-reader-section";
-import { getChapter, getChapters, getComic, getPages } from "~/services/comics";
+import { ComicProvider } from "#/contexts/comic-context";
+import { ComicReaderSection } from "#/sections/comic-reader-section";
+import { getChapter, getChapters, getComic, getPages } from "#/services/comics";
 
 const ChapterRoute = () => {
   const { comic, chapters, pages, currentComicId, currentChapterId } =

@@ -4,9 +4,9 @@ import TextField from "@mui/material/TextField";
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { AuthForm } from "~/components/auth-form";
-import { PageLayout } from "~/layouts/page-layout";
-import { signInSchema } from "~/schemas/users";
+import { AuthForm } from "#/components/auth-form";
+import { PageLayout } from "#/layouts/page-layout";
+import { signInSchema } from "#/schemas/users";
 
 const SignInRoute = () => {
   const form = useForm({

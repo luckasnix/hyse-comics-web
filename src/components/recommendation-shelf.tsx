@@ -8,9 +8,9 @@ import { useNavigate } from "@tanstack/react-router";
 import useEmblaCarousel from "embla-carousel-react";
 import { Activity } from "react";
 
-import { RecommendationCard } from "~/components/recommendation-card";
-import { useCarouselNavigation } from "~/hooks/use-carousel-navigation";
-import type { ChapterWithComic } from "~/types/comics";
+import { RecommendationCard } from "#/components/recommendation-card";
+import { useCarouselNavigation } from "#/hooks/use-carousel-navigation";
+import type { ChapterWithComic } from "#/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   width: "100%",

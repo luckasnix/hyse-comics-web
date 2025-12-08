@@ -1,4 +1,4 @@
-import type { Chapter, Comic, Page } from "~/types/comics";
+import type { Chapter, Comic, Page } from "#/types/comics";
 
 export const comicsMock: Array<Comic> = [
   {

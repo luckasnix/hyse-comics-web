@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { createContext, useContext, useMemo } from "react";
 
-import type { User } from "~/types/users";
+import type { User } from "#/types/users";
 
 export type UserContextValue = {
   user: User;

@@ -10,8 +10,8 @@ import {
   useState,
 } from "react";
 
-import { Toast, type ToastOptions, type ToastProps } from "~/components/toast";
-import { theme } from "~/styles/theme";
+import { Toast, type ToastOptions, type ToastProps } from "#/components/toast";
+import { theme } from "#/styles/theme";
 
 export type UiContextValue = {
   showToast: (options: ToastOptions) => void;

@@ -3,10 +3,10 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute } from "@tanstack/react-router";
-import { AuthForm } from "~/components/auth-form";
+import { AuthForm } from "#/components/auth-form";
 
-import { PageLayout } from "~/layouts/page-layout";
-import { signUpSchema } from "~/schemas/users";
+import { PageLayout } from "#/layouts/page-layout";
+import { signUpSchema } from "#/schemas/users";
 
 const SignUpRoute = () => {
   const form = useForm({

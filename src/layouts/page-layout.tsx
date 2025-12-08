@@ -2,8 +2,8 @@ import Container, { type ContainerOwnProps } from "@mui/material/Container";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { ReactNode } from "react";
 
-import { FooterSection } from "~/sections/footer-section";
-import { HeaderSection } from "~/sections/header-section";
+import { FooterSection } from "#/sections/footer-section";
+import { HeaderSection } from "#/sections/header-section";
 
 const containerStyle: SxProps<Theme> = {
   paddingY: 4,

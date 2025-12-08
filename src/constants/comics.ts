@@ -1,4 +1,4 @@
-import type { AxisDirectionOptionType, ComicDirection } from "~/types/comics";
+import type { AxisDirectionOptionType, ComicDirection } from "#/types/comics";
 
 export const comicReaderToolbarHeight = 56;
 

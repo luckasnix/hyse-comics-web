@@ -4,7 +4,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { CSSProperties } from "react";
 
-import type { Comic } from "~/types/comics";
+import type { Comic } from "#/types/comics";
 
 const containerStyle: SxProps<Theme> = {
   marginBottom: 5,

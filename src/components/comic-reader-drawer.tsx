@@ -7,8 +7,8 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { Link, useNavigate } from "@tanstack/react-router";
 
-import { useComicContext } from "~/contexts/comic-context";
-import { getClampedTextStyle, linkResetStyle } from "~/styles/common";
+import { useComicContext } from "#/contexts/comic-context";
+import { getClampedTextStyle, linkResetStyle } from "#/styles/common";
 
 import { ChapterList } from "./chapter-list";
 

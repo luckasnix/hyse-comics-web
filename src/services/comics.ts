@@ -1,4 +1,4 @@
-import type { Chapter, Comic, Page, Recommendation } from "~/types/comics";
+import type { Chapter, Comic, Page, Recommendation } from "#/types/comics";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 

@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { Link } from "@tanstack/react-router";
 import type { CSSProperties, MouseEventHandler, ReactNode } from "react";
 
-import { linkResetStyle } from "~/styles/common";
+import { linkResetStyle } from "#/styles/common";
 
 const containerStyle: SxProps<Theme> = {
   padding: 6,

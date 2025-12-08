@@ -2,10 +2,10 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { ChapterList } from "~/components/chapter-list";
-import { ComicOverview } from "~/components/comic-overview";
-import { PageLayout } from "~/layouts/page-layout";
-import { getChapters, getComic } from "~/services/comics";
+import { ChapterList } from "#/components/chapter-list";
+import { ComicOverview } from "#/components/comic-overview";
+import { PageLayout } from "#/layouts/page-layout";
+import { getChapters, getComic } from "#/services/comics";
 
 const ComicRoute = () => {
   const { comic, chapters } = Route.useLoaderData();
