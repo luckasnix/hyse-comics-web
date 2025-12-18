@@ -55,13 +55,14 @@ const getPageStyle = (
   }),
 });
 
-const imageStyle: CSSProperties = {
+const getImageStyle = (width: number, height: number): CSSProperties => ({
   width: "auto",
   height: "auto",
   maxWidth: "100%",
   maxHeight: "100%",
+  aspectRatio: width / height,
   padding: "40px",
-};
+});
 
 export type ComicReaderViewportProps = Readonly<{
   carouselRef: EmblaViewportRefType;
@@ -81,10 +82,8 @@ export const ComicReaderViewport = ({
           <Box key={page.id} sx={getPageStyle(page.backgroundTexture)}>
             <img
               src={page.imageUrl}
-              width={page.imageWidth}
-              height={page.imageHeight}
               alt={`${comic.title} page`}
-              style={imageStyle}
+              style={getImageStyle(page.imageWidth, page.imageHeight)}
             />
           </Box>
         ))}
