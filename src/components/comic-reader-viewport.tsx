@@ -11,7 +11,7 @@ import { comicReaderToolbarHeight } from "#/constants/comics";
 import { useComicContext } from "#/contexts/comic-context";
 import { useUserContext } from "#/contexts/user-context";
 import type { ComicDirection, PageBackgroundTexture } from "#/types/comics";
-import type { UserReadingAxis } from "#/types/users";
+import type { ReadingAxis } from "#/types/users";
 
 const containerStyle: SxProps<Theme> = {
   overflow: "hidden",
@@ -19,12 +19,12 @@ const containerStyle: SxProps<Theme> = {
 };
 
 const getSlideContainerStyle = (
-  userReadingAxis: UserReadingAxis,
+  readingAxis: ReadingAxis,
   comicDirection: ComicDirection,
 ): SxProps<Theme> => {
   let flexDirection: SxCSSProperties["flexDirection"] = "column";
 
-  if (userReadingAxis === "horizontal") {
+  if (readingAxis === "horizontal") {
     flexDirection = comicDirection === "western" ? "row" : "row-reverse";
   }
 
@@ -77,7 +77,12 @@ export const ComicReaderViewport = ({
 
   return (
     <Box ref={carouselRef} sx={containerStyle}>
-      <Box sx={getSlideContainerStyle(user.reading.axis, comic.direction)}>
+      <Box
+        sx={getSlideContainerStyle(
+          user.preferences.readingAxis,
+          comic.direction,
+        )}
+      >
         {pages.map((page) => (
           <Box key={page.id} sx={getPageStyle(page.backgroundTexture)}>
             <img

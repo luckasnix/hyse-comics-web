@@ -1,7 +1,7 @@
 import type { AxisOptionType } from "#/types/comics";
-import type { UserReadingAxis } from "#/types/users";
+import type { ReadingAxis } from "#/types/users";
 
-export const carouselAxisFrom: Record<UserReadingAxis, AxisOptionType> = {
+export const carouselAxisFrom: Record<ReadingAxis, AxisOptionType> = {
   horizontal: "x",
   vertical: "y",
 };

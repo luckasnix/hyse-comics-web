@@ -24,7 +24,7 @@ export const ComicReaderSection = () => {
   const containerRef = useRef<HTMLElement>(null);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    axis: carouselAxisFrom[user.reading.axis],
+    axis: carouselAxisFrom[user.preferences.readingAxis],
     direction: carouselDirectionFrom[comic.direction],
   });
 
