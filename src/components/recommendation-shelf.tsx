@@ -3,6 +3,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import type { SxProps, Theme } from "@mui/material/styles";
+import { darken } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "@tanstack/react-router";
 import useEmblaCarousel from "embla-carousel-react";
@@ -36,18 +37,14 @@ const slideContainerStyle: SxProps<Theme> = {
 };
 
 const navigationButtonStyle: SxProps<Theme> = {
-  backgroundColor: "background.paper",
-  boxShadow: 2,
   position: "absolute",
   top: "50%",
   transform: "translateY(-50%)",
   zIndex: 1,
+  backgroundColor: "background.paper",
+  boxShadow: 2,
   "&:hover": {
-    backgroundColor: "background.paper",
-    boxShadow: 4,
-  },
-  "&:disabled": {
-    backgroundColor: "background.paper",
+    backgroundColor: (theme) => darken(theme.palette.background.paper, 0.05),
   },
 };
 
