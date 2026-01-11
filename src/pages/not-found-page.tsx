@@ -1,8 +1,8 @@
-import HomeIcon from "@mui/icons-material/Home";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { IconHomeFilled } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 
 const containerStyle: SxProps<Theme> = {
@@ -28,7 +28,8 @@ export const NotFoundPage = () => {
       </Stack>
       <Button
         variant="contained"
-        startIcon={<HomeIcon />}
+        size="large"
+        startIcon={<IconHomeFilled />}
         onClick={() => {
           navigate({ to: "/" });
         }}

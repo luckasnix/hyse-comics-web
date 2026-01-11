@@ -1,10 +1,9 @@
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { darken } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 import useEmblaCarousel from "embla-carousel-react";
 import { Activity } from "react";
@@ -95,7 +94,7 @@ export const RecommendationShelf = ({
             disabled={!canNavigatePrev}
             onClick={navigatePrev}
           >
-            <ChevronLeftIcon />
+            <IconChevronLeft />
           </IconButton>
         </Activity>
         <Box ref={emblaRef} sx={viewportStyle}>
@@ -118,7 +117,7 @@ export const RecommendationShelf = ({
             disabled={!canNavigateNext}
             onClick={navigateNext}
           >
-            <ChevronRightIcon />
+            <IconChevronRight />
           </IconButton>
         </Activity>
       </Box>

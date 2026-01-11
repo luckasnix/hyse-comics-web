@@ -1,9 +1,8 @@
-import InstagramIcon from "@mui/icons-material/Instagram";
-import XIcon from "@mui/icons-material/X";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
+import { IconBrandInstagram, IconBrandX } from "@tabler/icons-react";
 import type { CSSProperties } from "react";
 
 const containerStyle: SxProps<Theme> = {
@@ -42,7 +41,7 @@ export const FooterSection = () => (
         rel="noopener noreferrer"
         sx={iconButtonStyle}
       >
-        <XIcon />
+        <IconBrandX />
       </IconButton>
       <IconButton
         component="a"
@@ -51,7 +50,7 @@ export const FooterSection = () => (
         rel="noopener noreferrer"
         sx={iconButtonStyle}
       >
-        <InstagramIcon />
+        <IconBrandInstagram />
       </IconButton>
     </Stack>
   </Box>

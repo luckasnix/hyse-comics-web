@@ -1,6 +1,6 @@
-import Login from "@mui/icons-material/Login";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
+import { IconLogin } from "@tabler/icons-react";
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -68,7 +68,7 @@ const SignInRoute = () => {
               <AuthForm.SubmitButton
                 disabled={!canSubmit || isSubmitting}
                 loading={isSubmitting}
-                icon={<Login />}
+                icon={<IconLogin />}
                 onClick={(event) => {
                   event.preventDefault();
                   form.handleSubmit();

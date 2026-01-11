@@ -1,17 +1,19 @@
-import FirstPageIcon from "@mui/icons-material/FirstPage";
-import FullscreenIcon from "@mui/icons-material/Fullscreen";
-import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
-import HomeIcon from "@mui/icons-material/Home";
-import LastPageIcon from "@mui/icons-material/LastPage";
-import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import {
+  IconArrowsMaximize,
+  IconArrowsMinimize,
+  IconChevronLeft,
+  IconChevronLeftPipe,
+  IconChevronRight,
+  IconChevronRightPipe,
+  IconHomeFilled,
+  IconLayoutSidebarLeftCollapseFilled,
+} from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import { useEventListener } from "ahooks";
 import type { EmblaCarouselType } from "embla-carousel";
@@ -113,7 +115,7 @@ export const ComicReaderToolbar = ({
           <Tooltip title="Home">
             <Link to="/">
               <IconButton sx={iconButtonStyle}>
-                <HomeIcon />
+                <IconHomeFilled />
               </IconButton>
             </Link>
           </Tooltip>
@@ -126,7 +128,7 @@ export const ComicReaderToolbar = ({
                 disabled={buttons.farLeft.disabled}
                 onClick={buttons.farLeft.onClick}
               >
-                <FirstPageIcon />
+                <IconChevronLeftPipe />
               </IconButton>
             </Box>
           </Tooltip>
@@ -137,7 +139,7 @@ export const ComicReaderToolbar = ({
                 disabled={buttons.left.disabled}
                 onClick={buttons.left.onClick}
               >
-                <NavigateBeforeIcon />
+                <IconChevronLeft />
               </IconButton>
             </Box>
           </Tooltip>
@@ -153,7 +155,7 @@ export const ComicReaderToolbar = ({
                 disabled={buttons.right.disabled}
                 onClick={buttons.right.onClick}
               >
-                <NavigateNextIcon />
+                <IconChevronRight />
               </IconButton>
             </Box>
           </Tooltip>
@@ -164,7 +166,7 @@ export const ComicReaderToolbar = ({
                 disabled={buttons.farRight.disabled}
                 onClick={buttons.farRight.onClick}
               >
-                <LastPageIcon />
+                <IconChevronRightPipe />
               </IconButton>
             </Box>
           </Tooltip>
@@ -174,7 +176,7 @@ export const ComicReaderToolbar = ({
             <Tooltip title="Exit fullscreen (f)">
               <Box component="span">
                 <IconButton sx={iconButtonStyle} onClick={exitFullscreen}>
-                  <FullscreenExitIcon />
+                  <IconArrowsMinimize />
                 </IconButton>
               </Box>
             </Tooltip>
@@ -182,7 +184,7 @@ export const ComicReaderToolbar = ({
             <Tooltip title="Enter fullscreen (f)">
               <Box component="span">
                 <IconButton sx={iconButtonStyle} onClick={enterFullscreen}>
-                  <FullscreenIcon />
+                  <IconArrowsMaximize />
                 </IconButton>
               </Box>
             </Tooltip>
@@ -194,7 +196,7 @@ export const ComicReaderToolbar = ({
                 disabled={isFullscreen}
                 onClick={openDrawer}
               >
-                <MenuOpenIcon />
+                <IconLayoutSidebarLeftCollapseFilled />
               </IconButton>
             </Box>
           </Tooltip>

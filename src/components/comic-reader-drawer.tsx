@@ -1,10 +1,10 @@
-import CloseIcon from "@mui/icons-material/Close";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { IconX } from "@tabler/icons-react";
 import { Link, useNavigate } from "@tanstack/react-router";
 
 import { useComicContext } from "#/contexts/comic-context";
@@ -57,7 +57,7 @@ export const ComicReaderDrawer = ({
       <Stack spacing={1} sx={containerStyle}>
         <Box sx={headerActionsStyle}>
           <IconButton onClick={onClose}>
-            <CloseIcon />
+            <IconX />
           </IconButton>
         </Box>
         <Link

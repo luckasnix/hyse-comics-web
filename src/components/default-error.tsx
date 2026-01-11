@@ -1,17 +1,13 @@
-import ErrorOutline from "@mui/icons-material/ErrorOutline";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { IconExclamationCircle } from "@tabler/icons-react";
 
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",
   padding: 2,
   justifyContent: "center",
   alignItems: "center",
-};
-
-const iconStyle: SxProps<Theme> = {
-  fontSize: 64,
 };
 
 const textStyle: SxProps<Theme> = {
@@ -24,7 +20,7 @@ export type DefaultErrorProps = Readonly<{
 
 export const DefaultError = ({ error }: DefaultErrorProps) => (
   <Stack spacing={2} sx={containerStyle}>
-    <ErrorOutline color="error" sx={iconStyle} />
+    <IconExclamationCircle color="#d32f2f" size={64} />
     <Typography variant="h3" sx={textStyle}>
       Erro
     </Typography>
