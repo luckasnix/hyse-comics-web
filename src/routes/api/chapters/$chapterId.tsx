@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { json } from "@tanstack/react-start";
 
 import { chaptersMock } from "#/mocks/comics";
 
@@ -15,10 +14,13 @@ export const Route = createFileRoute("/api/chapters/$chapterId")({
         );
 
         if (!chapter) {
-          return json({ message: "Chapter not found" }, { status: 404 });
+          return Response.json(
+            { message: "Chapter not found" },
+            { status: 404 },
+          );
         }
 
-        return json(chapter);
+        return Response.json(chapter);
       },
     },
   },

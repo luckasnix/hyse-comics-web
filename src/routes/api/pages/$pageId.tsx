@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { json } from "@tanstack/react-start";
 
 import { pagesMock } from "#/mocks/comics";
 
@@ -13,10 +12,10 @@ export const Route = createFileRoute("/api/pages/$pageId")({
         const page = pagesMock.find((currentPage) => currentPage.id === pageId);
 
         if (!page) {
-          return json({ message: "Page not found" }, { status: 404 });
+          return Response.json({ message: "Page not found" }, { status: 404 });
         }
 
-        return json(page);
+        return Response.json(page);
       },
     },
   },

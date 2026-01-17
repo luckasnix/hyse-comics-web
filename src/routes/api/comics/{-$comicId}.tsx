@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { json } from "@tanstack/react-start";
 
 import { comicsMock } from "#/mocks/comics";
 
@@ -11,7 +10,7 @@ export const Route = createFileRoute("/api/comics/{-$comicId}")({
         const { comicId } = params;
 
         if (!comicId) {
-          return json(comicsMock);
+          return Response.json(comicsMock);
         }
 
         const comic = comicsMock.find(
@@ -19,10 +18,10 @@ export const Route = createFileRoute("/api/comics/{-$comicId}")({
         );
 
         if (!comic) {
-          return json({ message: "Comic not found" }, { status: 404 });
+          return Response.json({ message: "Comic not found" }, { status: 404 });
         }
 
-        return json(comic);
+        return Response.json(comic);
       },
     },
   },

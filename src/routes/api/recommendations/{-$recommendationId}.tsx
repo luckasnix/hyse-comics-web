@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { json } from "@tanstack/react-start";
 
 import { chaptersMock, comicsMock } from "#/mocks/comics";
 import type { ChapterWithComic, Recommendation } from "#/types/comics";
@@ -68,16 +67,16 @@ export const Route = createFileRoute(
           );
 
           if (!recommendation) {
-            return json(
+            return Response.json(
               { message: "Recommendation not found" },
               { status: 404 },
             );
           }
 
-          return json(recommendation);
+          return Response.json(recommendation);
         }
 
-        return json(recommendations);
+        return Response.json(recommendations);
       },
     },
   },

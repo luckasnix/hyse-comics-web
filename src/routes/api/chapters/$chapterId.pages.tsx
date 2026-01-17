@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { json } from "@tanstack/react-start";
 
 import { pagesMock } from "#/mocks/comics";
 
@@ -14,7 +13,7 @@ export const Route = createFileRoute("/api/chapters/$chapterId/pages")({
           (currentPage) => currentPage.chapterId === chapterId,
         );
 
-        return json(pages);
+        return Response.json(pages);
       },
     },
   },
