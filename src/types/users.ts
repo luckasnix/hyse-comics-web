@@ -1,7 +1,12 @@
 export type SupportedLanguage = "en-US" | "pt-BR";
 
 export type UserProfile = {
-  language: SupportedLanguage;
+  id: string;
+  username: string;
+  displayName: string | null;
+  avatarUrl: string | null;
+  coverUrl: string | null;
+  preferredLanguage: SupportedLanguage;
 };
 
 export type ReadingAxis = "horizontal" | "vertical";

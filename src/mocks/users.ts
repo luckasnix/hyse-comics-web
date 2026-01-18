@@ -1,10 +1,19 @@
 import type { User } from "#/types/users";
 
-export const userMock: User = {
-  profile: {
-    language: "pt-BR",
+export const usersMock: Array<User> = [
+  {
+    profile: {
+      id: "xhMmYL0qjhVK",
+      username: "luckasnix",
+      displayName: "Kasnix",
+      avatarUrl:
+        "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/users/luckasnix/av.webp",
+      coverUrl:
+        "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/users/luckasnix/co.webp",
+      preferredLanguage: "en-US",
+    },
+    preferences: {
+      readingAxis: "vertical",
+    },
   },
-  preferences: {
-    readingAxis: "vertical",
-  },
-};
+];

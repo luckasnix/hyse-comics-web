@@ -4,7 +4,7 @@ import { type ReactNode, Suspense } from "react";
 
 import { UiProvider } from "#/contexts/ui-context";
 import { UserProvider } from "#/contexts/user-context";
-import { userMock } from "#/mocks/users";
+import { usersMock } from "#/mocks/users";
 import { FallbackPage } from "#/pages/fallback-page";
 import { NotFoundPage } from "#/pages/not-found-page";
 
@@ -16,7 +16,7 @@ const RootDocument = ({ children }: { children: ReactNode }) => (
     </head>
     <body>
       <UiProvider>
-        <UserProvider user={userMock}>
+        <UserProvider user={usersMock[0]}>
           <Suspense fallback={<FallbackPage />}>{children}</Suspense>
         </UserProvider>
       </UiProvider>
