@@ -14,6 +14,7 @@ import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComicsComicIdRouteImport } from './routes/comics/$comicId'
 import { Route as ChaptersChapterIdRouteImport } from './routes/chapters/$chapterId'
+import { Route as ApiUsersUserIdRouteImport } from './routes/api/users/$userId'
 import { Route as ApiRecommendationsChar123RecommendationIdChar125RouteImport } from './routes/api/recommendations/{-$recommendationId}'
 import { Route as ApiPagesPageIdRouteImport } from './routes/api/pages/$pageId'
 import { Route as ApiComicsChar123ComicIdChar125RouteImport } from './routes/api/comics/{-$comicId}'
@@ -44,6 +45,11 @@ const ComicsComicIdRoute = ComicsComicIdRouteImport.update({
 const ChaptersChapterIdRoute = ChaptersChapterIdRouteImport.update({
   id: '/chapters/$chapterId',
   path: '/chapters/$chapterId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiUsersUserIdRoute = ApiUsersUserIdRouteImport.update({
+  id: '/api/users/$userId',
+  path: '/api/users/$userId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiRecommendationsChar123RecommendationIdChar125Route =
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
   '/api/pages/$pageId': typeof ApiPagesPageIdRoute
   '/api/recommendations/{-$recommendationId}': typeof ApiRecommendationsChar123RecommendationIdChar125Route
+  '/api/users/$userId': typeof ApiUsersUserIdRoute
   '/api/chapters/$chapterId/pages': typeof ApiChaptersChapterIdPagesRoute
   '/api/comics/$comicId/chapters': typeof ApiComicsComicIdChaptersRoute
 }
@@ -104,6 +111,7 @@ export interface FileRoutesByTo {
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
   '/api/pages/$pageId': typeof ApiPagesPageIdRoute
   '/api/recommendations/{-$recommendationId}': typeof ApiRecommendationsChar123RecommendationIdChar125Route
+  '/api/users/$userId': typeof ApiUsersUserIdRoute
   '/api/chapters/$chapterId/pages': typeof ApiChaptersChapterIdPagesRoute
   '/api/comics/$comicId/chapters': typeof ApiComicsComicIdChaptersRoute
 }
@@ -118,6 +126,7 @@ export interface FileRoutesById {
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
   '/api/pages/$pageId': typeof ApiPagesPageIdRoute
   '/api/recommendations/{-$recommendationId}': typeof ApiRecommendationsChar123RecommendationIdChar125Route
+  '/api/users/$userId': typeof ApiUsersUserIdRoute
   '/api/chapters/$chapterId/pages': typeof ApiChaptersChapterIdPagesRoute
   '/api/comics/$comicId/chapters': typeof ApiComicsComicIdChaptersRoute
 }
@@ -133,6 +142,7 @@ export interface FileRouteTypes {
     | '/api/comics/{-$comicId}'
     | '/api/pages/$pageId'
     | '/api/recommendations/{-$recommendationId}'
+    | '/api/users/$userId'
     | '/api/chapters/$chapterId/pages'
     | '/api/comics/$comicId/chapters'
   fileRoutesByTo: FileRoutesByTo
@@ -146,6 +156,7 @@ export interface FileRouteTypes {
     | '/api/comics/{-$comicId}'
     | '/api/pages/$pageId'
     | '/api/recommendations/{-$recommendationId}'
+    | '/api/users/$userId'
     | '/api/chapters/$chapterId/pages'
     | '/api/comics/$comicId/chapters'
   id:
@@ -159,6 +170,7 @@ export interface FileRouteTypes {
     | '/api/comics/{-$comicId}'
     | '/api/pages/$pageId'
     | '/api/recommendations/{-$recommendationId}'
+    | '/api/users/$userId'
     | '/api/chapters/$chapterId/pages'
     | '/api/comics/$comicId/chapters'
   fileRoutesById: FileRoutesById
@@ -173,6 +185,7 @@ export interface RootRouteChildren {
   ApiComicsChar123ComicIdChar125Route: typeof ApiComicsChar123ComicIdChar125Route
   ApiPagesPageIdRoute: typeof ApiPagesPageIdRoute
   ApiRecommendationsChar123RecommendationIdChar125Route: typeof ApiRecommendationsChar123RecommendationIdChar125Route
+  ApiUsersUserIdRoute: typeof ApiUsersUserIdRoute
   ApiComicsComicIdChaptersRoute: typeof ApiComicsComicIdChaptersRoute
 }
 
@@ -211,6 +224,13 @@ declare module '@tanstack/react-router' {
       path: '/chapters/$chapterId'
       fullPath: '/chapters/$chapterId'
       preLoaderRoute: typeof ChaptersChapterIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/users/$userId': {
+      id: '/api/users/$userId'
+      path: '/api/users/$userId'
+      fullPath: '/api/users/$userId'
+      preLoaderRoute: typeof ApiUsersUserIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/recommendations/{-$recommendationId}': {
@@ -280,6 +300,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPagesPageIdRoute: ApiPagesPageIdRoute,
   ApiRecommendationsChar123RecommendationIdChar125Route:
     ApiRecommendationsChar123RecommendationIdChar125Route,
+  ApiUsersUserIdRoute: ApiUsersUserIdRoute,
   ApiComicsComicIdChaptersRoute: ApiComicsComicIdChaptersRoute,
 }
 export const routeTree = rootRouteImport
