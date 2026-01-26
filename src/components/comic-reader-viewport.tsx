@@ -9,7 +9,7 @@ import type { CSSProperties } from "react";
 
 import { comicReaderToolbarHeight } from "#/constants/comics";
 import { useComicContext } from "#/contexts/comic-context";
-import { useUserContext } from "#/contexts/user-context";
+import { useUser } from "#/contexts/user-context";
 import type { ComicDirection, PageBackgroundTexture } from "#/types/comics";
 import type { ReadingAxis } from "#/types/users";
 
@@ -71,7 +71,7 @@ export type ComicReaderViewportProps = Readonly<{
 export const ComicReaderViewport = ({
   carouselRef,
 }: ComicReaderViewportProps) => {
-  const { user } = useUserContext();
+  const { user } = useUser();
 
   const { comic, pages } = useComicContext();
 

@@ -10,14 +10,14 @@ import { ComicReaderViewport } from "#/components/comic-reader-viewport";
 import { carouselDirectionFrom } from "#/constants/comics";
 import { carouselAxisFrom } from "#/constants/users";
 import { useComicContext } from "#/contexts/comic-context";
-import { useUserContext } from "#/contexts/user-context";
+import { useUser } from "#/contexts/user-context";
 
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",
 };
 
 export const ComicReaderSection = () => {
-  const { user } = useUserContext();
+  const { user } = useUser();
 
   const { comic } = useComicContext();
 
