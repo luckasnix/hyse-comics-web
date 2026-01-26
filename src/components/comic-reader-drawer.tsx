@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { IconX } from "@tabler/icons-react";
 import { Link, useNavigate } from "@tanstack/react-router";
 
-import { useComicContext } from "#/contexts/comic-context";
+import { useComic } from "#/contexts/comic-context";
 import { getClampedTextStyle, linkResetStyle } from "#/styles/common";
 
 import { ChapterList } from "./chapter-list";
@@ -41,7 +41,7 @@ export const ComicReaderDrawer = ({
   isOpen,
   onClose,
 }: ComicReaderDrawerProps) => {
-  const { comic, chapters, currentChapterId } = useComicContext();
+  const { comic, chapters, currentChapterId } = useComic();
 
   const navigate = useNavigate();
 

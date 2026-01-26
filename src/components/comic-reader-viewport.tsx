@@ -8,7 +8,7 @@ import type { EmblaViewportRefType } from "embla-carousel-react";
 import type { CSSProperties } from "react";
 
 import { comicReaderToolbarHeight } from "#/constants/comics";
-import { useComicContext } from "#/contexts/comic-context";
+import { useComic } from "#/contexts/comic-context";
 import { useUser } from "#/contexts/user-context";
 import type { ComicDirection, PageBackgroundTexture } from "#/types/comics";
 import type { ReadingAxis } from "#/types/users";
@@ -73,7 +73,7 @@ export const ComicReaderViewport = ({
 }: ComicReaderViewportProps) => {
   const { user } = useUser();
 
-  const { comic, pages } = useComicContext();
+  const { comic, pages } = useComic();
 
   return (
     <Box ref={carouselRef} sx={containerStyle}>

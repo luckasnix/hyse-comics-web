@@ -43,13 +43,11 @@ export const ComicProvider = ({
   );
 };
 
-export const useComicContext = () => {
+export const useComic = () => {
   const context = useContext(ComicContext);
 
   if (!context) {
-    throw new Error(
-      "The hook 'useComicContext' must be used inside 'ComicProvider'.",
-    );
+    throw new Error("The hook 'useComic' must be used inside 'ComicProvider'.");
   }
 
   return context;

@@ -9,7 +9,7 @@ import { ComicReaderToolbar } from "#/components/comic-reader-toolbar";
 import { ComicReaderViewport } from "#/components/comic-reader-viewport";
 import { carouselDirectionFrom } from "#/constants/comics";
 import { carouselAxisFrom } from "#/constants/users";
-import { useComicContext } from "#/contexts/comic-context";
+import { useComic } from "#/contexts/comic-context";
 import { useUser } from "#/contexts/user-context";
 
 const containerStyle: SxProps<Theme> = {
@@ -19,7 +19,7 @@ const containerStyle: SxProps<Theme> = {
 export const ComicReaderSection = () => {
   const { user } = useUser();
 
-  const { comic } = useComicContext();
+  const { comic } = useComic();
 
   const containerRef = useRef<HTMLElement>(null);
 

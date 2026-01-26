@@ -22,7 +22,7 @@ import {
   carouselDirectionFrom,
   comicReaderToolbarHeight,
 } from "#/constants/comics";
-import { useComicContext } from "#/contexts/comic-context";
+import { useComic } from "#/contexts/comic-context";
 import { useComicReaderToolbar } from "#/hooks/use-comic-reader-toolbar";
 
 const containerStyle: SxProps<Theme> = {
@@ -77,7 +77,7 @@ export const ComicReaderToolbar = ({
   openDrawer,
   toggleDrawer,
 }: ComicReaderToolbarProps) => {
-  const { comic } = useComicContext();
+  const { comic } = useComic();
 
   const { buttons, currentSlideNumber, slidesLength } = useComicReaderToolbar(
     carouselApi,
