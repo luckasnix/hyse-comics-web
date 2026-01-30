@@ -1,4 +1,5 @@
 import fontsourceVariableNotoSansCss from "@fontsource-variable/noto-sans?url";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { type ReactNode, Suspense } from "react";
 
@@ -8,6 +9,8 @@ import { usersMock } from "#/mocks/users";
 import { FallbackPage } from "#/pages/fallback-page";
 import { NotFoundPage } from "#/pages/not-found-page";
 
+const queryClient = new QueryClient();
+
 const RootDocument = ({ children }: { children: ReactNode }) => (
   // TODO: Add internationalization with American English and Brazilian Portuguese
   <html lang="en-US">
@@ -15,11 +18,13 @@ const RootDocument = ({ children }: { children: ReactNode }) => (
       <HeadContent />
     </head>
     <body>
-      <UiProvider>
-        <UserProvider user={usersMock[0]}>
-          <Suspense fallback={<FallbackPage />}>{children}</Suspense>
-        </UserProvider>
-      </UiProvider>
+      <QueryClientProvider client={queryClient}>
+        <UiProvider>
+          <UserProvider user={usersMock[0]}>
+            <Suspense fallback={<FallbackPage />}>{children}</Suspense>
+          </UserProvider>
+        </UiProvider>
+      </QueryClientProvider>
       <Scripts />
     </body>
   </html>
