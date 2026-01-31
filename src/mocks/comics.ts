@@ -448,11 +448,16 @@ export const creditsMock: Array<Credit> = [
   {
     chapterId: "vNH8ZOb8",
     userId: "xhMmYL0qjhVK",
-    role: "writer",
+    role: "comics:writer",
+  },
+  {
+    chapterId: "KoEb6BNw",
+    userId: "xhMmYL0qjhVK",
+    role: "comics:letterer",
   },
   {
     chapterId: "ocxHyVie",
     userId: "xhMmYL0qjhVK",
-    role: "writer",
+    role: "comics:editor",
   },
 ];

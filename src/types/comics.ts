@@ -1,4 +1,4 @@
-import type { UserProfile } from "./users";
+import type { UserProfile, UserRoles } from "./users";
 
 // TODO: This type should come from the Embla Carousel
 export type AxisOptionType = "x" | "y";
@@ -78,12 +78,12 @@ export type ChapterWithComic = Chapter & {
 export type Credit = {
   chapterId: string;
   userId: string;
-  role: string;
+  role: UserRoles;
 };
 
 export type CreditWithUser = {
   user: UserProfile;
-  role: string;
+  role: UserRoles;
 };
 
 export type Recommendation = {

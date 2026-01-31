@@ -11,6 +11,12 @@ export const usersMock: Array<User> = [
       coverUrl:
         "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/users/luckasnix/co.webp",
       preferredLanguage: "en-US",
+      roles: [
+        "comics:owner",
+        "comics:writer",
+        "comics:letterer",
+        "comics:editor",
+      ],
     },
     preferences: {
       readingAxis: "vertical",
