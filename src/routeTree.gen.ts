@@ -21,6 +21,7 @@ import { Route as ApiComicsChar123ComicIdChar125RouteImport } from './routes/api
 import { Route as ApiChaptersChapterIdRouteImport } from './routes/api/chapters/$chapterId'
 import { Route as ApiComicsComicIdChaptersRouteImport } from './routes/api/comics/$comicId.chapters'
 import { Route as ApiChaptersChapterIdPagesRouteImport } from './routes/api/chapters/$chapterId.pages'
+import { Route as ApiChaptersChapterIdCreditsRouteImport } from './routes/api/chapters/$chapterId.credits'
 
 const SignUpRoute = SignUpRouteImport.update({
   id: '/sign-up',
@@ -86,6 +87,12 @@ const ApiChaptersChapterIdPagesRoute =
     path: '/pages',
     getParentRoute: () => ApiChaptersChapterIdRoute,
   } as any)
+const ApiChaptersChapterIdCreditsRoute =
+  ApiChaptersChapterIdCreditsRouteImport.update({
+    id: '/credits',
+    path: '/credits',
+    getParentRoute: () => ApiChaptersChapterIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/api/pages/$pageId': typeof ApiPagesPageIdRoute
   '/api/recommendations/{-$recommendationId}': typeof ApiRecommendationsChar123RecommendationIdChar125Route
   '/api/users/$userId': typeof ApiUsersUserIdRoute
+  '/api/chapters/$chapterId/credits': typeof ApiChaptersChapterIdCreditsRoute
   '/api/chapters/$chapterId/pages': typeof ApiChaptersChapterIdPagesRoute
   '/api/comics/$comicId/chapters': typeof ApiComicsComicIdChaptersRoute
 }
@@ -112,6 +120,7 @@ export interface FileRoutesByTo {
   '/api/pages/$pageId': typeof ApiPagesPageIdRoute
   '/api/recommendations/{-$recommendationId}': typeof ApiRecommendationsChar123RecommendationIdChar125Route
   '/api/users/$userId': typeof ApiUsersUserIdRoute
+  '/api/chapters/$chapterId/credits': typeof ApiChaptersChapterIdCreditsRoute
   '/api/chapters/$chapterId/pages': typeof ApiChaptersChapterIdPagesRoute
   '/api/comics/$comicId/chapters': typeof ApiComicsComicIdChaptersRoute
 }
@@ -127,6 +136,7 @@ export interface FileRoutesById {
   '/api/pages/$pageId': typeof ApiPagesPageIdRoute
   '/api/recommendations/{-$recommendationId}': typeof ApiRecommendationsChar123RecommendationIdChar125Route
   '/api/users/$userId': typeof ApiUsersUserIdRoute
+  '/api/chapters/$chapterId/credits': typeof ApiChaptersChapterIdCreditsRoute
   '/api/chapters/$chapterId/pages': typeof ApiChaptersChapterIdPagesRoute
   '/api/comics/$comicId/chapters': typeof ApiComicsComicIdChaptersRoute
 }
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/api/pages/$pageId'
     | '/api/recommendations/{-$recommendationId}'
     | '/api/users/$userId'
+    | '/api/chapters/$chapterId/credits'
     | '/api/chapters/$chapterId/pages'
     | '/api/comics/$comicId/chapters'
   fileRoutesByTo: FileRoutesByTo
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/api/pages/$pageId'
     | '/api/recommendations/{-$recommendationId}'
     | '/api/users/$userId'
+    | '/api/chapters/$chapterId/credits'
     | '/api/chapters/$chapterId/pages'
     | '/api/comics/$comicId/chapters'
   id:
@@ -171,6 +183,7 @@ export interface FileRouteTypes {
     | '/api/pages/$pageId'
     | '/api/recommendations/{-$recommendationId}'
     | '/api/users/$userId'
+    | '/api/chapters/$chapterId/credits'
     | '/api/chapters/$chapterId/pages'
     | '/api/comics/$comicId/chapters'
   fileRoutesById: FileRoutesById
@@ -275,14 +288,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChaptersChapterIdPagesRouteImport
       parentRoute: typeof ApiChaptersChapterIdRoute
     }
+    '/api/chapters/$chapterId/credits': {
+      id: '/api/chapters/$chapterId/credits'
+      path: '/credits'
+      fullPath: '/api/chapters/$chapterId/credits'
+      preLoaderRoute: typeof ApiChaptersChapterIdCreditsRouteImport
+      parentRoute: typeof ApiChaptersChapterIdRoute
+    }
   }
 }
 
 interface ApiChaptersChapterIdRouteChildren {
+  ApiChaptersChapterIdCreditsRoute: typeof ApiChaptersChapterIdCreditsRoute
   ApiChaptersChapterIdPagesRoute: typeof ApiChaptersChapterIdPagesRoute
 }
 
 const ApiChaptersChapterIdRouteChildren: ApiChaptersChapterIdRouteChildren = {
+  ApiChaptersChapterIdCreditsRoute: ApiChaptersChapterIdCreditsRoute,
   ApiChaptersChapterIdPagesRoute: ApiChaptersChapterIdPagesRoute,
 }
 

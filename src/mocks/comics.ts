@@ -1,4 +1,4 @@
-import type { Chapter, Comic, Page } from "#/types/comics";
+import type { Chapter, Comic, Credit, Page } from "#/types/comics";
 
 export const comicsMock: Array<Comic> = [
   {
@@ -441,5 +441,18 @@ export const pagesMock: Array<Page> = [
     imageWidth: 1080,
     imageHeight: 720,
     backgroundTexture: "black-paper",
+  },
+];
+
+export const creditsMock: Array<Credit> = [
+  {
+    chapterId: "vNH8ZOb8",
+    userId: "xhMmYL0qjhVK",
+    role: "writer",
+  },
+  {
+    chapterId: "ocxHyVie",
+    userId: "xhMmYL0qjhVK",
+    role: "writer",
   },
 ];
