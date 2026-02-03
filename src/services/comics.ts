@@ -1,4 +1,10 @@
-import type { Chapter, Comic, Page, Recommendation } from "#/types/comics";
+import type {
+  Chapter,
+  Comic,
+  CreditWithUser,
+  Page,
+  Recommendation,
+} from "#/types/comics";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 
@@ -46,6 +52,20 @@ export const getChapter = async (chapterId: string): Promise<Chapter> => {
     );
   }
   const data = (await response.json()) as Chapter;
+
+  return data;
+};
+
+export const getChapterCredits = async (
+  chapterId: string,
+): Promise<Array<CreditWithUser>> => {
+  const response = await fetch(`${BASE_URL}/api/chapters/${chapterId}/credits`);
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch credits for chapter "${chapterId}": ${response.status} ${response.statusText}`,
+    );
+  }
+  const data = (await response.json()) as Array<CreditWithUser>;
 
   return data;
 };
