@@ -5,7 +5,7 @@ import { type ReactNode, Suspense } from "react";
 
 import { UiProvider } from "#/contexts/ui-context";
 import { UserProvider } from "#/contexts/user-context";
-import { usersMock } from "#/mocks/users";
+import { signedInUserMock } from "#/mocks/users";
 import { FallbackPage } from "#/pages/fallback-page";
 import { NotFoundPage } from "#/pages/not-found-page";
 
@@ -20,7 +20,7 @@ const RootDocument = ({ children }: { children: ReactNode }) => (
     <body>
       <QueryClientProvider client={queryClient}>
         <UiProvider>
-          <UserProvider user={usersMock[0]}>
+          <UserProvider user={signedInUserMock}>
             <Suspense fallback={<FallbackPage />}>{children}</Suspense>
           </UserProvider>
         </UiProvider>
