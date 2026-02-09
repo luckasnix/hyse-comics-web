@@ -5,12 +5,16 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconX } from "@tabler/icons-react";
+import { useQuery } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 
 import { useComic } from "#/contexts/comic-context";
+import { getChapterCredits } from "#/services/comics";
 import { getClampedTextStyle, linkResetStyle } from "#/styles/common";
 
 import { ChapterList } from "./chapter-list";
+import { CreditList } from "./credit-list";
+import { TabGroup } from "./tab-group";
 
 const containerStyle: SxProps<Theme> = {
   width: 420,
@@ -45,6 +49,12 @@ export const ComicReaderDrawer = ({
 
   const navigate = useNavigate();
 
+  const { data: chapterCredits = [] } = useQuery({
+    queryKey: ["chapter-credits", currentChapterId],
+    queryFn: () => getChapterCredits(currentChapterId ?? ""),
+    enabled: !!currentChapterId,
+  });
+
   const navigateToChapter = (chapterId: string) => {
     navigate({
       to: "/chapters/$chapterId",
@@ -74,11 +84,25 @@ export const ComicReaderDrawer = ({
             </Typography>
           </Box>
         </Link>
-        <ChapterList
-          chapters={chapters}
-          selectedChapterId={currentChapterId}
-          onChapterClick={navigateToChapter}
-        />
+        <TabGroup initialValue={0}>
+          <TabGroup.List
+            items={[
+              { value: 0, label: "Chapters" },
+              { value: 1, label: "Créditos" },
+            ]}
+          />
+          <TabGroup.Panel value={0}>
+            <ChapterList
+              chapters={chapters}
+              selectedChapterId={currentChapterId}
+              onChapterClick={navigateToChapter}
+            />
+          </TabGroup.Panel>
+          <TabGroup.Panel value={1}>
+            {/* TODO: Create a users page and redirect to it when clicking on the credit */}
+            <CreditList credits={chapterCredits} onCreditClick={() => {}} />
+          </TabGroup.Panel>
+        </TabGroup>
       </Stack>
     </Drawer>
   );

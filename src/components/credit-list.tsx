@@ -8,6 +8,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconCircleXFilled } from "@tabler/icons-react";
 
+import { roleLabelsFrom } from "#/constants/users";
 import type { CreditWithUser } from "#/types/comics";
 
 const avatarStyle: SxProps<Theme> = {
@@ -63,7 +64,7 @@ export const CreditList = ({ credits, onCreditClick }: CreditListProps) => {
           </ListItemAvatar>
           <ListItemText
             primary={`@${credit.user.username}`}
-            secondary={credit.role}
+            secondary={roleLabelsFrom[credit.role]}
             slotProps={{
               primary: {
                 sx: creditTextStyle,
