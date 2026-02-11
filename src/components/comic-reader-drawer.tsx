@@ -62,6 +62,13 @@ export const ComicReaderDrawer = ({
     });
   };
 
+  const navigateToUser = (userId: string) => {
+    navigate({
+      to: "/users/$userId",
+      params: { userId: userId },
+    });
+  };
+
   return (
     <Drawer open={isOpen} anchor="right" onClose={onClose}>
       <Stack spacing={1} sx={containerStyle}>
@@ -99,8 +106,10 @@ export const ComicReaderDrawer = ({
             />
           </TabGroup.Panel>
           <TabGroup.Panel value={1}>
-            {/* TODO: Create a users page and redirect to it when clicking on the credit */}
-            <CreditList credits={chapterCredits} onCreditClick={() => {}} />
+            <CreditList
+              credits={chapterCredits}
+              onCreditClick={navigateToUser}
+            />
           </TabGroup.Panel>
         </TabGroup>
       </Stack>
