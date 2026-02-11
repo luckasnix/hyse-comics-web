@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as UsersUserIdRouteImport } from './routes/users/$userId'
 import { Route as ComicsComicIdRouteImport } from './routes/comics/$comicId'
 import { Route as ChaptersChapterIdRouteImport } from './routes/chapters/$chapterId'
 import { Route as ApiUsersUserIdRouteImport } from './routes/api/users/$userId'
@@ -36,6 +37,11 @@ const SignInRoute = SignInRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsersUserIdRoute = UsersUserIdRouteImport.update({
+  id: '/users/$userId',
+  path: '/users/$userId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComicsComicIdRoute = ComicsComicIdRouteImport.update({
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/sign-up': typeof SignUpRoute
   '/chapters/$chapterId': typeof ChaptersChapterIdRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
+  '/users/$userId': typeof UsersUserIdRoute
   '/api/chapters/$chapterId': typeof ApiChaptersChapterIdRouteWithChildren
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
   '/api/pages/$pageId': typeof ApiPagesPageIdRoute
@@ -115,6 +122,7 @@ export interface FileRoutesByTo {
   '/sign-up': typeof SignUpRoute
   '/chapters/$chapterId': typeof ChaptersChapterIdRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
+  '/users/$userId': typeof UsersUserIdRoute
   '/api/chapters/$chapterId': typeof ApiChaptersChapterIdRouteWithChildren
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
   '/api/pages/$pageId': typeof ApiPagesPageIdRoute
@@ -131,6 +139,7 @@ export interface FileRoutesById {
   '/sign-up': typeof SignUpRoute
   '/chapters/$chapterId': typeof ChaptersChapterIdRoute
   '/comics/$comicId': typeof ComicsComicIdRoute
+  '/users/$userId': typeof UsersUserIdRoute
   '/api/chapters/$chapterId': typeof ApiChaptersChapterIdRouteWithChildren
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
   '/api/pages/$pageId': typeof ApiPagesPageIdRoute
@@ -148,6 +157,7 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/chapters/$chapterId'
     | '/comics/$comicId'
+    | '/users/$userId'
     | '/api/chapters/$chapterId'
     | '/api/comics/{-$comicId}'
     | '/api/pages/$pageId'
@@ -163,6 +173,7 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/chapters/$chapterId'
     | '/comics/$comicId'
+    | '/users/$userId'
     | '/api/chapters/$chapterId'
     | '/api/comics/{-$comicId}'
     | '/api/pages/$pageId'
@@ -178,6 +189,7 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/chapters/$chapterId'
     | '/comics/$comicId'
+    | '/users/$userId'
     | '/api/chapters/$chapterId'
     | '/api/comics/{-$comicId}'
     | '/api/pages/$pageId'
@@ -194,6 +206,7 @@ export interface RootRouteChildren {
   SignUpRoute: typeof SignUpRoute
   ChaptersChapterIdRoute: typeof ChaptersChapterIdRoute
   ComicsComicIdRoute: typeof ComicsComicIdRoute
+  UsersUserIdRoute: typeof UsersUserIdRoute
   ApiChaptersChapterIdRoute: typeof ApiChaptersChapterIdRouteWithChildren
   ApiComicsChar123ComicIdChar125Route: typeof ApiComicsChar123ComicIdChar125Route
   ApiPagesPageIdRoute: typeof ApiPagesPageIdRoute
@@ -223,6 +236,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/users/$userId': {
+      id: '/users/$userId'
+      path: '/users/$userId'
+      fullPath: '/users/$userId'
+      preLoaderRoute: typeof UsersUserIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/comics/$comicId': {
@@ -317,6 +337,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignUpRoute: SignUpRoute,
   ChaptersChapterIdRoute: ChaptersChapterIdRoute,
   ComicsComicIdRoute: ComicsComicIdRoute,
+  UsersUserIdRoute: UsersUserIdRoute,
   ApiChaptersChapterIdRoute: ApiChaptersChapterIdRouteWithChildren,
   ApiComicsChar123ComicIdChar125Route: ApiComicsChar123ComicIdChar125Route,
   ApiPagesPageIdRoute: ApiPagesPageIdRoute,
