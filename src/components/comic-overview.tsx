@@ -11,7 +11,7 @@ const containerStyle: SxProps<Theme> = {
 };
 
 const imageStyle: CSSProperties = {
-  width: "auto",
+  width: "100%",
   maxWidth: "852px",
   height: "365px",
   borderRadius: "4px",
