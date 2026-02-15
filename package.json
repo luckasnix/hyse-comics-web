@@ -26,6 +26,7 @@
     "@mui/material": "7.3.8",
     "@tabler/icons-react": "3.36.1",
     "@tanstack/react-form": "1.28.0",
+    "@tanstack/react-hotkeys": "0.1.0",
     "@tanstack/react-query": "5.90.21",
     "@tanstack/react-router": "1.159.5",
     "@tanstack/react-start": "1.159.5",

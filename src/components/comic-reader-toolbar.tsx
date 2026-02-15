@@ -14,8 +14,8 @@ import {
   IconHomeFilled,
   IconLayoutSidebarLeftCollapseFilled,
 } from "@tabler/icons-react";
+import { useHotkey } from "@tanstack/react-hotkeys";
 import { Link } from "@tanstack/react-router";
-import { useEventListener } from "ahooks";
 import type { EmblaCarouselType } from "embla-carousel";
 
 import {
@@ -84,29 +84,17 @@ export const ComicReaderToolbar = ({
     carouselDirectionFrom[comic.direction],
   );
 
-  useEventListener("keydown", ({ key, shiftKey }) => {
-    if (shiftKey) {
-      if (key === "ArrowLeft") {
-        buttons.farLeft.onClick();
-      }
-      if (key === "ArrowRight") {
-        buttons.farRight.onClick();
-      }
-    } else {
-      if (key === "ArrowLeft") {
-        buttons.left.onClick();
-      }
-      if (key === "ArrowRight") {
-        buttons.right.onClick();
-      }
-      if (key === "f") {
-        toggleFullscreen();
-      }
-      if (key === "m") {
-        toggleDrawer();
-      }
-    }
-  });
+  useHotkey("Shift+ArrowLeft", buttons.farLeft.onClick);
+
+  useHotkey("ArrowLeft", buttons.left.onClick);
+
+  useHotkey("ArrowRight", buttons.right.onClick);
+
+  useHotkey("Shift+ArrowRight", buttons.farRight.onClick);
+
+  useHotkey("F", toggleFullscreen);
+
+  useHotkey("M", toggleDrawer, { enabled: !isFullscreen });
 
   return (
     <Grid container sx={containerStyle}>
