@@ -37,12 +37,20 @@ export type ComicGenre =
   | "war"
   | "western";
 
+export type ContentWarning =
+  | "ai-generated"
+  | "graphic-violence"
+  | "sexual-content"
+  | "strong-language"
+  | "substance-use";
+
 export type Comic = {
   id: string;
   structure: ComicStructure;
   orientation: ComicOrientation;
   direction: ComicDirection;
   genres: Array<ComicGenre>;
+  contentWarnings: Array<ContentWarning>;
   title: string;
   synopsis: string;
   thumbnailUrl: string;
