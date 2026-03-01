@@ -29,13 +29,6 @@ export const Route = createFileRoute("/api/chapters/$chapterId/credits")({
           })
           .filter((currentCredit) => currentCredit !== null);
 
-        if (!credits.length) {
-          return Response.json(
-            { message: "Credits not found" },
-            { status: 404 },
-          );
-        }
-
         return Response.json(credits);
       },
     },
