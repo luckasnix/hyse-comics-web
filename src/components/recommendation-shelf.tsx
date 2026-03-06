@@ -90,6 +90,7 @@ export const RecommendationShelf = ({
       <Box sx={carouselStyle}>
         <Activity mode={canNavigatePrev ? "visible" : "hidden"}>
           <IconButton
+            color="secondary"
             sx={prevButtonStyle}
             disabled={!canNavigatePrev}
             onClick={navigatePrev}
@@ -113,6 +114,7 @@ export const RecommendationShelf = ({
         </Box>
         <Activity mode={canNavigateNext ? "visible" : "hidden"}>
           <IconButton
+            color="secondary"
             sx={nextButtonStyle}
             disabled={!canNavigateNext}
             onClick={navigateNext}

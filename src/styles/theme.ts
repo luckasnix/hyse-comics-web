@@ -1,14 +1,25 @@
 import { createTheme } from "@mui/material/styles";
 
-// TODO: Complete the theme
 export const theme = createTheme({
   cssVariables: true,
   palette: {
     primary: {
-      main: "#00796b",
-      light: "#339388",
-      dark: "#00544a",
-      contrastText: "#ffffff",
+      main: "#157f1f",
+    },
+    secondary: {
+      main: "#1d263b",
+    },
+    success: {
+      main: "#157f1f",
+    },
+    info: {
+      main: "#33658a",
+    },
+    warning: {
+      main: "#f5cb5c",
+    },
+    error: {
+      main: "#a31621",
     },
   },
   typography: {
