@@ -5,12 +5,12 @@ import type {
   Page,
   Recommendation,
 } from "#/types/comics";
+import { getBaseUrl } from "#/utils/navigation";
 
-const BASE_URL =
-  import.meta.env.HYSE_COMICS_BASE_URL || "http://localhost:3001";
+const baseUrl = getBaseUrl();
 
 export const getComics = async (): Promise<Array<Comic>> => {
-  const response = await fetch(`${BASE_URL}/api/comics`);
+  const response = await fetch(`${baseUrl}/api/comics`);
   if (!response.ok) {
     throw new Error(
       `Failed to fetch comics list: ${response.status} ${response.statusText}`,
@@ -22,7 +22,7 @@ export const getComics = async (): Promise<Array<Comic>> => {
 };
 
 export const getComic = async (comicId: string): Promise<Comic> => {
-  const response = await fetch(`${BASE_URL}/api/comics/${comicId}`);
+  const response = await fetch(`${baseUrl}/api/comics/${comicId}`);
   if (!response.ok) {
     throw new Error(
       `Failed to fetch comic "${comicId}": ${response.status} ${response.statusText}`,
@@ -34,7 +34,7 @@ export const getComic = async (comicId: string): Promise<Comic> => {
 };
 
 export const getChapters = async (comicId: string): Promise<Array<Chapter>> => {
-  const response = await fetch(`${BASE_URL}/api/comics/${comicId}/chapters`);
+  const response = await fetch(`${baseUrl}/api/comics/${comicId}/chapters`);
   if (!response.ok) {
     throw new Error(
       `Failed to fetch chapters for comic "${comicId}": ${response.status} ${response.statusText}`,
@@ -46,7 +46,7 @@ export const getChapters = async (comicId: string): Promise<Array<Chapter>> => {
 };
 
 export const getChapter = async (chapterId: string): Promise<Chapter> => {
-  const response = await fetch(`${BASE_URL}/api/chapters/${chapterId}`);
+  const response = await fetch(`${baseUrl}/api/chapters/${chapterId}`);
   if (!response.ok) {
     throw new Error(
       `Failed to fetch chapter "${chapterId}": ${response.status} ${response.statusText}`,
@@ -60,7 +60,7 @@ export const getChapter = async (chapterId: string): Promise<Chapter> => {
 export const getChapterCredits = async (
   chapterId: string,
 ): Promise<Array<CreditWithUser>> => {
-  const response = await fetch(`${BASE_URL}/api/chapters/${chapterId}/credits`);
+  const response = await fetch(`${baseUrl}/api/chapters/${chapterId}/credits`);
   if (!response.ok) {
     throw new Error(
       `Failed to fetch credits for chapter "${chapterId}": ${response.status} ${response.statusText}`,
@@ -72,7 +72,7 @@ export const getChapterCredits = async (
 };
 
 export const getPages = async (chapterId: string): Promise<Array<Page>> => {
-  const response = await fetch(`${BASE_URL}/api/chapters/${chapterId}/pages`);
+  const response = await fetch(`${baseUrl}/api/chapters/${chapterId}/pages`);
   if (!response.ok) {
     throw new Error(
       `Failed to fetch pages for chapter "${chapterId}": ${response.status} ${response.statusText}`,
@@ -84,7 +84,7 @@ export const getPages = async (chapterId: string): Promise<Array<Page>> => {
 };
 
 export const getPage = async (pageId: string): Promise<Page> => {
-  const response = await fetch(`${BASE_URL}/api/pages/${pageId}`);
+  const response = await fetch(`${baseUrl}/api/pages/${pageId}`);
   if (!response.ok) {
     throw new Error(
       `Failed to fetch page "${pageId}": ${response.status} ${response.statusText}`,
@@ -96,7 +96,7 @@ export const getPage = async (pageId: string): Promise<Page> => {
 };
 
 export const getRecommendations = async (): Promise<Array<Recommendation>> => {
-  const response = await fetch(`${BASE_URL}/api/recommendations`);
+  const response = await fetch(`${baseUrl}/api/recommendations`);
   if (!response.ok) {
     throw new Error(
       `Failed to fetch comic recommendations: ${response.status} ${response.statusText}`,
@@ -111,7 +111,7 @@ export const getRecommendation = async (
   recommendationId: string,
 ): Promise<Recommendation> => {
   const response = await fetch(
-    `${BASE_URL}/api/recommendations/${recommendationId}`,
+    `${baseUrl}/api/recommendations/${recommendationId}`,
   );
   if (!response.ok) {
     throw new Error(

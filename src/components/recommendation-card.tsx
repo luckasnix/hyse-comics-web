@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 
 import { useUi } from "#/contexts/ui-context";
 import { getClampedTextStyle } from "#/styles/common";
+import { getBaseUrl } from "#/utils/navigation";
 
 const containerStyle: SxProps<Theme> = {
   minWidth: 320,
@@ -50,11 +51,11 @@ export const RecommendationCard = ({
 }: RecommendationCardProps) => {
   const { showToast } = useUi();
 
+  const baseUrl = getBaseUrl();
+
   const shareChapterLink = async () => {
-    const BASE_URL =
-      import.meta.env.HYSE_COMICS_BASE_URL || "http://localhost:3001";
     try {
-      await navigator.clipboard.writeText(`${BASE_URL}/chapters/${chapterId}`);
+      await navigator.clipboard.writeText(`${baseUrl}/chapters/${chapterId}`);
       showToast({
         severity: "success",
         message: "Link copied to clipboard.",
