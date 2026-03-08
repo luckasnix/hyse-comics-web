@@ -89,10 +89,10 @@ export const RecommendationCard = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={shareChapterLink}>
+        <Button size="small" color="secondary" onClick={shareChapterLink}>
           Share
         </Button>
-        <Button size="small" onClick={readComic}>
+        <Button size="small" color="secondary" onClick={readComic}>
           Read
         </Button>
       </CardActions>
