@@ -5,7 +5,7 @@ import viteTsConfigPaths from "vite-tsconfig-paths";
 
 const viteConfig = defineConfig({
   server: {
-    port: 3000,
+    port: 3001,
   },
   plugins: [
     viteTsConfigPaths({

@@ -6,7 +6,8 @@ import type {
   Recommendation,
 } from "#/types/comics";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
+const BASE_URL =
+  import.meta.env.HYSE_COMICS_BASE_URL || "http://localhost:3001";
 
 export const getComics = async (): Promise<Array<Comic>> => {
   const response = await fetch(`${BASE_URL}/api/comics`);

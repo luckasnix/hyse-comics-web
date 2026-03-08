@@ -51,12 +51,10 @@ export const RecommendationCard = ({
   const { showToast } = useUi();
 
   const shareChapterLink = async () => {
-    const baseUrl =
-      import.meta.env.MODE === "development"
-        ? "http://localhost:3000"
-        : "https://comics.hyse.app";
+    const BASE_URL =
+      import.meta.env.HYSE_COMICS_BASE_URL || "http://localhost:3001";
     try {
-      await navigator.clipboard.writeText(`${baseUrl}/chapters/${chapterId}`);
+      await navigator.clipboard.writeText(`${BASE_URL}/chapters/${chapterId}`);
       showToast({
         severity: "success",
         message: "Link copied to clipboard.",

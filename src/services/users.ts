@@ -1,6 +1,7 @@
 import type { User } from "#/types/users";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
+const BASE_URL =
+  import.meta.env.HYSE_COMICS_BASE_URL || "http://localhost:3001";
 
 export const getUser = async (userId: string): Promise<User> => {
   const response = await fetch(`${BASE_URL}/api/users/${userId}`);
