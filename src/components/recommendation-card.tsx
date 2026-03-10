@@ -91,7 +91,12 @@ export const RecommendationCard = ({
         <Button size="small" color="secondary" onClick={shareChapterLink}>
           Share
         </Button>
-        <Button size="small" color="secondary" onClick={readComic}>
+        <Button
+          variant="contained"
+          size="small"
+          color="secondary"
+          onClick={readComic}
+        >
           Read
         </Button>
       </CardActions>
