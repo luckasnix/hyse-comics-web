@@ -24,5 +24,7 @@ jobs:
         run: npm run type:check
       - name: Check format, lint and import sorting
         run: npm run check-ci
+      - name: Test
+        run: npm run test:coverage
       - name: Build
         run: npm run build

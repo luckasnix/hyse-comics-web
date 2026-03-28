@@ -19,6 +19,9 @@
     "check-all": "biome check",
     "write-all": "biome check --write",
     "check-ci": "biome ci",
+    "test": "vitest",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage",
     "prepare": "husky"
   },
   "dependencies": {
@@ -48,8 +51,10 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.1",
+    "@vitest/coverage-v8": "4.1.2",
     "husky": "9.1.7",
     "typescript": "5.9.3",
-    "vite": "8.0.2"
+    "vite": "8.0.2",
+    "vitest": "4.1.2"
   }
 }

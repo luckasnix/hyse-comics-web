@@ -1,0 +1,14 @@
+import { defineConfig } from "vitest/config";
+
+const vitestConfig = defineConfig({
+  test: {
+    watch: false,
+    restoreMocks: true,
+    passWithNoTests: true,
+    coverage: {
+      include: ["src/**/*.ts"],
+    },
+  },
+});
+
+export default vitestConfig;
