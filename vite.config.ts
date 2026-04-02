@@ -3,13 +3,13 @@ import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 const viteConfig = defineConfig({
-  server: {
-    port: 3001,
-  },
+  plugins: [tanstackStart(), viteReact()],
   resolve: {
     tsconfigPaths: true,
   },
-  plugins: [tanstackStart(), viteReact()],
+  server: {
+    port: 3001,
+  },
 });
 
 export default viteConfig;
