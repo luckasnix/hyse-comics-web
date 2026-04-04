@@ -1,15 +1,16 @@
-import { defineConfig } from "vitest/config";
 import viteReact from "@vitejs/plugin-react";
+import { defineConfig } from "vitest/config";
 
 const vitestConfig = defineConfig({
   plugins: [viteReact()],
   test: {
-    watch: false,
-    restoreMocks: true,
-    passWithNoTests: true,
     coverage: {
       include: ["src/**/*.ts"],
     },
+    passWithNoTests: true,
+    restoreMocks: true,
+    setupFiles: ["./vitest.setup.ts"],
+    watch: false,
   },
 });
 

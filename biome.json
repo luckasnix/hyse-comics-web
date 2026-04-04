@@ -15,7 +15,9 @@
       "biome.json",
       "commitlint.config.ts",
       "tsconfig.json",
-      "vite.config.ts"
+      "vite.config.ts",
+      "vitest.config.ts",
+      "vitest.setup.ts"
     ],
     "ignoreUnknown": false
   },
