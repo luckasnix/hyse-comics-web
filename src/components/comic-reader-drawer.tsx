@@ -13,7 +13,7 @@ import { getChapterCredits } from "#/services/comics";
 import { getClampedTextStyle, linkResetStyle } from "#/styles/common";
 
 import { ChapterList } from "./chapter-list/chapter-list";
-import { CreditList } from "./credit-list";
+import { CreditList } from "./credit-list/credit-list";
 import { TabGroup } from "./tab-group";
 
 const containerStyle: SxProps<Theme> = {

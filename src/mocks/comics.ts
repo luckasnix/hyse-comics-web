@@ -1,4 +1,12 @@
-import type { Chapter, Comic, Credit, Page } from "#/types/comics";
+import type {
+  Chapter,
+  Comic,
+  Credit,
+  CreditWithUser,
+  Page,
+} from "#/types/comics";
+
+import { usersMock } from "./users";
 
 export const comicsMock: Array<Comic> = [
   {
@@ -465,5 +473,16 @@ export const creditsMock: Array<Credit> = [
     chapterId: "LlAkuYOs5J",
     userId: "xhMmYL0qjhVK",
     role: "comics:editor",
+  },
+];
+
+export const creditsWithUserMock: Array<CreditWithUser> = [
+  {
+    user: usersMock[0].profile,
+    role: "comics:writer",
+  },
+  {
+    user: usersMock[1].profile,
+    role: "comics:penciller",
   },
 ];

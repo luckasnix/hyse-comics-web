@@ -57,7 +57,7 @@ describe("<ChapterList />", () => {
     expect(listItems[1]).toHaveClass("Mui-selected");
   });
 
-  it("calls onChapterClick with the chapter id when a chapter is clicked", async () => {
+  it("calls onChapterClick with the chapter ID when a chapter is clicked", async () => {
     const user = userEvent.setup();
 
     render(
@@ -71,5 +71,9 @@ describe("<ChapterList />", () => {
     await user.click(screen.getByText(chapters[0].title));
 
     expect(onChapterClickSpy).toHaveBeenCalledWith(chapters[0].id);
+
+    await user.click(screen.getByText(chapters[1].title));
+
+    expect(onChapterClickSpy).toHaveBeenCalledWith(chapters[1].id);
   });
 });
