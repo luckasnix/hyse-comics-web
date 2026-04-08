@@ -8,7 +8,7 @@ import { IconX } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 
-import { useComic } from "#/contexts/comic-context";
+import { useComic } from "#/contexts/comic/hook";
 import { getChapterCredits } from "#/services/comics";
 import { getClampedTextStyle, linkResetStyle } from "#/styles/common";
 

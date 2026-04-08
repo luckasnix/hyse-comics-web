@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
-import { useUi } from "#/contexts/ui-context";
+import { useUi } from "#/contexts/ui/hook";
 import { getClampedTextStyle } from "#/styles/common";
 import { getBaseUrl } from "#/utils/navigation";
 

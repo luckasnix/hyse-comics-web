@@ -8,8 +8,8 @@ import type { EmblaViewportRefType } from "embla-carousel-react";
 import type { CSSProperties } from "react";
 
 import { comicReaderToolbarHeight } from "#/constants/comics";
-import { useComic } from "#/contexts/comic-context";
-import { useUser } from "#/contexts/user-context";
+import { useComic } from "#/contexts/comic/hook";
+import { useUser } from "#/contexts/user/hook";
 import type { ComicDirection, PageBackgroundTexture } from "#/types/comics";
 import type { ReadingAxis } from "#/types/users";
 

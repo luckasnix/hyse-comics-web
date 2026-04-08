@@ -3,8 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { type ReactNode, Suspense } from "react";
 
-import { UiProvider } from "#/contexts/ui-context";
-import { UserProvider } from "#/contexts/user-context";
+import { UiProvider } from "#/contexts/ui/provider";
+import { UserProvider } from "#/contexts/user/provider";
 import { signedInUserMock } from "#/mocks/users";
 import { FallbackPage } from "#/pages/fallback-page";
 import { NotFoundPage } from "#/pages/not-found-page";

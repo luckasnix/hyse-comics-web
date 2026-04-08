@@ -22,7 +22,7 @@ import {
   carouselDirectionFrom,
   comicReaderToolbarHeight,
 } from "#/constants/comics";
-import { useComic } from "#/contexts/comic-context";
+import { useComic } from "#/contexts/comic/hook";
 import { useComicReaderToolbar } from "#/hooks/use-comic-reader-toolbar";
 
 const containerStyle: SxProps<Theme> = {

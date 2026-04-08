@@ -9,8 +9,8 @@ import { ComicReaderToolbar } from "#/components/comic-reader-toolbar";
 import { ComicReaderViewport } from "#/components/comic-reader-viewport";
 import { carouselDirectionFrom } from "#/constants/comics";
 import { carouselAxisFrom } from "#/constants/users";
-import { useComic } from "#/contexts/comic-context";
-import { useUser } from "#/contexts/user-context";
+import { useComic } from "#/contexts/comic/hook";
+import { useUser } from "#/contexts/user/hook";
 
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",
