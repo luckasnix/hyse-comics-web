@@ -34,6 +34,10 @@ const iconContainerStyle: SxProps<Theme> = {
   color: "warning.contrastText",
 };
 
+const contentWarningListStyle: SxProps<Theme> = {
+  flexWrap: "wrap",
+};
+
 const contentWarningChipStyle: SxProps<Theme> = {
   userSelect: "none",
 };
@@ -79,7 +83,12 @@ export const ContentWarningDialog = ({
             <strong>{comicTitle}</strong> contains the following sensitive
             content:
           </Typography>
-          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={contentWarningListStyle}
+            useFlexGap
+          >
             {contentWarnings.map((contentWarning) => (
               <Chip
                 key={contentWarning}

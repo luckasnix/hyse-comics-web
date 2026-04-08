@@ -37,6 +37,26 @@ const innerContainerStyle: SxProps<Theme> = {
   maxWidth: 1200,
 };
 
+const gridStyle: SxProps<Theme> = {
+  display: "flex",
+  gap: "4px",
+};
+
+const gridStartStyle: SxProps<Theme> = {
+  ...gridStyle,
+  justifyContent: "start",
+};
+
+const gridCenterStyle: SxProps<Theme> = {
+  ...gridStyle,
+  justifyContent: "center",
+};
+
+const gridEndStyle: SxProps<Theme> = {
+  ...gridStyle,
+  justifyContent: "end",
+};
+
 const iconButtonStyle: SxProps<Theme> = {
   color: "primary.contrastText",
   borderRadius: 1,
@@ -99,7 +119,7 @@ export const ComicReaderToolbar = ({
   return (
     <Grid container sx={containerStyle}>
       <Grid container size="grow" sx={innerContainerStyle}>
-        <Grid size={2} display="flex" justifyContent="start" gap="4px">
+        <Grid size={2} sx={gridStartStyle}>
           <Tooltip title="Home">
             <Link to="/">
               <IconButton sx={iconButtonStyle}>
@@ -108,7 +128,7 @@ export const ComicReaderToolbar = ({
             </Link>
           </Tooltip>
         </Grid>
-        <Grid size="grow" display="flex" justifyContent="center" gap="4px">
+        <Grid size="grow" sx={gridCenterStyle}>
           <Tooltip title={buttons.farLeft.label}>
             <Box component="span">
               <IconButton
@@ -159,7 +179,7 @@ export const ComicReaderToolbar = ({
             </Box>
           </Tooltip>
         </Grid>
-        <Grid size={2} display="flex" justifyContent="end" gap="4px">
+        <Grid size={2} sx={gridEndStyle}>
           {isFullscreen ? (
             <Tooltip title="Exit fullscreen (f)">
               <Box component="span">

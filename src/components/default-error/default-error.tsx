@@ -14,6 +14,11 @@ const textStyle: SxProps<Theme> = {
   textAlign: "center",
 };
 
+const errorMessageStyle: SxProps<Theme> = {
+  ...textStyle,
+  color: "text.secondary",
+};
+
 export type DefaultErrorProps = Readonly<{
   error: Error;
 }>;
@@ -24,7 +29,7 @@ export const DefaultError = ({ error }: DefaultErrorProps) => (
     <Typography variant="h3" sx={textStyle}>
       Erro
     </Typography>
-    <Typography variant="body1" color="text.secondary" sx={textStyle}>
+    <Typography variant="body1" sx={errorMessageStyle}>
       {error.message}
     </Typography>
   </Stack>

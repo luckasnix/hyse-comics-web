@@ -18,6 +18,10 @@ const imageStyle: CSSProperties = {
   objectFit: "cover",
 };
 
+const synopsisStyle: SxProps<Theme> = {
+  color: "text.secondary",
+};
+
 const genreStyle: SxProps<Theme> = {
   userSelect: "none",
 };
@@ -30,7 +34,7 @@ export const ComicOverview = ({ comic }: ComicOverviewProps) => (
   <Stack spacing={2} sx={containerStyle}>
     <img src={comic.coverUrl} alt={`${comic.title} cover`} style={imageStyle} />
     <Typography variant="h1">{comic.title}</Typography>
-    <Typography variant="body1" color="text.secondary">
+    <Typography variant="body1" sx={synopsisStyle}>
       {comic.synopsis}
     </Typography>
     <Stack direction="row" spacing={1}>

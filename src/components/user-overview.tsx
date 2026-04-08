@@ -34,6 +34,14 @@ const profileTextStyle: SxProps<Theme> = {
   paddingBottom: 1,
 };
 
+const displayNameStyle: SxProps<Theme> = {
+  fontWeight: "bold",
+};
+
+const usernameStyle: SxProps<Theme> = {
+  color: "text.secondary",
+};
+
 export type UserOverviewProps = Readonly<{
   username: string;
   displayName: string | null;
@@ -60,10 +68,10 @@ export const UserOverview = ({
         style={avatarStyle}
       />
       <Stack sx={profileTextStyle}>
-        <Typography variant="h5" fontWeight="bold">
+        <Typography variant="h5" sx={displayNameStyle}>
           {displayName ?? username}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" sx={usernameStyle}>
           @{username}
         </Typography>
       </Stack>
