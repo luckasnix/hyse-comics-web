@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { creditsWithUserMock } from "#/mocks/comics";
 
-import { CreditList } from "./credit-list";
+import { CreditList } from "./component";
 
 afterEach(cleanup);
 

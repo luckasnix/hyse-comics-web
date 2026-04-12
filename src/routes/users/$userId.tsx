@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { UserOverview } from "#/components/user-overview";
 import { PageLayout } from "#/layouts/page-layout";
+import { UserOverviewSection } from "#/sections/user-overview-section";
 import { getUser } from "#/services/users";
 
 const UserRoute = () => {
@@ -9,7 +9,7 @@ const UserRoute = () => {
 
   return (
     <PageLayout>
-      <UserOverview
+      <UserOverviewSection
         username={user.profile.username}
         displayName={user.profile.displayName}
         avatarUrl={user.profile.avatarUrl}

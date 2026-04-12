@@ -42,20 +42,20 @@ const usernameStyle: SxProps<Theme> = {
   color: "text.secondary",
 };
 
-export type UserOverviewProps = Readonly<{
+export type UserOverviewSectionProps = Readonly<{
   username: string;
   displayName: string | null;
   avatarUrl: string | null;
   coverUrl: string | null;
 }>;
 
-export const UserOverview = ({
+export const UserOverviewSection = ({
   username,
   displayName,
   avatarUrl,
   coverUrl,
-}: UserOverviewProps) => (
-  <Stack sx={containerStyle}>
+}: UserOverviewSectionProps) => (
+  <Stack component="section" sx={containerStyle}>
     <img
       src={coverUrl ?? "/fallbacks/cover.webp"}
       alt={`${displayName ?? username} cover`}

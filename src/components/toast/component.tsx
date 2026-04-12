@@ -1,23 +1,12 @@
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import type { SxProps, Theme } from "@mui/material/styles";
-import type { ComponentProps } from "react";
+
+import type { ToastProps } from "./types";
 
 const alertStyle: SxProps<Theme> = {
   width: "100%",
 };
-
-export type ToastOptions = {
-  severity: ComponentProps<typeof Alert>["severity"];
-  message: string;
-};
-
-export type ToastProps = Readonly<
-  ToastOptions & {
-    open: boolean;
-    onClose: () => void;
-  }
->;
 
 export const Toast = ({ open, onClose, severity, message }: ToastProps) => (
   <Snackbar

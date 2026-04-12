@@ -8,13 +8,15 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconCircleXFilled } from "@tabler/icons-react";
 
-import type { Chapter } from "#/types/comics";
+import { roleLabelsFrom } from "#/constants/users";
+
+import type { CreditListProps } from "./types";
 
 const avatarStyle: SxProps<Theme> = {
   backgroundColor: "primary.main",
 };
 
-const chapterTextStyle: SxProps<Theme> = {
+const creditTextStyle: SxProps<Theme> = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
@@ -30,50 +32,41 @@ const emptyListStyle: SxProps<Theme> = {
   color: "text.secondary",
 };
 
-export type ChapterListProps = Readonly<{
-  chapters: Array<Chapter>;
-  selectedChapterId: string | null;
-  onChapterClick: (chapterId: string) => void;
-}>;
-
-export const ChapterList = ({
-  chapters,
-  selectedChapterId,
-  onChapterClick,
-}: ChapterListProps) => {
-  if (chapters.length === 0) {
+export const CreditList = ({ credits, onCreditClick }: CreditListProps) => {
+  if (credits.length === 0) {
     return (
       <Box sx={emptyListStyle}>
         <IconCircleXFilled size={48} />
-        <Typography variant="body1">No chapters found</Typography>
+        <Typography variant="body1">No credits found</Typography>
       </Box>
     );
   }
 
   return (
     <List>
-      {chapters.map((chapter, index) => (
+      {credits.map((credit) => (
         <ListItemButton
-          key={chapter.id}
-          selected={chapter.id === selectedChapterId}
+          key={credit.user.id}
           onClick={() => {
-            onChapterClick(chapter.id);
+            onCreditClick(credit.user.id);
           }}
         >
           <ListItemAvatar>
-            <Avatar variant="rounded" sx={avatarStyle}>
-              {index + 1}
-            </Avatar>
+            <Avatar
+              variant="rounded"
+              sx={avatarStyle}
+              src={credit.user.avatarUrl ?? ""}
+            />
           </ListItemAvatar>
           <ListItemText
-            primary={chapter.title}
-            secondary={chapter.synopsis}
+            primary={`@${credit.user.username}`}
+            secondary={roleLabelsFrom[credit.role]}
             slotProps={{
               primary: {
-                sx: chapterTextStyle,
+                sx: creditTextStyle,
               },
               secondary: {
-                sx: chapterTextStyle,
+                sx: creditTextStyle,
               },
             }}
           />

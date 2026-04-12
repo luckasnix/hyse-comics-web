@@ -4,7 +4,6 @@ import Tabs from "@mui/material/Tabs";
 import {
   Activity,
   createContext,
-  type ReactNode,
   type SyntheticEvent,
   useCallback,
   useContext,
@@ -12,10 +11,12 @@ import {
   useState,
 } from "react";
 
-export type TabGroupContextValue = {
-  selectedValue: number;
-  selectValue: (_: SyntheticEvent, newValue: number) => void;
-};
+import type {
+  TabContainerProps,
+  TabGroupContextValue,
+  TabListProps,
+  TabPanelProps,
+} from "./types";
 
 const TabGroupContext = createContext<TabGroupContextValue | null>(null);
 
@@ -28,11 +29,6 @@ const useTabGroup = () => {
 
   return context;
 };
-
-export type TabContainerProps = Readonly<{
-  initialValue: number;
-  children: ReactNode;
-}>;
 
 const TabContainer = ({ initialValue, children }: TabContainerProps) => {
   const [selectedValue, setSelectedValue] = useState(initialValue);
@@ -53,15 +49,6 @@ const TabContainer = ({ initialValue, children }: TabContainerProps) => {
   );
 };
 
-export type TabItem = {
-  value: number;
-  label: string;
-};
-
-export type TabListProps = Readonly<{
-  items: Array<TabItem>;
-}>;
-
 const TabList = ({ items }: TabListProps) => {
   const { selectedValue, selectValue } = useTabGroup();
 
@@ -73,11 +60,6 @@ const TabList = ({ items }: TabListProps) => {
     </Tabs>
   );
 };
-
-export type TabPanelProps = Readonly<{
-  value: number;
-  children: ReactNode;
-}>;
 
 const TabPanel = ({ value, children }: TabPanelProps) => {
   const { selectedValue } = useTabGroup();

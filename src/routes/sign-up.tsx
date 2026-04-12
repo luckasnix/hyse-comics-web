@@ -3,8 +3,8 @@ import TextField from "@mui/material/TextField";
 import { IconUserPlus } from "@tabler/icons-react";
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute } from "@tanstack/react-router";
-import { AuthForm } from "#/components/auth-form";
 
+import { AuthForm } from "#/components/auth-form/component";
 import { PageLayout } from "#/layouts/page-layout";
 import { signUpSchema } from "#/schemas/users";
 

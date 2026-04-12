@@ -4,7 +4,6 @@ import type {
   SxProps,
   Theme,
 } from "@mui/material/styles";
-import type { EmblaViewportRefType } from "embla-carousel-react";
 import type { CSSProperties } from "react";
 
 import { comicReaderToolbarHeight } from "#/constants/comics";
@@ -12,6 +11,8 @@ import { useComic } from "#/contexts/comic/hook";
 import { useUser } from "#/contexts/user/hook";
 import type { ComicDirection, PageBackgroundTexture } from "#/types/comics";
 import type { ReadingAxis } from "#/types/users";
+
+import type { ComicReaderViewportProps } from "./types";
 
 const containerStyle: SxProps<Theme> = {
   overflow: "hidden",
@@ -63,10 +64,6 @@ const getImageStyle = (width: number, height: number): CSSProperties => ({
   aspectRatio: width / height,
   padding: "40px",
 });
-
-export type ComicReaderViewportProps = Readonly<{
-  carouselRef: EmblaViewportRefType;
-}>;
 
 export const ComicReaderViewport = ({
   carouselRef,

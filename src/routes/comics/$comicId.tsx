@@ -2,9 +2,9 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { ChapterList } from "#/components/chapter-list/chapter-list";
-import { ComicOverview } from "#/components/comic-overview";
+import { ChapterList } from "#/components/chapter-list/component";
 import { PageLayout } from "#/layouts/page-layout";
+import { ComicOverviewSection } from "#/sections/comic-overview-section";
 import { getChapters, getComic } from "#/services/comics";
 
 const ComicRoute = () => {
@@ -21,7 +21,7 @@ const ComicRoute = () => {
 
   return (
     <PageLayout>
-      <ComicOverview comic={comic} />
+      <ComicOverviewSection comic={comic} />
       <Stack spacing={2}>
         <Typography variant="h4">Chapters</Typography>
         <ChapterList

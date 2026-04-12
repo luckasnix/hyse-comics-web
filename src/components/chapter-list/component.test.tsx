@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { chaptersMock } from "#/mocks/comics";
 
-import { ChapterList } from "./chapter-list";
+import { ChapterList } from "./component";
 
 afterEach(cleanup);
 

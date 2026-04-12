@@ -16,7 +16,6 @@ import {
 } from "@tabler/icons-react";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { Link } from "@tanstack/react-router";
-import type { EmblaCarouselType } from "embla-carousel";
 
 import {
   carouselDirectionFrom,
@@ -24,6 +23,8 @@ import {
 } from "#/constants/comics";
 import { useComic } from "#/contexts/comic/hook";
 import { useComicReaderToolbar } from "#/hooks/use-comic-reader-toolbar";
+
+import type { ComicReaderToolbarProps } from "./types";
 
 const containerStyle: SxProps<Theme> = {
   height: comicReaderToolbarHeight,
@@ -73,16 +74,6 @@ const pageCounterStyle: SxProps<Theme> = {
 const pageCounterTextStyle: SxProps<Theme> = {
   color: "primary.contrastText",
 };
-
-export type ComicReaderToolbarProps = Readonly<{
-  carouselApi: EmblaCarouselType | undefined;
-  isFullscreen: boolean;
-  enterFullscreen: () => void;
-  exitFullscreen: () => void;
-  toggleFullscreen: () => void;
-  openDrawer: () => void;
-  toggleDrawer: () => void;
-}>;
 
 // TODO: Adapt reading to the comic's "orientation" settings
 // TODO: Add thumbnail navigation

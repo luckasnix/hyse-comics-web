@@ -4,7 +4,7 @@ import { IconLogin } from "@tabler/icons-react";
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { AuthForm } from "#/components/auth-form";
+import { AuthForm } from "#/components/auth-form/component";
 import { PageLayout } from "#/layouts/page-layout";
 import { signInSchema } from "#/schemas/users";
 

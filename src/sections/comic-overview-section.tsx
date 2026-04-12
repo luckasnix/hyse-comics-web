@@ -26,12 +26,12 @@ const genreStyle: SxProps<Theme> = {
   userSelect: "none",
 };
 
-export type ComicOverviewProps = Readonly<{
+export type ComicOverviewSectionProps = Readonly<{
   comic: Comic;
 }>;
 
-export const ComicOverview = ({ comic }: ComicOverviewProps) => (
-  <Stack spacing={2} sx={containerStyle}>
+export const ComicOverviewSection = ({ comic }: ComicOverviewSectionProps) => (
+  <Stack component="section" spacing={2} sx={containerStyle}>
     <img src={comic.coverUrl} alt={`${comic.title} cover`} style={imageStyle} />
     <Typography variant="h1">{comic.title}</Typography>
     <Typography variant="body1" sx={synopsisStyle}>

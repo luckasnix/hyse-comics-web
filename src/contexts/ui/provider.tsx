@@ -4,7 +4,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { useCallback, useState } from "react";
 
-import { Toast, type ToastOptions, type ToastProps } from "#/components/toast";
+import { Toast } from "#/components/toast/component";
+import type { ToastOptions, ToastProps } from "#/components/toast/types";
 import { theme } from "#/styles/theme";
 
 import { UiContext } from "./context";

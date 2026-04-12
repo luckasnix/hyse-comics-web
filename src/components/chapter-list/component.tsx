@@ -8,14 +8,13 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconCircleXFilled } from "@tabler/icons-react";
 
-import { roleLabelsFrom } from "#/constants/users";
-import type { CreditWithUser } from "#/types/comics";
+import type { ChapterListProps } from "./types";
 
 const avatarStyle: SxProps<Theme> = {
   backgroundColor: "primary.main",
 };
 
-const creditTextStyle: SxProps<Theme> = {
+const chapterTextStyle: SxProps<Theme> = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
@@ -31,46 +30,44 @@ const emptyListStyle: SxProps<Theme> = {
   color: "text.secondary",
 };
 
-export type CreditListProps = Readonly<{
-  credits: Array<CreditWithUser>;
-  onCreditClick: (userId: string) => void;
-}>;
-
-export const CreditList = ({ credits, onCreditClick }: CreditListProps) => {
-  if (credits.length === 0) {
+export const ChapterList = ({
+  chapters,
+  selectedChapterId,
+  onChapterClick,
+}: ChapterListProps) => {
+  if (chapters.length === 0) {
     return (
       <Box sx={emptyListStyle}>
         <IconCircleXFilled size={48} />
-        <Typography variant="body1">No credits found</Typography>
+        <Typography variant="body1">No chapters found</Typography>
       </Box>
     );
   }
 
   return (
     <List>
-      {credits.map((credit) => (
+      {chapters.map((chapter, index) => (
         <ListItemButton
-          key={credit.user.id}
+          key={chapter.id}
+          selected={chapter.id === selectedChapterId}
           onClick={() => {
-            onCreditClick(credit.user.id);
+            onChapterClick(chapter.id);
           }}
         >
           <ListItemAvatar>
-            <Avatar
-              variant="rounded"
-              sx={avatarStyle}
-              src={credit.user.avatarUrl ?? ""}
-            />
+            <Avatar variant="rounded" sx={avatarStyle}>
+              {index + 1}
+            </Avatar>
           </ListItemAvatar>
           <ListItemText
-            primary={`@${credit.user.username}`}
-            secondary={roleLabelsFrom[credit.role]}
+            primary={chapter.title}
+            secondary={chapter.synopsis}
             slotProps={{
               primary: {
-                sx: creditTextStyle,
+                sx: chapterTextStyle,
               },
               secondary: {
-                sx: creditTextStyle,
+                sx: chapterTextStyle,
               },
             }}
           />

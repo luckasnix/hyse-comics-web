@@ -9,17 +9,21 @@ import {
   IconBrandGoogleFilled,
 } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import type { CSSProperties, MouseEventHandler, ReactNode } from "react";
+import type { CSSProperties } from "react";
 
 import { linkResetStyle } from "#/styles/common";
+
+import type {
+  AuthFormContainerProps,
+  AuthFormSocialProps,
+  AuthFormSubmitButtonProps,
+  AuthFormSwitchPromptProps,
+  AuthFormTitleProps,
+} from "./types";
 
 const containerStyle: SxProps<Theme> = {
   padding: 6,
 };
-
-export type AuthFormContainerProps = Readonly<{
-  children: ReactNode;
-}>;
 
 const AuthFormContainer = ({ children }: AuthFormContainerProps) => (
   <Paper elevation={2} sx={containerStyle}>
@@ -32,23 +36,11 @@ const titleStyle: SxProps<Theme> = {
   textAlign: "center",
 };
 
-export type AuthFormTitleProps = Readonly<{
-  children: ReactNode;
-}>;
-
 const AuthFormTitle = ({ children }: AuthFormTitleProps) => (
   <Typography variant="h3" sx={titleStyle}>
     {children}
   </Typography>
 );
-
-export type AuthFormSubmitButtonProps = Readonly<{
-  disabled: boolean;
-  loading: boolean;
-  icon: ReactNode;
-  onClick: MouseEventHandler<HTMLButtonElement>;
-  children: string;
-}>;
 
 const AuthFormSubmitButton = ({
   disabled,
@@ -75,11 +67,6 @@ const dividerStyle: SxProps<Theme> = {
 };
 
 const AuthFormDivider = () => <Divider sx={dividerStyle}>OR</Divider>;
-
-export type AuthFormSocialProps = Readonly<{
-  onClick: MouseEventHandler<HTMLButtonElement>;
-  children: string;
-}>;
 
 const AuthFormSocialGoogleButton = ({
   onClick,
@@ -118,12 +105,6 @@ const linkStyle: CSSProperties = {
   ...linkResetStyle,
   fontWeight: "bold",
 };
-
-export type AuthFormSwitchPromptProps = Readonly<{
-  message: string;
-  linkTo: string;
-  linkText: string;
-}>;
 
 const AuthFormSwitchPrompt = ({
   message,

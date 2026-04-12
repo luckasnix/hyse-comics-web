@@ -4,9 +4,9 @@ import { useBoolean, useFullscreen } from "ahooks";
 import useEmblaCarousel from "embla-carousel-react";
 import { useRef } from "react";
 
-import { ComicReaderDrawer } from "#/components/comic-reader-drawer";
-import { ComicReaderToolbar } from "#/components/comic-reader-toolbar";
-import { ComicReaderViewport } from "#/components/comic-reader-viewport";
+import { ComicReaderDrawer } from "#/components/comic-reader-drawer/component";
+import { ComicReaderToolbar } from "#/components/comic-reader-toolbar/component";
+import { ComicReaderViewport } from "#/components/comic-reader-viewport/component";
 import { carouselDirectionFrom } from "#/constants/comics";
 import { carouselAxisFrom } from "#/constants/users";
 import { useComic } from "#/contexts/comic/hook";

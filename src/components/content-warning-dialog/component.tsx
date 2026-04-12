@@ -14,7 +14,8 @@ import { IconAlertTriangle } from "@tabler/icons-react";
 import { useState } from "react";
 
 import { contentWarningLabelsFrom } from "#/constants/comics";
-import type { ContentWarning } from "#/types/comics";
+
+import type { ContentWarningDialogProps } from "./types";
 
 const titleContainerStyle: SxProps<Theme> = {
   display: "flex",
@@ -41,14 +42,6 @@ const contentWarningListStyle: SxProps<Theme> = {
 const contentWarningChipStyle: SxProps<Theme> = {
   userSelect: "none",
 };
-
-export type ContentWarningDialogProps = Readonly<{
-  contentWarnings: Array<ContentWarning>;
-  comicTitle: string;
-  open: boolean;
-  onConfirm: () => void;
-  onCancel: () => void;
-}>;
 
 export const ContentWarningDialog = ({
   contentWarnings,

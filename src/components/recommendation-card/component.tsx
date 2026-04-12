@@ -10,6 +10,8 @@ import { useUi } from "#/contexts/ui/hook";
 import { getClampedTextStyle } from "#/styles/common";
 import { getBaseUrl } from "#/utils/navigation";
 
+import type { RecommendationCardProps } from "./types";
+
 const containerStyle: SxProps<Theme> = {
   minWidth: 320,
   width: 320,
@@ -33,14 +35,6 @@ const synopsisStyle: SxProps<Theme> = {
   userSelect: "none",
   ...getClampedTextStyle(4),
 };
-
-export type RecommendationCardProps = Readonly<{
-  chapterId: string;
-  title: string;
-  synopsis: string;
-  imageUrl: string;
-  onReadButtonClick: (chapterId: string) => void;
-}>;
 
 export const RecommendationCard = ({
   chapterId,

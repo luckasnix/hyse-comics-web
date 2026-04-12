@@ -3,6 +3,8 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconExclamationCircle } from "@tabler/icons-react";
 
+import type { DefaultErrorProps } from "./types";
+
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",
   padding: 2,
@@ -18,10 +20,6 @@ const errorMessageStyle: SxProps<Theme> = {
   ...textStyle,
   color: "text.secondary",
 };
-
-export type DefaultErrorProps = Readonly<{
-  error: Error;
-}>;
 
 export const DefaultError = ({ error }: DefaultErrorProps) => (
   <Stack spacing={2} sx={containerStyle}>

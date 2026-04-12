@@ -8,9 +8,10 @@ import { useNavigate } from "@tanstack/react-router";
 import useEmblaCarousel from "embla-carousel-react";
 import { Activity } from "react";
 
-import { RecommendationCard } from "#/components/recommendation-card";
+import { RecommendationCard } from "#/components/recommendation-card/component";
 import { useCarouselNavigation } from "#/hooks/use-carousel-navigation";
-import type { ChapterWithComic } from "#/types/comics";
+
+import type { RecommendationShelfProps } from "./types";
 
 const containerStyle: SxProps<Theme> = {
   width: "100%",
@@ -56,11 +57,6 @@ const nextButtonStyle: SxProps<Theme> = {
   ...navigationButtonStyle,
   right: -24,
 };
-
-export type RecommendationShelfProps = Readonly<{
-  title: string;
-  chapters: Array<ChapterWithComic>;
-}>;
 
 export const RecommendationShelf = ({
   title,

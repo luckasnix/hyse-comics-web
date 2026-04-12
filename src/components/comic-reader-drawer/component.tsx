@@ -8,13 +8,14 @@ import { IconX } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 
+import { ChapterList } from "#/components/chapter-list/component";
+import { CreditList } from "#/components/credit-list/component";
+import { TabGroup } from "#/components/tab-group/component";
 import { useComic } from "#/contexts/comic/hook";
 import { getChapterCredits } from "#/services/comics";
 import { getClampedTextStyle, linkResetStyle } from "#/styles/common";
 
-import { ChapterList } from "./chapter-list/chapter-list";
-import { CreditList } from "./credit-list/credit-list";
-import { TabGroup } from "./tab-group";
+import type { ComicReaderDrawerProps } from "./types";
 
 const containerStyle: SxProps<Theme> = {
   width: 420,
@@ -35,11 +36,6 @@ const synopsisStyle: SxProps<Theme> = {
   color: "text.secondary",
   ...getClampedTextStyle(4),
 };
-
-export type ComicReaderDrawerProps = Readonly<{
-  isOpen: boolean;
-  onClose: () => void;
-}>;
 
 export const ComicReaderDrawer = ({
   isOpen,
