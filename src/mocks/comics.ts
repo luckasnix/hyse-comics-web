@@ -478,11 +478,11 @@ export const creditsMock: Array<Credit> = [
 
 export const creditsWithUserMock: Array<CreditWithUser> = [
   {
-    user: usersMock[0].profile,
+    user: usersMock[1].profile,
     role: "comics:writer",
   },
   {
-    user: usersMock[1].profile,
+    user: usersMock[2].profile,
     role: "comics:penciller",
   },
 ];

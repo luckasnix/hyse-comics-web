@@ -23,6 +23,7 @@ export const signedInUserMock: User = {
 };
 
 export const usersMock: Array<User> = [
+  signedInUserMock,
   {
     profile: {
       id: "40gHsx5wC4xV",
