@@ -4,22 +4,7 @@ import { useMemo } from "react";
 import { useCarouselNavigation } from "#/hooks/use-carousel-navigation";
 import type { AxisDirectionOptionType } from "#/types/comics";
 
-export type NavigationButtonPosition =
-  | "farLeft"
-  | "left"
-  | "right"
-  | "farRight";
-
-export type NavigationButtonConfig = {
-  label: string;
-  disabled: boolean;
-  onClick: () => void;
-};
-
-export type NavigationConfig = Record<
-  NavigationButtonPosition,
-  NavigationButtonConfig
->;
+import type { NavigationConfig } from "./types";
 
 export const useComicReaderToolbar = (
   carouselApi: EmblaCarouselType | undefined,

@@ -17,12 +17,12 @@ import {
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { Link } from "@tanstack/react-router";
 
+import { useComicReaderToolbar } from "#/components/comic-reader-toolbar/hooks";
 import {
   carouselDirectionFrom,
   comicReaderToolbarHeight,
 } from "#/constants/comics";
 import { useComic } from "#/contexts/comic/hook";
-import { useComicReaderToolbar } from "#/hooks/use-comic-reader-toolbar";
 
 import type { ComicReaderToolbarProps } from "./types";
 
