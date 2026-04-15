@@ -113,7 +113,7 @@ export const ComicReaderToolbar = ({
         <Grid size={2} sx={gridStartStyle}>
           <Tooltip title="Home">
             <Link to="/">
-              <IconButton sx={iconButtonStyle}>
+              <IconButton aria-label="Home" sx={iconButtonStyle}>
                 <IconHomeFilled />
               </IconButton>
             </Link>
@@ -123,6 +123,7 @@ export const ComicReaderToolbar = ({
           <Tooltip title={buttons.farLeft.label}>
             <Box component="span">
               <IconButton
+                aria-label={buttons.farLeft.label}
                 sx={iconButtonStyle}
                 disabled={buttons.farLeft.disabled}
                 onClick={buttons.farLeft.onClick}
@@ -134,6 +135,7 @@ export const ComicReaderToolbar = ({
           <Tooltip title={buttons.left.label}>
             <Box component="span">
               <IconButton
+                aria-label={buttons.left.label}
                 sx={iconButtonStyle}
                 disabled={buttons.left.disabled}
                 onClick={buttons.left.onClick}
@@ -150,6 +152,7 @@ export const ComicReaderToolbar = ({
           <Tooltip title={buttons.right.label}>
             <Box component="span">
               <IconButton
+                aria-label={buttons.right.label}
                 sx={iconButtonStyle}
                 disabled={buttons.right.disabled}
                 onClick={buttons.right.onClick}
@@ -161,6 +164,7 @@ export const ComicReaderToolbar = ({
           <Tooltip title={buttons.farRight.label}>
             <Box component="span">
               <IconButton
+                aria-label={buttons.farRight.label}
                 sx={iconButtonStyle}
                 disabled={buttons.farRight.disabled}
                 onClick={buttons.farRight.onClick}
@@ -174,7 +178,11 @@ export const ComicReaderToolbar = ({
           {isFullscreen ? (
             <Tooltip title="Exit fullscreen (f)">
               <Box component="span">
-                <IconButton sx={iconButtonStyle} onClick={exitFullscreen}>
+                <IconButton
+                  aria-label="Exit fullscreen (f)"
+                  sx={iconButtonStyle}
+                  onClick={exitFullscreen}
+                >
                   <IconArrowsMinimize />
                 </IconButton>
               </Box>
@@ -182,7 +190,11 @@ export const ComicReaderToolbar = ({
           ) : (
             <Tooltip title="Enter fullscreen (f)">
               <Box component="span">
-                <IconButton sx={iconButtonStyle} onClick={enterFullscreen}>
+                <IconButton
+                  aria-label="Enter fullscreen (f)"
+                  sx={iconButtonStyle}
+                  onClick={enterFullscreen}
+                >
                   <IconArrowsMaximize />
                 </IconButton>
               </Box>
@@ -191,6 +203,7 @@ export const ComicReaderToolbar = ({
           <Tooltip title="More (m)">
             <Box component="span">
               <IconButton
+                aria-label="More (m)"
                 sx={iconButtonStyle}
                 disabled={isFullscreen}
                 onClick={openDrawer}

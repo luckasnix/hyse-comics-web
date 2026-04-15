@@ -35,6 +35,7 @@ export const FooterSection = () => (
     />
     <Stack direction="row" spacing={1}>
       <IconButton
+        aria-label="X (Twitter)"
         component="a"
         href="https://x.com/luckasnix"
         target="_blank"
@@ -44,6 +45,7 @@ export const FooterSection = () => (
         <IconBrandX />
       </IconButton>
       <IconButton
+        aria-label="Instagram"
         component="a"
         href="https://www.instagram.com/luckasnix/"
         target="_blank"

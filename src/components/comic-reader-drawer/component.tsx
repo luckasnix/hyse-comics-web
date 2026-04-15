@@ -69,7 +69,7 @@ export const ComicReaderDrawer = ({
     <Drawer open={isOpen} anchor="right" onClose={onClose}>
       <Stack spacing={1} sx={containerStyle}>
         <Box sx={headerActionsStyle}>
-          <IconButton onClick={onClose}>
+          <IconButton aria-label="Close" onClick={onClose}>
             <IconX />
           </IconButton>
         </Box>
