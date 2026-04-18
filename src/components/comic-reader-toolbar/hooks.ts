@@ -1,7 +1,7 @@
 import type { EmblaCarouselType } from "embla-carousel";
 import { useMemo } from "react";
 
-import { useCarouselNavigation } from "#/hooks/use-carousel-navigation";
+import { useCarouselNavigation } from "#/hooks/use-carousel-navigation/hook";
 import type { AxisDirectionOptionType } from "#/types/comics";
 
 import type { NavigationConfig } from "./types";

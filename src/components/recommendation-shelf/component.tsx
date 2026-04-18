@@ -9,7 +9,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Activity } from "react";
 
 import { RecommendationCard } from "#/components/recommendation-card/component";
-import { useCarouselNavigation } from "#/hooks/use-carousel-navigation";
+import { useCarouselNavigation } from "#/hooks/use-carousel-navigation/hook";
 
 import type { RecommendationShelfProps } from "./types";
 
