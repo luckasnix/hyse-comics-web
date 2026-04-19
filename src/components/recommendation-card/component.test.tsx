@@ -45,7 +45,7 @@ const setupClipboard = (resolved: boolean) => {
 afterEach(cleanup);
 
 describe("<RecommendationCard />", () => {
-  it("renders the component correctly", () => {
+  it("renders the thumbnail, title and synopsis", () => {
     renderComponent();
 
     expect(
@@ -53,6 +53,11 @@ describe("<RecommendationCard />", () => {
     ).toBeInTheDocument();
     expect(screen.getByText(defaultProps.title)).toBeInTheDocument();
     expect(screen.getByText(defaultProps.synopsis)).toBeInTheDocument();
+  });
+
+  it("renders the Share and Read buttons", () => {
+    renderComponent();
+
     expect(screen.getByRole("button", { name: "Share" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Read" })).toBeInTheDocument();
   });
