@@ -91,7 +91,7 @@ export const ComicReaderDrawer = ({
           <TabGroup.List
             items={[
               { value: 0, label: "Chapters" },
-              { value: 1, label: "Créditos" },
+              { value: 1, label: "Credits" },
             ]}
           />
           <TabGroup.Panel value={0}>
