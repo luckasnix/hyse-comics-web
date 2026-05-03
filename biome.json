@@ -8,7 +8,6 @@
   "files": {
     "includes": [
       ".vscode/**",
-      "!!dist",
       "public/**",
       "src/**",
       "!src/routeTree.gen.ts",
