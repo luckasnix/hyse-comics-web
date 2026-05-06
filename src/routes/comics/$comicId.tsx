@@ -1,35 +1,17 @@
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { ChapterList } from "#/components/chapter-list/component";
 import { PageLayout } from "#/layouts/page-layout";
+import { ComicNavigationSection } from "#/sections/comic-navigation-section.tsx";
 import { ComicOverviewSection } from "#/sections/comic-overview-section";
 import { getChapters, getComic } from "#/services/comics";
 
 const ComicRoute = () => {
   const { comic, chapters } = Route.useLoaderData();
 
-  const navigate = Route.useNavigate();
-
-  const navigateToChapter = (chapterId: string) => {
-    navigate({
-      to: "/chapters/$chapterId",
-      params: { chapterId: chapterId },
-    });
-  };
-
   return (
     <PageLayout>
       <ComicOverviewSection comic={comic} />
-      <Stack spacing={2}>
-        <Typography variant="h4">Chapters</Typography>
-        <ChapterList
-          chapters={chapters}
-          selectedChapterId={null}
-          onChapterClick={navigateToChapter}
-        />
-      </Stack>
+      <ComicNavigationSection comicId={comic.id} chapters={chapters} />
     </PageLayout>
   );
 };

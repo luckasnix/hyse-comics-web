@@ -462,27 +462,27 @@ export const creditsMock: Array<Credit> = [
   {
     chapterId: "3URztCal8w",
     userId: "xhMmYL0qjhVK",
-    role: "comics:writer",
+    roles: ["comics:writer"],
   },
   {
     chapterId: "mduaZ9Iu3k",
     userId: "xhMmYL0qjhVK",
-    role: "comics:letterer",
+    roles: ["comics:letterer"],
   },
   {
     chapterId: "LlAkuYOs5J",
     userId: "xhMmYL0qjhVK",
-    role: "comics:editor",
+    roles: ["comics:editor"],
   },
 ];
 
 export const creditsWithUserMock: Array<CreditWithUser> = [
   {
     user: usersMock[1].profile,
-    role: "comics:writer",
+    roles: ["comics:writer"],
   },
   {
     user: usersMock[2].profile,
-    role: "comics:penciller",
+    roles: ["comics:penciller"],
   },
 ];

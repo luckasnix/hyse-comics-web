@@ -33,6 +33,20 @@ export const getComic = async (comicId: string): Promise<Comic> => {
   return data;
 };
 
+export const getComicCredits = async (
+  comicId: string,
+): Promise<Array<CreditWithUser>> => {
+  const response = await fetch(`${baseUrl}/api/comics/${comicId}/credits`);
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch credits for comic "${comicId}": ${response.status} ${response.statusText}`,
+    );
+  }
+  const data = (await response.json()) as Array<CreditWithUser>;
+
+  return data;
+};
+
 export const getChapters = async (comicId: string): Promise<Array<Chapter>> => {
   const response = await fetch(`${baseUrl}/api/comics/${comicId}/chapters`);
   if (!response.ok) {

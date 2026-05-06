@@ -86,12 +86,12 @@ export type ChapterWithComic = Chapter & {
 export type Credit = {
   chapterId: string;
   userId: string;
-  role: UserRoles;
+  roles: Array<UserRoles>;
 };
 
 export type CreditWithUser = {
   user: UserProfile;
-  role: UserRoles;
+  roles: Array<UserRoles>;
 };
 
 export type Recommendation = {

@@ -24,7 +24,7 @@ export const Route = createFileRoute("/api/chapters/$chapterId/credits")({
 
             return {
               user: user.profile,
-              role: currentCredit.role,
+              roles: currentCredit.roles,
             };
           })
           .filter((currentCredit) => currentCredit !== null);
