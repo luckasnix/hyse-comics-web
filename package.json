@@ -6,6 +6,7 @@
   "imports": {
     "#/*": "./src/*"
   },
+  "packageManager": "pnpm@11.1.2",
   "scripts": {
     "dev": "vite dev",
     "start": "vite",
@@ -47,6 +48,7 @@
     "@biomejs/biome": "2.4.14",
     "@commitlint/cli": "20.5.3",
     "@commitlint/config-conventional": "20.5.3",
+    "@commitlint/types": "20.5.0",
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
