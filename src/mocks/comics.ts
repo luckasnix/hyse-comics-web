@@ -211,7 +211,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/ch1-pg1.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "uncoated-paper",
   },
   {
     id: "C4llozTOUTq6",
@@ -220,7 +220,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/ch1-pg2.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "uncoated-paper",
   },
   {
     id: "g6Xibl9M3eCF",
@@ -229,7 +229,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/ch1-pg3.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "uncoated-paper",
   },
   {
     id: "9qCb7Grf0Z3C",
@@ -238,7 +238,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/ch2-pg1.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "uncoated-paper",
   },
   {
     id: "WtUltVQkXfGD",
@@ -247,7 +247,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/ch2-pg2.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "uncoated-paper",
   },
   {
     id: "JXYWpZLLSsX8",
@@ -256,7 +256,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/ch2-pg3.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "uncoated-paper",
   },
   {
     id: "HRGi1AmGMqIQ",
@@ -265,7 +265,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/ch3-pg1.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "uncoated-paper",
   },
   {
     id: "Z1q1ZsMl09zz",
@@ -274,7 +274,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/ch3-pg2.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "uncoated-paper",
   },
   {
     id: "V1UjEhS4zcfM",
@@ -283,7 +283,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/forbidden-treasures/ch3-pg3.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "uncoated-paper",
   },
   {
     id: "zXXAJX34uh5f",
@@ -292,7 +292,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/ch1-pg1.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "recycled-paper",
   },
   {
     id: "4IsYMn6qYoVd",
@@ -301,7 +301,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/ch1-pg2.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "recycled-paper",
   },
   {
     id: "SATeaYapvzwf",
@@ -310,7 +310,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/skate-champion/ch1-pg3.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "recycled-paper",
   },
   {
     id: "MdBg2Xscgq6Q",
@@ -355,7 +355,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch1-pg1.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "newsprint",
   },
   {
     id: "YdJZNZPhtiUX",
@@ -364,7 +364,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch1-pg2.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "newsprint",
   },
   {
     id: "z1lTnhEqxxZG",
@@ -373,7 +373,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch1-pg3.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "newsprint",
   },
   {
     id: "j9zFHiavtswx",
@@ -382,7 +382,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch2-pg1.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "newsprint",
   },
   {
     id: "50Dbe0UEG9iy",
@@ -391,7 +391,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch2-pg2.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "newsprint",
   },
   {
     id: "OFgYzDtf58Vk",
@@ -400,7 +400,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch2-pg3.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "newsprint",
   },
   {
     id: "Ks90KKvPVXKv",
@@ -409,7 +409,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch2-pg4.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "newsprint",
   },
   {
     id: "LnR7SZyywXaP",
@@ -418,7 +418,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/apprentice-of-witchcraft/ch2-pg5.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "white-paper",
+    backgroundTexture: "newsprint",
   },
   {
     id: "iLp24SwA5fBD",
@@ -427,7 +427,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/ch1-pg1.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "black-paper",
+    backgroundTexture: "uncoated-paper-inked",
   },
   {
     id: "BYR877ZlOsZE",
@@ -436,7 +436,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/ch1-pg2.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "black-paper",
+    backgroundTexture: "uncoated-paper-inked",
   },
   {
     id: "98SWWdBWqRmc",
@@ -445,7 +445,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/ch1-pg3.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "black-paper",
+    backgroundTexture: "uncoated-paper-inked",
   },
   {
     id: "euF02qcm8ZYU",
@@ -454,7 +454,7 @@ export const pagesMock: Array<Page> = [
       "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/comics/the-purifier/ch1-pg4.webp",
     imageWidth: 1080,
     imageHeight: 720,
-    backgroundTexture: "black-paper",
+    backgroundTexture: "uncoated-paper-inked",
   },
 ];
 

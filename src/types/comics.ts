@@ -65,10 +65,11 @@ export type Chapter = {
 };
 
 export type PageBackgroundTexture =
-  | "black-paper"
-  | "newspaper"
+  | "newsprint"
   | "parchment"
-  | "white-paper";
+  | "recycled-paper"
+  | "uncoated-paper"
+  | "uncoated-paper-inked";
 
 export type Page = {
   id: string;
