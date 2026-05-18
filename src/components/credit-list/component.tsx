@@ -54,7 +54,7 @@ export const CreditList = ({ credits, onCreditClick }: CreditListProps) => {
             <Avatar
               variant="rounded"
               sx={avatarStyle}
-              src={credit.user.avatarUrl ?? ""}
+              src={credit.user.avatarUrl ?? "/fallbacks/avatar.webp"}
             />
           </ListItemAvatar>
           <ListItemText

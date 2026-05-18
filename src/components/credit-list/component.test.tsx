@@ -71,4 +71,23 @@ describe("<CreditList />", () => {
 
     expect(onCreditClickSpy).toHaveBeenCalledWith("sOXaMS9a6t8z");
   });
+
+  it("renders a fallback avatar when avatarUrl is null", () => {
+    render(
+      <CreditList
+        credits={[
+          {
+            user: { ...creditsWithUserMock[0].user, avatarUrl: null },
+            roles: creditsWithUserMock[0].roles,
+          },
+        ]}
+        onCreditClick={onCreditClickSpy}
+      />,
+    );
+
+    expect(screen.getByRole("img")).toHaveAttribute(
+      "src",
+      "/fallbacks/avatar.webp",
+    );
+  });
 });
