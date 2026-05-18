@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { UiProvider } from "#/contexts/ui/provider";
@@ -8,8 +9,10 @@ import { recommendationsMock } from "#/mocks/recommendations";
 import { RecommendationShelf } from "./component";
 import type { RecommendationShelfProps } from "./types";
 
+const navigateSpy = vi.fn();
+
 vi.mock("@tanstack/react-router", () => ({
-  useNavigate: () => vi.fn(),
+  useNavigate: () => navigateSpy,
 }));
 
 vi.mock("embla-carousel-react", () => ({
@@ -122,5 +125,19 @@ describe("<RecommendationShelf />", () => {
     renderComponent();
 
     expect(screen.getByRole("button", { name: "Next" })).toBeInTheDocument();
+  });
+
+  it("navigates to the chapter when the Read button is clicked", async () => {
+    const user = userEvent.setup();
+    setupMock();
+
+    renderComponent();
+
+    await user.click(screen.getAllByRole("button", { name: "Read" })[0]);
+
+    expect(navigateSpy).toHaveBeenCalledWith({
+      to: "/chapters/$chapterId",
+      params: { chapterId: recommendation.chapters[0].id },
+    });
   });
 });
