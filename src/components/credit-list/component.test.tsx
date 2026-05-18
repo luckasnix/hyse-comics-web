@@ -4,21 +4,12 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { creditsWithUserMock } from "#/mocks/comics";
-import { usersMock } from "#/mocks/users";
-import type { CreditWithUser } from "#/types/comics";
 
 import { CreditList } from "./component";
 
 afterEach(cleanup);
 
 const onCreditClickSpy = vi.fn();
-
-const comicCreditsWithUserMock: Array<CreditWithUser> = [
-  {
-    user: usersMock[0].profile,
-    roles: ["comics:writer", "comics:editor"],
-  },
-];
 
 describe("<CreditList />", () => {
   it("renders the empty state when there are no credits", () => {
@@ -44,12 +35,17 @@ describe("<CreditList />", () => {
   it("renders combined role labels", () => {
     render(
       <CreditList
-        credits={comicCreditsWithUserMock}
+        credits={[
+          {
+            user: creditsWithUserMock[0].user,
+            roles: ["comics:writer", "comics:editor"],
+          },
+        ]}
         onCreditClick={onCreditClickSpy}
       />,
     );
 
-    expect(screen.getByText("@luckasnix")).toBeInTheDocument();
+    expect(screen.getByText("@johndoe")).toBeInTheDocument();
     expect(screen.getByText("Writer, Editor")).toBeInTheDocument();
   });
 
