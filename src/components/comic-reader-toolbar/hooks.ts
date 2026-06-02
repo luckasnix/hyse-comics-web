@@ -1,5 +1,6 @@
 import type { EmblaCarouselType } from "embla-carousel";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useCarouselNavigation } from "#/hooks/use-carousel-navigation/hook";
 import type { AxisDirectionOptionType } from "#/types/comics";
@@ -10,6 +11,8 @@ export const useComicReaderToolbar = (
   carouselApi: EmblaCarouselType | undefined,
   direction: AxisDirectionOptionType,
 ) => {
+  const { t } = useTranslation();
+
   const {
     canNavigateFirst,
     canNavigatePrev,
@@ -25,22 +28,22 @@ export const useComicReaderToolbar = (
   const buttons = useMemo(() => {
     const ltr: NavigationConfig = {
       farLeft: {
-        label: "First page (shift + ←)",
+        label: t("reader.firstPageLtr"),
         disabled: !canNavigateFirst,
         onClick: navigateFirst,
       },
       left: {
-        label: "Previous page (←)",
+        label: t("reader.previousPageLtr"),
         disabled: !canNavigatePrev,
         onClick: navigatePrev,
       },
       right: {
-        label: "Next page (→)",
+        label: t("reader.nextPageLtr"),
         disabled: !canNavigateNext,
         onClick: navigateNext,
       },
       farRight: {
-        label: "Last page (shift + →)",
+        label: t("reader.lastPageLtr"),
         disabled: !canNavigateLast,
         onClick: navigateLast,
       },
@@ -48,22 +51,22 @@ export const useComicReaderToolbar = (
 
     const rtl: NavigationConfig = {
       farLeft: {
-        label: "Last page (shift + ←)",
+        label: t("reader.firstPageRtl"),
         disabled: !canNavigateLast,
         onClick: navigateLast,
       },
       left: {
-        label: "Next page (←)",
+        label: t("reader.previousPageRtl"),
         disabled: !canNavigateNext,
         onClick: navigateNext,
       },
       right: {
-        label: "Previous page (→)",
+        label: t("reader.nextPageRtl"),
         disabled: !canNavigatePrev,
         onClick: navigatePrev,
       },
       farRight: {
-        label: "First page (shift + →)",
+        label: t("reader.lastPageRtl"),
         disabled: !canNavigateFirst,
         onClick: navigateFirst,
       },
@@ -76,6 +79,7 @@ export const useComicReaderToolbar = (
 
     return buttonsFrom[direction];
   }, [
+    t,
     direction,
     canNavigateFirst,
     canNavigatePrev,

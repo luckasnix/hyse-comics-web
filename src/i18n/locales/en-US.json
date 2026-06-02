@@ -1,0 +1,91 @@
+{
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithApple": "Sign in with Apple",
+    "signUpWithGoogle": "Sign up with Google",
+    "signUpWithApple": "Sign up with Apple",
+    "noAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "signUpLink": "Sign up.",
+    "signInLink": "Sign in."
+  },
+  "brand": {
+    "logoAlt": "Hyse Comics logo"
+  },
+  "common": {
+    "or": "OR"
+  },
+  "contentWarning": {
+    "title": "Content Warning",
+    "containsSensitiveContent": "<strong>{{comicTitle}}</strong> contains the following sensitive content:",
+    "iUnderstand": "I understand and wish to continue",
+    "goBack": "Go Back",
+    "continue": "Continue",
+    "labels": {
+      "aiGenerated": "AI-Generated Content",
+      "graphicViolence": "Graphic Violence",
+      "sexualContent": "Sexual Content",
+      "strongLanguage": "Strong Language",
+      "substanceUse": "Substance Use"
+    }
+  },
+  "errors": {
+    "error": "Error",
+    "pageNotFound": "Page not found",
+    "pageNotFoundDescription": "Sorry, the page you are looking for does not exist.",
+    "backToHome": "Back to home"
+  },
+  "lists": {
+    "noChaptersFound": "No chapters found",
+    "noCreditsFound": "No credits found"
+  },
+  "meta": {
+    "description": "Read your favorite comics"
+  },
+  "navigation": {
+    "chapters": "Chapters",
+    "credits": "Credits"
+  },
+  "reader": {
+    "home": "Home",
+    "exitFullscreen": "Exit fullscreen (f)",
+    "enterFullscreen": "Enter fullscreen (f)",
+    "more": "More (m)",
+    "firstPageLtr": "First page (shift + ←)",
+    "previousPageLtr": "Previous page (←)",
+    "nextPageLtr": "Next page (→)",
+    "lastPageLtr": "Last page (shift + →)",
+    "firstPageRtl": "Last page (shift + ←)",
+    "previousPageRtl": "Next page (←)",
+    "nextPageRtl": "Previous page (→)",
+    "lastPageRtl": "First page (shift + →)",
+    "close": "Close",
+    "chapters": "Chapters",
+    "credits": "Credits"
+  },
+  "recommendations": {
+    "share": "Share",
+    "read": "Read",
+    "linkCopied": "Link copied to clipboard.",
+    "linkCopyFailed": "Failed to copy link to clipboard. Please try again.",
+    "previousAriaLabel": "Previous",
+    "nextAriaLabel": "Next"
+  },
+  "roles": {
+    "owner": "Owner",
+    "writer": "Writer",
+    "penciller": "Penciller",
+    "inker": "Inker",
+    "colorist": "Colorist",
+    "letterer": "Letterer",
+    "coverArtist": "Cover Artist",
+    "translator": "Translator",
+    "editor": "Editor",
+    "publisher": "Publisher"
+  }
+}

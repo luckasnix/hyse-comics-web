@@ -16,7 +16,7 @@ const ComicRoute = () => {
   );
 };
 
-export const Route = createFileRoute("/comics/$comicId")({
+export const Route = createFileRoute("/{-$locale}/comics/$comicId")({
   component: ComicRoute,
   loader: async ({ params: { comicId } }) => {
     const [comic, chapters] = await Promise.all([

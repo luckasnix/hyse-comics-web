@@ -7,9 +7,11 @@ import ListItemText from "@mui/material/ListItemText";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconCircleXFilled } from "@tabler/icons-react";
+import { useTranslation } from "react-i18next";
 
+import { roleLabelsFrom } from "#/constants/users";
 import type { CreditListProps } from "./types";
-import { keyFromCredit, roleLabelFromCredit } from "./utils";
+import { keyFromCredit, rolesFromCredit } from "./utils";
 
 const avatarStyle: SxProps<Theme> = {
   backgroundColor: "primary.main",
@@ -32,11 +34,13 @@ const emptyListStyle: SxProps<Theme> = {
 };
 
 export const CreditList = ({ credits, onCreditClick }: CreditListProps) => {
+  const { t } = useTranslation();
+
   if (credits.length === 0) {
     return (
       <Box sx={emptyListStyle}>
         <IconCircleXFilled size={48} />
-        <Typography variant="body1">No credits found</Typography>
+        <Typography variant="body1">{t("lists.noCreditsFound")}</Typography>
       </Box>
     );
   }
@@ -59,7 +63,9 @@ export const CreditList = ({ credits, onCreditClick }: CreditListProps) => {
           </ListItemAvatar>
           <ListItemText
             primary={`@${credit.user.username}`}
-            secondary={roleLabelFromCredit(credit)}
+            secondary={rolesFromCredit(credit)
+              .map((role) => t(roleLabelsFrom[role]))
+              .join(", ")}
             slotProps={{
               primary: {
                 sx: creditTextStyle,

@@ -11,9 +11,16 @@ import { ComicReaderToolbar } from "./component";
 import type { ComicReaderToolbarProps } from "./types";
 
 vi.mock("@tanstack/react-router", () => ({
-  Link: ({ children, to }: { children: ReactNode; to: string }) => (
-    <a href={to}>{children}</a>
-  ),
+  Link: ({
+    children,
+    params,
+    to,
+  }: {
+    children: ReactNode;
+    params?: { locale?: string };
+    to: string;
+  }) => <a href={to.replace("{-$locale}", params?.locale ?? "")}>{children}</a>,
+  useParams: () => ({ locale: "en-US" }),
 }));
 
 vi.mock("@tanstack/react-hotkeys", () => ({
@@ -206,6 +213,6 @@ describe("<ComicReaderToolbar />", () => {
 
     const homeLink = screen.getByRole("link");
 
-    expect(homeLink).toHaveAttribute("href", "/");
+    expect(homeLink).toHaveAttribute("href", "/en-US");
   });
 });

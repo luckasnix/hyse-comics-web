@@ -2,7 +2,9 @@ import fontsourceVariableNotoSansCss from "@fontsource-variable/noto-sans?url";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { type ReactNode, Suspense } from "react";
+import { useTranslation } from "react-i18next";
 
+import "#/i18n";
 import { UiProvider } from "#/contexts/ui/provider";
 import { UserProvider } from "#/contexts/user/provider";
 import { signedInUserMock } from "#/mocks/users";
@@ -11,24 +13,27 @@ import { NotFoundPage } from "#/pages/not-found-page";
 
 const queryClient = new QueryClient();
 
-const RootDocument = ({ children }: { children: ReactNode }) => (
-  // TODO: Add internationalization with American English and Brazilian Portuguese
-  <html lang="en-US">
-    <head>
-      <HeadContent />
-    </head>
-    <body>
-      <QueryClientProvider client={queryClient}>
-        <UiProvider>
-          <UserProvider user={signedInUserMock}>
-            <Suspense fallback={<FallbackPage />}>{children}</Suspense>
-          </UserProvider>
-        </UiProvider>
-      </QueryClientProvider>
-      <Scripts />
-    </body>
-  </html>
-);
+const RootDocument = ({ children }: { children: ReactNode }) => {
+  const { i18n } = useTranslation();
+
+  return (
+    <html lang={i18n.language}>
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        <QueryClientProvider client={queryClient}>
+          <UiProvider>
+            <UserProvider user={signedInUserMock}>
+              <Suspense fallback={<FallbackPage />}>{children}</Suspense>
+            </UserProvider>
+          </UiProvider>
+        </QueryClientProvider>
+        <Scripts />
+      </body>
+    </html>
+  );
+};
 
 export const Route = createRootRoute({
   head: () => ({

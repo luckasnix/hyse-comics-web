@@ -9,12 +9,13 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SignUpRouteImport } from './routes/sign-up'
-import { Route as SignInRouteImport } from './routes/sign-in'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as UsersUserIdRouteImport } from './routes/users/$userId'
-import { Route as ComicsComicIdRouteImport } from './routes/comics/$comicId'
-import { Route as ChaptersChapterIdRouteImport } from './routes/chapters/$chapterId'
+import { Route as Char123LocaleChar125RouteRouteImport } from './routes/{-$locale}/route'
+import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index'
+import { Route as Char123LocaleChar125SignUpRouteImport } from './routes/{-$locale}/sign-up'
+import { Route as Char123LocaleChar125SignInRouteImport } from './routes/{-$locale}/sign-in'
+import { Route as Char123LocaleChar125UsersUserIdRouteImport } from './routes/{-$locale}/users/$userId'
+import { Route as Char123LocaleChar125ComicsComicIdRouteImport } from './routes/{-$locale}/comics/$comicId'
+import { Route as Char123LocaleChar125ChaptersChapterIdRouteImport } from './routes/{-$locale}/chapters/$chapterId'
 import { Route as ApiUsersUserIdRouteImport } from './routes/api/users/$userId'
 import { Route as ApiRecommendationsChar123RecommendationIdChar125RouteImport } from './routes/api/recommendations/{-$recommendationId}'
 import { Route as ApiPagesPageIdRouteImport } from './routes/api/pages/$pageId'
@@ -25,36 +26,48 @@ import { Route as ApiComicsComicIdChaptersRouteImport } from './routes/api/comic
 import { Route as ApiChaptersChapterIdPagesRouteImport } from './routes/api/chapters/$chapterId.pages'
 import { Route as ApiChaptersChapterIdCreditsRouteImport } from './routes/api/chapters/$chapterId.credits'
 
-const SignUpRoute = SignUpRouteImport.update({
-  id: '/sign-up',
-  path: '/sign-up',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SignInRoute = SignInRouteImport.update({
-  id: '/sign-in',
-  path: '/sign-in',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const UsersUserIdRoute = UsersUserIdRouteImport.update({
-  id: '/users/$userId',
-  path: '/users/$userId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComicsComicIdRoute = ComicsComicIdRouteImport.update({
-  id: '/comics/$comicId',
-  path: '/comics/$comicId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ChaptersChapterIdRoute = ChaptersChapterIdRouteImport.update({
-  id: '/chapters/$chapterId',
-  path: '/chapters/$chapterId',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const Char123LocaleChar125RouteRoute =
+  Char123LocaleChar125RouteRouteImport.update({
+    id: '/{-$locale}',
+    path: '/{-$locale}',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char123LocaleChar125IndexRoute =
+  Char123LocaleChar125IndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
+const Char123LocaleChar125SignUpRoute =
+  Char123LocaleChar125SignUpRouteImport.update({
+    id: '/sign-up',
+    path: '/sign-up',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
+const Char123LocaleChar125SignInRoute =
+  Char123LocaleChar125SignInRouteImport.update({
+    id: '/sign-in',
+    path: '/sign-in',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
+const Char123LocaleChar125UsersUserIdRoute =
+  Char123LocaleChar125UsersUserIdRouteImport.update({
+    id: '/users/$userId',
+    path: '/users/$userId',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
+const Char123LocaleChar125ComicsComicIdRoute =
+  Char123LocaleChar125ComicsComicIdRouteImport.update({
+    id: '/comics/$comicId',
+    path: '/comics/$comicId',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
+const Char123LocaleChar125ChaptersChapterIdRoute =
+  Char123LocaleChar125ChaptersChapterIdRouteImport.update({
+    id: '/chapters/$chapterId',
+    path: '/chapters/$chapterId',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
 const ApiUsersUserIdRoute = ApiUsersUserIdRouteImport.update({
   id: '/api/users/$userId',
   path: '/api/users/$userId',
@@ -107,34 +120,35 @@ const ApiChaptersChapterIdCreditsRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/sign-in': typeof SignInRoute
-  '/sign-up': typeof SignUpRoute
-  '/chapters/$chapterId': typeof ChaptersChapterIdRoute
-  '/comics/$comicId': typeof ComicsComicIdRoute
-  '/users/$userId': typeof UsersUserIdRoute
+  '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
+  '/{-$locale}/sign-in': typeof Char123LocaleChar125SignInRoute
+  '/{-$locale}/sign-up': typeof Char123LocaleChar125SignUpRoute
+  '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
   '/api/chapters/$chapterId': typeof ApiChaptersChapterIdRouteWithChildren
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
   '/api/pages/$pageId': typeof ApiPagesPageIdRoute
   '/api/recommendations/{-$recommendationId}': typeof ApiRecommendationsChar123RecommendationIdChar125Route
   '/api/users/$userId': typeof ApiUsersUserIdRoute
+  '/{-$locale}/chapters/$chapterId': typeof Char123LocaleChar125ChaptersChapterIdRoute
+  '/{-$locale}/comics/$comicId': typeof Char123LocaleChar125ComicsComicIdRoute
+  '/{-$locale}/users/$userId': typeof Char123LocaleChar125UsersUserIdRoute
   '/api/chapters/$chapterId/credits': typeof ApiChaptersChapterIdCreditsRoute
   '/api/chapters/$chapterId/pages': typeof ApiChaptersChapterIdPagesRoute
   '/api/comics/$comicId/chapters': typeof ApiComicsComicIdChaptersRoute
   '/api/comics/$comicId/credits': typeof ApiComicsComicIdCreditsRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/sign-in': typeof SignInRoute
-  '/sign-up': typeof SignUpRoute
-  '/chapters/$chapterId': typeof ChaptersChapterIdRoute
-  '/comics/$comicId': typeof ComicsComicIdRoute
-  '/users/$userId': typeof UsersUserIdRoute
+  '/{-$locale}/sign-in': typeof Char123LocaleChar125SignInRoute
+  '/{-$locale}/sign-up': typeof Char123LocaleChar125SignUpRoute
+  '/{-$locale}': typeof Char123LocaleChar125IndexRoute
   '/api/chapters/$chapterId': typeof ApiChaptersChapterIdRouteWithChildren
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
   '/api/pages/$pageId': typeof ApiPagesPageIdRoute
   '/api/recommendations/{-$recommendationId}': typeof ApiRecommendationsChar123RecommendationIdChar125Route
   '/api/users/$userId': typeof ApiUsersUserIdRoute
+  '/{-$locale}/chapters/$chapterId': typeof Char123LocaleChar125ChaptersChapterIdRoute
+  '/{-$locale}/comics/$comicId': typeof Char123LocaleChar125ComicsComicIdRoute
+  '/{-$locale}/users/$userId': typeof Char123LocaleChar125UsersUserIdRoute
   '/api/chapters/$chapterId/credits': typeof ApiChaptersChapterIdCreditsRoute
   '/api/chapters/$chapterId/pages': typeof ApiChaptersChapterIdPagesRoute
   '/api/comics/$comicId/chapters': typeof ApiComicsComicIdChaptersRoute
@@ -142,17 +156,18 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/sign-in': typeof SignInRoute
-  '/sign-up': typeof SignUpRoute
-  '/chapters/$chapterId': typeof ChaptersChapterIdRoute
-  '/comics/$comicId': typeof ComicsComicIdRoute
-  '/users/$userId': typeof UsersUserIdRoute
+  '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
+  '/{-$locale}/sign-in': typeof Char123LocaleChar125SignInRoute
+  '/{-$locale}/sign-up': typeof Char123LocaleChar125SignUpRoute
+  '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
   '/api/chapters/$chapterId': typeof ApiChaptersChapterIdRouteWithChildren
   '/api/comics/{-$comicId}': typeof ApiComicsChar123ComicIdChar125Route
   '/api/pages/$pageId': typeof ApiPagesPageIdRoute
   '/api/recommendations/{-$recommendationId}': typeof ApiRecommendationsChar123RecommendationIdChar125Route
   '/api/users/$userId': typeof ApiUsersUserIdRoute
+  '/{-$locale}/chapters/$chapterId': typeof Char123LocaleChar125ChaptersChapterIdRoute
+  '/{-$locale}/comics/$comicId': typeof Char123LocaleChar125ComicsComicIdRoute
+  '/{-$locale}/users/$userId': typeof Char123LocaleChar125UsersUserIdRoute
   '/api/chapters/$chapterId/credits': typeof ApiChaptersChapterIdCreditsRoute
   '/api/chapters/$chapterId/pages': typeof ApiChaptersChapterIdPagesRoute
   '/api/comics/$comicId/chapters': typeof ApiComicsComicIdChaptersRoute
@@ -161,51 +176,53 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/sign-in'
-    | '/sign-up'
-    | '/chapters/$chapterId'
-    | '/comics/$comicId'
-    | '/users/$userId'
+    | '/{-$locale}'
+    | '/{-$locale}/sign-in'
+    | '/{-$locale}/sign-up'
+    | '/{-$locale}/'
     | '/api/chapters/$chapterId'
     | '/api/comics/{-$comicId}'
     | '/api/pages/$pageId'
     | '/api/recommendations/{-$recommendationId}'
     | '/api/users/$userId'
+    | '/{-$locale}/chapters/$chapterId'
+    | '/{-$locale}/comics/$comicId'
+    | '/{-$locale}/users/$userId'
     | '/api/chapters/$chapterId/credits'
     | '/api/chapters/$chapterId/pages'
     | '/api/comics/$comicId/chapters'
     | '/api/comics/$comicId/credits'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/sign-in'
-    | '/sign-up'
-    | '/chapters/$chapterId'
-    | '/comics/$comicId'
-    | '/users/$userId'
+    | '/{-$locale}/sign-in'
+    | '/{-$locale}/sign-up'
+    | '/{-$locale}'
     | '/api/chapters/$chapterId'
     | '/api/comics/{-$comicId}'
     | '/api/pages/$pageId'
     | '/api/recommendations/{-$recommendationId}'
     | '/api/users/$userId'
+    | '/{-$locale}/chapters/$chapterId'
+    | '/{-$locale}/comics/$comicId'
+    | '/{-$locale}/users/$userId'
     | '/api/chapters/$chapterId/credits'
     | '/api/chapters/$chapterId/pages'
     | '/api/comics/$comicId/chapters'
     | '/api/comics/$comicId/credits'
   id:
     | '__root__'
-    | '/'
-    | '/sign-in'
-    | '/sign-up'
-    | '/chapters/$chapterId'
-    | '/comics/$comicId'
-    | '/users/$userId'
+    | '/{-$locale}'
+    | '/{-$locale}/sign-in'
+    | '/{-$locale}/sign-up'
+    | '/{-$locale}/'
     | '/api/chapters/$chapterId'
     | '/api/comics/{-$comicId}'
     | '/api/pages/$pageId'
     | '/api/recommendations/{-$recommendationId}'
     | '/api/users/$userId'
+    | '/{-$locale}/chapters/$chapterId'
+    | '/{-$locale}/comics/$comicId'
+    | '/{-$locale}/users/$userId'
     | '/api/chapters/$chapterId/credits'
     | '/api/chapters/$chapterId/pages'
     | '/api/comics/$comicId/chapters'
@@ -213,12 +230,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  SignInRoute: typeof SignInRoute
-  SignUpRoute: typeof SignUpRoute
-  ChaptersChapterIdRoute: typeof ChaptersChapterIdRoute
-  ComicsComicIdRoute: typeof ComicsComicIdRoute
-  UsersUserIdRoute: typeof UsersUserIdRoute
+  Char123LocaleChar125RouteRoute: typeof Char123LocaleChar125RouteRouteWithChildren
   ApiChaptersChapterIdRoute: typeof ApiChaptersChapterIdRouteWithChildren
   ApiComicsChar123ComicIdChar125Route: typeof ApiComicsChar123ComicIdChar125Route
   ApiPagesPageIdRoute: typeof ApiPagesPageIdRoute
@@ -230,47 +242,54 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sign-up': {
-      id: '/sign-up'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof SignUpRouteImport
+    '/{-$locale}': {
+      id: '/{-$locale}'
+      path: '/{-$locale}'
+      fullPath: '/{-$locale}'
+      preLoaderRoute: typeof Char123LocaleChar125RouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sign-in': {
-      id: '/sign-in'
-      path: '/sign-in'
-      fullPath: '/sign-in'
-      preLoaderRoute: typeof SignInRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
+    '/{-$locale}/': {
+      id: '/{-$locale}/'
       path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/{-$locale}/'
+      preLoaderRoute: typeof Char123LocaleChar125IndexRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
     }
-    '/users/$userId': {
-      id: '/users/$userId'
+    '/{-$locale}/sign-up': {
+      id: '/{-$locale}/sign-up'
+      path: '/sign-up'
+      fullPath: '/{-$locale}/sign-up'
+      preLoaderRoute: typeof Char123LocaleChar125SignUpRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
+    '/{-$locale}/sign-in': {
+      id: '/{-$locale}/sign-in'
+      path: '/sign-in'
+      fullPath: '/{-$locale}/sign-in'
+      preLoaderRoute: typeof Char123LocaleChar125SignInRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
+    '/{-$locale}/users/$userId': {
+      id: '/{-$locale}/users/$userId'
       path: '/users/$userId'
-      fullPath: '/users/$userId'
-      preLoaderRoute: typeof UsersUserIdRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/{-$locale}/users/$userId'
+      preLoaderRoute: typeof Char123LocaleChar125UsersUserIdRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
     }
-    '/comics/$comicId': {
-      id: '/comics/$comicId'
+    '/{-$locale}/comics/$comicId': {
+      id: '/{-$locale}/comics/$comicId'
       path: '/comics/$comicId'
-      fullPath: '/comics/$comicId'
-      preLoaderRoute: typeof ComicsComicIdRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/{-$locale}/comics/$comicId'
+      preLoaderRoute: typeof Char123LocaleChar125ComicsComicIdRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
     }
-    '/chapters/$chapterId': {
-      id: '/chapters/$chapterId'
+    '/{-$locale}/chapters/$chapterId': {
+      id: '/{-$locale}/chapters/$chapterId'
       path: '/chapters/$chapterId'
-      fullPath: '/chapters/$chapterId'
-      preLoaderRoute: typeof ChaptersChapterIdRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/{-$locale}/chapters/$chapterId'
+      preLoaderRoute: typeof Char123LocaleChar125ChaptersChapterIdRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
     }
     '/api/users/$userId': {
       id: '/api/users/$userId'
@@ -338,6 +357,32 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface Char123LocaleChar125RouteRouteChildren {
+  Char123LocaleChar125SignInRoute: typeof Char123LocaleChar125SignInRoute
+  Char123LocaleChar125SignUpRoute: typeof Char123LocaleChar125SignUpRoute
+  Char123LocaleChar125IndexRoute: typeof Char123LocaleChar125IndexRoute
+  Char123LocaleChar125ChaptersChapterIdRoute: typeof Char123LocaleChar125ChaptersChapterIdRoute
+  Char123LocaleChar125ComicsComicIdRoute: typeof Char123LocaleChar125ComicsComicIdRoute
+  Char123LocaleChar125UsersUserIdRoute: typeof Char123LocaleChar125UsersUserIdRoute
+}
+
+const Char123LocaleChar125RouteRouteChildren: Char123LocaleChar125RouteRouteChildren =
+  {
+    Char123LocaleChar125SignInRoute: Char123LocaleChar125SignInRoute,
+    Char123LocaleChar125SignUpRoute: Char123LocaleChar125SignUpRoute,
+    Char123LocaleChar125IndexRoute: Char123LocaleChar125IndexRoute,
+    Char123LocaleChar125ChaptersChapterIdRoute:
+      Char123LocaleChar125ChaptersChapterIdRoute,
+    Char123LocaleChar125ComicsComicIdRoute:
+      Char123LocaleChar125ComicsComicIdRoute,
+    Char123LocaleChar125UsersUserIdRoute: Char123LocaleChar125UsersUserIdRoute,
+  }
+
+const Char123LocaleChar125RouteRouteWithChildren =
+  Char123LocaleChar125RouteRoute._addFileChildren(
+    Char123LocaleChar125RouteRouteChildren,
+  )
+
 interface ApiChaptersChapterIdRouteChildren {
   ApiChaptersChapterIdCreditsRoute: typeof ApiChaptersChapterIdCreditsRoute
   ApiChaptersChapterIdPagesRoute: typeof ApiChaptersChapterIdPagesRoute
@@ -352,12 +397,7 @@ const ApiChaptersChapterIdRouteWithChildren =
   ApiChaptersChapterIdRoute._addFileChildren(ApiChaptersChapterIdRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  SignInRoute: SignInRoute,
-  SignUpRoute: SignUpRoute,
-  ChaptersChapterIdRoute: ChaptersChapterIdRoute,
-  ComicsComicIdRoute: ComicsComicIdRoute,
-  UsersUserIdRoute: UsersUserIdRoute,
+  Char123LocaleChar125RouteRoute: Char123LocaleChar125RouteRouteWithChildren,
   ApiChaptersChapterIdRoute: ApiChaptersChapterIdRouteWithChildren,
   ApiComicsChar123ComicIdChar125Route: ApiComicsChar123ComicIdChar125Route,
   ApiPagesPageIdRoute: ApiPagesPageIdRoute,

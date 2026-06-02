@@ -4,9 +4,10 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import { darken } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useParams } from "@tanstack/react-router";
 import useEmblaCarousel from "embla-carousel-react";
 import { Activity } from "react";
+import { useTranslation } from "react-i18next";
 
 import { RecommendationCard } from "#/components/recommendation-card/component";
 import { useCarouselNavigation } from "#/hooks/use-carousel-navigation/hook";
@@ -62,6 +63,10 @@ export const RecommendationShelf = ({
   title,
   chapters,
 }: RecommendationShelfProps) => {
+  const { t } = useTranslation();
+
+  const { locale } = useParams({ strict: false });
+
   const navigate = useNavigate();
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -73,8 +78,8 @@ export const RecommendationShelf = ({
 
   const handleReadButtonClick = (chapterId: string) => {
     navigate({
-      to: "/chapters/$chapterId",
-      params: { chapterId: chapterId },
+      to: "/{-$locale}/chapters/$chapterId",
+      params: { locale, chapterId: chapterId },
     });
   };
 
@@ -86,7 +91,7 @@ export const RecommendationShelf = ({
       <Box sx={carouselStyle}>
         <Activity mode={canNavigatePrev ? "visible" : "hidden"}>
           <IconButton
-            aria-label="Previous"
+            aria-label={t("recommendations.previousAriaLabel")}
             color="secondary"
             sx={prevButtonStyle}
             disabled={!canNavigatePrev}
@@ -111,7 +116,7 @@ export const RecommendationShelf = ({
         </Box>
         <Activity mode={canNavigateNext ? "visible" : "hidden"}>
           <IconButton
-            aria-label="Next"
+            aria-label={t("recommendations.nextAriaLabel")}
             color="secondary"
             sx={nextButtonStyle}
             disabled={!canNavigateNext}

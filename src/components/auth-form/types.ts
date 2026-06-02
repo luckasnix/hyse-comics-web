@@ -24,5 +24,6 @@ export type AuthFormSocialProps = Readonly<{
 export type AuthFormSwitchPromptProps = Readonly<{
   message: string;
   linkTo: string;
+  linkParams?: Record<string, string | undefined>;
   linkText: string;
 }>;

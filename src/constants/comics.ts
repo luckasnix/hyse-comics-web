@@ -15,9 +15,9 @@ export const carouselDirectionFrom: Record<
 };
 
 export const contentWarningLabelsFrom: Record<ContentWarning, string> = {
-  "ai-generated": "AI-Generated Content",
-  "graphic-violence": "Graphic Violence",
-  "sexual-content": "Sexual Content",
-  "strong-language": "Strong Language",
-  "substance-use": "Substance Use",
+  "ai-generated": "contentWarning.labels.aiGenerated",
+  "graphic-violence": "contentWarning.labels.graphicViolence",
+  "sexual-content": "contentWarning.labels.sexualContent",
+  "strong-language": "contentWarning.labels.strongLanguage",
+  "substance-use": "contentWarning.labels.substanceUse",
 };

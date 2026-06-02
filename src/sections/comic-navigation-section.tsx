@@ -1,6 +1,7 @@
 import Stack from "@mui/material/Stack";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
 import { ChapterList } from "#/components/chapter-list/component";
 import { CreditList } from "#/components/credit-list/component";
@@ -17,6 +18,10 @@ export const ComicNavigationSection = ({
   comicId,
   chapters,
 }: ComicNavigationSectionProps) => {
+  const { t } = useTranslation();
+
+  const { locale } = useParams({ strict: false });
+
   const navigate = useNavigate();
 
   const { data: credits = [] } = useQuery({
@@ -26,15 +31,15 @@ export const ComicNavigationSection = ({
 
   const navigateToChapter = (chapterId: string) => {
     navigate({
-      to: "/chapters/$chapterId",
-      params: { chapterId: chapterId },
+      to: "/{-$locale}/chapters/$chapterId",
+      params: { locale, chapterId: chapterId },
     });
   };
 
   const navigateToUser = (userId: string) => {
     navigate({
-      to: "/users/$userId",
-      params: { userId: userId },
+      to: "/{-$locale}/users/$userId",
+      params: { locale, userId: userId },
     });
   };
 
@@ -43,8 +48,8 @@ export const ComicNavigationSection = ({
       <TabGroup initialValue={0}>
         <TabGroup.List
           items={[
-            { value: 0, label: "Chapters" },
-            { value: 1, label: "Credits" },
+            { value: 0, label: t("navigation.chapters") },
+            { value: 1, label: t("navigation.credits") },
           ]}
         />
         <TabGroup.Panel value={0}>

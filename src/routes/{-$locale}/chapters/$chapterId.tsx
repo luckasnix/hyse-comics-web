@@ -23,7 +23,7 @@ const ChapterRoute = () => {
   );
 };
 
-export const Route = createFileRoute("/chapters/$chapterId")({
+export const Route = createFileRoute("/{-$locale}/chapters/$chapterId")({
   component: ChapterRoute,
   loader: async ({ params: { chapterId } }) => {
     const chapter = await getChapter(chapterId);

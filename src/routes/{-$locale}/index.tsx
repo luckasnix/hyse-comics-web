@@ -14,7 +14,7 @@ const HomeRoute = () => {
   );
 };
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/{-$locale}/")({
   component: HomeRoute,
   loader: async () => {
     const recommendations = await getRecommendations();

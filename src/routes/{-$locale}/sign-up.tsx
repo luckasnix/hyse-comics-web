@@ -1,21 +1,27 @@
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import { IconLogin } from "@tabler/icons-react";
+import { IconUserPlus } from "@tabler/icons-react";
 import { useForm } from "@tanstack/react-form";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
 import { AuthForm } from "#/components/auth-form/component";
 import { PageLayout } from "#/layouts/page-layout";
-import { signInSchema } from "#/schemas/users";
+import { signUpSchema } from "#/schemas/users";
 
-const SignInRoute = () => {
+const SignUpRoute = () => {
+  const { t } = useTranslation();
+
+  const { locale } = useParams({ strict: false });
+
   const form = useForm({
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
     },
     validators: {
-      onSubmit: signInSchema,
+      onSubmit: signUpSchema,
     },
     onSubmit: async ({ value, formApi }) => {
       console.log("Form submitted:", value);
@@ -26,13 +32,13 @@ const SignInRoute = () => {
   return (
     <PageLayout maxWidth="sm">
       <AuthForm>
-        <AuthForm.Title>Sign In</AuthForm.Title>
+        <AuthForm.Title>{t("auth.signUp")}</AuthForm.Title>
         <Stack spacing={2}>
           <form.Field name="email">
             {(field) => (
               <TextField
                 fullWidth
-                label="Email"
+                label={t("auth.email")}
                 type="email"
                 value={field.state.value}
                 onChange={(event) => {
@@ -47,7 +53,22 @@ const SignInRoute = () => {
             {(field) => (
               <TextField
                 fullWidth
-                label="Password"
+                label={t("auth.password")}
+                type="password"
+                value={field.state.value}
+                onChange={(event) => {
+                  field.handleChange(event.target.value);
+                }}
+                error={field.state.meta.errors.length > 0}
+                helperText={field.state.meta.errors[0]?.message}
+              />
+            )}
+          </form.Field>
+          <form.Field name="confirmPassword">
+            {(field) => (
+              <TextField
+                fullWidth
+                label={t("auth.confirmPassword")}
                 type="password"
                 value={field.state.value}
                 onChange={(event) => {
@@ -68,42 +89,43 @@ const SignInRoute = () => {
               <AuthForm.SubmitButton
                 disabled={!canSubmit || isSubmitting}
                 loading={isSubmitting}
-                icon={<IconLogin />}
+                icon={<IconUserPlus />}
                 onClick={(event) => {
                   event.preventDefault();
                   form.handleSubmit();
                 }}
               >
-                Sign In
+                {t("auth.signUp")}
               </AuthForm.SubmitButton>
             )}
           </form.Subscribe>
           <AuthForm.Divider />
           <AuthForm.SocialGoogleButton
             onClick={() => {
-              console.log("Sign in with Google");
+              console.log("Sign up with Google");
             }}
           >
-            Sign in with Google
+            {t("auth.signUpWithGoogle")}
           </AuthForm.SocialGoogleButton>
           <AuthForm.SocialAppleButton
             onClick={() => {
-              console.log("Sign in with Apple");
+              console.log("Sign up with Apple");
             }}
           >
-            Sign in with Apple
+            {t("auth.signUpWithApple")}
           </AuthForm.SocialAppleButton>
         </Stack>
         <AuthForm.SwitchPrompt
-          message="Don't have an account?"
-          linkTo="/sign-up"
-          linkText="Sign up."
+          message={t("auth.alreadyHaveAccount")}
+          linkTo="/{-$locale}/sign-in"
+          linkParams={{ locale }}
+          linkText={t("auth.signInLink")}
         />
       </AuthForm>
     </PageLayout>
   );
 };
 
-export const Route = createFileRoute("/sign-in")({
-  component: SignInRoute,
+export const Route = createFileRoute("/{-$locale}/sign-up")({
+  component: SignUpRoute,
 });

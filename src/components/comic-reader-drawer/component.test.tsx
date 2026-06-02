@@ -18,6 +18,7 @@ vi.mock("@tanstack/react-router", () => ({
     <a href={to}>{children}</a>
   ),
   useNavigate: () => navigateSpy,
+  useParams: () => ({ locale: "en-US" }),
 }));
 
 vi.mock("#/services/comics", () => ({
@@ -137,8 +138,8 @@ describe("<ComicReaderDrawer />", () => {
     await user.click(screen.getByText(chapters[1].title));
 
     expect(navigateSpy).toHaveBeenCalledWith({
-      to: "/chapters/$chapterId",
-      params: { chapterId: chapters[1].id },
+      to: "/{-$locale}/chapters/$chapterId",
+      params: { locale: "en-US", chapterId: chapters[1].id },
     });
   });
 
@@ -151,8 +152,8 @@ describe("<ComicReaderDrawer />", () => {
     await user.click(await screen.findByText("@johndoe"));
 
     expect(navigateSpy).toHaveBeenCalledWith({
-      to: "/users/$userId",
-      params: { userId: creditsWithUserMock[0].user.id },
+      to: "/{-$locale}/users/$userId",
+      params: { locale: "en-US", userId: creditsWithUserMock[0].user.id },
     });
   });
 });

@@ -19,7 +19,7 @@ const UserRoute = () => {
   );
 };
 
-export const Route = createFileRoute("/users/$userId")({
+export const Route = createFileRoute("/{-$locale}/users/$userId")({
   component: UserRoute,
   loader: async ({ params: { userId } }) => {
     const user = await getUser(userId);

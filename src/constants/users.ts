@@ -7,14 +7,14 @@ export const carouselAxisFrom: Record<ReadingAxis, AxisOptionType> = {
 };
 
 export const roleLabelsFrom: Record<UserRoles, string> = {
-  "comics:owner": "Owner",
-  "comics:writer": "Writer",
-  "comics:penciller": "Penciller",
-  "comics:inker": "Inker",
-  "comics:colorist": "Colorist",
-  "comics:letterer": "Letterer",
-  "comics:cover-artist": "Cover Artist",
-  "comics:translator": "Translator",
-  "comics:editor": "Editor",
-  "comics:publisher": "Publisher",
+  "comics:owner": "roles.owner",
+  "comics:writer": "roles.writer",
+  "comics:penciller": "roles.penciller",
+  "comics:inker": "roles.inker",
+  "comics:colorist": "roles.colorist",
+  "comics:letterer": "roles.letterer",
+  "comics:cover-artist": "roles.coverArtist",
+  "comics:translator": "roles.translator",
+  "comics:editor": "roles.editor",
+  "comics:publisher": "roles.publisher",
 };

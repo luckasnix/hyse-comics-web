@@ -4,6 +4,7 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { IconBrandInstagram, IconBrandX } from "@tabler/icons-react";
 import type { CSSProperties } from "react";
+import { useTranslation } from "react-i18next";
 
 const containerStyle: SxProps<Theme> = {
   width: "100%",
@@ -24,36 +25,40 @@ const logoStyle: CSSProperties = {
 };
 
 // TODO: Use Hyse's social media
-export const FooterSection = () => (
-  <Box component="footer" sx={containerStyle}>
-    <img
-      src="/logo.svg"
-      width={256}
-      height={64}
-      style={logoStyle}
-      alt="Hyse Comics logo"
-    />
-    <Stack direction="row" spacing={1}>
-      <IconButton
-        aria-label="X (Twitter)"
-        component="a"
-        href="https://x.com/luckasnix"
-        target="_blank"
-        rel="noopener noreferrer"
-        sx={iconButtonStyle}
-      >
-        <IconBrandX />
-      </IconButton>
-      <IconButton
-        aria-label="Instagram"
-        component="a"
-        href="https://www.instagram.com/luckasnix/"
-        target="_blank"
-        rel="noopener noreferrer"
-        sx={iconButtonStyle}
-      >
-        <IconBrandInstagram />
-      </IconButton>
-    </Stack>
-  </Box>
-);
+export const FooterSection = () => {
+  const { t } = useTranslation();
+
+  return (
+    <Box component="footer" sx={containerStyle}>
+      <img
+        src="/logo.svg"
+        width={256}
+        height={64}
+        style={logoStyle}
+        alt={t("brand.logoAlt")}
+      />
+      <Stack direction="row" spacing={1}>
+        <IconButton
+          aria-label="X (Twitter)"
+          component="a"
+          href="https://x.com/luckasnix"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={iconButtonStyle}
+        >
+          <IconBrandX />
+        </IconButton>
+        <IconButton
+          aria-label="Instagram"
+          component="a"
+          href="https://www.instagram.com/luckasnix/"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={iconButtonStyle}
+        >
+          <IconBrandInstagram />
+        </IconButton>
+      </Stack>
+    </Box>
+  );
+};

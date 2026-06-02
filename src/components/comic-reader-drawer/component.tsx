@@ -6,7 +6,8 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconX } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate, useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
 import { ChapterList } from "#/components/chapter-list/component";
 import { CreditList } from "#/components/credit-list/component";
@@ -43,6 +44,10 @@ export const ComicReaderDrawer = ({
 }: ComicReaderDrawerProps) => {
   const { comic, chapters, currentChapterId } = useComic();
 
+  const { t } = useTranslation();
+
+  const { locale } = useParams({ strict: false });
+
   const navigate = useNavigate();
 
   const { data: chapterCredits = [] } = useQuery({
@@ -53,15 +58,15 @@ export const ComicReaderDrawer = ({
 
   const navigateToChapter = (chapterId: string) => {
     navigate({
-      to: "/chapters/$chapterId",
-      params: { chapterId: chapterId },
+      to: "/{-$locale}/chapters/$chapterId",
+      params: { locale, chapterId: chapterId },
     });
   };
 
   const navigateToUser = (userId: string) => {
     navigate({
-      to: "/users/$userId",
-      params: { userId: userId },
+      to: "/{-$locale}/users/$userId",
+      params: { locale, userId: userId },
     });
   };
 
@@ -69,13 +74,13 @@ export const ComicReaderDrawer = ({
     <Drawer open={isOpen} anchor="right" onClose={onClose}>
       <Stack spacing={1} sx={containerStyle}>
         <Box sx={headerActionsStyle}>
-          <IconButton aria-label="Close" onClick={onClose}>
+          <IconButton aria-label={t("reader.close")} onClick={onClose}>
             <IconX />
           </IconButton>
         </Box>
         <Link
-          to="/comics/$comicId"
-          params={{ comicId: comic.id }}
+          to="/{-$locale}/comics/$comicId"
+          params={{ locale, comicId: comic.id }}
           style={linkResetStyle}
         >
           <Box sx={overviewStyle}>
@@ -90,8 +95,8 @@ export const ComicReaderDrawer = ({
         <TabGroup initialValue={0}>
           <TabGroup.List
             items={[
-              { value: 0, label: "Chapters" },
-              { value: 1, label: "Credits" },
+              { value: 0, label: t("reader.chapters") },
+              { value: 1, label: t("reader.credits") },
             ]}
           />
           <TabGroup.Panel value={0}>

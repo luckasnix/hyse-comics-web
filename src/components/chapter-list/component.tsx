@@ -7,6 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconCircleXFilled } from "@tabler/icons-react";
+import { useTranslation } from "react-i18next";
 
 import type { ChapterListProps } from "./types";
 
@@ -35,11 +36,13 @@ export const ChapterList = ({
   selectedChapterId,
   onChapterClick,
 }: ChapterListProps) => {
+  const { t } = useTranslation();
+
   if (chapters.length === 0) {
     return (
       <Box sx={emptyListStyle}>
         <IconCircleXFilled size={48} />
-        <Typography variant="body1">No chapters found</Typography>
+        <Typography variant="body1">{t("lists.noChaptersFound")}</Typography>
       </Box>
     );
   }

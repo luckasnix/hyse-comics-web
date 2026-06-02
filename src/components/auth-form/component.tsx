@@ -10,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import type { CSSProperties } from "react";
+import { useTranslation } from "react-i18next";
 
 import { linkResetStyle } from "#/styles/common";
 
@@ -66,7 +67,10 @@ const dividerStyle: SxProps<Theme> = {
   marginY: 2,
 };
 
-const AuthFormDivider = () => <Divider sx={dividerStyle}>OR</Divider>;
+const AuthFormDivider = () => {
+  const { t } = useTranslation();
+  return <Divider sx={dividerStyle}>{t("common.or")}</Divider>;
+};
 
 const AuthFormSocialGoogleButton = ({
   onClick,
@@ -109,11 +113,12 @@ const linkStyle: CSSProperties = {
 const AuthFormSwitchPrompt = ({
   message,
   linkTo,
+  linkParams,
   linkText,
 }: AuthFormSwitchPromptProps) => (
   <Typography variant="body2" sx={switchPromptStyle}>
     {message}{" "}
-    <Link to={linkTo} style={linkStyle}>
+    <Link to={linkTo} params={linkParams} style={linkStyle}>
       {linkText}
     </Link>
   </Typography>

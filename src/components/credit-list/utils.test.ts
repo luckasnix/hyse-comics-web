@@ -29,8 +29,10 @@ describe("rolesFromCredit()", () => {
 });
 
 describe("roleLabelFromCredit()", () => {
-  it("maps and joins role labels", () => {
-    expect(roleLabelFromCredit(multiRoleCreditMock)).toBe("Writer, Editor");
+  it("maps and joins role label translation keys", () => {
+    expect(roleLabelFromCredit(multiRoleCreditMock)).toBe(
+      "roles.writer, roles.editor",
+    );
   });
 });
 

@@ -5,6 +5,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
 import { useUi } from "#/contexts/ui/hook";
 import { getClampedTextStyle } from "#/styles/common";
@@ -43,21 +45,27 @@ export const RecommendationCard = ({
   imageUrl,
   onReadButtonClick,
 }: RecommendationCardProps) => {
+  const { t } = useTranslation();
+
+  const { locale } = useParams({ strict: false });
+
   const { showToast } = useUi();
 
   const baseUrl = getBaseUrl();
 
   const shareChapterLink = async () => {
     try {
-      await navigator.clipboard.writeText(`${baseUrl}/chapters/${chapterId}`);
+      await navigator.clipboard.writeText(
+        `${baseUrl}/${locale}/chapters/${chapterId}`,
+      );
       showToast({
         severity: "success",
-        message: "Link copied to clipboard.",
+        message: t("recommendations.linkCopied"),
       });
     } catch {
       showToast({
         severity: "error",
-        message: "Failed to copy link to clipboard. Please try again.",
+        message: t("recommendations.linkCopyFailed"),
       });
     }
   };
@@ -83,7 +91,7 @@ export const RecommendationCard = ({
       </CardContent>
       <CardActions>
         <Button size="small" color="secondary" onClick={shareChapterLink}>
-          Share
+          {t("recommendations.share")}
         </Button>
         <Button
           variant="contained"
@@ -91,7 +99,7 @@ export const RecommendationCard = ({
           color="secondary"
           onClick={readComic}
         >
-          Read
+          {t("recommendations.read")}
         </Button>
       </CardActions>
     </Card>

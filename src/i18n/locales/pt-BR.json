@@ -1,0 +1,91 @@
+{
+  "auth": {
+    "signIn": "Entrar",
+    "signUp": "Cadastrar",
+    "email": "E-mail",
+    "password": "Senha",
+    "confirmPassword": "Confirmar senha",
+    "signInWithGoogle": "Entrar com Google",
+    "signInWithApple": "Entrar com Apple",
+    "signUpWithGoogle": "Cadastrar com Google",
+    "signUpWithApple": "Cadastrar com Apple",
+    "noAccount": "Não tem uma conta?",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "signUpLink": "Cadastre-se.",
+    "signInLink": "Entre."
+  },
+  "brand": {
+    "logoAlt": "Logo Hyse Comics"
+  },
+  "common": {
+    "or": "OU"
+  },
+  "contentWarning": {
+    "title": "Aviso de Conteúdo",
+    "containsSensitiveContent": "<strong>{{comicTitle}}</strong> contém o seguinte conteúdo sensível:",
+    "iUnderstand": "Eu entendo e desejo continuar",
+    "goBack": "Voltar",
+    "continue": "Continuar",
+    "labels": {
+      "aiGenerated": "Conteúdo Gerado por IA",
+      "graphicViolence": "Violência Gráfica",
+      "sexualContent": "Conteúdo Sexual",
+      "strongLanguage": "Linguagem Forte",
+      "substanceUse": "Uso de Substâncias"
+    }
+  },
+  "errors": {
+    "error": "Erro",
+    "pageNotFound": "Página não encontrada",
+    "pageNotFoundDescription": "Desculpe, a página que você está procurando não existe.",
+    "backToHome": "Voltar para o início"
+  },
+  "lists": {
+    "noChaptersFound": "Nenhum capítulo encontrado",
+    "noCreditsFound": "Nenhum crédito encontrado"
+  },
+  "meta": {
+    "description": "Leia seus quadrinhos favoritos"
+  },
+  "navigation": {
+    "chapters": "Capítulos",
+    "credits": "Créditos"
+  },
+  "reader": {
+    "home": "Início",
+    "exitFullscreen": "Sair da tela cheia (f)",
+    "enterFullscreen": "Entrar em tela cheia (f)",
+    "more": "Mais (m)",
+    "firstPageLtr": "Primeira página (shift + ←)",
+    "previousPageLtr": "Página anterior (←)",
+    "nextPageLtr": "Próxima página (→)",
+    "lastPageLtr": "Última página (shift + →)",
+    "firstPageRtl": "Última página (shift + ←)",
+    "previousPageRtl": "Próxima página (←)",
+    "nextPageRtl": "Página anterior (→)",
+    "lastPageRtl": "Primeira página (shift + →)",
+    "close": "Fechar",
+    "chapters": "Capítulos",
+    "credits": "Créditos"
+  },
+  "recommendations": {
+    "share": "Compartilhar",
+    "read": "Ler",
+    "linkCopied": "Link copiado para a área de transferência.",
+    "linkCopyFailed": "Falha ao copiar o link. Por favor, tente novamente.",
+    "previousAriaLabel": "Anterior",
+    "nextAriaLabel": "Próximo"
+  },
+  "roles": {
+    "owner": "Proprietário",
+    "writer": "Roteirista",
+    "penciller": "Desenhista",
+    "inker": "Arte-finalista",
+    "colorist": "Colorista",
+    "letterer": "Letrista",
+    "coverArtist": "Capista",
+    "translator": "Tradutor",
+    "editor": "Editor",
+    "publisher": "Editora"
+  }
+}

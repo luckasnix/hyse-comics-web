@@ -11,6 +11,10 @@ import type { RecommendationCardProps } from "./types";
 
 const onReadButtonClickSpy = vi.fn();
 
+vi.mock("@tanstack/react-router", () => ({
+  useParams: () => ({ locale: "en-US" }),
+}));
+
 const defaultProps: RecommendationCardProps = {
   chapterId: chaptersMock[0].id,
   title: comicsMock[0].title,

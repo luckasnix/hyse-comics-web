@@ -13,6 +13,7 @@ const navigateSpy = vi.fn();
 
 vi.mock("@tanstack/react-router", () => ({
   useNavigate: () => navigateSpy,
+  useParams: () => ({ locale: "en-US" }),
 }));
 
 vi.mock("embla-carousel-react", () => ({
@@ -136,8 +137,8 @@ describe("<RecommendationShelf />", () => {
     await user.click(screen.getAllByRole("button", { name: "Read" })[0]);
 
     expect(navigateSpy).toHaveBeenCalledWith({
-      to: "/chapters/$chapterId",
-      params: { chapterId: recommendation.chapters[0].id },
+      to: "/{-$locale}/chapters/$chapterId",
+      params: { locale: "en-US", chapterId: recommendation.chapters[0].id },
     });
   });
 });

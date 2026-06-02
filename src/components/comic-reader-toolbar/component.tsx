@@ -15,7 +15,8 @@ import {
   IconLayoutSidebarLeftCollapseFilled,
 } from "@tabler/icons-react";
 import { useHotkey } from "@tanstack/react-hotkeys";
-import { Link } from "@tanstack/react-router";
+import { Link, useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
 import { useComicReaderToolbar } from "#/components/comic-reader-toolbar/hooks";
 import {
@@ -88,6 +89,10 @@ export const ComicReaderToolbar = ({
   openDrawer,
   toggleDrawer,
 }: ComicReaderToolbarProps) => {
+  const { t } = useTranslation();
+
+  const { locale } = useParams({ strict: false });
+
   const { comic } = useComic();
 
   const { buttons, currentSlideNumber, slidesLength } = useComicReaderToolbar(
@@ -111,9 +116,9 @@ export const ComicReaderToolbar = ({
     <Grid container sx={containerStyle}>
       <Grid container size="grow" sx={innerContainerStyle}>
         <Grid size={2} sx={gridStartStyle}>
-          <Tooltip title="Home">
-            <Link to="/">
-              <IconButton aria-label="Home" sx={iconButtonStyle}>
+          <Tooltip title={t("reader.home")}>
+            <Link to="/{-$locale}" params={{ locale }}>
+              <IconButton aria-label={t("reader.home")} sx={iconButtonStyle}>
                 <IconHomeFilled />
               </IconButton>
             </Link>
@@ -176,10 +181,10 @@ export const ComicReaderToolbar = ({
         </Grid>
         <Grid size={2} sx={gridEndStyle}>
           {isFullscreen ? (
-            <Tooltip title="Exit fullscreen (f)">
+            <Tooltip title={t("reader.exitFullscreen")}>
               <Box component="span">
                 <IconButton
-                  aria-label="Exit fullscreen (f)"
+                  aria-label={t("reader.exitFullscreen")}
                   sx={iconButtonStyle}
                   onClick={exitFullscreen}
                 >
@@ -188,10 +193,10 @@ export const ComicReaderToolbar = ({
               </Box>
             </Tooltip>
           ) : (
-            <Tooltip title="Enter fullscreen (f)">
+            <Tooltip title={t("reader.enterFullscreen")}>
               <Box component="span">
                 <IconButton
-                  aria-label="Enter fullscreen (f)"
+                  aria-label={t("reader.enterFullscreen")}
                   sx={iconButtonStyle}
                   onClick={enterFullscreen}
                 >
@@ -200,10 +205,10 @@ export const ComicReaderToolbar = ({
               </Box>
             </Tooltip>
           )}
-          <Tooltip title="More (m)">
+          <Tooltip title={t("reader.more")}>
             <Box component="span">
               <IconButton
-                aria-label="More (m)"
+                aria-label={t("reader.more")}
                 sx={iconButtonStyle}
                 disabled={isFullscreen}
                 onClick={openDrawer}

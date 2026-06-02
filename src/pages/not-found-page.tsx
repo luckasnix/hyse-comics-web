@@ -3,7 +3,10 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconHomeFilled } from "@tabler/icons-react";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
+
+import { useUser } from "#/contexts/user/hook";
 
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",
@@ -16,14 +19,20 @@ const textContainerStyle: SxProps<Theme> = {
 };
 
 export const NotFoundPage = () => {
+  const { t } = useTranslation();
+
+  const { locale } = useParams({ strict: false });
+
+  const { user } = useUser();
+
   const navigate = useNavigate();
 
   return (
     <Stack direction="column" spacing={2} sx={containerStyle}>
       <Stack direction="column" spacing={1} sx={textContainerStyle}>
-        <Typography variant="h3">Page not found</Typography>
+        <Typography variant="h3">{t("errors.pageNotFound")}</Typography>
         <Typography variant="body1">
-          Sorry, the page you are looking for does not exist.
+          {t("errors.pageNotFoundDescription")}
         </Typography>
       </Stack>
       <Button
@@ -31,10 +40,13 @@ export const NotFoundPage = () => {
         size="large"
         startIcon={<IconHomeFilled />}
         onClick={() => {
-          navigate({ to: "/" });
+          navigate({
+            to: "/{-$locale}",
+            params: { locale: locale ?? user.profile.preferredLanguage },
+          });
         }}
       >
-        Back to home
+        {t("errors.backToHome")}
       </Button>
     </Stack>
   );

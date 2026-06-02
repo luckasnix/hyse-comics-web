@@ -11,7 +11,7 @@ describe("<DefaultError />", () => {
     render(<DefaultError error={new Error("Failed to load page")} />);
 
     expect(
-      screen.getByRole("heading", { level: 3, name: "Erro" }),
+      screen.getByRole("heading", { level: 3, name: "Error" }),
     ).toBeInTheDocument();
     expect(screen.getByText("Failed to load page")).toBeInTheDocument();
   });

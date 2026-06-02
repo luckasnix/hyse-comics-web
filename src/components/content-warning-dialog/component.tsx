@@ -12,6 +12,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconAlertTriangle } from "@tabler/icons-react";
 import { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 
 import { contentWarningLabelsFrom } from "#/constants/comics";
 
@@ -50,6 +51,8 @@ export const ContentWarningDialog = ({
   onConfirm,
   onCancel,
 }: ContentWarningDialogProps) => {
+  const { t } = useTranslation();
+
   const [acknowledged, setAcknowledged] = useState(false);
 
   const handleClose = () => {
@@ -68,13 +71,15 @@ export const ContentWarningDialog = ({
         <Box sx={iconContainerStyle}>
           <IconAlertTriangle />
         </Box>
-        Content Warning
+        {t("contentWarning.title")}
       </DialogTitle>
       <DialogContent>
         <Stack spacing={2}>
           <Typography variant="body1">
-            <strong>{comicTitle}</strong> contains the following sensitive
-            content:
+            <Trans
+              i18nKey="contentWarning.containsSensitiveContent"
+              values={{ comicTitle }}
+            />
           </Typography>
           <Stack
             direction="row"
@@ -86,7 +91,7 @@ export const ContentWarningDialog = ({
               <Chip
                 key={contentWarning}
                 color="warning"
-                label={contentWarningLabelsFrom[contentWarning]}
+                label={t(contentWarningLabelsFrom[contentWarning])}
                 sx={contentWarningChipStyle}
               />
             ))}
@@ -99,13 +104,13 @@ export const ContentWarningDialog = ({
                 onChange={(_, checked) => setAcknowledged(checked)}
               />
             }
-            label="I understand and wish to continue"
+            label={t("contentWarning.iUnderstand")}
           />
         </Stack>
       </DialogContent>
       <DialogActions>
         <Button color="secondary" onClick={handleClose}>
-          Go Back
+          {t("contentWarning.goBack")}
         </Button>
         <Button
           variant="contained"
@@ -113,7 +118,7 @@ export const ContentWarningDialog = ({
           disabled={!acknowledged}
           onClick={handleConfirm}
         >
-          Continue
+          {t("contentWarning.continue")}
         </Button>
       </DialogActions>
     </Dialog>
