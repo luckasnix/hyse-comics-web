@@ -23,6 +23,9 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports.biome": "explicit"
   },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
   "editor.formatOnSave": true,
   "files.readonlyInclude": {
     "**/routeTree.gen.ts": true
