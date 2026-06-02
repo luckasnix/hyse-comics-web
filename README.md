@@ -23,7 +23,7 @@ Follow the steps below to set up and run the project in your local environment.
 3. Install dependencies:
 
     ```bash
-    npm install
+    pnpm install
     ```
 
 4. Set up environment variables:
@@ -39,7 +39,7 @@ Follow the steps below to set up and run the project in your local environment.
 5. Run the development server:
 
     ```bash
-    npm run dev
+    pnpm dev
     ```
 
 6. Open in your browser:
