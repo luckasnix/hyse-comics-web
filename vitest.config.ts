@@ -5,8 +5,8 @@ const vitestConfig = defineConfig({
   plugins: [viteReact()],
   test: {
     coverage: {
-      include: ["./src/{components,hooks,utils}/**/*.{ts,tsx}"],
-      exclude: ["./src/{components,hooks,utils}/**/types.{ts,tsx}"],
+      include: ["./src/{components,contexts,hooks,utils}/**/*.{ts,tsx}"],
+      exclude: ["./src/{components,contexts,hooks,utils}/**/types.{ts,tsx}"],
     },
     passWithNoTests: true,
     restoreMocks: true,
