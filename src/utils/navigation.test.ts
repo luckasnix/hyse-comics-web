@@ -9,9 +9,17 @@ describe("getBaseUrl()", () => {
     expect(getBaseUrl()).toBe("https://api.hysecomics.com");
   });
 
-  it("returns the default localhost URL when HYSE_COMICS_BASE_URL is not set", () => {
+  it("returns the development fallback URL when HYSE_COMICS_BASE_URL is not set", () => {
     vi.stubEnv("HYSE_COMICS_BASE_URL", "");
+    vi.stubEnv("MODE", "development");
 
     expect(getBaseUrl()).toBe("http://localhost:3001");
+  });
+
+  it("returns the production fallback URL when HYSE_COMICS_BASE_URL is not set", () => {
+    vi.stubEnv("HYSE_COMICS_BASE_URL", "");
+    vi.stubEnv("MODE", "production");
+
+    expect(getBaseUrl()).toBe("http://localhost:3000");
   });
 });

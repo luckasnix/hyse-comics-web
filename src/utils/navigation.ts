@@ -1,3 +1,8 @@
 export const getBaseUrl = (): string => {
-  return import.meta.env.HYSE_COMICS_BASE_URL || "http://localhost:3001";
+  const fallbackUrl =
+    import.meta.env.MODE === "development"
+      ? "http://localhost:3001"
+      : "http://localhost:3000";
+
+  return import.meta.env.HYSE_COMICS_BASE_URL || fallbackUrl;
 };

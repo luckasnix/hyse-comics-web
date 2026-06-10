@@ -9,7 +9,7 @@
   "packageManager": "pnpm@11.5.1",
   "scripts": {
     "dev": "vite dev",
-    "start": "vite",
+    "start": "node .output/server/index.mjs",
     "build": "vite build",
     "serve": "vite preview",
     "type:check": "tsc --noEmit",
@@ -41,6 +41,7 @@
     "embla-carousel": "8.6.0",
     "embla-carousel-react": "8.6.0",
     "i18next": "26.3.0",
+    "nitro": "3.0.260603-beta",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "react-i18next": "17.0.8",
