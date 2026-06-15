@@ -1,0 +1,113 @@
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import { useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
+
+import { useUi } from "#/contexts/ui";
+import { getClampedTextStyle } from "#/styles/common";
+import { getBaseUrl } from "#/utils/navigation";
+
+export type RecommendationCardProps = Readonly<{
+  chapterId: string;
+  title: string;
+  synopsis: string;
+  imageUrl: string;
+  onReadButtonClick: (chapterId: string) => void;
+}>;
+
+const containerStyle: SxProps<Theme> = {
+  minWidth: 320,
+  width: 320,
+  height: 460,
+};
+
+const imageStyle: SxProps<Theme> = {
+  width: 320,
+  height: 240,
+};
+
+const titleStyle: SxProps<Theme> = {
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  userSelect: "none",
+};
+
+const synopsisStyle: SxProps<Theme> = {
+  color: "text.secondary",
+  userSelect: "none",
+  ...getClampedTextStyle(4),
+};
+
+export const RecommendationCard = ({
+  chapterId,
+  title,
+  synopsis,
+  imageUrl,
+  onReadButtonClick,
+}: RecommendationCardProps) => {
+  const { t } = useTranslation();
+
+  const { locale } = useParams({ strict: false });
+
+  const { showToast } = useUi();
+
+  const baseUrl = getBaseUrl();
+
+  const shareChapterLink = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        `${baseUrl}/${locale}/chapters/${chapterId}`,
+      );
+      showToast({
+        severity: "success",
+        message: t("recommendations.linkCopied"),
+      });
+    } catch {
+      showToast({
+        severity: "error",
+        message: t("recommendations.linkCopyFailed"),
+      });
+    }
+  };
+
+  const readComic = () => {
+    onReadButtonClick(chapterId);
+  };
+
+  return (
+    <Card sx={containerStyle}>
+      <CardMedia
+        sx={imageStyle}
+        image={imageUrl}
+        title={`${title} thumbnail`}
+      />
+      <CardContent>
+        <Typography variant="h5" gutterBottom sx={titleStyle}>
+          {title}
+        </Typography>
+        <Typography variant="body2" gutterBottom sx={synopsisStyle}>
+          {synopsis}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" color="secondary" onClick={shareChapterLink}>
+          {t("recommendations.share")}
+        </Button>
+        <Button
+          variant="contained"
+          size="small"
+          color="secondary"
+          onClick={readComic}
+        >
+          {t("recommendations.read")}
+        </Button>
+      </CardActions>
+    </Card>
+  );
+};

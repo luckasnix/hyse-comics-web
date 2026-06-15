@@ -5,7 +5,7 @@ import { useForm } from "@tanstack/react-form";
 import { createFileRoute, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { AuthForm } from "#/components/auth-form/component";
+import { AuthForm } from "#/components/auth-form";
 import { PageLayout } from "#/layouts/page-layout";
 import { signInSchema } from "#/schemas/users";
 

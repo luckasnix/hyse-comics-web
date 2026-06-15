@@ -3,9 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { ChapterList } from "#/components/chapter-list/component";
-import { CreditList } from "#/components/credit-list/component";
-import { TabGroup } from "#/components/tab-group/component";
+import { ChapterList } from "#/components/chapter-list";
+import { CreditList } from "#/components/credit-list";
+import { TabGroup } from "#/components/tab-group";
 import { getComicCredits } from "#/services/comics";
 import type { Chapter } from "#/types/comics";
 
