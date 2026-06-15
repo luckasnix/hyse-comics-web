@@ -12,9 +12,16 @@ import {
 } from "./recommendation-card";
 
 const onReadButtonClickSpy = vi.fn();
+const getBaseUrlMock = vi.hoisted(() =>
+  vi.fn(() => Promise.resolve("https://preview-123.comics.hyse.dev")),
+);
 
 vi.mock("@tanstack/react-router", () => ({
   useParams: () => ({ locale: "en-US" }),
+}));
+
+vi.mock("#/utils/navigation", () => ({
+  getBaseUrl: getBaseUrlMock,
 }));
 
 const defaultProps: RecommendationCardProps = {
@@ -87,7 +94,7 @@ describe("<RecommendationCard />", () => {
     await user.click(screen.getByRole("button", { name: "Share" }));
 
     expect(writeText).toHaveBeenCalledWith(
-      expect.stringContaining(`/chapters/${defaultProps.chapterId}`),
+      `https://preview-123.comics.hyse.dev/en-US/chapters/${defaultProps.chapterId}`,
     );
   });
 

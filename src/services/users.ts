@@ -1,9 +1,8 @@
 import type { User } from "#/types/users";
 import { getBaseUrl } from "#/utils/navigation";
 
-const baseUrl = getBaseUrl();
-
 export const getUser = async (userId: string): Promise<User> => {
+  const baseUrl = await getBaseUrl();
   const response = await fetch(`${baseUrl}/api/users/${userId}`);
   if (!response.ok) {
     throw new Error(

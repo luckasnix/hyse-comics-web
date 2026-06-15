@@ -1,8 +1,13 @@
-export const getBaseUrl = (): string => {
-  const fallbackUrl =
-    import.meta.env.MODE === "development"
-      ? "http://localhost:3001"
-      : "http://localhost:3000";
+import { createIsomorphicFn } from "@tanstack/react-start";
 
-  return import.meta.env.HYSE_COMICS_BASE_URL || fallbackUrl;
+const getRuntimeOrigin = createIsomorphicFn()
+  .server(async () => {
+    const { getRequestUrl } = await import("@tanstack/react-start/server");
+
+    return getRequestUrl().origin;
+  })
+  .client(() => window.location.origin);
+
+export const getBaseUrl = async (): Promise<string> => {
+  return getRuntimeOrigin();
 };

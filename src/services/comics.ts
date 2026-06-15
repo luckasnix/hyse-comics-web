@@ -7,9 +7,8 @@ import type {
 } from "#/types/comics";
 import { getBaseUrl } from "#/utils/navigation";
 
-const baseUrl = getBaseUrl();
-
 export const getComics = async (): Promise<Array<Comic>> => {
+  const baseUrl = await getBaseUrl();
   const response = await fetch(`${baseUrl}/api/comics`);
   if (!response.ok) {
     throw new Error(
@@ -22,6 +21,7 @@ export const getComics = async (): Promise<Array<Comic>> => {
 };
 
 export const getComic = async (comicId: string): Promise<Comic> => {
+  const baseUrl = await getBaseUrl();
   const response = await fetch(`${baseUrl}/api/comics/${comicId}`);
   if (!response.ok) {
     throw new Error(
@@ -36,6 +36,7 @@ export const getComic = async (comicId: string): Promise<Comic> => {
 export const getComicCredits = async (
   comicId: string,
 ): Promise<Array<CreditWithUser>> => {
+  const baseUrl = await getBaseUrl();
   const response = await fetch(`${baseUrl}/api/comics/${comicId}/credits`);
   if (!response.ok) {
     throw new Error(
@@ -48,6 +49,7 @@ export const getComicCredits = async (
 };
 
 export const getChapters = async (comicId: string): Promise<Array<Chapter>> => {
+  const baseUrl = await getBaseUrl();
   const response = await fetch(`${baseUrl}/api/comics/${comicId}/chapters`);
   if (!response.ok) {
     throw new Error(
@@ -60,6 +62,7 @@ export const getChapters = async (comicId: string): Promise<Array<Chapter>> => {
 };
 
 export const getChapter = async (chapterId: string): Promise<Chapter> => {
+  const baseUrl = await getBaseUrl();
   const response = await fetch(`${baseUrl}/api/chapters/${chapterId}`);
   if (!response.ok) {
     throw new Error(
@@ -74,6 +77,7 @@ export const getChapter = async (chapterId: string): Promise<Chapter> => {
 export const getChapterCredits = async (
   chapterId: string,
 ): Promise<Array<CreditWithUser>> => {
+  const baseUrl = await getBaseUrl();
   const response = await fetch(`${baseUrl}/api/chapters/${chapterId}/credits`);
   if (!response.ok) {
     throw new Error(
@@ -86,6 +90,7 @@ export const getChapterCredits = async (
 };
 
 export const getPages = async (chapterId: string): Promise<Array<Page>> => {
+  const baseUrl = await getBaseUrl();
   const response = await fetch(`${baseUrl}/api/chapters/${chapterId}/pages`);
   if (!response.ok) {
     throw new Error(
@@ -98,6 +103,7 @@ export const getPages = async (chapterId: string): Promise<Array<Page>> => {
 };
 
 export const getPage = async (pageId: string): Promise<Page> => {
+  const baseUrl = await getBaseUrl();
   const response = await fetch(`${baseUrl}/api/pages/${pageId}`);
   if (!response.ok) {
     throw new Error(
@@ -110,6 +116,7 @@ export const getPage = async (pageId: string): Promise<Page> => {
 };
 
 export const getRecommendations = async (): Promise<Array<Recommendation>> => {
+  const baseUrl = await getBaseUrl();
   const response = await fetch(`${baseUrl}/api/recommendations`);
   if (!response.ok) {
     throw new Error(
@@ -124,6 +131,7 @@ export const getRecommendations = async (): Promise<Array<Recommendation>> => {
 export const getRecommendation = async (
   recommendationId: string,
 ): Promise<Recommendation> => {
+  const baseUrl = await getBaseUrl();
   const response = await fetch(
     `${baseUrl}/api/recommendations/${recommendationId}`,
   );

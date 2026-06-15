@@ -57,10 +57,9 @@ export const RecommendationCard = ({
 
   const { showToast } = useUi();
 
-  const baseUrl = getBaseUrl();
-
   const shareChapterLink = async () => {
     try {
+      const baseUrl = await getBaseUrl();
       await navigator.clipboard.writeText(
         `${baseUrl}/${locale}/chapters/${chapterId}`,
       );
