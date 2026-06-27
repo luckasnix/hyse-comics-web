@@ -12,6 +12,12 @@ export type UserRoles =
   | "comics:editor"
   | "comics:publisher";
 
+export type UserSocialLinks = {
+  x: string | null;
+  instagram: string | null;
+  threads: string | null;
+};
+
 export type UserProfile = {
   id: string;
   username: string;
@@ -20,6 +26,7 @@ export type UserProfile = {
   coverUrl: string | null;
   preferredLanguage: SupportedLanguage;
   roles: UserRoles[];
+  socialLinks: UserSocialLinks;
 };
 
 export type ReadingAxis = "horizontal" | "vertical";

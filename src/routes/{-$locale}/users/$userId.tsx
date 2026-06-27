@@ -14,6 +14,7 @@ const UserRoute = () => {
         displayName={user.profile.displayName}
         avatarUrl={user.profile.avatarUrl}
         coverUrl={user.profile.coverUrl}
+        socialLinks={user.profile.socialLinks}
       />
     </PageLayout>
   );

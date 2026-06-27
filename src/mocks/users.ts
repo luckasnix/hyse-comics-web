@@ -16,6 +16,11 @@ export const signedInUserMock: User = {
       "comics:letterer",
       "comics:editor",
     ],
+    socialLinks: {
+      x: "https://x.com/luckasnix",
+      instagram: "https://www.instagram.com/luckasnix",
+      threads: "https://www.threads.com/@luckasnix",
+    },
   },
   preferences: {
     readingAxis: "vertical",
@@ -35,6 +40,11 @@ export const usersMock: Array<User> = [
         "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/users/johndoe/co.webp",
       preferredLanguage: "en-US",
       roles: ["comics:writer"],
+      socialLinks: {
+        x: "https://x.com/johndoe",
+        instagram: null,
+        threads: "https://www.threads.com/@johndoe",
+      },
     },
     preferences: {
       readingAxis: "vertical",
@@ -51,6 +61,11 @@ export const usersMock: Array<User> = [
         "https://ncruxkkvlxobsrzmvbkz.supabase.co/storage/v1/object/public/users/joaodasilva/co.webp",
       preferredLanguage: "pt-BR",
       roles: ["comics:penciller", "comics:letterer"],
+      socialLinks: {
+        x: null,
+        instagram: "https://www.instagram.com/joaodasilva",
+        threads: null,
+      },
     },
     preferences: {
       readingAxis: "horizontal",
