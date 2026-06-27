@@ -2,7 +2,11 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
-import { IconBrandInstagram, IconBrandX } from "@tabler/icons-react";
+import {
+  IconBrandInstagram,
+  IconBrandThreads,
+  IconBrandX,
+} from "@tabler/icons-react";
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -18,6 +22,7 @@ const containerStyle: SxProps<Theme> = {
 
 const iconButtonStyle: SxProps<Theme> = {
   color: "primary.contrastText",
+  borderRadius: 1,
 };
 
 const logoStyle: CSSProperties = {
@@ -39,7 +44,7 @@ export const FooterSection = () => {
       />
       <Stack direction="row" spacing={1}>
         <IconButton
-          aria-label="X (Twitter)"
+          aria-label="Hyse on X"
           component="a"
           href="https://x.com/luckasnix"
           target="_blank"
@@ -49,14 +54,24 @@ export const FooterSection = () => {
           <IconBrandX />
         </IconButton>
         <IconButton
-          aria-label="Instagram"
+          aria-label="Hyse on Instagram"
           component="a"
-          href="https://www.instagram.com/luckasnix/"
+          href="https://www.instagram.com/luckasnix"
           target="_blank"
           rel="noopener noreferrer"
           sx={iconButtonStyle}
         >
           <IconBrandInstagram />
+        </IconButton>
+        <IconButton
+          aria-label="Hyse on Threads"
+          component="a"
+          href="https://www.threads.com/@luckasnix"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={iconButtonStyle}
+        >
+          <IconBrandThreads />
         </IconButton>
       </Stack>
     </Box>
