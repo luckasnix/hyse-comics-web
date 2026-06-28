@@ -2,11 +2,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
-import {
-  IconBrandInstagram,
-  IconBrandThreads,
-  IconBrandX,
-} from "@tabler/icons-react";
+import { IconBrandInstagram, IconBrandX } from "@tabler/icons-react";
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -62,16 +58,6 @@ export const FooterSection = () => {
           sx={iconButtonStyle}
         >
           <IconBrandInstagram />
-        </IconButton>
-        <IconButton
-          aria-label="Hyse on Threads"
-          component="a"
-          href="https://www.threads.com/@luckasnix"
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={iconButtonStyle}
-        >
-          <IconBrandThreads />
         </IconButton>
       </Stack>
     </Box>

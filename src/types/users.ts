@@ -15,7 +15,6 @@ export type UserRoles =
 export type UserSocialLinks = {
   x: string | null;
   instagram: string | null;
-  threads: string | null;
 };
 
 export type UserProfile = {

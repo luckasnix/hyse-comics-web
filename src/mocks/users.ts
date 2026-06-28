@@ -19,7 +19,6 @@ export const signedInUserMock: User = {
     socialLinks: {
       x: "https://x.com/luckasnix",
       instagram: "https://www.instagram.com/luckasnix",
-      threads: "https://www.threads.com/@luckasnix",
     },
   },
   preferences: {
@@ -43,7 +42,6 @@ export const usersMock: Array<User> = [
       socialLinks: {
         x: "https://x.com/johndoe",
         instagram: null,
-        threads: "https://www.threads.com/@johndoe",
       },
     },
     preferences: {
@@ -64,7 +62,6 @@ export const usersMock: Array<User> = [
       socialLinks: {
         x: null,
         instagram: "https://www.instagram.com/joaodasilva",
-        threads: null,
       },
     },
     preferences: {

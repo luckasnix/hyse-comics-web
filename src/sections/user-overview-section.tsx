@@ -2,11 +2,7 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import {
-  IconBrandInstagram,
-  IconBrandThreads,
-  IconBrandX,
-} from "@tabler/icons-react";
+import { IconBrandInstagram, IconBrandX } from "@tabler/icons-react";
 import type { CSSProperties } from "react";
 
 import type { UserSocialLinks } from "#/types/users";
@@ -77,9 +73,7 @@ export const UserOverviewSection = ({
 }: UserOverviewSectionProps) => {
   const profileName = displayName ?? username;
 
-  const hasSocialLinks = Boolean(
-    socialLinks.x || socialLinks.instagram || socialLinks.threads,
-  );
+  const hasSocialLinks = Boolean(socialLinks.x || socialLinks.instagram);
 
   return (
     <Stack component="section" sx={containerStyle}>
@@ -129,19 +123,6 @@ export const UserOverviewSection = ({
               sx={socialLinkButtonStyle}
             >
               <IconBrandInstagram />
-            </IconButton>
-          )}
-          {socialLinks.threads && (
-            <IconButton
-              aria-label={`${profileName} on Threads`}
-              component="a"
-              href={socialLinks.threads}
-              target="_blank"
-              rel="noopener noreferrer"
-              size="small"
-              sx={socialLinkButtonStyle}
-            >
-              <IconBrandThreads />
             </IconButton>
           )}
         </Stack>
