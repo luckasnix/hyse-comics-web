@@ -95,6 +95,11 @@ export type CreditWithUser = {
   roles: Array<UserRoles>;
 };
 
+export type UserComicWork = {
+  comic: Comic;
+  roles: Array<UserRoles>;
+};
+
 export type Recommendation = {
   id: string;
   title: string;
