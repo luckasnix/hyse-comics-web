@@ -42,7 +42,8 @@
   },
   "lists": {
     "noChaptersFound": "Nenhum capítulo encontrado",
-    "noCreditsFound": "Nenhum crédito encontrado"
+    "noCreditsFound": "Nenhum crédito encontrado",
+    "noWorksFound": "Nenhuma obra encontrada"
   },
   "meta": {
     "description": "Leia seus quadrinhos favoritos"
@@ -87,5 +88,8 @@
     "translator": "Tradutor",
     "editor": "Editor",
     "publisher": "Editora"
+  },
+  "users": {
+    "works": "Obras"
   }
 }

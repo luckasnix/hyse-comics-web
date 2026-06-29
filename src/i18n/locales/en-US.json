@@ -42,7 +42,8 @@
   },
   "lists": {
     "noChaptersFound": "No chapters found",
-    "noCreditsFound": "No credits found"
+    "noCreditsFound": "No credits found",
+    "noWorksFound": "No works found"
   },
   "meta": {
     "description": "Read your favorite comics"
@@ -87,5 +88,8 @@
     "translator": "Translator",
     "editor": "Editor",
     "publisher": "Publisher"
+  },
+  "users": {
+    "works": "Works"
   }
 }
