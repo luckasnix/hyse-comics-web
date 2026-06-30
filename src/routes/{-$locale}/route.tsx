@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useUser } from "#/contexts/user";
+import { NotFoundPage } from "#/pages/not-found-page";
 import type { SupportedLanguage } from "#/types/users";
 
 const supportedLocales: SupportedLanguage[] = ["en-US", "pt-BR"];
@@ -38,4 +39,5 @@ const LocaleRoute = () => {
 
 export const Route = createFileRoute("/{-$locale}")({
   component: LocaleRoute,
+  notFoundComponent: NotFoundPage,
 });
