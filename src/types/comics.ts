@@ -1,9 +1,7 @@
 import type { UserProfile, UserRoles } from "./users";
 
-// TODO: This type should come from the Embla Carousel
 export type AxisOptionType = "x" | "y";
 
-// TODO: This type should come from the Embla Carousel
 export type AxisDirectionOptionType = "ltr" | "rtl";
 
 export type ComicStructure = "single-panel" | "traditional" | "long-scroll";

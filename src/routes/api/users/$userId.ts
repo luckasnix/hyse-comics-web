@@ -5,7 +5,6 @@ import { usersMock } from "#/mocks/users";
 export const Route = createFileRoute("/api/users/$userId")({
   server: {
     handlers: {
-      // TODO: Connect to Supabase and fetch data from there
       GET: async ({ params }) => {
         const { userId } = params;
 

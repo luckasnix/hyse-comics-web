@@ -8,7 +8,6 @@ import type { UserRoles } from "#/types/users";
 export const Route = createFileRoute("/api/users/$userId/works")({
   server: {
     handlers: {
-      // TODO: Connect to Supabase and fetch data from there
       GET: async ({ params }) => {
         const { userId } = params;
 

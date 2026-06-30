@@ -5,7 +5,6 @@ import { chaptersMock } from "#/mocks/comics";
 export const Route = createFileRoute("/api/chapters/$chapterId")({
   server: {
     handlers: {
-      // TODO: Connect to Supabase and fetch data from there
       GET: async ({ params }) => {
         const { chapterId } = params;
 

@@ -7,7 +7,6 @@ import type { CreditWithUser } from "#/types/comics";
 export const Route = createFileRoute("/api/chapters/$chapterId/credits")({
   server: {
     handlers: {
-      // TODO: Connect to Supabase and fetch data from there
       GET: async ({ params }) => {
         const { chapterId } = params;
 

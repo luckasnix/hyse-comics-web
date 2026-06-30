@@ -85,10 +85,6 @@ const pageCounterTextStyle: SxProps<Theme> = {
   color: "primary.contrastText",
 };
 
-// TODO: Adapt reading to the comic's "orientation" settings
-// TODO: Add thumbnail navigation
-// TODO: Add touch navigation
-// TODO: Add zoom to images
 export const ComicReaderToolbar = ({
   carouselApi,
   isFullscreen,

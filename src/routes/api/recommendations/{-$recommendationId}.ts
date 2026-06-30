@@ -7,7 +7,6 @@ export const Route = createFileRoute(
 )({
   server: {
     handlers: {
-      // TODO: Connect to Supabase and fetch data from there
       GET: async ({ params }) => {
         const { recommendationId } = params;
 
