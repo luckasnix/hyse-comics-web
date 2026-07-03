@@ -1,3 +1,7 @@
+/**
+ * Uses BCP 47 language tags, the same locale identifier format used by the
+ * Web platform.
+ */
 export type SupportedLanguage = "en-US" | "pt-BR";
 
 export type UserRoles =

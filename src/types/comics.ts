@@ -1,7 +1,15 @@
 import type { UserProfile, UserRoles } from "./users";
 
+/**
+ * Mirrors Embla Carousel's internal axis option type because the library does
+ * not export it.
+ */
 export type AxisOptionType = "x" | "y";
 
+/**
+ * Mirrors Embla Carousel's internal axis direction option type because the
+ * library does not export it.
+ */
 export type AxisDirectionOptionType = "ltr" | "rtl";
 
 export type ComicStructure = "single-panel" | "traditional" | "long-scroll";
