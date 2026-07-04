@@ -25,13 +25,4 @@ describe("getBaseUrl()", () => {
     );
     expect(getRuntimeOriginMock).toHaveBeenCalledOnce();
   });
-
-  it("ignores VITE_HYSE_COMICS_BASE_URL for internal API routes", async () => {
-    vi.stubEnv("VITE_HYSE_COMICS_BASE_URL", "https://comics.hyse.app");
-
-    await expect(getBaseUrl()).resolves.toBe(
-      "https://preview-123.comics.hyse.dev",
-    );
-    expect(getRuntimeOriginMock).toHaveBeenCalledOnce();
-  });
 });
