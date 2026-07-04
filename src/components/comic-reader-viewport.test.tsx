@@ -6,6 +6,8 @@ import { ComicProvider } from "#/contexts/comic";
 import { UserProvider } from "#/contexts/user";
 import { chaptersMock, comicsMock, pagesMock } from "#/mocks/comics";
 import { signedInUserMock, usersMock } from "#/mocks/users";
+import type { Comic, Page } from "#/types/comics";
+import type { User } from "#/types/users";
 
 import { ComicReaderViewport } from "./comic-reader-viewport";
 
@@ -18,17 +20,30 @@ const carouselRefSpy = (() => {}) as unknown as ReturnType<
   typeof import("embla-carousel-react").default
 >[0];
 
-const renderComponent = ({
-  comic = easternComic,
-  user = signedInUserMock,
-  pagesToRender = pages,
-} = {}) =>
-  render(
+type RenderComponentOptions = {
+  comic: Comic;
+  user: User | null;
+  pages: Array<Page>;
+};
+
+const defaultRenderOptions: RenderComponentOptions = {
+  comic: easternComic,
+  user: signedInUserMock,
+  pages,
+};
+
+const renderComponent = (overrides: Partial<RenderComponentOptions> = {}) => {
+  const { comic, user, pages } = {
+    ...defaultRenderOptions,
+    ...overrides,
+  };
+
+  return render(
     <UserProvider user={user}>
       <ComicProvider
         comic={comic}
         chapters={chapters}
-        pages={pagesToRender}
+        pages={pages}
         currentComicId={comic.id}
         currentChapterId={chapters[0].id}
       >
@@ -36,6 +51,7 @@ const renderComponent = ({
       </ComicProvider>
     </UserProvider>,
   );
+};
 
 afterEach(cleanup);
 
@@ -69,7 +85,7 @@ describe("<ComicReaderViewport />", () => {
   });
 
   it("renders no images when pages are empty", () => {
-    renderComponent({ pagesToRender: [] });
+    renderComponent({ pages: [] });
 
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
@@ -79,7 +95,7 @@ describe("<ComicReaderViewport />", () => {
       (page) => page.backgroundTexture !== null,
     );
 
-    renderComponent({ pagesToRender: pagesWithTexture.slice(0, 2) });
+    renderComponent({ pages: pagesWithTexture.slice(0, 2) });
 
     const images = screen.getAllByRole("img");
 
@@ -96,7 +112,7 @@ describe("<ComicReaderViewport />", () => {
       (page) => page.backgroundTexture === null,
     );
 
-    renderComponent({ pagesToRender: pagesWithoutTexture.slice(0, 2) });
+    renderComponent({ pages: pagesWithoutTexture.slice(0, 2) });
 
     const images = screen.getAllByRole("img");
 
@@ -109,6 +125,15 @@ describe("<ComicReaderViewport />", () => {
 
   it("renders with column direction for vertical reading axis", () => {
     renderComponent({ user: signedInUserMock });
+
+    const images = screen.getAllByRole("img");
+    const slideContainer = images[0].parentElement?.parentElement;
+
+    expect(slideContainer).toHaveStyle({ flexDirection: "column" });
+  });
+
+  it("falls back to column direction when no user is available", () => {
+    renderComponent({ user: null });
 
     const images = screen.getAllByRole("img");
     const slideContainer = images[0].parentElement?.parentElement;

@@ -2,6 +2,7 @@ import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
+import { fallbackLanguage } from "#/constants/users";
 import { useUser } from "#/contexts/user";
 import { NotFoundPage } from "#/pages/not-found-page";
 import type { SupportedLanguage } from "#/types/users";
@@ -19,7 +20,7 @@ const LocaleRoute = () => {
   const navigate = useNavigate();
   const { i18n } = useTranslation();
 
-  const preferredLocale = user.profile.preferredLanguage;
+  const preferredLocale = user?.profile.preferredLanguage ?? fallbackLanguage;
 
   useEffect(() => {
     if (!isSupportedLocale(locale)) {

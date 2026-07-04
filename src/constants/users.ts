@@ -1,5 +1,9 @@
 import type { AxisOptionType } from "#/types/comics";
-import type { ReadingAxis, UserRoles } from "#/types/users";
+import type { ReadingAxis, SupportedLanguage, UserRoles } from "#/types/users";
+
+export const fallbackLanguage = "en-US" satisfies SupportedLanguage;
+
+export const fallbackReadingAxis = "vertical" satisfies ReadingAxis;
 
 export const carouselAxisFrom: Record<ReadingAxis, AxisOptionType> = {
   horizontal: "x",

@@ -3,18 +3,17 @@ import { createContext, type ReactNode, useContext, useMemo } from "react";
 import type { User } from "#/types/users";
 
 export type UserContextValue = {
-  user: User;
+  user: User | null;
 };
 
-export type UserProviderProps = Readonly<
-  UserContextValue & {
-    children: ReactNode;
-  }
->;
+export type UserProviderProps = Readonly<{
+  children: ReactNode;
+  user?: User | null;
+}>;
 
 export const UserContext = createContext<UserContextValue | null>(null);
 
-export const UserProvider = ({ children, user }: UserProviderProps) => {
+export const UserProvider = ({ children, user = null }: UserProviderProps) => {
   const value = useMemo(
     () => ({
       user,

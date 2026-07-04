@@ -6,6 +6,7 @@ import { IconHomeFilled } from "@tabler/icons-react";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
+import { fallbackLanguage } from "#/constants/users";
 import { useUser } from "#/contexts/user";
 
 const containerStyle: SxProps<Theme> = {
@@ -42,7 +43,10 @@ export const NotFoundPage = () => {
         onClick={() => {
           navigate({
             to: "/{-$locale}",
-            params: { locale: locale ?? user.profile.preferredLanguage },
+            params: {
+              locale:
+                locale ?? user?.profile.preferredLanguage ?? fallbackLanguage,
+            },
           });
         }}
       >

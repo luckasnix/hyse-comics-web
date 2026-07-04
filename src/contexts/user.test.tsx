@@ -21,6 +21,14 @@ describe("UserContext", () => {
     expect(result.current.user).toBe(signedInUserMock);
   });
 
+  it("provides null when no user is available", () => {
+    const { result } = renderHook(() => useUser(), {
+      wrapper: ({ children }) => <UserProvider>{children}</UserProvider>,
+    });
+
+    expect(result.current.user).toBeNull();
+  });
+
   it("throws when accessed outside UserProvider", () => {
     expect(() => renderHook(() => useUser())).toThrow(
       "The hook 'useUser' must be used inside 'UserProvider'.",

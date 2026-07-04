@@ -7,6 +7,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { ComicProvider } from "#/contexts/comic";
 import { chaptersMock, comicsMock, creditsWithUserMock } from "#/mocks/comics";
+import type { CreditWithUser } from "#/types/comics";
 
 import {
   ComicReaderDrawer,
@@ -48,7 +49,7 @@ const renderComponent = (
     chapterCredits = creditsWithUserMock,
   }: {
     currentChapterId?: string | null;
-    chapterCredits?: typeof creditsWithUserMock;
+    chapterCredits?: Array<CreditWithUser>;
   } = {},
 ) => {
   navigateSpy.mockClear();

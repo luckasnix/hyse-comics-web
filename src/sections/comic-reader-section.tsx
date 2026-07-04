@@ -8,7 +8,7 @@ import { ComicReaderDrawer } from "#/components/comic-reader-drawer";
 import { ComicReaderToolbar } from "#/components/comic-reader-toolbar";
 import { ComicReaderViewport } from "#/components/comic-reader-viewport";
 import { carouselDirectionFrom } from "#/constants/comics";
-import { carouselAxisFrom } from "#/constants/users";
+import { carouselAxisFrom, fallbackReadingAxis } from "#/constants/users";
 import { useComic } from "#/contexts/comic";
 import { useUser } from "#/contexts/user";
 
@@ -24,7 +24,9 @@ export const ComicReaderSection = () => {
   const containerRef = useRef<HTMLElement>(null);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    axis: carouselAxisFrom[user.preferences.readingAxis],
+    axis: carouselAxisFrom[
+      user?.preferences.readingAxis ?? fallbackReadingAxis
+    ],
     direction: carouselDirectionFrom[comic.direction],
   });
 

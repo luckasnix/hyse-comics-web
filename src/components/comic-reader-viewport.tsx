@@ -8,6 +8,7 @@ import type { EmblaViewportRefType } from "embla-carousel-react";
 import type { CSSProperties } from "react";
 
 import { comicReaderToolbarHeight } from "#/constants/comics";
+import { fallbackReadingAxis } from "#/constants/users";
 import { useComic } from "#/contexts/comic";
 import { useUser } from "#/contexts/user";
 import type { ComicDirection, PageBackgroundTexture } from "#/types/comics";
@@ -79,7 +80,7 @@ export const ComicReaderViewport = ({
     <Box ref={carouselRef} sx={containerStyle}>
       <Box
         sx={getSlideContainerStyle(
-          user.preferences.readingAxis,
+          user?.preferences.readingAxis ?? fallbackReadingAxis,
           comic.direction,
         )}
       >
