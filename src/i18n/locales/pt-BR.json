@@ -36,6 +36,7 @@
   },
   "errors": {
     "error": "Erro",
+    "defaultDescription": "Algo deu errado. Tente novamente em instantes.",
     "pageNotFound": "Página não encontrada",
     "pageNotFoundDescription": "Desculpe, a página que você está procurando não existe.",
     "backToHome": "Voltar para o início"

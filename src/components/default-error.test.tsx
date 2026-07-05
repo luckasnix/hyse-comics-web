@@ -7,12 +7,14 @@ import { DefaultError } from "./default-error";
 afterEach(cleanup);
 
 describe("<DefaultError />", () => {
-  it("renders the error heading and message", () => {
-    render(<DefaultError error={new Error("Failed to load page")} />);
+  it("renders the error heading and default description", () => {
+    render(<DefaultError />);
 
     expect(
       screen.getByRole("heading", { level: 3, name: "Error" }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Failed to load page")).toBeInTheDocument();
+    expect(
+      screen.getByText("Something went wrong. Please try again later."),
+    ).toBeInTheDocument();
   });
 });

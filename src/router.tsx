@@ -9,5 +9,5 @@ export const getRouter = () =>
     routeTree,
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
-    defaultErrorComponent: ({ error }) => <DefaultError error={error} />,
+    defaultErrorComponent: DefaultError,
   });

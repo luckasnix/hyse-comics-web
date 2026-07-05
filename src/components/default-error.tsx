@@ -4,10 +4,6 @@ import Typography from "@mui/material/Typography";
 import { IconExclamationCircle } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 
-export type DefaultErrorProps = Readonly<{
-  error: Error;
-}>;
-
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",
   padding: 2,
@@ -24,7 +20,7 @@ const errorMessageStyle: SxProps<Theme> = {
   color: "text.secondary",
 };
 
-export const DefaultError = ({ error }: DefaultErrorProps) => {
+export const DefaultError = () => {
   const { t } = useTranslation();
 
   return (
@@ -34,7 +30,7 @@ export const DefaultError = ({ error }: DefaultErrorProps) => {
         {t("errors.error")}
       </Typography>
       <Typography variant="body1" sx={errorMessageStyle}>
-        {error.message}
+        {t("errors.defaultDescription")}
       </Typography>
     </Stack>
   );
