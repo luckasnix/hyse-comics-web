@@ -58,6 +58,7 @@
     "exitFullscreen": "Exit fullscreen (f)",
     "enterFullscreen": "Enter fullscreen (f)",
     "more": "More (m)",
+    "pageImageAlt": "{{comicTitle}} page {{pageNumber}} of {{pageCount}}",
     "firstPageLtr": "First page (shift + ←)",
     "previousPageLtr": "Previous page (←)",
     "nextPageLtr": "Next page (→)",

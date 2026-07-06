@@ -64,13 +64,16 @@ describe("<ComicReaderViewport />", () => {
     expect(images).toHaveLength(pages.length);
   });
 
-  it("renders alt text with the comic title for each page", () => {
+  it("renders unique alt text with the comic title and page position", () => {
     renderComponent();
 
     const images = screen.getAllByRole("img");
 
-    for (const image of images) {
-      expect(image).toHaveAttribute("alt", `${easternComic.title} page`);
+    for (const [index, image] of images.entries()) {
+      expect(image).toHaveAttribute(
+        "alt",
+        `${easternComic.title} page ${index + 1} of ${pages.length}`,
+      );
     }
   });
 
@@ -81,6 +84,20 @@ describe("<ComicReaderViewport />", () => {
 
     for (const [index, image] of images.entries()) {
       expect(image).toHaveAttribute("src", pages[index].imageUrl);
+    }
+  });
+
+  it("renders page images with box-safe sizing", () => {
+    renderComponent();
+
+    const images = screen.getAllByRole("img");
+
+    for (const image of images) {
+      expect(image).toHaveStyle({
+        boxSizing: "border-box",
+        maxWidth: "100%",
+        maxHeight: "100%",
+      });
     }
   });
 
@@ -129,7 +146,10 @@ describe("<ComicReaderViewport />", () => {
     const images = screen.getAllByRole("img");
     const slideContainer = images[0].parentElement?.parentElement;
 
-    expect(slideContainer).toHaveStyle({ flexDirection: "column" });
+    expect(slideContainer).toHaveStyle({
+      flexDirection: "column",
+      touchAction: "pan-x pinch-zoom",
+    });
   });
 
   it("falls back to column direction when no user is available", () => {
@@ -149,7 +169,10 @@ describe("<ComicReaderViewport />", () => {
     const images = screen.getAllByRole("img");
     const slideContainer = images[0].parentElement?.parentElement;
 
-    expect(slideContainer).toHaveStyle({ flexDirection: "row" });
+    expect(slideContainer).toHaveStyle({
+      flexDirection: "row",
+      touchAction: "pan-y pinch-zoom",
+    });
   });
 
   it("renders with row-reverse direction for horizontal reading axis and eastern comic", () => {
@@ -160,6 +183,9 @@ describe("<ComicReaderViewport />", () => {
     const images = screen.getAllByRole("img");
     const slideContainer = images[0].parentElement?.parentElement;
 
-    expect(slideContainer).toHaveStyle({ flexDirection: "row-reverse" });
+    expect(slideContainer).toHaveStyle({
+      flexDirection: "row-reverse",
+      touchAction: "pan-y pinch-zoom",
+    });
   });
 });

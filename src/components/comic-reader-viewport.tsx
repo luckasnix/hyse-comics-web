@@ -6,6 +6,7 @@ import type {
 } from "@mui/material/styles";
 import type { EmblaViewportRefType } from "embla-carousel-react";
 import type { CSSProperties } from "react";
+import { useTranslation } from "react-i18next";
 
 import { comicReaderToolbarHeight } from "#/constants/comics";
 import { fallbackReadingAxis } from "#/constants/users";
@@ -28,6 +29,8 @@ const getSlideContainerStyle = (
   comicDirection: ComicDirection,
 ): SxProps<Theme> => {
   let flexDirection: SxCSSProperties["flexDirection"] = "column";
+  const touchAction: SxCSSProperties["touchAction"] =
+    readingAxis === "horizontal" ? "pan-y pinch-zoom" : "pan-x pinch-zoom";
 
   if (readingAxis === "horizontal") {
     flexDirection = comicDirection === "western" ? "row" : "row-reverse";
@@ -35,7 +38,7 @@ const getSlideContainerStyle = (
 
   return {
     height: `calc(100dvh - ${comicReaderToolbarHeight}px)`,
-    touchAction: "pan-x pinch-zoom",
+    touchAction,
     display: "flex",
     flexDirection,
     cursor: "grab",
@@ -66,12 +69,15 @@ const getImageStyle = (width: number, height: number): CSSProperties => ({
   maxWidth: "100%",
   maxHeight: "100%",
   aspectRatio: width / height,
-  padding: "40px",
+  boxSizing: "border-box",
+  padding: "clamp(16px, 4vw, 40px)",
 });
 
 export const ComicReaderViewport = ({
   carouselRef,
 }: ComicReaderViewportProps) => {
+  const { t } = useTranslation();
+
   const { user } = useUser();
 
   const { comic, pages } = useComic();
@@ -84,11 +90,15 @@ export const ComicReaderViewport = ({
           comic.direction,
         )}
       >
-        {pages.map((page) => (
+        {pages.map((page, index) => (
           <Box key={page.id} sx={getPageStyle(page.backgroundTexture)}>
             <img
               src={page.imageUrl}
-              alt={`${comic.title} page`}
+              alt={t("reader.pageImageAlt", {
+                comicTitle: comic.title,
+                pageNumber: index + 1,
+                pageCount: pages.length,
+              })}
               style={getImageStyle(page.imageWidth, page.imageHeight)}
             />
           </Box>

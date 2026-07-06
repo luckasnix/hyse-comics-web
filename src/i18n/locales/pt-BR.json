@@ -58,6 +58,7 @@
     "exitFullscreen": "Sair da tela cheia (f)",
     "enterFullscreen": "Entrar em tela cheia (f)",
     "more": "Mais (m)",
+    "pageImageAlt": "{{comicTitle}} página {{pageNumber}} de {{pageCount}}",
     "firstPageLtr": "Primeira página (shift + ←)",
     "previousPageLtr": "Página anterior (←)",
     "nextPageLtr": "Próxima página (→)",
