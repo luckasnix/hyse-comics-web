@@ -69,7 +69,9 @@
     "lastPageRtl": "First page (shift + →)",
     "close": "Close",
     "chapters": "Chapters",
-    "credits": "Credits"
+    "credits": "Credits",
+    "loadingCredits": "Loading credits...",
+    "creditsLoadError": "Failed to load credits."
   },
   "recommendations": {
     "share": "Share",

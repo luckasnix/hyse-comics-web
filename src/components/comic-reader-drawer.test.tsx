@@ -47,14 +47,25 @@ const renderComponent = (
   {
     currentChapterId = chapters[0].id,
     chapterCredits = creditsWithUserMock,
+    chapterCreditsError = null,
+    keepChapterCreditsPending = false,
   }: {
     currentChapterId?: string | null;
     chapterCredits?: Array<CreditWithUser>;
+    chapterCreditsError?: Error | null;
+    keepChapterCreditsPending?: boolean;
   } = {},
 ) => {
   navigateSpy.mockClear();
   getChapterCreditsMock.mockClear();
-  getChapterCreditsMock.mockResolvedValue(chapterCredits);
+
+  if (keepChapterCreditsPending) {
+    getChapterCreditsMock.mockReturnValue(new Promise(() => undefined));
+  } else if (chapterCreditsError) {
+    getChapterCreditsMock.mockRejectedValue(chapterCreditsError);
+  } else {
+    getChapterCreditsMock.mockResolvedValue(chapterCredits);
+  }
 
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -120,6 +131,45 @@ describe("<ComicReaderDrawer />", () => {
     renderComponent({}, { currentChapterId: null });
 
     expect(getChapterCreditsMock).not.toHaveBeenCalled();
+  });
+
+  it("does not request credits when the drawer is closed", () => {
+    renderComponent({ isOpen: false });
+
+    expect(getChapterCreditsMock).not.toHaveBeenCalled();
+  });
+
+  it("renders an empty credit list when there is no current chapter", async () => {
+    const user = userEvent.setup();
+
+    renderComponent({}, { currentChapterId: null });
+
+    await user.click(screen.getByRole("tab", { name: "Credits" }));
+
+    expect(screen.getByText("No credits found")).toBeVisible();
+  });
+
+  it("renders the credit loading state while credits are pending", async () => {
+    const user = userEvent.setup();
+
+    renderComponent({}, { keepChapterCreditsPending: true });
+
+    await user.click(screen.getByRole("tab", { name: "Credits" }));
+
+    expect(screen.getByText("Loading credits...")).toBeVisible();
+  });
+
+  it("renders the credit error state when credits fail to load", async () => {
+    const user = userEvent.setup();
+
+    renderComponent(
+      {},
+      { chapterCreditsError: new Error("Failed to fetch credits") },
+    );
+
+    await user.click(screen.getByRole("tab", { name: "Credits" }));
+
+    expect(await screen.findByText("Failed to load credits.")).toBeVisible();
   });
 
   it("renders the credit list when the Credits tab is selected", async () => {

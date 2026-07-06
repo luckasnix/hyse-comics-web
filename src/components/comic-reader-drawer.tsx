@@ -1,10 +1,11 @@
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import type { SxProps, Theme } from "@mui/material/styles";
+import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import { IconX } from "@tabler/icons-react";
+import { IconExclamationCircle, IconX } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
@@ -22,7 +23,11 @@ export type ComicReaderDrawerProps = Readonly<{
 }>;
 
 const containerStyle: SxProps<Theme> = {
-  width: 420,
+  width: {
+    xs: "100vw",
+    sm: 420,
+  },
+  maxWidth: "100vw",
   paddingTop: 1,
 };
 
@@ -41,6 +46,16 @@ const synopsisStyle: SxProps<Theme> = {
   ...getClampedTextStyle(4),
 };
 
+const creditsStatusStyle: SxProps<Theme> = {
+  paddingY: 4,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 1,
+  color: "text.secondary",
+};
+
 export const ComicReaderDrawer = ({
   isOpen,
   onClose,
@@ -53,10 +68,16 @@ export const ComicReaderDrawer = ({
 
   const navigate = useNavigate();
 
-  const { data: chapterCredits = [] } = useQuery({
+  const theme = useTheme();
+
+  const {
+    data: chapterCredits = [],
+    isPending: areChapterCreditsPending,
+    isError: didChapterCreditsError,
+  } = useQuery({
     queryKey: ["chapter-credits", currentChapterId],
     queryFn: () => getChapterCredits(currentChapterId ?? ""),
-    enabled: !!currentChapterId,
+    enabled: isOpen && !!currentChapterId,
   });
 
   const navigateToChapter = (chapterId: string) => {
@@ -71,6 +92,36 @@ export const ComicReaderDrawer = ({
       to: "/{-$locale}/users/$userId",
       params: { locale, userId: userId },
     });
+  };
+
+  const renderCredits = () => {
+    if (!currentChapterId) {
+      return <CreditList credits={[]} onCreditClick={navigateToUser} />;
+    }
+
+    if (areChapterCreditsPending) {
+      return (
+        <Box sx={creditsStatusStyle}>
+          <CircularProgress size={48} color="primary" />
+          <Typography variant="body1">{t("reader.loadingCredits")}</Typography>
+        </Box>
+      );
+    }
+
+    if (didChapterCreditsError) {
+      return (
+        <Box sx={creditsStatusStyle}>
+          <IconExclamationCircle size={48} color={theme.palette.error.main} />
+          <Typography variant="body1">
+            {t("reader.creditsLoadError")}
+          </Typography>
+        </Box>
+      );
+    }
+
+    return (
+      <CreditList credits={chapterCredits} onCreditClick={navigateToUser} />
+    );
   };
 
   return (
@@ -109,12 +160,7 @@ export const ComicReaderDrawer = ({
               onChapterClick={navigateToChapter}
             />
           </TabGroup.Panel>
-          <TabGroup.Panel value={1}>
-            <CreditList
-              credits={chapterCredits}
-              onCreditClick={navigateToUser}
-            />
-          </TabGroup.Panel>
+          <TabGroup.Panel value={1}>{renderCredits()}</TabGroup.Panel>
         </TabGroup>
       </Stack>
     </Drawer>
