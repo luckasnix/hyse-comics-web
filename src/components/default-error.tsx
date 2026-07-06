@@ -1,5 +1,5 @@
 import Stack from "@mui/material/Stack";
-import type { SxProps, Theme } from "@mui/material/styles";
+import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconExclamationCircle } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
@@ -23,9 +23,11 @@ const errorMessageStyle: SxProps<Theme> = {
 export const DefaultError = () => {
   const { t } = useTranslation();
 
+  const theme = useTheme();
+
   return (
     <Stack spacing={2} sx={containerStyle}>
-      <IconExclamationCircle color="#d32f2f" size={64} />
+      <IconExclamationCircle size={64} color={theme.palette.error.main} />
       <Typography variant="h3" sx={textStyle}>
         {t("errors.error")}
       </Typography>
