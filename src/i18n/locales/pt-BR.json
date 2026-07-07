@@ -57,6 +57,7 @@
     "home": "Início",
     "exitFullscreen": "Sair da tela cheia (f)",
     "enterFullscreen": "Entrar em tela cheia (f)",
+    "zoom": "Zoom (z)",
     "more": "Mais (m)",
     "pageImageAlt": "{{comicTitle}} página {{pageNumber}} de {{pageCount}}",
     "firstPageLtr": "Primeira página (shift + ←)",

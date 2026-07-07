@@ -57,6 +57,7 @@
     "home": "Home",
     "exitFullscreen": "Exit fullscreen (f)",
     "enterFullscreen": "Enter fullscreen (f)",
+    "zoom": "Zoom (z)",
     "more": "More (m)",
     "pageImageAlt": "{{comicTitle}} page {{pageNumber}} of {{pageCount}}",
     "firstPageLtr": "First page (shift + ←)",

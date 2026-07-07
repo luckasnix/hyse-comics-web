@@ -30,6 +30,8 @@ export const ComicReaderSection = () => {
     direction: carouselDirectionFrom[comic.direction],
   });
 
+  const [isZoomEnabled, { toggle: toggleZoom }] = useBoolean(false);
+
   const [isFullscreen, { enterFullscreen, exitFullscreen, toggleFullscreen }] =
     useFullscreen(containerRef);
 
@@ -40,10 +42,15 @@ export const ComicReaderSection = () => {
 
   return (
     <Stack component="section" ref={containerRef} sx={containerStyle}>
-      <ComicReaderViewport carouselRef={emblaRef} />
+      <ComicReaderViewport
+        carouselRef={emblaRef}
+        isZoomEnabled={isZoomEnabled}
+      />
       <ComicReaderToolbar
         carouselApi={emblaApi}
+        isZoomEnabled={isZoomEnabled}
         isFullscreen={isFullscreen}
+        toggleZoom={toggleZoom}
         enterFullscreen={enterFullscreen}
         exitFullscreen={exitFullscreen}
         toggleFullscreen={toggleFullscreen}

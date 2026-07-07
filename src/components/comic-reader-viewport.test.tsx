@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import userEvent from "@testing-library/user-event";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { ComicProvider } from "#/contexts/comic";
 import { UserProvider } from "#/contexts/user";
@@ -24,21 +25,25 @@ type RenderComponentOptions = {
   comic: Comic;
   user: User | null;
   pages: Array<Page>;
+  isZoomEnabled: boolean;
 };
 
 const defaultRenderOptions: RenderComponentOptions = {
   comic: easternComic,
   user: signedInUserMock,
   pages,
+  isZoomEnabled: false,
 };
 
-const renderComponent = (overrides: Partial<RenderComponentOptions> = {}) => {
-  const { comic, user, pages } = {
+const renderReaderViewport = (
+  overrides: Partial<RenderComponentOptions> = {},
+) => {
+  const { comic, user, pages, isZoomEnabled } = {
     ...defaultRenderOptions,
     ...overrides,
   };
 
-  return render(
+  return (
     <UserProvider user={user}>
       <ComicProvider
         comic={comic}
@@ -47,13 +52,38 @@ const renderComponent = (overrides: Partial<RenderComponentOptions> = {}) => {
         currentComicId={comic.id}
         currentChapterId={chapters[0].id}
       >
-        <ComicReaderViewport carouselRef={carouselRefSpy} />
+        <ComicReaderViewport
+          carouselRef={carouselRefSpy}
+          isZoomEnabled={isZoomEnabled}
+        />
       </ComicProvider>
-    </UserProvider>,
+    </UserProvider>
   );
 };
 
-afterEach(cleanup);
+const renderComponent = (overrides: Partial<RenderComponentOptions> = {}) =>
+  render(renderReaderViewport(overrides));
+
+const mockImageRect = (image: HTMLElement) => {
+  const rect = {
+    x: 10,
+    y: 20,
+    left: 10,
+    top: 20,
+    right: 210,
+    bottom: 120,
+    width: 200,
+    height: 100,
+    toJSON: () => ({}),
+  } as DOMRect;
+
+  return vi.spyOn(image, "getBoundingClientRect").mockReturnValue(rect);
+};
+
+afterEach(() => {
+  cleanup();
+  vi.restoreAllMocks();
+});
 
 describe("<ComicReaderViewport />", () => {
   it("renders all page images", () => {
@@ -99,6 +129,129 @@ describe("<ComicReaderViewport />", () => {
         maxHeight: "100%",
       });
     }
+  });
+
+  it("uses the zoom-in cursor when zoom is enabled", () => {
+    renderComponent({ isZoomEnabled: true });
+
+    const image = screen.getAllByRole("img")[0];
+    const slideContainer = image.parentElement?.parentElement;
+
+    expect(slideContainer).toHaveStyle({ cursor: "zoom-in" });
+  });
+
+  it("does not zoom images when zoom is disabled", async () => {
+    const user = userEvent.setup();
+
+    renderComponent({ isZoomEnabled: false });
+
+    const image = screen.getAllByRole("img")[0];
+
+    mockImageRect(image);
+    await user.pointer({
+      target: image,
+      coords: {
+        clientX: 60,
+        clientY: 45,
+      },
+    });
+
+    expect(image.style.transform).toBe("");
+  });
+
+  it("zooms the hovered image around the cursor position", async () => {
+    const user = userEvent.setup();
+
+    renderComponent({ isZoomEnabled: true });
+
+    const image = screen.getAllByRole("img")[0];
+
+    mockImageRect(image);
+    await user.pointer({
+      target: image,
+      coords: {
+        clientX: 60,
+        clientY: 45,
+      },
+    });
+
+    expect(image).toHaveStyle({
+      transform: "scale(1.4)",
+      transformOrigin: "25% 25%",
+    });
+  });
+
+  it("keeps the zoom while the pointer stays inside the viewport", async () => {
+    const user = userEvent.setup();
+
+    renderComponent({ isZoomEnabled: true });
+
+    const image = screen.getAllByRole("img")[0];
+    const page = image.parentElement as HTMLElement;
+    const pointerInsidePage = {
+      clientX: 240,
+      clientY: 140,
+      relatedTarget: page,
+    };
+
+    mockImageRect(image);
+    await user.pointer({
+      target: image,
+      coords: {
+        clientX: 60,
+        clientY: 45,
+      },
+    });
+    await user.pointer({
+      target: page,
+      coords: pointerInsidePage,
+    });
+
+    expect(image).toHaveStyle({
+      transform: "scale(1.4)",
+      transformOrigin: "25% 25%",
+    });
+  });
+
+  it("removes the zoom when the pointer leaves the viewport", async () => {
+    const user = userEvent.setup();
+
+    renderComponent({ isZoomEnabled: true });
+
+    const image = screen.getAllByRole("img")[0];
+
+    mockImageRect(image);
+    await user.pointer({
+      target: image,
+      coords: {
+        clientX: 60,
+        clientY: 45,
+      },
+    });
+    await user.pointer({ target: document.body });
+
+    expect(image.style.transform).toBe("");
+  });
+
+  it("removes the zoom when zoom is disabled", async () => {
+    const user = userEvent.setup();
+
+    const { rerender } = renderComponent({ isZoomEnabled: true });
+
+    const image = screen.getAllByRole("img")[0];
+
+    mockImageRect(image);
+    await user.pointer({
+      target: image,
+      coords: {
+        clientX: 60,
+        clientY: 45,
+      },
+    });
+
+    rerender(renderReaderViewport({ isZoomEnabled: false }));
+
+    expect(screen.getAllByRole("img")[0].style.transform).toBe("");
   });
 
   it("renders no images when pages are empty", () => {

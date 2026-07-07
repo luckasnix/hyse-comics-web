@@ -6,6 +6,8 @@ import type {
 
 export const comicReaderToolbarHeight = 56;
 
+export const comicReaderZoomScale = 1.4;
+
 export const carouselDirectionFrom: Record<
   ComicDirection,
   AxisDirectionOptionType

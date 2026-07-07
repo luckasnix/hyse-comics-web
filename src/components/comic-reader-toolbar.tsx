@@ -13,6 +13,7 @@ import {
   IconChevronRightPipe,
   IconHomeFilled,
   IconLayoutSidebarLeftCollapseFilled,
+  IconZoomIn,
 } from "@tabler/icons-react";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { Link, useParams } from "@tanstack/react-router";
@@ -28,7 +29,9 @@ import { useComicReaderToolbar } from "#/hooks/use-comic-reader-toolbar";
 
 export type ComicReaderToolbarProps = Readonly<{
   carouselApi: EmblaCarouselType | undefined;
+  isZoomEnabled: boolean;
   isFullscreen: boolean;
+  toggleZoom: () => void;
   enterFullscreen: () => void;
   exitFullscreen: () => void;
   toggleFullscreen: () => void;
@@ -73,6 +76,17 @@ const iconButtonStyle: SxProps<Theme> = {
   borderRadius: 1,
 };
 
+const activeIconButtonStyle: SxProps<Theme> = {
+  ...iconButtonStyle,
+  backgroundColor: "primary.dark",
+  "&:hover": {
+    backgroundColor: "primary.dark",
+  },
+};
+
+const iconButtonStyleFrom = (isActive: boolean): SxProps<Theme> =>
+  isActive ? activeIconButtonStyle : iconButtonStyle;
+
 const pageCounterStyle: SxProps<Theme> = {
   display: "inline-flex",
   backgroundColor: "primary.dark",
@@ -87,7 +101,9 @@ const pageCounterTextStyle: SxProps<Theme> = {
 
 export const ComicReaderToolbar = ({
   carouselApi,
+  isZoomEnabled,
   isFullscreen,
+  toggleZoom,
   enterFullscreen,
   exitFullscreen,
   toggleFullscreen,
@@ -114,6 +130,8 @@ export const ComicReaderToolbar = ({
   useHotkey("Shift+ArrowRight", buttons.farRight.onClick);
 
   useHotkey("F", toggleFullscreen);
+
+  useHotkey("Z", toggleZoom);
 
   useHotkey("M", toggleDrawer, { enabled: !isFullscreen });
 
@@ -185,6 +203,18 @@ export const ComicReaderToolbar = ({
           </Tooltip>
         </Grid>
         <Grid size={2} sx={gridEndStyle}>
+          <Tooltip title={t("reader.zoom")}>
+            <Box component="span">
+              <IconButton
+                aria-label={t("reader.zoom")}
+                aria-pressed={isZoomEnabled}
+                sx={iconButtonStyleFrom(isZoomEnabled)}
+                onClick={toggleZoom}
+              >
+                <IconZoomIn />
+              </IconButton>
+            </Box>
+          </Tooltip>
           {isFullscreen ? (
             <Tooltip title={t("reader.exitFullscreen")}>
               <Box component="span">

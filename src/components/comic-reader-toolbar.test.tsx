@@ -1,4 +1,6 @@
 // @vitest-environment jsdom
+
+import { useHotkey } from "@tanstack/react-hotkeys";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
@@ -36,12 +38,15 @@ const pages = pagesMock.slice(0, 2);
 const enterFullscreenSpy = vi.fn();
 const exitFullscreenSpy = vi.fn();
 const toggleFullscreenSpy = vi.fn();
+const toggleZoomSpy = vi.fn();
 const openDrawerSpy = vi.fn();
 const toggleDrawerSpy = vi.fn();
 
 const defaultProps: ComicReaderToolbarProps = {
   carouselApi: undefined,
+  isZoomEnabled: false,
   isFullscreen: false,
+  toggleZoom: toggleZoomSpy,
   enterFullscreen: enterFullscreenSpy,
   exitFullscreen: exitFullscreenSpy,
   toggleFullscreen: toggleFullscreenSpy,
@@ -62,7 +67,10 @@ const renderComponent = (overrides: Partial<ComicReaderToolbarProps> = {}) =>
     </ComicProvider>,
   );
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  vi.clearAllMocks();
+});
 
 describe("<ComicReaderToolbar />", () => {
   it("renders the page counter with placeholders when carousel is not ready", () => {
@@ -71,12 +79,12 @@ describe("<ComicReaderToolbar />", () => {
     expect(screen.getByText("? / ?")).toBeInTheDocument();
   });
 
-  it("renders all seven toolbar buttons", () => {
+  it("renders all eight toolbar buttons", () => {
     renderComponent();
 
     const buttons = screen.getAllByRole("button");
 
-    expect(buttons).toHaveLength(7);
+    expect(buttons).toHaveLength(8);
   });
 
   it("renders the navigation buttons with RTL labels for an eastern-direction comic", () => {
@@ -162,6 +170,50 @@ describe("<ComicReaderToolbar />", () => {
     expect(
       screen.queryByRole("button", { name: "Enter fullscreen (f)" }),
     ).not.toBeInTheDocument();
+  });
+
+  it("renders the Zoom button before the fullscreen button", () => {
+    renderComponent({ isFullscreen: false });
+
+    const endButtons = screen.getAllByRole("button").slice(-3);
+
+    expect(
+      endButtons.map((button) => button.getAttribute("aria-label")),
+    ).toEqual(["Zoom (z)", "Enter fullscreen (f)", "More (m)"]);
+  });
+
+  it("marks the Zoom button as inactive when zoom is disabled", () => {
+    renderComponent({ isZoomEnabled: false });
+
+    expect(screen.getByRole("button", { name: "Zoom (z)" })).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
+  });
+
+  it("marks the Zoom button as active when zoom is enabled", () => {
+    renderComponent({ isZoomEnabled: true });
+
+    expect(screen.getByRole("button", { name: "Zoom (z)" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+  });
+
+  it("calls toggleZoom when the Zoom button is clicked", async () => {
+    const user = userEvent.setup();
+
+    renderComponent();
+
+    await user.click(screen.getByRole("button", { name: "Zoom (z)" }));
+
+    expect(toggleZoomSpy).toHaveBeenCalledOnce();
+  });
+
+  it("registers a keyboard shortcut for zoom", () => {
+    renderComponent();
+
+    expect(vi.mocked(useHotkey)).toHaveBeenCalledWith("Z", toggleZoomSpy);
   });
 
   it("calls enterFullscreen when the enter fullscreen button is clicked", async () => {
