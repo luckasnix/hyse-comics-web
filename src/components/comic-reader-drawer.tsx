@@ -1,17 +1,17 @@
 import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
+import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import { IconExclamationCircle, IconX } from "@tabler/icons-react";
+import { IconX } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { ChapterList } from "#/components/chapter-list";
 import { CreditList } from "#/components/credit-list";
+import { ListState } from "#/components/list-state";
 import { TabGroup } from "#/components/tab-group";
 import { useComic } from "#/contexts/comic";
 import { getChapterCredits } from "#/services/comics";
@@ -46,16 +46,6 @@ const synopsisStyle: SxProps<Theme> = {
   ...getClampedTextStyle(4),
 };
 
-const creditsStatusStyle: SxProps<Theme> = {
-  paddingY: 4,
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  gap: 1,
-  color: "text.secondary",
-};
-
 export const ComicReaderDrawer = ({
   isOpen,
   onClose,
@@ -67,8 +57,6 @@ export const ComicReaderDrawer = ({
   const { locale } = useParams({ strict: false });
 
   const navigate = useNavigate();
-
-  const theme = useTheme();
 
   const {
     data: chapterCredits = [],
@@ -100,23 +88,11 @@ export const ComicReaderDrawer = ({
     }
 
     if (areChapterCreditsPending) {
-      return (
-        <Box sx={creditsStatusStyle}>
-          <CircularProgress size={48} color="primary" />
-          <Typography variant="body1">{t("reader.loadingCredits")}</Typography>
-        </Box>
-      );
+      return <ListState kind="pending" message={t("reader.loadingCredits")} />;
     }
 
     if (didChapterCreditsError) {
-      return (
-        <Box sx={creditsStatusStyle}>
-          <IconExclamationCircle size={48} color={theme.palette.error.main} />
-          <Typography variant="body1">
-            {t("reader.creditsLoadError")}
-          </Typography>
-        </Box>
-      );
+      return <ListState kind="error" message={t("reader.creditsLoadError")} />;
     }
 
     return (
