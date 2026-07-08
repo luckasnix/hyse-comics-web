@@ -30,7 +30,13 @@ const SignInRoute = () => {
 
   return (
     <PageLayout maxWidth="sm">
-      <AuthForm>
+      <AuthForm
+        onSubmit={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          form.handleSubmit();
+        }}
+      >
         <AuthForm.Title>{t("auth.signIn")}</AuthForm.Title>
         <Stack spacing={2}>
           <form.Field name="email">
@@ -74,10 +80,6 @@ const SignInRoute = () => {
                 disabled={!canSubmit || isSubmitting}
                 loading={isSubmitting}
                 icon={<IconLogin />}
-                onClick={(event) => {
-                  event.preventDefault();
-                  form.handleSubmit();
-                }}
               >
                 {t("auth.signIn")}
               </AuthForm.SubmitButton>

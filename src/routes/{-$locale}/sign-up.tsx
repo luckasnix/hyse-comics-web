@@ -31,7 +31,13 @@ const SignUpRoute = () => {
 
   return (
     <PageLayout maxWidth="sm">
-      <AuthForm>
+      <AuthForm
+        onSubmit={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          form.handleSubmit();
+        }}
+      >
         <AuthForm.Title>{t("auth.signUp")}</AuthForm.Title>
         <Stack spacing={2}>
           <form.Field name="email">
@@ -90,10 +96,6 @@ const SignUpRoute = () => {
                 disabled={!canSubmit || isSubmitting}
                 loading={isSubmitting}
                 icon={<IconUserPlus />}
-                onClick={(event) => {
-                  event.preventDefault();
-                  form.handleSubmit();
-                }}
               >
                 {t("auth.signUp")}
               </AuthForm.SubmitButton>

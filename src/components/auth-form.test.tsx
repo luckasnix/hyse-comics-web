@@ -27,7 +27,7 @@ afterEach(cleanup);
 describe("<AuthForm />", () => {
   it("renders children inside a form container", () => {
     const { container } = render(
-      <AuthForm>
+      <AuthForm onSubmit={vi.fn()}>
         <span>Credentials fields</span>
       </AuthForm>,
     );
@@ -35,7 +35,28 @@ describe("<AuthForm />", () => {
     const form = container.querySelector("form");
 
     expect(form).toBeInTheDocument();
+    expect(form).toHaveAttribute("novalidate");
     expect(form).toContainElement(screen.getByText("Credentials fields"));
+  });
+
+  it("passes submit events to the form handler without native validation", async () => {
+    const user = userEvent.setup();
+    const onSubmitSpy = vi.fn();
+    render(
+      <AuthForm
+        onSubmit={(event) => {
+          event.preventDefault();
+          onSubmitSpy();
+        }}
+      >
+        <input aria-label="Email" defaultValue="invalid email" type="email" />
+        <button type="submit">Submit</button>
+      </AuthForm>,
+    );
+
+    await user.click(screen.getByRole("button", { name: "Submit" }));
+
+    expect(onSubmitSpy).toHaveBeenCalledOnce();
   });
 
   it("exposes all compound subcomponents", () => {
@@ -65,7 +86,6 @@ describe("<AuthForm.SubmitButton />", () => {
         disabled={false}
         loading={false}
         icon={<span data-testid="submit-icon" />}
-        onClick={vi.fn()}
       >
         Sign in
       </AuthForm.SubmitButton>,
@@ -77,33 +97,12 @@ describe("<AuthForm.SubmitButton />", () => {
     expect(screen.getByTestId("submit-icon")).toBeInTheDocument();
   });
 
-  it("calls onClick when clicked", async () => {
-    const user = userEvent.setup();
-    const onClickSpy = vi.fn();
-
-    render(
-      <AuthForm.SubmitButton
-        disabled={false}
-        loading={false}
-        icon={<span data-testid="submit-icon" />}
-        onClick={onClickSpy}
-      >
-        Sign in
-      </AuthForm.SubmitButton>,
-    );
-
-    await user.click(screen.getByRole("button", { name: "Sign in" }));
-
-    expect(onClickSpy).toHaveBeenCalledOnce();
-  });
-
   it("renders disabled when disabled is true", () => {
     render(
       <AuthForm.SubmitButton
         disabled
         loading={false}
         icon={<span data-testid="submit-icon" />}
-        onClick={vi.fn()}
       >
         Sign in
       </AuthForm.SubmitButton>,
@@ -134,6 +133,7 @@ describe("<AuthForm.SocialGoogleButton />", () => {
     });
 
     expect(button.querySelector("svg")).not.toBeNull();
+    expect(button).toHaveAttribute("type", "button");
   });
 
   it("calls onClick when clicked", async () => {
@@ -167,6 +167,7 @@ describe("<AuthForm.SocialAppleButton />", () => {
     });
 
     expect(button.querySelector("svg")).not.toBeNull();
+    expect(button).toHaveAttribute("type", "button");
   });
 
   it("calls onClick when clicked", async () => {

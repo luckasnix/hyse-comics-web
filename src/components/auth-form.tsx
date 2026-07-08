@@ -9,13 +9,19 @@ import {
   IconBrandGoogleFilled,
 } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import type { CSSProperties, MouseEventHandler, ReactNode } from "react";
+import type {
+  CSSProperties,
+  MouseEventHandler,
+  ReactNode,
+  SubmitEventHandler,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import { linkResetStyle } from "#/styles/common";
 
 export type AuthFormContainerProps = Readonly<{
   children: ReactNode;
+  onSubmit: SubmitEventHandler<HTMLFormElement>;
 }>;
 
 export type AuthFormTitleProps = Readonly<{
@@ -26,7 +32,6 @@ export type AuthFormSubmitButtonProps = Readonly<{
   disabled: boolean;
   loading: boolean;
   icon: ReactNode;
-  onClick: MouseEventHandler<HTMLButtonElement>;
   children: string;
 }>;
 
@@ -46,9 +51,11 @@ const containerStyle: SxProps<Theme> = {
   padding: 6,
 };
 
-const AuthFormContainer = ({ children }: AuthFormContainerProps) => (
+const AuthFormContainer = ({ children, onSubmit }: AuthFormContainerProps) => (
   <Paper elevation={2} sx={containerStyle}>
-    <Box component="form">{children}</Box>
+    <Box component="form" noValidate onSubmit={onSubmit}>
+      {children}
+    </Box>
   </Paper>
 );
 
@@ -67,17 +74,15 @@ const AuthFormSubmitButton = ({
   disabled,
   loading,
   icon,
-  onClick,
   children,
 }: AuthFormSubmitButtonProps) => (
   <Button
+    type="submit"
     variant="contained"
     fullWidth
-    type="submit"
     disabled={disabled}
     loading={loading}
     startIcon={icon}
-    onClick={onClick}
   >
     {children}
   </Button>
@@ -97,6 +102,7 @@ const AuthFormSocialGoogleButton = ({
   children,
 }: AuthFormSocialProps) => (
   <Button
+    type="button"
     variant="outlined"
     fullWidth
     startIcon={<IconBrandGoogleFilled />}
@@ -111,6 +117,7 @@ const AuthFormSocialAppleButton = ({
   children,
 }: AuthFormSocialProps) => (
   <Button
+    type="button"
     variant="outlined"
     fullWidth
     startIcon={<IconBrandAppleFilled />}
