@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { act, renderHook } from "@testing-library/react";
-import type { EmblaCarouselType } from "embla-carousel";
+import type { EmblaCarouselType, EmblaEventType } from "embla-carousel";
 import { describe, expect, it, vi } from "vitest";
 
 import { useCarouselNavigation } from "./use-carousel-navigation";
@@ -13,7 +13,7 @@ const createCarouselApi = ({
   canScrollPrev = false,
   canScrollNext = true,
 } = {}) => {
-  const listeners: Record<string, EmblaEventCallback[]> = {};
+  const listeners: Partial<Record<EmblaEventType, EmblaEventCallback[]>> = {};
 
   const selectedScrollSnapMock = vi.fn().mockReturnValue(currentIndex);
   const scrollSnapListMock = vi
@@ -24,8 +24,28 @@ const createCarouselApi = ({
   const scrollToMock = vi.fn();
   const scrollPrevMock = vi.fn();
   const scrollNextMock = vi.fn();
+  const onMock = vi
+    .fn()
+    .mockImplementation(
+      (event: EmblaEventType, callback: EmblaEventCallback) => {
+        listeners[event] = listeners[event] ?? [];
+        listeners[event].push(callback);
+        return api;
+      },
+    );
+  const offMock = vi
+    .fn()
+    .mockImplementation(
+      (event: EmblaEventType, callback: EmblaEventCallback) => {
+        listeners[event] = (listeners[event] ?? []).filter(
+          (listener) => listener !== callback,
+        );
+        return api;
+      },
+    );
 
-  const api = {
+  let api: EmblaCarouselType;
+  api = {
     selectedScrollSnap: selectedScrollSnapMock,
     scrollSnapList: scrollSnapListMock,
     canScrollPrev: canScrollPrevMock,
@@ -33,16 +53,11 @@ const createCarouselApi = ({
     scrollTo: scrollToMock,
     scrollPrev: scrollPrevMock,
     scrollNext: scrollNextMock,
-    on: vi
-      .fn()
-      .mockImplementation((event: string, callback: EmblaEventCallback) => {
-        listeners[event] = listeners[event] ?? [];
-        listeners[event].push(callback);
-        return api;
-      }),
+    on: onMock,
+    off: offMock,
   } as unknown as EmblaCarouselType;
 
-  const emit = (event: string) => {
+  const emit = (event: EmblaEventType) => {
     for (const callback of listeners[event] ?? []) {
       callback(api);
     }
@@ -59,6 +74,8 @@ const createCarouselApi = ({
       scrollTo: scrollToMock,
       scrollPrev: scrollPrevMock,
       scrollNext: scrollNextMock,
+      on: onMock,
+      off: offMock,
     },
   };
 };
@@ -108,6 +125,59 @@ describe("useCarouselNavigation()", () => {
 
       expect(api.on).toHaveBeenCalledWith("reInit", expect.any(Function));
       expect(api.on).toHaveBeenCalledWith("select", expect.any(Function));
+    });
+
+    it("removes reInit and select event listeners on unmount", () => {
+      const { api, mocks } = createCarouselApi();
+
+      const { unmount } = renderHook(() => useCarouselNavigation(api));
+      const reInitCallback = mocks.on.mock.calls.find(
+        ([event]) => event === "reInit",
+      )?.[1];
+      const selectCallback = mocks.on.mock.calls.find(
+        ([event]) => event === "select",
+      )?.[1];
+
+      unmount();
+
+      expect(reInitCallback).toEqual(expect.any(Function));
+      expect(selectCallback).toEqual(expect.any(Function));
+      expect(mocks.off).toHaveBeenCalledWith("reInit", reInitCallback);
+      expect(mocks.off).toHaveBeenCalledWith("select", selectCallback);
+    });
+
+    it("removes event listeners from the previous carousel api when it changes", () => {
+      const previousCarousel = createCarouselApi();
+      const nextCarousel = createCarouselApi();
+
+      const { rerender } = renderHook(({ api }) => useCarouselNavigation(api), {
+        initialProps: { api: previousCarousel.api },
+      });
+      const reInitCallback = previousCarousel.mocks.on.mock.calls.find(
+        ([event]) => event === "reInit",
+      )?.[1];
+      const selectCallback = previousCarousel.mocks.on.mock.calls.find(
+        ([event]) => event === "select",
+      )?.[1];
+
+      rerender({ api: nextCarousel.api });
+
+      expect(previousCarousel.mocks.off).toHaveBeenCalledWith(
+        "reInit",
+        reInitCallback,
+      );
+      expect(previousCarousel.mocks.off).toHaveBeenCalledWith(
+        "select",
+        selectCallback,
+      );
+      expect(nextCarousel.mocks.on).toHaveBeenCalledWith(
+        "reInit",
+        expect.any(Function),
+      );
+      expect(nextCarousel.mocks.on).toHaveBeenCalledWith(
+        "select",
+        expect.any(Function),
+      );
     });
 
     describe("canNavigateFirst", () => {

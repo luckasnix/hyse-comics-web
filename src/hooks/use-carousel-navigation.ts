@@ -46,6 +46,10 @@ export const useCarouselNavigation = (
     if (!carouselApi) return;
     onSelect(carouselApi);
     carouselApi.on("reInit", onSelect).on("select", onSelect);
+
+    return () => {
+      carouselApi.off("reInit", onSelect).off("select", onSelect);
+    };
   }, [carouselApi, onSelect]);
 
   return {
