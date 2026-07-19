@@ -11,6 +11,7 @@ import { carouselDirectionFrom } from "#/constants/comics";
 import { carouselAxisFrom, fallbackReadingAxis } from "#/constants/users";
 import { useComic } from "#/contexts/comic";
 import { useUser } from "#/contexts/user";
+import { useScreenOrientation } from "#/hooks/use-screen-orientation";
 
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",
@@ -34,6 +35,8 @@ export const ComicReaderSection = () => {
 
   const [isFullscreen, { enterFullscreen, exitFullscreen, toggleFullscreen }] =
     useFullscreen(containerRef);
+
+  useScreenOrientation(comic.orientation, isFullscreen);
 
   const [
     isDrawerOpen,
