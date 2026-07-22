@@ -13,6 +13,7 @@ import { Route as Char123LocaleChar125RouteRouteImport } from './routes/{-$local
 import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index'
 import { Route as Char123LocaleChar125SignUpRouteImport } from './routes/{-$locale}/sign-up'
 import { Route as Char123LocaleChar125SignInRouteImport } from './routes/{-$locale}/sign-in'
+import { Route as Char123LocaleChar125SettingsRouteImport } from './routes/{-$locale}/settings'
 import { Route as Char123LocaleChar125UsersUserIdRouteImport } from './routes/{-$locale}/users/$userId'
 import { Route as Char123LocaleChar125ComicsComicIdRouteImport } from './routes/{-$locale}/comics/$comicId'
 import { Route as Char123LocaleChar125ChaptersChapterIdRouteImport } from './routes/{-$locale}/chapters/$chapterId'
@@ -49,6 +50,12 @@ const Char123LocaleChar125SignInRoute =
   Char123LocaleChar125SignInRouteImport.update({
     id: '/sign-in',
     path: '/sign-in',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
+const Char123LocaleChar125SettingsRoute =
+  Char123LocaleChar125SettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
     getParentRoute: () => Char123LocaleChar125RouteRoute,
   } as any)
 const Char123LocaleChar125UsersUserIdRoute =
@@ -127,6 +134,7 @@ const ApiChaptersChapterIdCreditsRoute =
 
 export interface FileRoutesByFullPath {
   '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
+  '/{-$locale}/settings': typeof Char123LocaleChar125SettingsRoute
   '/{-$locale}/sign-in': typeof Char123LocaleChar125SignInRoute
   '/{-$locale}/sign-up': typeof Char123LocaleChar125SignUpRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
@@ -145,6 +153,7 @@ export interface FileRoutesByFullPath {
   '/api/users/$userId/works': typeof ApiUsersUserIdWorksRoute
 }
 export interface FileRoutesByTo {
+  '/{-$locale}/settings': typeof Char123LocaleChar125SettingsRoute
   '/{-$locale}/sign-in': typeof Char123LocaleChar125SignInRoute
   '/{-$locale}/sign-up': typeof Char123LocaleChar125SignUpRoute
   '/{-$locale}': typeof Char123LocaleChar125IndexRoute
@@ -165,6 +174,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
+  '/{-$locale}/settings': typeof Char123LocaleChar125SettingsRoute
   '/{-$locale}/sign-in': typeof Char123LocaleChar125SignInRoute
   '/{-$locale}/sign-up': typeof Char123LocaleChar125SignUpRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/{-$locale}'
+    | '/{-$locale}/settings'
     | '/{-$locale}/sign-in'
     | '/{-$locale}/sign-up'
     | '/{-$locale}/'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/api/users/$userId/works'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/{-$locale}/settings'
     | '/{-$locale}/sign-in'
     | '/{-$locale}/sign-up'
     | '/{-$locale}'
@@ -223,6 +235,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/{-$locale}'
+    | '/{-$locale}/settings'
     | '/{-$locale}/sign-in'
     | '/{-$locale}/sign-up'
     | '/{-$locale}/'
@@ -280,6 +293,13 @@ declare module '@tanstack/react-router' {
       path: '/sign-in'
       fullPath: '/{-$locale}/sign-in'
       preLoaderRoute: typeof Char123LocaleChar125SignInRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
+    '/{-$locale}/settings': {
+      id: '/{-$locale}/settings'
+      path: '/settings'
+      fullPath: '/{-$locale}/settings'
+      preLoaderRoute: typeof Char123LocaleChar125SettingsRouteImport
       parentRoute: typeof Char123LocaleChar125RouteRoute
     }
     '/{-$locale}/users/$userId': {
@@ -377,6 +397,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface Char123LocaleChar125RouteRouteChildren {
+  Char123LocaleChar125SettingsRoute: typeof Char123LocaleChar125SettingsRoute
   Char123LocaleChar125SignInRoute: typeof Char123LocaleChar125SignInRoute
   Char123LocaleChar125SignUpRoute: typeof Char123LocaleChar125SignUpRoute
   Char123LocaleChar125IndexRoute: typeof Char123LocaleChar125IndexRoute
@@ -387,6 +408,7 @@ interface Char123LocaleChar125RouteRouteChildren {
 
 const Char123LocaleChar125RouteRouteChildren: Char123LocaleChar125RouteRouteChildren =
   {
+    Char123LocaleChar125SettingsRoute: Char123LocaleChar125SettingsRoute,
     Char123LocaleChar125SignInRoute: Char123LocaleChar125SignInRoute,
     Char123LocaleChar125SignUpRoute: Char123LocaleChar125SignUpRoute,
     Char123LocaleChar125IndexRoute: Char123LocaleChar125IndexRoute,
