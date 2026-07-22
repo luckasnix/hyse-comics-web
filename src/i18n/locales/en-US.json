@@ -94,6 +94,21 @@
     "editor": "Editor",
     "publisher": "Publisher"
   },
+  "settings": {
+    "title": "Settings",
+    "preferredLanguage": "Preferred language",
+    "readingAxis": "Reading axis",
+    "save": "Save",
+    "saveSuccess": "Settings saved successfully.",
+    "languages": {
+      "enUS": "English (United States)",
+      "ptBR": "Portuguese (Brazil)"
+    },
+    "readingAxes": {
+      "horizontal": "Horizontal",
+      "vertical": "Vertical"
+    }
+  },
   "users": {
     "works": "Works"
   }

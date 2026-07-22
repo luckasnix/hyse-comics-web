@@ -94,6 +94,21 @@
     "editor": "Editor",
     "publisher": "Editora"
   },
+  "settings": {
+    "title": "Configurações",
+    "preferredLanguage": "Idioma preferido",
+    "readingAxis": "Eixo de leitura",
+    "save": "Salvar",
+    "saveSuccess": "Configurações salvas com sucesso.",
+    "languages": {
+      "enUS": "Inglês (Estados Unidos)",
+      "ptBR": "Português (Brasil)"
+    },
+    "readingAxes": {
+      "horizontal": "Horizontal",
+      "vertical": "Vertical"
+    }
+  },
   "users": {
     "works": "Obras"
   }
