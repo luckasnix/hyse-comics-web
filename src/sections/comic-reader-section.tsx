@@ -1,6 +1,6 @@
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
-import { useBoolean, useFullscreen } from "ahooks";
+import { useFullscreen } from "ahooks";
 import useEmblaCarousel from "embla-carousel-react";
 import { useRef } from "react";
 
@@ -11,6 +11,7 @@ import { carouselDirectionFrom } from "#/constants/comics";
 import { carouselAxisFrom, fallbackReadingAxis } from "#/constants/users";
 import { useComic } from "#/contexts/comic";
 import { useUser } from "#/contexts/user";
+import { useBoolean } from "#/hooks/use-boolean";
 import { useScreenOrientation } from "#/hooks/use-screen-orientation";
 
 const containerStyle: SxProps<Theme> = {
