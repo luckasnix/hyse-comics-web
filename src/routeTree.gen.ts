@@ -11,22 +11,22 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as Char123LocaleChar125RouteRouteImport } from './routes/{-$locale}/route'
 import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index'
-import { Route as Char123LocaleChar125SignUpRouteImport } from './routes/{-$locale}/sign-up'
-import { Route as Char123LocaleChar125SignInRouteImport } from './routes/{-$locale}/sign-in'
 import { Route as Char123LocaleChar125SettingsRouteImport } from './routes/{-$locale}/settings'
-import { Route as Char123LocaleChar125UsersUserIdRouteImport } from './routes/{-$locale}/users/$userId'
-import { Route as Char123LocaleChar125ComicsComicIdRouteImport } from './routes/{-$locale}/comics/$comicId'
-import { Route as Char123LocaleChar125ChaptersChapterIdRouteImport } from './routes/{-$locale}/chapters/$chapterId'
-import { Route as ApiUsersUserIdRouteImport } from './routes/api/users/$userId'
-import { Route as ApiRecommendationsChar123RecommendationIdChar125RouteImport } from './routes/api/recommendations/{-$recommendationId}'
-import { Route as ApiPagesPageIdRouteImport } from './routes/api/pages/$pageId'
-import { Route as ApiComicsChar123ComicIdChar125RouteImport } from './routes/api/comics/{-$comicId}'
+import { Route as Char123LocaleChar125SignInRouteImport } from './routes/{-$locale}/sign-in'
+import { Route as Char123LocaleChar125SignUpRouteImport } from './routes/{-$locale}/sign-up'
 import { Route as ApiChaptersChapterIdRouteImport } from './routes/api/chapters/$chapterId'
-import { Route as ApiUsersUserIdWorksRouteImport } from './routes/api/users/$userId.works'
-import { Route as ApiComicsComicIdCreditsRouteImport } from './routes/api/comics/$comicId.credits'
-import { Route as ApiComicsComicIdChaptersRouteImport } from './routes/api/comics/$comicId.chapters'
-import { Route as ApiChaptersChapterIdPagesRouteImport } from './routes/api/chapters/$chapterId.pages'
+import { Route as ApiComicsChar123ComicIdChar125RouteImport } from './routes/api/comics/{-$comicId}'
+import { Route as ApiPagesPageIdRouteImport } from './routes/api/pages/$pageId'
+import { Route as ApiRecommendationsChar123RecommendationIdChar125RouteImport } from './routes/api/recommendations/{-$recommendationId}'
+import { Route as ApiUsersUserIdRouteImport } from './routes/api/users/$userId'
+import { Route as Char123LocaleChar125ChaptersChapterIdRouteImport } from './routes/{-$locale}/chapters/$chapterId'
+import { Route as Char123LocaleChar125ComicsComicIdRouteImport } from './routes/{-$locale}/comics/$comicId'
+import { Route as Char123LocaleChar125UsersUserIdRouteImport } from './routes/{-$locale}/users/$userId'
 import { Route as ApiChaptersChapterIdCreditsRouteImport } from './routes/api/chapters/$chapterId.credits'
+import { Route as ApiChaptersChapterIdPagesRouteImport } from './routes/api/chapters/$chapterId.pages'
+import { Route as ApiComicsComicIdChaptersRouteImport } from './routes/api/comics/$comicId.chapters'
+import { Route as ApiComicsComicIdCreditsRouteImport } from './routes/api/comics/$comicId.credits'
+import { Route as ApiUsersUserIdWorksRouteImport } from './routes/api/users/$userId.works'
 
 const Char123LocaleChar125RouteRoute =
   Char123LocaleChar125RouteRouteImport.update({
@@ -40,10 +40,10 @@ const Char123LocaleChar125IndexRoute =
     path: '/',
     getParentRoute: () => Char123LocaleChar125RouteRoute,
   } as any)
-const Char123LocaleChar125SignUpRoute =
-  Char123LocaleChar125SignUpRouteImport.update({
-    id: '/sign-up',
-    path: '/sign-up',
+const Char123LocaleChar125SettingsRoute =
+  Char123LocaleChar125SettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
     getParentRoute: () => Char123LocaleChar125RouteRoute,
   } as any)
 const Char123LocaleChar125SignInRoute =
@@ -52,44 +52,15 @@ const Char123LocaleChar125SignInRoute =
     path: '/sign-in',
     getParentRoute: () => Char123LocaleChar125RouteRoute,
   } as any)
-const Char123LocaleChar125SettingsRoute =
-  Char123LocaleChar125SettingsRouteImport.update({
-    id: '/settings',
-    path: '/settings',
+const Char123LocaleChar125SignUpRoute =
+  Char123LocaleChar125SignUpRouteImport.update({
+    id: '/sign-up',
+    path: '/sign-up',
     getParentRoute: () => Char123LocaleChar125RouteRoute,
   } as any)
-const Char123LocaleChar125UsersUserIdRoute =
-  Char123LocaleChar125UsersUserIdRouteImport.update({
-    id: '/users/$userId',
-    path: '/users/$userId',
-    getParentRoute: () => Char123LocaleChar125RouteRoute,
-  } as any)
-const Char123LocaleChar125ComicsComicIdRoute =
-  Char123LocaleChar125ComicsComicIdRouteImport.update({
-    id: '/comics/$comicId',
-    path: '/comics/$comicId',
-    getParentRoute: () => Char123LocaleChar125RouteRoute,
-  } as any)
-const Char123LocaleChar125ChaptersChapterIdRoute =
-  Char123LocaleChar125ChaptersChapterIdRouteImport.update({
-    id: '/chapters/$chapterId',
-    path: '/chapters/$chapterId',
-    getParentRoute: () => Char123LocaleChar125RouteRoute,
-  } as any)
-const ApiUsersUserIdRoute = ApiUsersUserIdRouteImport.update({
-  id: '/api/users/$userId',
-  path: '/api/users/$userId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiRecommendationsChar123RecommendationIdChar125Route =
-  ApiRecommendationsChar123RecommendationIdChar125RouteImport.update({
-    id: '/api/recommendations/{-$recommendationId}',
-    path: '/api/recommendations/{-$recommendationId}',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiPagesPageIdRoute = ApiPagesPageIdRouteImport.update({
-  id: '/api/pages/$pageId',
-  path: '/api/pages/$pageId',
+const ApiChaptersChapterIdRoute = ApiChaptersChapterIdRouteImport.update({
+  id: '/api/chapters/$chapterId',
+  path: '/api/chapters/$chapterId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiComicsChar123ComicIdChar125Route =
@@ -98,32 +69,39 @@ const ApiComicsChar123ComicIdChar125Route =
     path: '/api/comics/{-$comicId}',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiChaptersChapterIdRoute = ApiChaptersChapterIdRouteImport.update({
-  id: '/api/chapters/$chapterId',
-  path: '/api/chapters/$chapterId',
+const ApiPagesPageIdRoute = ApiPagesPageIdRouteImport.update({
+  id: '/api/pages/$pageId',
+  path: '/api/pages/$pageId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiUsersUserIdWorksRoute = ApiUsersUserIdWorksRouteImport.update({
-  id: '/works',
-  path: '/works',
-  getParentRoute: () => ApiUsersUserIdRoute,
-} as any)
-const ApiComicsComicIdCreditsRoute = ApiComicsComicIdCreditsRouteImport.update({
-  id: '/api/comics/$comicId/credits',
-  path: '/api/comics/$comicId/credits',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiComicsComicIdChaptersRoute =
-  ApiComicsComicIdChaptersRouteImport.update({
-    id: '/api/comics/$comicId/chapters',
-    path: '/api/comics/$comicId/chapters',
+const ApiRecommendationsChar123RecommendationIdChar125Route =
+  ApiRecommendationsChar123RecommendationIdChar125RouteImport.update({
+    id: '/api/recommendations/{-$recommendationId}',
+    path: '/api/recommendations/{-$recommendationId}',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiChaptersChapterIdPagesRoute =
-  ApiChaptersChapterIdPagesRouteImport.update({
-    id: '/pages',
-    path: '/pages',
-    getParentRoute: () => ApiChaptersChapterIdRoute,
+const ApiUsersUserIdRoute = ApiUsersUserIdRouteImport.update({
+  id: '/api/users/$userId',
+  path: '/api/users/$userId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Char123LocaleChar125ChaptersChapterIdRoute =
+  Char123LocaleChar125ChaptersChapterIdRouteImport.update({
+    id: '/chapters/$chapterId',
+    path: '/chapters/$chapterId',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
+const Char123LocaleChar125ComicsComicIdRoute =
+  Char123LocaleChar125ComicsComicIdRouteImport.update({
+    id: '/comics/$comicId',
+    path: '/comics/$comicId',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
+const Char123LocaleChar125UsersUserIdRoute =
+  Char123LocaleChar125UsersUserIdRouteImport.update({
+    id: '/users/$userId',
+    path: '/users/$userId',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
   } as any)
 const ApiChaptersChapterIdCreditsRoute =
   ApiChaptersChapterIdCreditsRouteImport.update({
@@ -131,6 +109,28 @@ const ApiChaptersChapterIdCreditsRoute =
     path: '/credits',
     getParentRoute: () => ApiChaptersChapterIdRoute,
   } as any)
+const ApiChaptersChapterIdPagesRoute =
+  ApiChaptersChapterIdPagesRouteImport.update({
+    id: '/pages',
+    path: '/pages',
+    getParentRoute: () => ApiChaptersChapterIdRoute,
+  } as any)
+const ApiComicsComicIdChaptersRoute =
+  ApiComicsComicIdChaptersRouteImport.update({
+    id: '/api/comics/$comicId/chapters',
+    path: '/api/comics/$comicId/chapters',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiComicsComicIdCreditsRoute = ApiComicsComicIdCreditsRouteImport.update({
+  id: '/api/comics/$comicId/credits',
+  path: '/api/comics/$comicId/credits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiUsersUserIdWorksRoute = ApiUsersUserIdWorksRouteImport.update({
+  id: '/works',
+  path: '/works',
+  getParentRoute: () => ApiUsersUserIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
@@ -281,11 +281,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125IndexRouteImport
       parentRoute: typeof Char123LocaleChar125RouteRoute
     }
-    '/{-$locale}/sign-up': {
-      id: '/{-$locale}/sign-up'
-      path: '/sign-up'
-      fullPath: '/{-$locale}/sign-up'
-      preLoaderRoute: typeof Char123LocaleChar125SignUpRouteImport
+    '/{-$locale}/settings': {
+      id: '/{-$locale}/settings'
+      path: '/settings'
+      fullPath: '/{-$locale}/settings'
+      preLoaderRoute: typeof Char123LocaleChar125SettingsRouteImport
       parentRoute: typeof Char123LocaleChar125RouteRoute
     }
     '/{-$locale}/sign-in': {
@@ -295,53 +295,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125SignInRouteImport
       parentRoute: typeof Char123LocaleChar125RouteRoute
     }
-    '/{-$locale}/settings': {
-      id: '/{-$locale}/settings'
-      path: '/settings'
-      fullPath: '/{-$locale}/settings'
-      preLoaderRoute: typeof Char123LocaleChar125SettingsRouteImport
+    '/{-$locale}/sign-up': {
+      id: '/{-$locale}/sign-up'
+      path: '/sign-up'
+      fullPath: '/{-$locale}/sign-up'
+      preLoaderRoute: typeof Char123LocaleChar125SignUpRouteImport
       parentRoute: typeof Char123LocaleChar125RouteRoute
     }
-    '/{-$locale}/users/$userId': {
-      id: '/{-$locale}/users/$userId'
-      path: '/users/$userId'
-      fullPath: '/{-$locale}/users/$userId'
-      preLoaderRoute: typeof Char123LocaleChar125UsersUserIdRouteImport
-      parentRoute: typeof Char123LocaleChar125RouteRoute
-    }
-    '/{-$locale}/comics/$comicId': {
-      id: '/{-$locale}/comics/$comicId'
-      path: '/comics/$comicId'
-      fullPath: '/{-$locale}/comics/$comicId'
-      preLoaderRoute: typeof Char123LocaleChar125ComicsComicIdRouteImport
-      parentRoute: typeof Char123LocaleChar125RouteRoute
-    }
-    '/{-$locale}/chapters/$chapterId': {
-      id: '/{-$locale}/chapters/$chapterId'
-      path: '/chapters/$chapterId'
-      fullPath: '/{-$locale}/chapters/$chapterId'
-      preLoaderRoute: typeof Char123LocaleChar125ChaptersChapterIdRouteImport
-      parentRoute: typeof Char123LocaleChar125RouteRoute
-    }
-    '/api/users/$userId': {
-      id: '/api/users/$userId'
-      path: '/api/users/$userId'
-      fullPath: '/api/users/$userId'
-      preLoaderRoute: typeof ApiUsersUserIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/recommendations/{-$recommendationId}': {
-      id: '/api/recommendations/{-$recommendationId}'
-      path: '/api/recommendations/{-$recommendationId}'
-      fullPath: '/api/recommendations/{-$recommendationId}'
-      preLoaderRoute: typeof ApiRecommendationsChar123RecommendationIdChar125RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/pages/$pageId': {
-      id: '/api/pages/$pageId'
-      path: '/api/pages/$pageId'
-      fullPath: '/api/pages/$pageId'
-      preLoaderRoute: typeof ApiPagesPageIdRouteImport
+    '/api/chapters/$chapterId': {
+      id: '/api/chapters/$chapterId'
+      path: '/api/chapters/$chapterId'
+      fullPath: '/api/chapters/$chapterId'
+      preLoaderRoute: typeof ApiChaptersChapterIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/comics/{-$comicId}': {
@@ -351,33 +316,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiComicsChar123ComicIdChar125RouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/chapters/$chapterId': {
-      id: '/api/chapters/$chapterId'
-      path: '/api/chapters/$chapterId'
-      fullPath: '/api/chapters/$chapterId'
-      preLoaderRoute: typeof ApiChaptersChapterIdRouteImport
+    '/api/pages/$pageId': {
+      id: '/api/pages/$pageId'
+      path: '/api/pages/$pageId'
+      fullPath: '/api/pages/$pageId'
+      preLoaderRoute: typeof ApiPagesPageIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/users/$userId/works': {
-      id: '/api/users/$userId/works'
-      path: '/works'
-      fullPath: '/api/users/$userId/works'
-      preLoaderRoute: typeof ApiUsersUserIdWorksRouteImport
-      parentRoute: typeof ApiUsersUserIdRoute
-    }
-    '/api/comics/$comicId/credits': {
-      id: '/api/comics/$comicId/credits'
-      path: '/api/comics/$comicId/credits'
-      fullPath: '/api/comics/$comicId/credits'
-      preLoaderRoute: typeof ApiComicsComicIdCreditsRouteImport
+    '/api/recommendations/{-$recommendationId}': {
+      id: '/api/recommendations/{-$recommendationId}'
+      path: '/api/recommendations/{-$recommendationId}'
+      fullPath: '/api/recommendations/{-$recommendationId}'
+      preLoaderRoute: typeof ApiRecommendationsChar123RecommendationIdChar125RouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/comics/$comicId/chapters': {
-      id: '/api/comics/$comicId/chapters'
-      path: '/api/comics/$comicId/chapters'
-      fullPath: '/api/comics/$comicId/chapters'
-      preLoaderRoute: typeof ApiComicsComicIdChaptersRouteImport
+    '/api/users/$userId': {
+      id: '/api/users/$userId'
+      path: '/api/users/$userId'
+      fullPath: '/api/users/$userId'
+      preLoaderRoute: typeof ApiUsersUserIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/{-$locale}/chapters/$chapterId': {
+      id: '/{-$locale}/chapters/$chapterId'
+      path: '/chapters/$chapterId'
+      fullPath: '/{-$locale}/chapters/$chapterId'
+      preLoaderRoute: typeof Char123LocaleChar125ChaptersChapterIdRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
+    '/{-$locale}/comics/$comicId': {
+      id: '/{-$locale}/comics/$comicId'
+      path: '/comics/$comicId'
+      fullPath: '/{-$locale}/comics/$comicId'
+      preLoaderRoute: typeof Char123LocaleChar125ComicsComicIdRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
+    '/{-$locale}/users/$userId': {
+      id: '/{-$locale}/users/$userId'
+      path: '/users/$userId'
+      fullPath: '/{-$locale}/users/$userId'
+      preLoaderRoute: typeof Char123LocaleChar125UsersUserIdRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
+    '/api/chapters/$chapterId/credits': {
+      id: '/api/chapters/$chapterId/credits'
+      path: '/credits'
+      fullPath: '/api/chapters/$chapterId/credits'
+      preLoaderRoute: typeof ApiChaptersChapterIdCreditsRouteImport
+      parentRoute: typeof ApiChaptersChapterIdRoute
     }
     '/api/chapters/$chapterId/pages': {
       id: '/api/chapters/$chapterId/pages'
@@ -386,12 +372,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChaptersChapterIdPagesRouteImport
       parentRoute: typeof ApiChaptersChapterIdRoute
     }
-    '/api/chapters/$chapterId/credits': {
-      id: '/api/chapters/$chapterId/credits'
-      path: '/credits'
-      fullPath: '/api/chapters/$chapterId/credits'
-      preLoaderRoute: typeof ApiChaptersChapterIdCreditsRouteImport
-      parentRoute: typeof ApiChaptersChapterIdRoute
+    '/api/comics/$comicId/chapters': {
+      id: '/api/comics/$comicId/chapters'
+      path: '/api/comics/$comicId/chapters'
+      fullPath: '/api/comics/$comicId/chapters'
+      preLoaderRoute: typeof ApiComicsComicIdChaptersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/comics/$comicId/credits': {
+      id: '/api/comics/$comicId/credits'
+      path: '/api/comics/$comicId/credits'
+      fullPath: '/api/comics/$comicId/credits'
+      preLoaderRoute: typeof ApiComicsComicIdCreditsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/users/$userId/works': {
+      id: '/api/users/$userId/works'
+      path: '/works'
+      fullPath: '/api/users/$userId/works'
+      preLoaderRoute: typeof ApiUsersUserIdWorksRouteImport
+      parentRoute: typeof ApiUsersUserIdRoute
     }
   }
 }
