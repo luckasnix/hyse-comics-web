@@ -96,10 +96,16 @@
   },
   "settings": {
     "title": "Configurações",
+    "theme": "Tema",
     "preferredLanguage": "Idioma preferido",
     "readingAxis": "Eixo de leitura",
     "save": "Salvar",
     "saveSuccess": "Configurações salvas com sucesso.",
+    "themes": {
+      "system": "Sistema",
+      "light": "Claro",
+      "dark": "Escuro"
+    },
     "languages": {
       "enUS": "Inglês (Estados Unidos)",
       "ptBR": "Português (Brasil)"

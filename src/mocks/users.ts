@@ -22,6 +22,7 @@ export const signedInUserMock: User = {
     },
   },
   preferences: {
+    theme: "light",
     readingAxis: "vertical",
   },
 };
@@ -45,6 +46,7 @@ export const usersMock: Array<User> = [
       },
     },
     preferences: {
+      theme: "dark",
       readingAxis: "vertical",
     },
   },
@@ -65,6 +67,7 @@ export const usersMock: Array<User> = [
       },
     },
     preferences: {
+      theme: "system",
       readingAxis: "horizontal",
     },
   },

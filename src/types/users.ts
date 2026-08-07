@@ -32,9 +32,12 @@ export type UserProfile = {
   socialLinks: UserSocialLinks;
 };
 
+export type ThemePreference = "system" | "light" | "dark";
+
 export type ReadingAxis = "horizontal" | "vertical";
 
 export type UserPreferences = {
+  theme: ThemePreference;
   readingAxis: ReadingAxis;
 };
 

@@ -6,19 +6,47 @@ import { useForm } from "@tanstack/react-form";
 import { useTranslation } from "react-i18next";
 
 import { Form } from "#/components/form";
-import { fallbackLanguage, fallbackReadingAxis } from "#/constants/users";
+import {
+  fallbackLanguage,
+  fallbackReadingAxis,
+  fallbackTheme,
+} from "#/constants/users";
 import { useUi } from "#/contexts/ui";
-import type { ReadingAxis, SupportedLanguage } from "#/types/users";
+import type {
+  ReadingAxis,
+  SupportedLanguage,
+  ThemePreference,
+} from "#/types/users";
 
 export type SettingsFormValues = {
+  theme: ThemePreference;
   preferredLanguage: SupportedLanguage;
   readingAxis: ReadingAxis;
 };
 
 const defaultValues: SettingsFormValues = {
+  theme: fallbackTheme,
   preferredLanguage: fallbackLanguage,
   readingAxis: fallbackReadingAxis,
 };
+
+const themeOptions: ReadonlyArray<{
+  value: ThemePreference;
+  labelKey: string;
+}> = [
+  {
+    value: "system",
+    labelKey: "settings.themes.system",
+  },
+  {
+    value: "light",
+    labelKey: "settings.themes.light",
+  },
+  {
+    value: "dark",
+    labelKey: "settings.themes.dark",
+  },
+];
 
 const languageOptions: ReadonlyArray<{
   value: SupportedLanguage;
@@ -73,6 +101,25 @@ export const SettingsForm = () => {
     >
       <Form.Title>{t("settings.title")}</Form.Title>
       <Stack spacing={2}>
+        <form.Field name="theme">
+          {(field) => (
+            <TextField
+              select
+              fullWidth
+              label={t("settings.theme")}
+              value={field.state.value}
+              onChange={(event) => {
+                field.handleChange(event.target.value as ThemePreference);
+              }}
+            >
+              {themeOptions.map(({ value, labelKey }) => (
+                <MenuItem key={value} value={value}>
+                  {t(labelKey)}
+                </MenuItem>
+              ))}
+            </TextField>
+          )}
+        </form.Field>
         <form.Field name="preferredLanguage">
           {(field) => (
             <TextField

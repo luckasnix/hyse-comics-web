@@ -29,6 +29,9 @@ describe("<SettingsForm />", () => {
     expect(
       screen.getByRole("heading", { level: 3, name: "Settings" }),
     ).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Theme" })).toHaveTextContent(
+      "System",
+    );
     expect(
       screen.getByRole("combobox", { name: "Preferred language" }),
     ).toHaveTextContent("English (United States)");
@@ -42,6 +45,7 @@ describe("<SettingsForm />", () => {
     const user = userEvent.setup();
     renderComponent();
 
+    const theme = screen.getByRole("combobox", { name: "Theme" });
     const preferredLanguage = screen.getByRole("combobox", {
       name: "Preferred language",
     });
@@ -49,6 +53,8 @@ describe("<SettingsForm />", () => {
       name: "Reading axis",
     });
 
+    await user.click(theme);
+    await user.click(screen.getByRole("option", { name: "Dark" }));
     await user.click(preferredLanguage);
     await user.click(
       screen.getByRole("option", { name: "Portuguese (Brazil)" }),
@@ -60,6 +66,7 @@ describe("<SettingsForm />", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(
       "Settings saved successfully.",
     );
+    expect(theme).toHaveTextContent("Dark");
     expect(preferredLanguage).toHaveTextContent("Portuguese (Brazil)");
     expect(readingAxis).toHaveTextContent("Horizontal");
   });
@@ -72,6 +79,9 @@ describe("<SettingsForm />", () => {
     expect(
       screen.getByRole("heading", { level: 3, name: "Configurações" }),
     ).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Tema" })).toHaveTextContent(
+      "Sistema",
+    );
     expect(
       screen.getByRole("combobox", { name: "Idioma preferido" }),
     ).toHaveTextContent("Inglês (Estados Unidos)");
