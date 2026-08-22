@@ -23,9 +23,9 @@ import { useTranslation } from "react-i18next";
 import {
   carouselDirectionFrom,
   comicReaderToolbarHeight,
-} from "#/constants/comics";
-import { useComic } from "#/contexts/comic";
-import { useComicReaderToolbar } from "#/hooks/use-comic-reader-toolbar";
+} from "#/constants/comics.ts";
+import { useComic } from "#/contexts/comic.tsx";
+import { useComicReaderToolbar } from "#/hooks/use-comic-reader-toolbar.ts";
 
 export type ComicReaderToolbarProps = Readonly<{
   carouselApi: EmblaCarouselType | undefined;

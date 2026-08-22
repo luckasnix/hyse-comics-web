@@ -2,7 +2,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { useBoolean } from "./use-boolean";
+import { useBoolean } from "./use-boolean.ts";
 
 describe("useBoolean()", () => {
   it("is false by default", () => {

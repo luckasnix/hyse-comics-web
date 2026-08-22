@@ -5,18 +5,18 @@ import { IconDeviceFloppy } from "@tabler/icons-react";
 import { useForm } from "@tanstack/react-form";
 import { useTranslation } from "react-i18next";
 
-import { Form } from "#/components/form";
+import { Form } from "#/components/form.tsx";
 import {
   fallbackLanguage,
   fallbackReadingAxis,
   fallbackTheme,
-} from "#/constants/users";
-import { useUi } from "#/contexts/ui";
+} from "#/constants/users.ts";
+import { useUi } from "#/contexts/ui.tsx";
 import type {
   ReadingAxis,
   SupportedLanguage,
   ThemePreference,
-} from "#/types/users";
+} from "#/types/users.ts";
 
 export type SettingsFormValues = {
   theme: ThemePreference;

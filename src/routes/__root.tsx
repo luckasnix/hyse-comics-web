@@ -4,11 +4,11 @@ import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { type ReactNode, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 
-import "#/i18n";
-import { UiProvider } from "#/contexts/ui";
-import { UserProvider } from "#/contexts/user";
-import { FallbackPage } from "#/pages/fallback-page";
-import { NotFoundPage } from "#/pages/not-found-page";
+import "#/i18n/index.ts";
+import { UiProvider } from "#/contexts/ui.tsx";
+import { UserProvider } from "#/contexts/user.tsx";
+import { FallbackPage } from "#/pages/fallback-page.tsx";
+import { NotFoundPage } from "#/pages/not-found-page.tsx";
 
 const queryClient = new QueryClient();
 

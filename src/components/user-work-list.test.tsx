@@ -3,10 +3,10 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { comicsMock } from "#/mocks/comics";
-import type { UserComicWork } from "#/types/comics";
+import { comicsMock } from "#/mocks/comics.ts";
+import type { UserComicWork } from "#/types/comics.ts";
 
-import { UserWorkList } from "./user-work-list";
+import { UserWorkList } from "./user-work-list.tsx";
 
 const works: Array<UserComicWork> = [
   {

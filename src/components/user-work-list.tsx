@@ -6,10 +6,10 @@ import ListItemText from "@mui/material/ListItemText";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 
-import { ListState } from "#/components/list-state";
-import { roleLabelsFrom } from "#/constants/users";
-import type { UserComicWork } from "#/types/comics";
-import { keyFromUserComicWork, rolesFromUserComicWork } from "#/utils/users";
+import { ListState } from "#/components/list-state.tsx";
+import { roleLabelsFrom } from "#/constants/users.ts";
+import type { UserComicWork } from "#/types/comics.ts";
+import { keyFromUserComicWork, rolesFromUserComicWork } from "#/utils/users.ts";
 
 export type UserWorkListProps = Readonly<{
   works: Array<UserComicWork>;

@@ -2,10 +2,10 @@ import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { fallbackLanguage } from "#/constants/users";
-import { useUser } from "#/contexts/user";
-import { NotFoundPage } from "#/pages/not-found-page";
-import type { SupportedLanguage } from "#/types/users";
+import { fallbackLanguage } from "#/constants/users.ts";
+import { useUser } from "#/contexts/user.tsx";
+import { NotFoundPage } from "#/pages/not-found-page.tsx";
+import type { SupportedLanguage } from "#/types/users.ts";
 
 const supportedLocales: SupportedLanguage[] = ["en-US", "pt-BR"];
 

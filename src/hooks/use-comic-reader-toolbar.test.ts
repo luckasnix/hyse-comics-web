@@ -2,9 +2,9 @@
 import { renderHook } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-import { useComicReaderToolbar } from "./use-comic-reader-toolbar";
+import { useComicReaderToolbar } from "./use-comic-reader-toolbar.ts";
 
-vi.mock("#/hooks/use-carousel-navigation", () => ({
+vi.mock("#/hooks/use-carousel-navigation.ts", () => ({
   useCarouselNavigation: vi.fn().mockReturnValue({
     currentSlideNumber: null,
     slidesLength: null,
@@ -20,7 +20,7 @@ vi.mock("#/hooks/use-carousel-navigation", () => ({
 }));
 
 const { useCarouselNavigation } = await import(
-  "#/hooks/use-carousel-navigation"
+  "#/hooks/use-carousel-navigation.ts"
 );
 
 const useCarouselNavigationMock = vi.mocked(useCarouselNavigation);

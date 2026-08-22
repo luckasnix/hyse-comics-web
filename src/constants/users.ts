@@ -1,10 +1,10 @@
-import type { AxisOptionType } from "#/types/comics";
+import type { AxisOptionType } from "#/types/comics.ts";
 import type {
   ReadingAxis,
   SupportedLanguage,
   ThemePreference,
   UserRoles,
-} from "#/types/users";
+} from "#/types/users.ts";
 
 export const fallbackTheme = "system" satisfies ThemePreference;
 

@@ -1,3 +1,3 @@
 import "@testing-library/jest-dom/vitest";
 
-import "./src/i18n";
+import "./src/i18n/index.ts";

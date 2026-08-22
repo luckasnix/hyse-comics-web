@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { recommendationsMock } from "#/mocks/recommendations";
+import { recommendationsMock } from "#/mocks/recommendations.ts";
 
 export const Route = createFileRoute(
   "/api/recommendations/{-$recommendationId}",

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { SignUpForm } from "#/components/sign-up-form";
-import { PageLayout } from "#/layouts/page-layout";
+import { SignUpForm } from "#/components/sign-up-form.tsx";
+import { PageLayout } from "#/layouts/page-layout.tsx";
 
 const SignUpRoute = () => (
   <PageLayout maxWidth="sm">

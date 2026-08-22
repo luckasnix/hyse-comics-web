@@ -11,12 +11,12 @@ import { useTranslation } from "react-i18next";
 import {
   comicReaderToolbarHeight,
   comicReaderZoomScale,
-} from "#/constants/comics";
-import { fallbackReadingAxis } from "#/constants/users";
-import { useComic } from "#/contexts/comic";
-import { useUser } from "#/contexts/user";
-import type { ComicDirection, PageBackgroundTexture } from "#/types/comics";
-import type { ReadingAxis } from "#/types/users";
+} from "#/constants/comics.ts";
+import { fallbackReadingAxis } from "#/constants/users.ts";
+import { useComic } from "#/contexts/comic.tsx";
+import { useUser } from "#/contexts/user.tsx";
+import type { ComicDirection, PageBackgroundTexture } from "#/types/comics.ts";
+import type { ReadingAxis } from "#/types/users.ts";
 
 export type ComicReaderViewportProps = Readonly<{
   carouselRef: EmblaViewportRefType;

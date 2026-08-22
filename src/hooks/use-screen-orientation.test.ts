@@ -2,9 +2,9 @@
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import type { ComicOrientation } from "#/types/comics";
+import type { ComicOrientation } from "#/types/comics.ts";
 
-import { useScreenOrientation } from "./use-screen-orientation";
+import { useScreenOrientation } from "./use-screen-orientation.ts";
 
 const originalOrientationDescriptor = Object.getOwnPropertyDescriptor(
   window.screen,

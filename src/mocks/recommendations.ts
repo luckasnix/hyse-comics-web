@@ -1,6 +1,6 @@
-import type { ChapterWithComic, Recommendation } from "#/types/comics";
+import type { ChapterWithComic, Recommendation } from "#/types/comics.ts";
 
-import { chaptersMock, comicsMock } from "./comics";
+import { chaptersMock, comicsMock } from "./comics.ts";
 
 const generateChaptersWithComic = (
   chapterIds: Array<string>,

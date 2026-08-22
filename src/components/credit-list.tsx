@@ -6,10 +6,10 @@ import ListItemText from "@mui/material/ListItemText";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 
-import { ListState } from "#/components/list-state";
-import { roleLabelsFrom } from "#/constants/users";
-import type { CreditWithUser } from "#/types/comics";
-import { keyFromCredit, rolesFromCredit } from "#/utils/users";
+import { ListState } from "#/components/list-state.tsx";
+import { roleLabelsFrom } from "#/constants/users.ts";
+import type { CreditWithUser } from "#/types/comics.ts";
+import { keyFromCredit, rolesFromCredit } from "#/utils/users.ts";
 
 export type CreditListProps = Readonly<{
   credits: Array<CreditWithUser>;

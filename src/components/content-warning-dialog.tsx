@@ -14,8 +14,8 @@ import { IconAlertTriangle } from "@tabler/icons-react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { contentWarningLabelsFrom } from "#/constants/comics";
-import type { ContentWarning } from "#/types/comics";
+import { contentWarningLabelsFrom } from "#/constants/comics.ts";
+import type { ContentWarning } from "#/types/comics.ts";
 
 export type ContentWarningDialogProps = Readonly<{
   contentWarnings: Array<ContentWarning>;

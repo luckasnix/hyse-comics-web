@@ -3,14 +3,14 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { ComicProvider } from "#/contexts/comic";
-import { UserProvider } from "#/contexts/user";
-import { chaptersMock, comicsMock, pagesMock } from "#/mocks/comics";
-import { signedInUserMock, usersMock } from "#/mocks/users";
-import type { Comic, Page } from "#/types/comics";
-import type { User } from "#/types/users";
+import { ComicProvider } from "#/contexts/comic.tsx";
+import { UserProvider } from "#/contexts/user.tsx";
+import { chaptersMock, comicsMock, pagesMock } from "#/mocks/comics.ts";
+import { signedInUserMock, usersMock } from "#/mocks/users.ts";
+import type { Comic, Page } from "#/types/comics.ts";
+import type { User } from "#/types/users.ts";
 
-import { ComicReaderViewport } from "./comic-reader-viewport";
+import { ComicReaderViewport } from "./comic-reader-viewport.tsx";
 
 const easternComic = comicsMock[0];
 const westernComic = comicsMock[1];

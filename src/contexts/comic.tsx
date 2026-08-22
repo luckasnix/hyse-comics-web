@@ -1,6 +1,6 @@
 import { createContext, type ReactNode, useContext, useMemo } from "react";
 
-import type { Chapter, Comic, Page } from "#/types/comics";
+import type { Chapter, Comic, Page } from "#/types/comics.ts";
 
 export type ComicContextValue = {
   comic: Comic;

@@ -1,5 +1,5 @@
-import { roleLabelsFrom } from "#/constants/users";
-import type { CreditWithUser, UserComicWork } from "#/types/comics";
+import { roleLabelsFrom } from "#/constants/users.ts";
+import type { CreditWithUser, UserComicWork } from "#/types/comics.ts";
 
 export const rolesFromCredit = (credit: CreditWithUser) => {
   return credit.roles;

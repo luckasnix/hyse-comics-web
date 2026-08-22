@@ -3,9 +3,9 @@ import { renderHook } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { describe, expect, it } from "vitest";
 
-import { signedInUserMock } from "#/mocks/users";
+import { signedInUserMock } from "#/mocks/users.ts";
 
-import { UserProvider, useUser } from "./user";
+import { UserProvider, useUser } from "./user.tsx";
 
 const wrapper = ({ children }: { children: ReactNode }) => (
   <UserProvider user={signedInUserMock}>{children}</UserProvider>

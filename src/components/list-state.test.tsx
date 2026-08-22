@@ -2,7 +2,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
-import { ListState } from "./list-state";
+import { ListState } from "./list-state.tsx";
 
 afterEach(cleanup);
 

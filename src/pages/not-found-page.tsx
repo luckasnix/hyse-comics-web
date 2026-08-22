@@ -6,8 +6,8 @@ import { IconHomeFilled } from "@tabler/icons-react";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { fallbackLanguage } from "#/constants/users";
-import { useUser } from "#/contexts/user";
+import { fallbackLanguage } from "#/constants/users.ts";
+import { useUser } from "#/contexts/user.tsx";
 
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",

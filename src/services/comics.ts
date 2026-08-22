@@ -4,8 +4,8 @@ import type {
   CreditWithUser,
   Page,
   Recommendation,
-} from "#/types/comics";
-import { getBaseUrl } from "#/utils/navigation";
+} from "#/types/comics.ts";
+import { getBaseUrl } from "#/utils/navigation.ts";
 
 export const getComics = async (): Promise<Array<Comic>> => {
   const baseUrl = await getBaseUrl();

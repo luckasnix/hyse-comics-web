@@ -3,13 +3,13 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { UiProvider } from "#/contexts/ui";
-import { chaptersMock, comicsMock } from "#/mocks/comics";
+import { UiProvider } from "#/contexts/ui.tsx";
+import { chaptersMock, comicsMock } from "#/mocks/comics.ts";
 
 import {
   RecommendationCard,
   type RecommendationCardProps,
-} from "./recommendation-card";
+} from "./recommendation-card.tsx";
 
 const onReadButtonClickSpy = vi.fn();
 const getBaseUrlMock = vi.hoisted(() =>
@@ -20,7 +20,7 @@ vi.mock("@tanstack/react-router", () => ({
   useParams: () => ({ locale: "en-US" }),
 }));
 
-vi.mock("#/utils/navigation", () => ({
+vi.mock("#/utils/navigation.ts", () => ({
   getBaseUrl: getBaseUrlMock,
 }));
 

@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { PageLayout } from "#/layouts/page-layout";
-import { UserOverviewSection } from "#/sections/user-overview-section";
-import { UserWorksSection } from "#/sections/user-works-section";
-import { getUser, getUserWorks } from "#/services/users";
+import { PageLayout } from "#/layouts/page-layout.tsx";
+import { UserOverviewSection } from "#/sections/user-overview-section.tsx";
+import { UserWorksSection } from "#/sections/user-works-section.tsx";
+import { getUser, getUserWorks } from "#/services/users.ts";
 
 const UserRoute = () => {
   const { user, works } = Route.useLoaderData();

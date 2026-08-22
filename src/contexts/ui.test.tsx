@@ -10,7 +10,7 @@ import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { afterEach, describe, expect, it } from "vitest";
 
-import { UiProvider, useUi } from "./ui";
+import { UiProvider, useUi } from "./ui.tsx";
 
 const wrapper = ({ children }: { children: ReactNode }) => (
   <UiProvider>{children}</UiProvider>

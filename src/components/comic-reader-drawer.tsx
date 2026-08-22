@@ -9,13 +9,13 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { ChapterList } from "#/components/chapter-list";
-import { CreditList } from "#/components/credit-list";
-import { ListState } from "#/components/list-state";
-import { TabGroup } from "#/components/tab-group";
-import { useComic } from "#/contexts/comic";
-import { getChapterCredits } from "#/services/comics";
-import { getClampedTextStyle, linkResetStyle } from "#/styles/common";
+import { ChapterList } from "#/components/chapter-list.tsx";
+import { CreditList } from "#/components/credit-list.tsx";
+import { ListState } from "#/components/list-state.tsx";
+import { TabGroup } from "#/components/tab-group.tsx";
+import { useComic } from "#/contexts/comic.tsx";
+import { getChapterCredits } from "#/services/comics.ts";
+import { getClampedTextStyle, linkResetStyle } from "#/styles/common.ts";
 
 export type ComicReaderDrawerProps = Readonly<{
   isOpen: boolean;

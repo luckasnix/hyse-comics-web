@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { creditsMock } from "#/mocks/comics";
-import { usersMock } from "#/mocks/users";
-import type { CreditWithUser } from "#/types/comics";
+import { creditsMock } from "#/mocks/comics.ts";
+import { usersMock } from "#/mocks/users.ts";
+import type { CreditWithUser } from "#/types/comics.ts";
 
 export const Route = createFileRoute("/api/chapters/$chapterId/credits")({
   server: {

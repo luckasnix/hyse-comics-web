@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import { comicsMock } from "#/mocks/comics";
-import { usersMock } from "#/mocks/users";
-import type { CreditWithUser, UserComicWork } from "#/types/comics";
+import { comicsMock } from "#/mocks/comics.ts";
+import { usersMock } from "#/mocks/users.ts";
+import type { CreditWithUser, UserComicWork } from "#/types/comics.ts";
 
 import {
   keyFromCredit,
@@ -11,7 +11,7 @@ import {
   roleLabelFromUserComicWork,
   rolesFromCredit,
   rolesFromUserComicWork,
-} from "./users";
+} from "./users.ts";
 
 const singleRoleCreditMock: CreditWithUser = {
   user: usersMock[1].profile,

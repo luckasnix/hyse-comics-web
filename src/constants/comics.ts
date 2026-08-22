@@ -2,7 +2,7 @@ import type {
   AxisDirectionOptionType,
   ComicDirection,
   ContentWarning,
-} from "#/types/comics";
+} from "#/types/comics.ts";
 
 export const comicReaderToolbarHeight = 56;
 

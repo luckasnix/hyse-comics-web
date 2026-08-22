@@ -4,7 +4,11 @@ import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 
 const viteConfig = defineConfig({
-  plugins: [tanstackStart(), nitro(), viteReact()],
+  plugins: [
+    tanstackStart({ router: { addExtensions: true } }),
+    nitro(),
+    viteReact(),
+  ],
   resolve: {
     tsconfigPaths: true,
   },

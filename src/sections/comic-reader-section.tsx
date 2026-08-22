@@ -3,16 +3,16 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import useEmblaCarousel from "embla-carousel-react";
 import { useRef } from "react";
 
-import { ComicReaderDrawer } from "#/components/comic-reader-drawer";
-import { ComicReaderToolbar } from "#/components/comic-reader-toolbar";
-import { ComicReaderViewport } from "#/components/comic-reader-viewport";
-import { carouselDirectionFrom } from "#/constants/comics";
-import { carouselAxisFrom, fallbackReadingAxis } from "#/constants/users";
-import { useComic } from "#/contexts/comic";
-import { useUser } from "#/contexts/user";
-import { useBoolean } from "#/hooks/use-boolean";
-import { useFullscreen } from "#/hooks/use-fullscreen";
-import { useScreenOrientation } from "#/hooks/use-screen-orientation";
+import { ComicReaderDrawer } from "#/components/comic-reader-drawer.tsx";
+import { ComicReaderToolbar } from "#/components/comic-reader-toolbar.tsx";
+import { ComicReaderViewport } from "#/components/comic-reader-viewport.tsx";
+import { carouselDirectionFrom } from "#/constants/comics.ts";
+import { carouselAxisFrom, fallbackReadingAxis } from "#/constants/users.ts";
+import { useComic } from "#/contexts/comic.tsx";
+import { useUser } from "#/contexts/user.tsx";
+import { useBoolean } from "#/hooks/use-boolean.ts";
+import { useFullscreen } from "#/hooks/use-fullscreen.ts";
+import { useScreenOrientation } from "#/hooks/use-screen-orientation.ts";
 
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",

@@ -14,9 +14,9 @@ import { Link, useParams } from "@tanstack/react-router";
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Form } from "#/components/form";
-import { signInSchema } from "#/schemas/users";
-import { linkResetStyle } from "#/styles/common";
+import { Form } from "#/components/form.tsx";
+import { signInSchema } from "#/schemas/users.ts";
+import { linkResetStyle } from "#/styles/common.ts";
 
 const dividerStyle: SxProps<Theme> = {
   marginY: 2,

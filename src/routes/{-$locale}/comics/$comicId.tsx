@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { PageLayout } from "#/layouts/page-layout";
+import { PageLayout } from "#/layouts/page-layout.tsx";
 import { ComicNavigationSection } from "#/sections/comic-navigation-section.tsx";
-import { ComicOverviewSection } from "#/sections/comic-overview-section";
-import { getChapters, getComic } from "#/services/comics";
+import { ComicOverviewSection } from "#/sections/comic-overview-section.tsx";
+import { getChapters, getComic } from "#/services/comics.ts";
 
 const ComicRoute = () => {
   const { comic, chapters } = Route.useLoaderData();

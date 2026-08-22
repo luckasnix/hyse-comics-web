@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { getBaseUrl } from "./navigation";
+import { getBaseUrl } from "./navigation.ts";
 
 const getRuntimeOriginMock = vi.hoisted(() => vi.fn());
 

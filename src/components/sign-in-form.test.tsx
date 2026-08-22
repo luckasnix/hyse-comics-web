@@ -4,10 +4,10 @@ import userEvent from "@testing-library/user-event";
 import type { CSSProperties, ReactNode } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { fallbackLanguage } from "#/constants/users";
-import i18n from "#/i18n";
+import { fallbackLanguage } from "#/constants/users.ts";
+import i18n from "#/i18n/index.ts";
 
-import { SignInForm } from "./sign-in-form";
+import { SignInForm } from "./sign-in-form.tsx";
 
 vi.mock("@tanstack/react-router", () => ({
   useParams: () => ({ locale: "pt-BR" }),

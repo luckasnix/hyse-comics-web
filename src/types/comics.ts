@@ -1,4 +1,4 @@
-import type { UserProfile, UserRoles } from "./users";
+import type { UserProfile, UserRoles } from "./users.ts";
 
 /**
  * Mirrors Embla Carousel's internal axis option type because the library does

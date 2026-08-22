@@ -6,13 +6,13 @@ import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { ComicProvider } from "#/contexts/comic";
-import { chaptersMock, comicsMock, pagesMock } from "#/mocks/comics";
+import { ComicProvider } from "#/contexts/comic.tsx";
+import { chaptersMock, comicsMock, pagesMock } from "#/mocks/comics.ts";
 
 import {
   ComicReaderToolbar,
   type ComicReaderToolbarProps,
-} from "./comic-reader-toolbar";
+} from "./comic-reader-toolbar.tsx";
 
 vi.mock("@tanstack/react-router", () => ({
   Link: ({

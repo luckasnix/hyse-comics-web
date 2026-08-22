@@ -3,9 +3,9 @@ import { renderHook } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { describe, expect, it } from "vitest";
 
-import { chaptersMock, comicsMock, pagesMock } from "#/mocks/comics";
+import { chaptersMock, comicsMock, pagesMock } from "#/mocks/comics.ts";
 
-import { ComicProvider, useComic } from "./comic";
+import { ComicProvider, useComic } from "./comic.tsx";
 
 const comic = comicsMock[0];
 const chapters = chaptersMock.slice(0, 2);

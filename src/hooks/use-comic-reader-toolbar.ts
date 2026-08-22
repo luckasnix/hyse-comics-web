@@ -2,8 +2,8 @@ import type { EmblaCarouselType } from "embla-carousel";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useCarouselNavigation } from "#/hooks/use-carousel-navigation";
-import type { AxisDirectionOptionType } from "#/types/comics";
+import { useCarouselNavigation } from "#/hooks/use-carousel-navigation.ts";
+import type { AxisDirectionOptionType } from "#/types/comics.ts";
 
 export type NavigationButtonPosition =
   | "farLeft"

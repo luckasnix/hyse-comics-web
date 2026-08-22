@@ -3,12 +3,12 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { comicsMock } from "#/mocks/comics";
+import { comicsMock } from "#/mocks/comics.ts";
 
 import {
   ContentWarningDialog,
   type ContentWarningDialogProps,
-} from "./content-warning-dialog";
+} from "./content-warning-dialog.tsx";
 
 const comic = comicsMock[3];
 

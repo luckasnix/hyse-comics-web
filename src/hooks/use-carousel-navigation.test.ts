@@ -3,7 +3,7 @@ import { act, renderHook } from "@testing-library/react";
 import type { EmblaCarouselType, EmblaEventType } from "embla-carousel";
 import { describe, expect, it, vi } from "vitest";
 
-import { useCarouselNavigation } from "./use-carousel-navigation";
+import { useCarouselNavigation } from "./use-carousel-navigation.ts";
 
 type EmblaEventCallback = (api: EmblaCarouselType) => void;
 

@@ -8,9 +8,9 @@ import Typography from "@mui/material/Typography";
 import { useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { useUi } from "#/contexts/ui";
-import { getClampedTextStyle } from "#/styles/common";
-import { getBaseUrl } from "#/utils/navigation";
+import { useUi } from "#/contexts/ui.tsx";
+import { getClampedTextStyle } from "#/styles/common.ts";
+import { getBaseUrl } from "#/utils/navigation.ts";
 
 export type RecommendationCardProps = Readonly<{
   chapterId: string;

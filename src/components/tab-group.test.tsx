@@ -3,7 +3,11 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { type TabContainerProps, TabGroup, type TabItem } from "./tab-group";
+import {
+  type TabContainerProps,
+  TabGroup,
+  type TabItem,
+} from "./tab-group.tsx";
 
 const items: Array<TabItem> = [
   { value: 0, label: "Chapters" },

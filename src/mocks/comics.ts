@@ -4,9 +4,9 @@ import type {
   Credit,
   CreditWithUser,
   Page,
-} from "#/types/comics";
+} from "#/types/comics.ts";
 
-import { usersMock } from "./users";
+import { usersMock } from "./users.ts";
 
 export const comicsMock: Array<Comic> = [
   {

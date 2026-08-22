@@ -5,14 +5,18 @@ import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { ComicProvider } from "#/contexts/comic";
-import { chaptersMock, comicsMock, creditsWithUserMock } from "#/mocks/comics";
-import type { CreditWithUser } from "#/types/comics";
+import { ComicProvider } from "#/contexts/comic.tsx";
+import {
+  chaptersMock,
+  comicsMock,
+  creditsWithUserMock,
+} from "#/mocks/comics.ts";
+import type { CreditWithUser } from "#/types/comics.ts";
 
 import {
   ComicReaderDrawer,
   type ComicReaderDrawerProps,
-} from "./comic-reader-drawer";
+} from "./comic-reader-drawer.tsx";
 
 const navigateSpy = vi.fn();
 
@@ -24,11 +28,11 @@ vi.mock("@tanstack/react-router", () => ({
   useParams: () => ({ locale: "en-US" }),
 }));
 
-vi.mock("#/services/comics", () => ({
+vi.mock("#/services/comics.ts", () => ({
   getChapterCredits: vi.fn().mockResolvedValue(creditsWithUserMock),
 }));
 
-const { getChapterCredits } = await import("#/services/comics");
+const { getChapterCredits } = await import("#/services/comics.ts");
 
 const getChapterCreditsMock = vi.mocked(getChapterCredits);
 

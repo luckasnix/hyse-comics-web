@@ -3,7 +3,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import { Link, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { linkResetStyle } from "#/styles/common";
+import { linkResetStyle } from "#/styles/common.ts";
 
 const containerStyle: SxProps<Theme> = {
   width: "100%",

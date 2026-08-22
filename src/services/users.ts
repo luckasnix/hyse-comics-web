@@ -1,6 +1,6 @@
-import type { UserComicWork } from "#/types/comics";
-import type { User } from "#/types/users";
-import { getBaseUrl } from "#/utils/navigation";
+import type { UserComicWork } from "#/types/comics.ts";
+import type { User } from "#/types/users.ts";
+import { getBaseUrl } from "#/utils/navigation.ts";
 
 export const getUser = async (userId: string): Promise<User> => {
   const baseUrl = await getBaseUrl();

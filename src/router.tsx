@@ -1,8 +1,8 @@
 import { createRouter } from "@tanstack/react-router";
 
-import { DefaultError } from "#/components/default-error";
+import { DefaultError } from "#/components/default-error.tsx";
 
-import { routeTree } from "./routeTree.gen";
+import { routeTree } from "./routeTree.gen.ts";
 
 export const getRouter = () =>
   createRouter({

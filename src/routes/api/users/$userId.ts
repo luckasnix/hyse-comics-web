@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { usersMock } from "#/mocks/users";
+import { usersMock } from "#/mocks/users.ts";
 
 export const Route = createFileRoute("/api/users/$userId")({
   server: {

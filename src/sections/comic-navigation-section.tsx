@@ -3,11 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { ChapterList } from "#/components/chapter-list";
-import { CreditList } from "#/components/credit-list";
-import { TabGroup } from "#/components/tab-group";
-import { getComicCredits } from "#/services/comics";
-import type { Chapter } from "#/types/comics";
+import { ChapterList } from "#/components/chapter-list.tsx";
+import { CreditList } from "#/components/credit-list.tsx";
+import { TabGroup } from "#/components/tab-group.tsx";
+import { getComicCredits } from "#/services/comics.ts";
+import type { Chapter } from "#/types/comics.ts";
 
 export type ComicNavigationSectionProps = Readonly<{
   comicId: string;

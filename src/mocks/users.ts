@@ -1,4 +1,4 @@
-import type { User } from "#/types/users";
+import type { User } from "#/types/users.ts";
 
 export const signedInUserMock: User = {
   profile: {

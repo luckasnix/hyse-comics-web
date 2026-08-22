@@ -3,13 +3,13 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { UiProvider } from "#/contexts/ui";
-import { recommendationsMock } from "#/mocks/recommendations";
+import { UiProvider } from "#/contexts/ui.tsx";
+import { recommendationsMock } from "#/mocks/recommendations.ts";
 
 import {
   RecommendationShelf,
   type RecommendationShelfProps,
-} from "./recommendation-shelf";
+} from "./recommendation-shelf.tsx";
 
 const navigateSpy = vi.fn();
 
@@ -22,7 +22,7 @@ vi.mock("embla-carousel-react", () => ({
   default: () => [vi.fn(), undefined],
 }));
 
-vi.mock("#/hooks/use-carousel-navigation", () => ({
+vi.mock("#/hooks/use-carousel-navigation.ts", () => ({
   useCarouselNavigation: vi.fn().mockReturnValue({
     canNavigatePrev: false,
     canNavigateNext: false,
@@ -32,7 +32,7 @@ vi.mock("#/hooks/use-carousel-navigation", () => ({
 }));
 
 const { useCarouselNavigation } = await import(
-  "#/hooks/use-carousel-navigation"
+  "#/hooks/use-carousel-navigation.ts"
 );
 
 const useCarouselNavigationMock = vi.mocked(useCarouselNavigation);

@@ -3,11 +3,11 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
-import { fallbackLanguage } from "#/constants/users";
-import { UiProvider } from "#/contexts/ui";
-import i18n from "#/i18n";
+import { fallbackLanguage } from "#/constants/users.ts";
+import { UiProvider } from "#/contexts/ui.tsx";
+import i18n from "#/i18n/index.ts";
 
-import { SettingsForm } from "./settings-form";
+import { SettingsForm } from "./settings-form.tsx";
 
 const renderComponent = () =>
   render(

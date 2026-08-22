@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { IconBrandInstagram, IconBrandX } from "@tabler/icons-react";
 import type { CSSProperties } from "react";
 
-import type { UserSocialLinks } from "#/types/users";
+import type { UserSocialLinks } from "#/types/users.ts";
 
 const containerStyle: SxProps<Theme> = {
   marginBottom: 5,

@@ -6,8 +6,8 @@ import ListItemText from "@mui/material/ListItemText";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 
-import { ListState } from "#/components/list-state";
-import type { Chapter } from "#/types/comics";
+import { ListState } from "#/components/list-state.tsx";
+import type { Chapter } from "#/types/comics.ts";
 
 export type ChapterListProps = Readonly<{
   chapters: Array<Chapter>;

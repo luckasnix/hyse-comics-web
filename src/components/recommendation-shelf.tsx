@@ -9,9 +9,9 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Activity } from "react";
 import { useTranslation } from "react-i18next";
 
-import { RecommendationCard } from "#/components/recommendation-card";
-import { useCarouselNavigation } from "#/hooks/use-carousel-navigation";
-import type { ChapterWithComic } from "#/types/comics";
+import { RecommendationCard } from "#/components/recommendation-card.tsx";
+import { useCarouselNavigation } from "#/hooks/use-carousel-navigation.ts";
+import type { ChapterWithComic } from "#/types/comics.ts";
 
 export type RecommendationShelfProps = Readonly<{
   title: string;

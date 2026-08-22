@@ -1,6 +1,6 @@
 import { createContext, type ReactNode, useContext, useMemo } from "react";
 
-import type { User } from "#/types/users";
+import type { User } from "#/types/users.ts";
 
 export type UserContextValue = {
   user: User | null;

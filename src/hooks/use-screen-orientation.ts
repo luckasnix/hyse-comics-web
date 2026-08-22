@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import type { ComicOrientation } from "#/types/comics";
+import type { ComicOrientation } from "#/types/comics.ts";
 
 export const useScreenOrientation = (
   orientation: ComicOrientation,

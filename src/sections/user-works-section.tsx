@@ -4,8 +4,8 @@ import Typography from "@mui/material/Typography";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { UserWorkList } from "#/components/user-work-list";
-import type { UserComicWork } from "#/types/comics";
+import { UserWorkList } from "#/components/user-work-list.tsx";
+import type { UserComicWork } from "#/types/comics.ts";
 
 export type UserWorksSectionProps = Readonly<{
   works: Array<UserComicWork>;
