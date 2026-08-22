@@ -46,6 +46,26 @@ Follow the steps below to set up and run the project in your local environment.
 
     Open [http://localhost:3001](http://localhost:3001) in your browser to view the result.
 
+## Testing
+
+Run the test suite once:
+
+```bash
+pnpm test
+```
+
+Start Vitest in watch mode while developing:
+
+```bash
+pnpm test:watch
+```
+
+Generate the coverage report:
+
+```bash
+pnpm test:coverage
+```
+
 ## Production Preview
 
 Build the Nitro output:
