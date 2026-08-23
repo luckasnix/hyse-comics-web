@@ -210,10 +210,40 @@ describe("<ComicReaderToolbar />", () => {
     expect(toggleZoomSpy).toHaveBeenCalledOnce();
   });
 
-  it("registers a keyboard shortcut for zoom", () => {
+  it("registers keyboard shortcuts for reader actions", () => {
     renderComponent();
 
-    expect(vi.mocked(useHotkey)).toHaveBeenCalledWith("Z", toggleZoomSpy);
+    const useHotkeyMock = vi.mocked(useHotkey);
+
+    expect(useHotkeyMock).toHaveBeenCalledWith(
+      "Shift+ArrowLeft",
+      expect.any(Function),
+    );
+    expect(useHotkeyMock).toHaveBeenCalledWith(
+      "ArrowLeft",
+      expect.any(Function),
+    );
+    expect(useHotkeyMock).toHaveBeenCalledWith(
+      "ArrowRight",
+      expect.any(Function),
+    );
+    expect(useHotkeyMock).toHaveBeenCalledWith(
+      "Shift+ArrowRight",
+      expect.any(Function),
+    );
+    expect(useHotkeyMock).toHaveBeenCalledWith("F", toggleFullscreenSpy);
+    expect(useHotkeyMock).toHaveBeenCalledWith("Z", toggleZoomSpy);
+    expect(useHotkeyMock).toHaveBeenCalledWith("M", toggleDrawerSpy, {
+      enabled: true,
+    });
+  });
+
+  it("disables the drawer keyboard shortcut in fullscreen", () => {
+    renderComponent({ isFullscreen: true });
+
+    expect(vi.mocked(useHotkey)).toHaveBeenCalledWith("M", toggleDrawerSpy, {
+      enabled: false,
+    });
   });
 
   it("calls enterFullscreen when the enter fullscreen button is clicked", async () => {
