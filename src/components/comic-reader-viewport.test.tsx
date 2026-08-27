@@ -181,6 +181,29 @@ describe("<ComicReaderViewport />", () => {
     });
   });
 
+  it("does not calculate zoom for an image without layout dimensions", async () => {
+    const user = userEvent.setup();
+
+    renderComponent({ isZoomEnabled: true });
+
+    const image = screen.getAllByRole("img")[0];
+
+    vi.spyOn(image, "getBoundingClientRect").mockReturnValue({
+      width: 0,
+      height: 0,
+    } as DOMRect);
+
+    await user.pointer({
+      target: image,
+      coords: {
+        clientX: 60,
+        clientY: 45,
+      },
+    });
+
+    expect(image.style.transform).toBe("");
+  });
+
   it("keeps the zoom while the pointer stays inside the viewport", async () => {
     const user = userEvent.setup();
 
