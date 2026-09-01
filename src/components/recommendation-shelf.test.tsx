@@ -89,7 +89,13 @@ describe("<RecommendationShelf />", () => {
   it("renders no cards when chapters are empty", () => {
     renderComponent({ chapters: [] });
 
-    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Read" }),
+    ).not.toBeInTheDocument();
+
+    for (const chapter of recommendation.chapters) {
+      expect(screen.queryByText(chapter.comic.title)).not.toBeInTheDocument();
+    }
   });
 
   it("hides the Previous button when navigation is not available", () => {
