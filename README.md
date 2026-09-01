@@ -2,7 +2,7 @@
 
 Hyse Comics is an application for reading comics.
 
-## Getting Started
+## 🚀 Getting started
 
 Follow the steps below to set up and run the project in your local environment.
 
@@ -46,7 +46,7 @@ Follow the steps below to set up and run the project in your local environment.
 
     Open [http://localhost:3001](http://localhost:3001) in your browser to view the result.
 
-## Testing
+## 🧪 Testing
 
 Run the test suite once:
 
@@ -66,7 +66,7 @@ Generate the coverage report:
 pnpm test:coverage
 ```
 
-## Production Preview
+## 📦 Production preview
 
 Build the Nitro output:
 
