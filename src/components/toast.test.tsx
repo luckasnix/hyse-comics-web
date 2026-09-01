@@ -31,7 +31,10 @@ describe("<Toast />", () => {
   it("renders with the correct severity", () => {
     renderComponent({ severity: "error" });
 
-    expect(screen.getByRole("alert")).toBeInTheDocument();
+    expect(screen.getByRole("alert")).toHaveClass(
+      "MuiAlert-colorError",
+      "MuiAlert-filled",
+    );
   });
 
   it("does not render the message when closed", () => {
