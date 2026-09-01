@@ -2,6 +2,15 @@
 
 Hyse Comics is an application for reading comics.
 
+## 🛠️ Built with
+
+- [TypeScript](https://www.typescriptlang.org) keeps the application typed and maintainable.
+- [Vite](https://vite.dev) and [Nitro](https://nitro.build) power development, production builds, and the server output.
+- [TanStack Start](https://tanstack.com/start) provides the full-stack application framework, including routing and data loading.
+- [React](https://react.dev) provides the user interface.
+- [Material UI](https://mui.com/material-ui), [Embla Carousel](https://www.embla-carousel.com), and [Tabler Icons](https://tabler.io/icons) provide the application's components and icons.
+- [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com) support reliable component and user-interaction tests.
+
 ## 🚀 Getting started
 
 Follow the steps below to set up and run the project in your local environment.
