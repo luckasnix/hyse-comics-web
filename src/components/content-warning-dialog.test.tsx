@@ -104,6 +104,22 @@ describe("<ContentWarningDialog />", () => {
     expect(onCancelSpy).toHaveBeenCalledOnce();
   });
 
+  it("resets the acknowledgement after going back", async () => {
+    const user = userEvent.setup();
+
+    renderComponent();
+
+    const checkbox = screen.getByRole("checkbox", {
+      name: "I understand and wish to continue",
+    });
+
+    await user.click(checkbox);
+    await user.click(screen.getByRole("button", { name: "Go Back" }));
+
+    expect(checkbox).not.toBeChecked();
+    expect(screen.getByRole("button", { name: "Continue" })).toBeDisabled();
+  });
+
   it("does not render the dialog when open is false", () => {
     renderComponent({ open: false });
 
