@@ -1,5 +1,7 @@
 # Hyse Comics
 
+![Hyse Comics logo featuring a green illustrated emblem beside the wordmark.](public/logo.svg "Hyse Comics logo")
+
 Hyse Comics is an application for reading comics.
 
 ## 🛠️ Built with
