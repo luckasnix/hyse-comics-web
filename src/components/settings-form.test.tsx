@@ -5,8 +5,8 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { fallbackLanguage } from "#/constants/users.ts";
 import { UiProvider } from "#/contexts/ui.tsx";
-import i18n from "#/i18n/index.ts";
 
+import { i18n } from "../../vitest.setup.ts";
 import { SettingsForm } from "./settings-form.tsx";
 
 const renderComponent = () =>

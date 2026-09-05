@@ -39,6 +39,7 @@
     "embla-carousel": "8.6.0",
     "embla-carousel-react": "8.6.0",
     "i18next": "26.4.0",
+    "i18next-browser-languagedetector": "8.2.1",
     "nitro": "3.0.260610-beta",
     "react": "19.2.8",
     "react-dom": "19.2.8",

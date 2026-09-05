@@ -3,11 +3,10 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { IconHomeFilled } from "@tabler/icons-react";
-import { useNavigate, useParams } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { fallbackLanguage } from "#/constants/users.ts";
-import { useUser } from "#/contexts/user.tsx";
+import { useLanguage } from "#/contexts/language.tsx";
 
 const containerStyle: SxProps<Theme> = {
   height: "100dvh",
@@ -22,9 +21,7 @@ const textContainerStyle: SxProps<Theme> = {
 export const NotFoundPage = () => {
   const { t } = useTranslation();
 
-  const { locale } = useParams({ strict: false });
-
-  const { user } = useUser();
+  const { language } = useLanguage();
 
   const navigate = useNavigate();
 
@@ -44,8 +41,7 @@ export const NotFoundPage = () => {
           navigate({
             to: "/{-$locale}",
             params: {
-              locale:
-                locale ?? user?.profile.preferredLanguage ?? fallbackLanguage,
+              locale: language,
             },
           });
         }}

@@ -2,9 +2,11 @@ import fontsourceVariableNotoSansCss from "@fontsource-variable/noto-sans?url";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { type ReactNode, Suspense } from "react";
-import { useTranslation } from "react-i18next";
-
-import "#/i18n/index.ts";
+import {
+  LanguageBoundary,
+  LanguageProvider,
+  useLanguage,
+} from "#/contexts/language.tsx";
 import { UiProvider } from "#/contexts/ui.tsx";
 import { UserProvider } from "#/contexts/user.tsx";
 import { FallbackPage } from "#/pages/fallback-page.tsx";
@@ -12,20 +14,20 @@ import { NotFoundPage } from "#/pages/not-found-page.tsx";
 
 const queryClient = new QueryClient();
 
-const RootDocument = ({ children }: { children: ReactNode }) => {
-  const { i18n } = useTranslation();
+const Document = ({ children }: { children: ReactNode }) => {
+  const { language } = useLanguage();
 
   return (
-    <html lang={i18n.language}>
+    <html lang={language}>
       <head>
         <HeadContent />
       </head>
       <body>
         <QueryClientProvider client={queryClient}>
           <UiProvider>
-            <UserProvider>
+            <LanguageBoundary>
               <Suspense fallback={<FallbackPage />}>{children}</Suspense>
-            </UserProvider>
+            </LanguageBoundary>
           </UiProvider>
         </QueryClientProvider>
         <Scripts />
@@ -33,6 +35,14 @@ const RootDocument = ({ children }: { children: ReactNode }) => {
     </html>
   );
 };
+
+const RootDocument = ({ children }: { children: ReactNode }) => (
+  <UserProvider>
+    <LanguageProvider>
+      <Document>{children}</Document>
+    </LanguageProvider>
+  </UserProvider>
+);
 
 export const Route = createRootRoute({
   head: () => ({

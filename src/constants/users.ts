@@ -10,6 +10,11 @@ export const fallbackTheme = "system" satisfies ThemePreference;
 
 export const fallbackLanguage = "en-US" satisfies SupportedLanguage;
 
+export const supportedLanguages: readonly SupportedLanguage[] = [
+  "en-US",
+  "pt-BR",
+];
+
 export const fallbackReadingAxis = "vertical" satisfies ReadingAxis;
 
 export const carouselAxisFrom: Record<ReadingAxis, AxisOptionType> = {

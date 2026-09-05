@@ -5,8 +5,8 @@ import type { CSSProperties, ReactNode } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { fallbackLanguage } from "#/constants/users.ts";
-import i18n from "#/i18n/index.ts";
 
+import { i18n } from "../../vitest.setup.ts";
 import { SignUpForm } from "./sign-up-form.tsx";
 
 vi.mock("@tanstack/react-router", () => ({
