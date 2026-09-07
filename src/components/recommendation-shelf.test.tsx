@@ -59,7 +59,7 @@ const recommendation = recommendationsMock[0];
 
 const defaultProps: RecommendationShelfProps = {
   title: recommendation.title,
-  chapters: recommendation.chapters,
+  comics: recommendation.comics,
 };
 
 const renderComponent = (overrides: Partial<RecommendationShelfProps> = {}) =>
@@ -78,23 +78,23 @@ describe("<RecommendationShelf />", () => {
     expect(screen.getByText(recommendation.title)).toBeInTheDocument();
   });
 
-  it("renders a card for each chapter", () => {
+  it("renders a card for each comic", () => {
     renderComponent();
 
-    for (const chapter of recommendation.chapters) {
-      expect(screen.getByText(chapter.comic.title)).toBeInTheDocument();
+    for (const comic of recommendation.comics) {
+      expect(screen.getByText(comic.title)).toBeInTheDocument();
     }
   });
 
-  it("renders no cards when chapters are empty", () => {
-    renderComponent({ chapters: [] });
+  it("renders no cards when comics are empty", () => {
+    renderComponent({ comics: [] });
 
     expect(
       screen.queryByRole("button", { name: "Read" }),
     ).not.toBeInTheDocument();
 
-    for (const chapter of recommendation.chapters) {
-      expect(screen.queryByText(chapter.comic.title)).not.toBeInTheDocument();
+    for (const comic of recommendation.comics) {
+      expect(screen.queryByText(comic.title)).not.toBeInTheDocument();
     }
   });
 
@@ -136,7 +136,7 @@ describe("<RecommendationShelf />", () => {
     expect(screen.getByRole("button", { name: "Next" })).toBeInTheDocument();
   });
 
-  it("navigates to the chapter when the Read button is clicked", async () => {
+  it("navigates to the comic when the Read button is clicked", async () => {
     const user = userEvent.setup();
     setupMock();
 
@@ -145,8 +145,8 @@ describe("<RecommendationShelf />", () => {
     await user.click(screen.getAllByRole("button", { name: "Read" })[0]);
 
     expect(navigateSpy).toHaveBeenCalledWith({
-      to: "/{-$locale}/chapters/$chapterId",
-      params: { locale: "en-US", chapterId: recommendation.chapters[0].id },
+      to: "/{-$locale}/comics/$comicId",
+      params: { locale: "en-US", comicId: recommendation.comics[0].id },
     });
   });
 });

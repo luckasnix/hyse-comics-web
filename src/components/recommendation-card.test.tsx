@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { UiProvider } from "#/contexts/ui.tsx";
-import { chaptersMock, comicsMock } from "#/mocks/comics.ts";
+import { comicsMock } from "#/mocks/comics.ts";
 
 import {
   RecommendationCard,
@@ -12,12 +12,15 @@ import {
 } from "./recommendation-card.tsx";
 
 const onReadButtonClickSpy = vi.fn();
+const useParamsMock = vi.hoisted(() =>
+  vi.fn<() => { locale?: string }>(() => ({ locale: "en-US" })),
+);
 const getBaseUrlMock = vi.hoisted(() =>
   vi.fn(() => Promise.resolve("https://preview-123.comics.hyse.dev")),
 );
 
 vi.mock("@tanstack/react-router", () => ({
-  useParams: () => ({ locale: "en-US" }),
+  useParams: useParamsMock,
 }));
 
 vi.mock("#/utils/navigation.ts", () => ({
@@ -25,7 +28,7 @@ vi.mock("#/utils/navigation.ts", () => ({
 }));
 
 const defaultProps: RecommendationCardProps = {
-  chapterId: chaptersMock[0].id,
+  comicId: comicsMock[0].id,
   title: comicsMock[0].title,
   synopsis: comicsMock[0].synopsis,
   imageUrl: comicsMock[0].thumbnailUrl,
@@ -75,17 +78,17 @@ describe("<RecommendationCard />", () => {
     expect(screen.getByRole("button", { name: "Read" })).toBeInTheDocument();
   });
 
-  it("calls onReadButtonClick with the chapter ID when Read is clicked", async () => {
+  it("calls onReadButtonClick with the comic ID when Read is clicked", async () => {
     const user = userEvent.setup();
 
     renderComponent();
 
     await user.click(screen.getByRole("button", { name: "Read" }));
 
-    expect(onReadButtonClickSpy).toHaveBeenCalledWith(defaultProps.chapterId);
+    expect(onReadButtonClickSpy).toHaveBeenCalledWith(defaultProps.comicId);
   });
 
-  it("copies the chapter link to the clipboard when Share is clicked", async () => {
+  it("copies the comic link to the clipboard when Share is clicked", async () => {
     const user = userEvent.setup();
     const { writeText } = setupClipboard(true);
 
@@ -94,7 +97,21 @@ describe("<RecommendationCard />", () => {
     await user.click(screen.getByRole("button", { name: "Share" }));
 
     expect(writeText).toHaveBeenCalledWith(
-      `https://preview-123.comics.hyse.dev/en-US/chapters/${defaultProps.chapterId}`,
+      `https://preview-123.comics.hyse.dev/en-US/comics/${defaultProps.comicId}`,
+    );
+  });
+
+  it("copies the comic link without a locale when the route has none", async () => {
+    const user = userEvent.setup();
+    const { writeText } = setupClipboard(true);
+    useParamsMock.mockReturnValueOnce({});
+
+    renderComponent();
+
+    await user.click(screen.getByRole("button", { name: "Share" }));
+
+    expect(writeText).toHaveBeenCalledWith(
+      `https://preview-123.comics.hyse.dev/comics/${defaultProps.comicId}`,
     );
   });
 

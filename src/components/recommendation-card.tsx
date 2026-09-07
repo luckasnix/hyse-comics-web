@@ -13,11 +13,11 @@ import { getClampedTextStyle } from "#/styles/common.ts";
 import { getBaseUrl } from "#/utils/navigation.ts";
 
 export type RecommendationCardProps = Readonly<{
-  chapterId: string;
+  comicId: string;
   title: string;
   synopsis: string;
   imageUrl: string;
-  onReadButtonClick: (chapterId: string) => void;
+  onReadButtonClick: (comicId: string) => void;
 }>;
 
 const containerStyle: SxProps<Theme> = {
@@ -45,7 +45,7 @@ const synopsisStyle: SxProps<Theme> = {
 };
 
 export const RecommendationCard = ({
-  chapterId,
+  comicId,
   title,
   synopsis,
   imageUrl,
@@ -57,11 +57,11 @@ export const RecommendationCard = ({
 
   const { showToast } = useUi();
 
-  const shareChapterLink = async () => {
+  const shareComicLink = async () => {
     try {
       const baseUrl = await getBaseUrl();
       await navigator.clipboard.writeText(
-        `${baseUrl}/${locale}/chapters/${chapterId}`,
+        `${baseUrl}${locale ? `/${locale}` : ""}/comics/${comicId}`,
       );
       showToast({
         severity: "success",
@@ -76,7 +76,7 @@ export const RecommendationCard = ({
   };
 
   const readComic = () => {
-    onReadButtonClick(chapterId);
+    onReadButtonClick(comicId);
   };
 
   return (
@@ -95,7 +95,7 @@ export const RecommendationCard = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="secondary" onClick={shareChapterLink}>
+        <Button size="small" color="secondary" onClick={shareComicLink}>
           {t("recommendations.share")}
         </Button>
         <Button

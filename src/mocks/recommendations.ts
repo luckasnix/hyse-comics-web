@@ -1,51 +1,35 @@
-import type { ChapterWithComic, Recommendation } from "#/types/comics.ts";
+import type { Comic, Recommendation } from "#/types/comics.ts";
 
-import { chaptersMock, comicsMock } from "./comics.ts";
+import { comicsMock } from "./comics.ts";
 
-const generateChaptersWithComic = (
-  chapterIds: Array<string>,
-): Array<ChapterWithComic> =>
-  chapterIds
-    .map((chapterId) => {
-      const chapter = chaptersMock.find((chapter) => chapter.id === chapterId);
-      if (!chapter) {
-        return null;
-      }
-      const comic = comicsMock.find((comic) => comic.id === chapter.comicId);
-      if (!comic) {
-        return null;
-      }
-
-      return {
-        ...chapter,
-        comic,
-      };
-    })
-    .filter((chapter) => chapter !== null);
+const getComics = (comicIds: Array<string>): Array<Comic> =>
+  comicIds
+    .map((comicId) => comicsMock.find((comic) => comic.id === comicId))
+    .filter((comic) => comic !== undefined);
 
 export const recommendationsMock: Array<Recommendation> = [
   {
     id: "trending-now",
     title: "Trending now",
-    chapters: generateChaptersWithComic([
-      "3URztCal8w",
-      "8n86aCriNv",
-      "mduaZ9Iu3k",
-      "h4Ot0UrDfB",
-      "ppgL2CuVHR",
-      "LlAkuYOs5J",
+    comics: getComics([
+      "QhbGUrW2",
+      "LPLc5tsY",
+      "iEdqrCrJ",
+      "t7uzBpFU",
+      "9eaVmAst",
+      "4ShLAvTY",
     ]),
   },
   {
     id: "continue-reading",
     title: "Continue reading",
-    chapters: generateChaptersWithComic([
-      "3URztCal8w",
-      "8n86aCriNv",
-      "mduaZ9Iu3k",
-      "h4Ot0UrDfB",
-      "ppgL2CuVHR",
-      "LlAkuYOs5J",
+    comics: getComics([
+      "QhbGUrW2",
+      "LPLc5tsY",
+      "iEdqrCrJ",
+      "t7uzBpFU",
+      "9eaVmAst",
+      "4ShLAvTY",
     ]),
   },
 ];

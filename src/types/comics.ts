@@ -86,10 +86,6 @@ export type Page = {
   backgroundTexture: PageBackgroundTexture | null;
 };
 
-export type ChapterWithComic = Chapter & {
-  comic: Comic;
-};
-
 export type Credit = {
   chapterId: string;
   userId: string;
@@ -109,5 +105,5 @@ export type UserComicWork = {
 export type Recommendation = {
   id: string;
   title: string;
-  chapters: Array<ChapterWithComic>;
+  comics: Array<Comic>;
 };

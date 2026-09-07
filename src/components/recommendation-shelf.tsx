@@ -11,11 +11,11 @@ import { useTranslation } from "react-i18next";
 
 import { RecommendationCard } from "#/components/recommendation-card.tsx";
 import { useCarouselNavigation } from "#/hooks/use-carousel-navigation.ts";
-import type { ChapterWithComic } from "#/types/comics.ts";
+import type { Comic } from "#/types/comics.ts";
 
 export type RecommendationShelfProps = Readonly<{
   title: string;
-  chapters: Array<ChapterWithComic>;
+  comics: Array<Comic>;
 }>;
 
 const containerStyle: SxProps<Theme> = {
@@ -65,7 +65,7 @@ const nextButtonStyle: SxProps<Theme> = {
 
 export const RecommendationShelf = ({
   title,
-  chapters,
+  comics,
 }: RecommendationShelfProps) => {
   const { t } = useTranslation();
 
@@ -80,10 +80,10 @@ export const RecommendationShelf = ({
   const { canNavigatePrev, canNavigateNext, navigatePrev, navigateNext } =
     useCarouselNavigation(emblaApi);
 
-  const handleReadButtonClick = (chapterId: string) => {
+  const handleReadButtonClick = (comicId: string) => {
     navigate({
-      to: "/{-$locale}/chapters/$chapterId",
-      params: { locale, chapterId: chapterId },
+      to: "/{-$locale}/comics/$comicId",
+      params: { locale, comicId },
     });
   };
 
@@ -106,10 +106,10 @@ export const RecommendationShelf = ({
         </Activity>
         <Box ref={emblaRef} sx={viewportStyle}>
           <Box sx={slideContainerStyle}>
-            {chapters.map(({ comic, ...chapter }) => (
+            {comics.map((comic) => (
               <RecommendationCard
-                key={chapter.id}
-                chapterId={chapter.id}
+                key={comic.id}
+                comicId={comic.id}
                 title={comic.title}
                 synopsis={comic.synopsis}
                 imageUrl={comic.thumbnailUrl}
