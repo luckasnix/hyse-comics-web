@@ -90,3 +90,7 @@ Run the generated Nitro server:
 ```bash
 pnpm start
 ```
+
+## 📄 License
+
+Licensed under the [PolyForm Shield License 1.0.0](./LICENSE.md).
