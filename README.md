@@ -17,6 +17,8 @@ Hyse Comics is an application for reading comics.
 
 Follow the steps below to set up and run the project in your local environment.
 
+Before you begin, make sure [Node.js](https://nodejs.org/en/download) and [pnpm](https://pnpm.io/installation) are installed at the versions specified in [`.nvmrc`](./.nvmrc) and the `packageManager` field of [`package.json`](./package.json), respectively.
+
 1. Clone the repository:
 
     Open your terminal and run the following command:
@@ -34,7 +36,7 @@ Follow the steps below to set up and run the project in your local environment.
 3. Install dependencies:
 
     ```bash
-    pnpm install
+    pnpm install --frozen-lockfile
     ```
 
 4. Set up environment variables:
