@@ -1,14 +1,7 @@
-// @vitest-environment jsdom
-import {
-  cleanup,
-  render,
-  renderHook,
-  screen,
-  waitFor,
-} from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { afterEach, describe, expect, it } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { cleanup, render, renderHook } from "vitest-browser-react/pure";
 
 import { UiProvider, useUi } from "./ui.tsx";
 
@@ -37,18 +30,18 @@ const ToastTrigger = () => {
 afterEach(cleanup);
 
 describe("UiContext", () => {
-  it("renders children inside UiProvider", () => {
-    render(
+  it("renders children inside UiProvider", async () => {
+    await render(
       <UiProvider>
         <span>Provider child</span>
       </UiProvider>,
     );
 
-    expect(screen.getByText("Provider child")).toBeInTheDocument();
+    await expect.element(page.getByText("Provider child")).toBeInTheDocument();
   });
 
-  it("provides showToast through UiProvider", () => {
-    const { result } = renderHook(() => useUi(), { wrapper });
+  it("provides showToast through UiProvider", async () => {
+    const { result } = await renderHook(() => useUi(), { wrapper });
 
     expect(result.current.showToast).toEqual(expect.any(Function));
   });
@@ -56,45 +49,43 @@ describe("UiContext", () => {
   it("renders a toast when showToast is called", async () => {
     const user = userEvent.setup();
 
-    render(
+    await render(
       <UiProvider>
         <ToastTrigger />
       </UiProvider>,
     );
 
-    await user.click(screen.getByRole("button", { name: "Show toast" }));
+    await user.click(page.getByRole("button", { name: "Show toast" }));
 
-    expect(
-      await screen.findByText("Operation completed successfully."),
-    ).toBeInTheDocument();
+    await expect
+      .element(page.getByText("Operation completed successfully."))
+      .toBeInTheDocument();
   });
 
   it("closes the toast when the close button is clicked", async () => {
     const user = userEvent.setup();
 
-    render(
+    await render(
       <UiProvider>
         <ToastTrigger />
       </UiProvider>,
     );
 
-    await user.click(screen.getByRole("button", { name: "Show toast" }));
+    await user.click(page.getByRole("button", { name: "Show toast" }));
 
-    expect(
-      await screen.findByText("Operation completed successfully."),
-    ).toBeInTheDocument();
+    await expect
+      .element(page.getByText("Operation completed successfully."))
+      .toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: "Close" }));
+    await user.click(page.getByRole("button", { name: "Close" }));
 
-    await waitFor(() => {
-      expect(
-        screen.queryByText("Operation completed successfully."),
-      ).not.toBeInTheDocument();
-    });
+    await expect
+      .element(page.getByText("Operation completed successfully."))
+      .not.toBeInTheDocument();
   });
 
-  it("throws when accessed outside UiProvider", () => {
-    expect(() => renderHook(() => useUi())).toThrow(
+  it("throws when accessed outside UiProvider", async () => {
+    await expect(renderHook(() => useUi())).rejects.toThrow(
       "The hook 'useUi' must be used inside 'UiProvider'.",
     );
   });

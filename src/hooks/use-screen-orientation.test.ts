@@ -1,6 +1,5 @@
-// @vitest-environment jsdom
-import { act, renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { renderHook } from "vitest-browser-react/pure";
 
 import type { ComicOrientation } from "#/types/comics.ts";
 
@@ -31,8 +30,11 @@ const renderScreenOrientation = (
   isFullscreen: boolean,
 ) =>
   renderHook(
-    ({ nextOrientation, nextIsFullscreen }) =>
-      useScreenOrientation(nextOrientation, nextIsFullscreen),
+    (props) =>
+      useScreenOrientation(
+        props?.nextOrientation ?? orientation,
+        props?.nextIsFullscreen ?? isFullscreen,
+      ),
     {
       initialProps: {
         nextOrientation: orientation,
@@ -56,20 +58,20 @@ afterEach(() => {
 });
 
 describe("useScreenOrientation()", () => {
-  it("does not request an orientation outside fullscreen", () => {
+  it("does not request an orientation outside fullscreen", async () => {
     const { lock, unlock } = setScreenOrientation();
 
-    renderScreenOrientation("landscape", false);
+    await renderScreenOrientation("landscape", false);
 
     expect(lock).not.toHaveBeenCalled();
     expect(unlock).not.toHaveBeenCalled();
   });
 
-  it("locks the landscape orientation after entering fullscreen", () => {
+  it("locks the landscape orientation after entering fullscreen", async () => {
     const { lock } = setScreenOrientation();
-    const { rerender } = renderScreenOrientation("landscape", false);
+    const { rerender } = await renderScreenOrientation("landscape", false);
 
-    rerender({
+    await rerender({
       nextOrientation: "landscape",
       nextIsFullscreen: true,
     });
@@ -78,20 +80,20 @@ describe("useScreenOrientation()", () => {
     expect(lock).toHaveBeenCalledWith("landscape");
   });
 
-  it("locks the portrait orientation in fullscreen", () => {
+  it("locks the portrait orientation in fullscreen", async () => {
     const { lock } = setScreenOrientation();
 
-    renderScreenOrientation("portrait", true);
+    await renderScreenOrientation("portrait", true);
 
     expect(lock).toHaveBeenCalledOnce();
     expect(lock).toHaveBeenCalledWith("portrait");
   });
 
-  it("unlocks the orientation after leaving fullscreen", () => {
+  it("unlocks the orientation after leaving fullscreen", async () => {
     const { unlock } = setScreenOrientation();
-    const { rerender } = renderScreenOrientation("landscape", true);
+    const { rerender } = await renderScreenOrientation("landscape", true);
 
-    rerender({
+    await rerender({
       nextOrientation: "landscape",
       nextIsFullscreen: false,
     });
@@ -99,22 +101,22 @@ describe("useScreenOrientation()", () => {
     expect(unlock).toHaveBeenCalledOnce();
   });
 
-  it("unlocks the orientation when unmounted in fullscreen", () => {
+  it("unlocks the orientation when unmounted in fullscreen", async () => {
     const { unlock } = setScreenOrientation();
-    const { unmount } = renderScreenOrientation("landscape", true);
+    const { unmount } = await renderScreenOrientation("landscape", true);
 
-    unmount();
+    await unmount();
 
     expect(unlock).toHaveBeenCalledOnce();
   });
 
-  it("does nothing when the Screen Orientation API is unavailable", () => {
+  it("does nothing when the Screen Orientation API is unavailable", async () => {
     Object.defineProperty(window.screen, "orientation", {
       configurable: true,
       value: undefined,
     });
 
-    expect(() => renderScreenOrientation("landscape", true)).not.toThrow();
+    await renderScreenOrientation("landscape", true);
   });
 
   it("ignores rejected orientation lock requests", async () => {
@@ -124,7 +126,7 @@ describe("useScreenOrientation()", () => {
       .mockImplementation(() => {});
 
     setScreenOrientation({ lock });
-    renderScreenOrientation("landscape", true);
+    const { act } = await renderScreenOrientation("landscape", true);
 
     await act(async () => undefined);
 
@@ -132,7 +134,7 @@ describe("useScreenOrientation()", () => {
     expect(consoleError).not.toHaveBeenCalled();
   });
 
-  it("ignores synchronous lock and unlock failures", () => {
+  it("ignores synchronous lock and unlock failures", async () => {
     const lock = vi.fn(() => {
       throw new Error("Lock failed");
     });
@@ -142,9 +144,9 @@ describe("useScreenOrientation()", () => {
 
     setScreenOrientation({ lock, unlock });
 
-    const { unmount } = renderScreenOrientation("portrait", true);
+    const { unmount } = await renderScreenOrientation("portrait", true);
 
-    expect(unmount).not.toThrow();
+    await unmount();
     expect(lock).toHaveBeenCalledWith("portrait");
     expect(unlock).toHaveBeenCalledOnce();
   });

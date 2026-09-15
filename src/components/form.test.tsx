@@ -1,15 +1,14 @@
-// @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import { Form } from "./form.tsx";
 
 afterEach(cleanup);
 
 describe("<Form />", () => {
-  it("renders children inside a form container", () => {
-    const { container } = render(
+  it("renders children inside a form container", async () => {
+    const { container } = await render(
       <Form onSubmit={vi.fn()}>
         <span>Form fields</span>
       </Form>,
@@ -19,7 +18,7 @@ describe("<Form />", () => {
 
     expect(form).toBeInTheDocument();
     expect(form).toHaveAttribute("novalidate");
-    expect(form).toContainElement(screen.getByText("Form fields"));
+    expect(form).toContainElement(page.getByText("Form fields").element());
   });
 
   it("passes submit events to the provided handler", async () => {
@@ -27,36 +26,36 @@ describe("<Form />", () => {
     const onSubmitSpy = vi.fn((event) => {
       event.preventDefault();
     });
-    render(
+    await render(
       <Form onSubmit={onSubmitSpy}>
         <button type="submit">Submit</button>
       </Form>,
     );
 
-    await user.click(screen.getByRole("button", { name: "Submit" }));
+    await user.click(page.getByRole("button", { name: "Submit" }));
 
     expect(onSubmitSpy).toHaveBeenCalledOnce();
   });
 
-  it("exposes the compound subcomponents", () => {
+  it("exposes the compound subcomponents", async () => {
     expect(Form.Title).toBeDefined();
     expect(Form.SubmitButton).toBeDefined();
   });
 });
 
 describe("<Form.Title />", () => {
-  it("renders a level 3 heading", () => {
-    render(<Form.Title>Form title</Form.Title>);
+  it("renders a level 3 heading", async () => {
+    await render(<Form.Title>Form title</Form.Title>);
 
-    expect(
-      screen.getByRole("heading", { level: 3, name: "Form title" }),
-    ).toBeInTheDocument();
+    await expect
+      .element(page.getByRole("heading", { level: 3, name: "Form title" }))
+      .toBeInTheDocument();
   });
 });
 
 describe("<Form.SubmitButton />", () => {
-  it("renders a submit button with its label and icon", () => {
-    render(
+  it("renders a submit button with its label and icon", async () => {
+    await render(
       <Form.SubmitButton
         disabled={false}
         loading={false}
@@ -66,14 +65,14 @@ describe("<Form.SubmitButton />", () => {
       </Form.SubmitButton>,
     );
 
-    const button = screen.getByRole("button", { name: "Submit" });
+    const button = page.getByRole("button", { name: "Submit" });
 
     expect(button).toHaveAttribute("type", "submit");
-    expect(screen.getByTestId("submit-icon")).toBeInTheDocument();
+    await expect.element(page.getByTestId("submit-icon")).toBeInTheDocument();
   });
 
-  it("supports the disabled state", () => {
-    render(
+  it("supports the disabled state", async () => {
+    await render(
       <Form.SubmitButton
         disabled
         loading={false}
@@ -83,11 +82,13 @@ describe("<Form.SubmitButton />", () => {
       </Form.SubmitButton>,
     );
 
-    expect(screen.getByRole("button", { name: "Submit" })).toBeDisabled();
+    await expect
+      .element(page.getByRole("button", { name: "Submit" }))
+      .toBeDisabled();
   });
 
-  it("supports the loading state", () => {
-    render(
+  it("supports the loading state", async () => {
+    await render(
       <Form.SubmitButton
         disabled={false}
         loading
@@ -97,7 +98,9 @@ describe("<Form.SubmitButton />", () => {
       </Form.SubmitButton>,
     );
 
-    expect(screen.getByRole("button", { name: "Submit" })).toBeDisabled();
-    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Submit" }))
+      .toBeDisabled();
+    await expect.element(page.getByRole("progressbar")).toBeInTheDocument();
   });
 });

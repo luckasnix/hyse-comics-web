@@ -1,7 +1,6 @@
-// @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import { comicsMock } from "#/mocks/comics.ts";
 
@@ -29,67 +28,75 @@ const renderComponent = (overrides: Partial<ContentWarningDialogProps> = {}) =>
 afterEach(cleanup);
 
 describe("<ContentWarningDialog />", () => {
-  it("renders the dialog title", () => {
-    renderComponent();
+  it("renders the dialog title", async () => {
+    await renderComponent();
 
-    expect(screen.getByText("Content Warning")).toBeInTheDocument();
+    await expect.element(page.getByText("Content Warning")).toBeInTheDocument();
   });
 
-  it("renders the comic title in the description", () => {
-    renderComponent();
+  it("renders the comic title in the description", async () => {
+    await renderComponent();
 
-    expect(screen.getByText("Blood and Gold")).toBeInTheDocument();
+    await expect.element(page.getByText("Blood and Gold")).toBeInTheDocument();
   });
 
-  it("renders all content warning chips", () => {
-    renderComponent();
+  it("renders all content warning chips", async () => {
+    await renderComponent();
 
-    expect(screen.getByText("Graphic Violence")).toBeInTheDocument();
-    expect(screen.getByText("Strong Language")).toBeInTheDocument();
-    expect(screen.getByText("Substance Use")).toBeInTheDocument();
+    await expect
+      .element(page.getByText("Graphic Violence"))
+      .toBeInTheDocument();
+    await expect.element(page.getByText("Strong Language")).toBeInTheDocument();
+    await expect.element(page.getByText("Substance Use")).toBeInTheDocument();
   });
 
-  it("renders the acknowledgement checkbox unchecked by default", () => {
-    renderComponent();
+  it("renders the acknowledgement checkbox unchecked by default", async () => {
+    await renderComponent();
 
-    expect(
-      screen.getByRole("checkbox", {
-        name: "I understand and wish to continue",
-      }),
-    ).not.toBeChecked();
+    await expect
+      .element(
+        page.getByRole("checkbox", {
+          name: "I understand and wish to continue",
+        }),
+      )
+      .not.toBeChecked();
   });
 
-  it("renders the Continue button disabled by default", () => {
-    renderComponent();
+  it("renders the Continue button disabled by default", async () => {
+    await renderComponent();
 
-    expect(screen.getByRole("button", { name: "Continue" })).toBeDisabled();
+    await expect
+      .element(page.getByRole("button", { name: "Continue" }))
+      .toBeDisabled();
   });
 
   it("enables the Continue button after checking the acknowledgement checkbox", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
     await user.click(
-      screen.getByRole("checkbox", {
+      page.getByRole("checkbox", {
         name: "I understand and wish to continue",
       }),
     );
 
-    expect(screen.getByRole("button", { name: "Continue" })).toBeEnabled();
+    await expect
+      .element(page.getByRole("button", { name: "Continue" }))
+      .toBeEnabled();
   });
 
   it("calls onConfirm when Continue button is clicked after acknowledging", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
     await user.click(
-      screen.getByRole("checkbox", {
+      page.getByRole("checkbox", {
         name: "I understand and wish to continue",
       }),
     );
-    await user.click(screen.getByRole("button", { name: "Continue" }));
+    await user.click(page.getByRole("button", { name: "Continue" }));
 
     expect(onConfirmSpy).toHaveBeenCalledOnce();
   });
@@ -97,9 +104,9 @@ describe("<ContentWarningDialog />", () => {
   it("calls onCancel when Go Back button is clicked", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByRole("button", { name: "Go Back" }));
+    await user.click(page.getByRole("button", { name: "Go Back" }));
 
     expect(onCancelSpy).toHaveBeenCalledOnce();
   });
@@ -107,22 +114,26 @@ describe("<ContentWarningDialog />", () => {
   it("resets the acknowledgement after going back", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
-    const checkbox = screen.getByRole("checkbox", {
+    const checkbox = page.getByRole("checkbox", {
       name: "I understand and wish to continue",
     });
 
     await user.click(checkbox);
-    await user.click(screen.getByRole("button", { name: "Go Back" }));
+    await user.click(page.getByRole("button", { name: "Go Back" }));
 
     expect(checkbox).not.toBeChecked();
-    expect(screen.getByRole("button", { name: "Continue" })).toBeDisabled();
+    await expect
+      .element(page.getByRole("button", { name: "Continue" }))
+      .toBeDisabled();
   });
 
-  it("does not render the dialog when open is false", () => {
-    renderComponent({ open: false });
+  it("does not render the dialog when open is false", async () => {
+    await renderComponent({ open: false });
 
-    expect(screen.queryByText("Content Warning")).not.toBeInTheDocument();
+    await expect
+      .element(page.getByText("Content Warning"))
+      .not.toBeInTheDocument();
   });
 });

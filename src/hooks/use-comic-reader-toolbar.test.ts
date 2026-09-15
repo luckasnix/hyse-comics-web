@@ -1,6 +1,5 @@
-// @vitest-environment jsdom
-import { renderHook } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { renderHook } from "vitest-browser-react/pure";
 
 import { useComicReaderToolbar } from "./use-comic-reader-toolbar.ts";
 
@@ -54,7 +53,7 @@ const setupMock = ({
 
 describe("useComicReaderToolbar()", () => {
   describe("when direction is LTR", () => {
-    it("maps navigation to left-to-right order", () => {
+    it("maps navigation to left-to-right order", async () => {
       setupMock({
         canNavigateFirst: true,
         canNavigatePrev: true,
@@ -62,7 +61,7 @@ describe("useComicReaderToolbar()", () => {
         canNavigateLast: true,
       });
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useComicReaderToolbar(undefined, "ltr"),
       );
 
@@ -88,10 +87,10 @@ describe("useComicReaderToolbar()", () => {
       });
     });
 
-    it("disables buttons when navigation is not available", () => {
+    it("disables buttons when navigation is not available", async () => {
       setupMock();
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useComicReaderToolbar(undefined, "ltr"),
       );
 
@@ -103,7 +102,7 @@ describe("useComicReaderToolbar()", () => {
   });
 
   describe("when direction is RTL", () => {
-    it("maps navigation to right-to-left order", () => {
+    it("maps navigation to right-to-left order", async () => {
       setupMock({
         canNavigateFirst: true,
         canNavigatePrev: true,
@@ -111,7 +110,7 @@ describe("useComicReaderToolbar()", () => {
         canNavigateLast: true,
       });
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useComicReaderToolbar(undefined, "rtl"),
       );
 
@@ -137,10 +136,10 @@ describe("useComicReaderToolbar()", () => {
       });
     });
 
-    it("disables buttons when navigation is not available", () => {
+    it("disables buttons when navigation is not available", async () => {
       setupMock();
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useComicReaderToolbar(undefined, "rtl"),
       );
 
@@ -151,10 +150,10 @@ describe("useComicReaderToolbar()", () => {
     });
   });
 
-  it("passes through currentSlideNumber and slidesLength", () => {
+  it("passes through currentSlideNumber and slidesLength", async () => {
     setupMock({ currentSlideNumber: 3, slidesLength: 10 });
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useComicReaderToolbar(undefined, "ltr"),
     );
 
@@ -162,10 +161,10 @@ describe("useComicReaderToolbar()", () => {
     expect(result.current.slidesLength).toBe(10);
   });
 
-  it("returns null for currentSlideNumber and slidesLength when carousel is not ready", () => {
+  it("returns null for currentSlideNumber and slidesLength when carousel is not ready", async () => {
     setupMock();
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useComicReaderToolbar(undefined, "ltr"),
     );
 

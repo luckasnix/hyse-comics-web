@@ -1,7 +1,6 @@
-// @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { page } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import { ComicProvider } from "#/contexts/comic.tsx";
 import { UserProvider } from "#/contexts/user.tsx";
@@ -64,40 +63,53 @@ const renderReaderViewport = (
 const renderComponent = (overrides: Partial<RenderComponentOptions> = {}) =>
   render(renderReaderViewport(overrides));
 
-const mockImageRect = (image: HTMLElement) => {
-  const rect = {
-    x: 10,
-    y: 20,
-    left: 10,
-    top: 20,
-    right: 210,
-    bottom: 120,
-    width: 200,
-    height: 100,
-    toJSON: () => ({}),
-  } as DOMRect;
+const getImages = () => page.getByRole("img").elements() as Array<HTMLElement>;
 
-  return vi.spyOn(image, "getBoundingClientRect").mockReturnValue(rect);
+const hoverFirstImageAtQuarter = async () => {
+  const imageLocator = page.getByRole("img").first();
+  const image = imageLocator.element() as HTMLElement;
+  image.style.width = "200px";
+  image.style.height = "100px";
+  const { width, height } = image.getBoundingClientRect();
+
+  await imageLocator.hover({ position: { x: width / 4, y: height / 4 } });
+
+  return {
+    image,
+    imageLocator,
+  };
 };
 
-afterEach(() => {
-  cleanup();
+const movePointer = (
+  target: HTMLElement,
+  { clientX = 0, clientY = 0 } = {},
+) => {
+  target.dispatchEvent(
+    new PointerEvent("pointerover", { bubbles: true, clientX, clientY }),
+  );
+  target.dispatchEvent(
+    new PointerEvent("pointermove", { bubbles: true, clientX, clientY }),
+  );
+};
+
+afterEach(async () => {
+  await cleanup();
   vi.restoreAllMocks();
 });
 
 describe("<ComicReaderViewport />", () => {
-  it("renders all page images", () => {
-    renderComponent();
+  it("renders all page images", async () => {
+    await renderComponent();
 
-    const images = screen.getAllByRole("img");
+    const images = getImages();
 
     expect(images).toHaveLength(pages.length);
   });
 
-  it("renders unique alt text with the comic title and page position", () => {
-    renderComponent();
+  it("renders unique alt text with the comic title and page position", async () => {
+    await renderComponent();
 
-    const images = screen.getAllByRole("img");
+    const images = getImages();
 
     for (const [index, image] of images.entries()) {
       expect(image).toHaveAttribute(
@@ -107,20 +119,20 @@ describe("<ComicReaderViewport />", () => {
     }
   });
 
-  it("renders the correct image sources", () => {
-    renderComponent();
+  it("renders the correct image sources", async () => {
+    await renderComponent();
 
-    const images = screen.getAllByRole("img");
+    const images = getImages();
 
     for (const [index, image] of images.entries()) {
       expect(image).toHaveAttribute("src", pages[index].imageUrl);
     }
   });
 
-  it("renders page images with box-safe sizing", () => {
-    renderComponent();
+  it("renders page images with box-safe sizing", async () => {
+    await renderComponent();
 
-    const images = screen.getAllByRole("img");
+    const images = getImages();
 
     for (const image of images) {
       expect(image).toHaveStyle({
@@ -131,166 +143,102 @@ describe("<ComicReaderViewport />", () => {
     }
   });
 
-  it("uses the zoom-in cursor when zoom is enabled", () => {
-    renderComponent({ isZoomEnabled: true });
+  it("uses the zoom-in cursor when zoom is enabled", async () => {
+    await renderComponent({ isZoomEnabled: true });
 
-    const image = screen.getAllByRole("img")[0];
+    const image = getImages()[0];
     const slideContainer = image.parentElement?.parentElement;
 
     expect(slideContainer).toHaveStyle({ cursor: "zoom-in" });
   });
 
   it("does not zoom images when zoom is disabled", async () => {
-    const user = userEvent.setup();
+    await renderComponent({ isZoomEnabled: false });
 
-    renderComponent({ isZoomEnabled: false });
+    const image = getImages()[0];
 
-    const image = screen.getAllByRole("img")[0];
-
-    mockImageRect(image);
-    await user.pointer({
-      target: image,
-      coords: {
-        clientX: 60,
-        clientY: 45,
-      },
-    });
+    await movePointer(image, { clientX: 60, clientY: 45 });
 
     expect(image.style.transform).toBe("");
   });
 
   it("zooms the hovered image around the cursor position", async () => {
-    const user = userEvent.setup();
+    await renderComponent({ isZoomEnabled: true });
 
-    renderComponent({ isZoomEnabled: true });
+    const { image, imageLocator } = await hoverFirstImageAtQuarter();
 
-    const image = screen.getAllByRole("img")[0];
-
-    mockImageRect(image);
-    await user.pointer({
-      target: image,
-      coords: {
-        clientX: 60,
-        clientY: 45,
-      },
-    });
-
-    expect(image).toHaveStyle({
-      transform: "scale(1.4)",
-      transformOrigin: "25% 25%",
-    });
+    await expect.element(imageLocator).toHaveStyle({ transform: "scale(1.4)" });
+    expect(image.style.transformOrigin).toBe("25% 25%");
   });
 
   it("does not calculate zoom for an image without layout dimensions", async () => {
-    const user = userEvent.setup();
+    await renderComponent({ isZoomEnabled: true });
 
-    renderComponent({ isZoomEnabled: true });
-
-    const image = screen.getAllByRole("img")[0];
+    const image = getImages()[0];
 
     vi.spyOn(image, "getBoundingClientRect").mockReturnValue({
       width: 0,
       height: 0,
     } as DOMRect);
 
-    await user.pointer({
-      target: image,
-      coords: {
-        clientX: 60,
-        clientY: 45,
-      },
-    });
+    await movePointer(image, { clientX: 60, clientY: 45 });
 
     expect(image.style.transform).toBe("");
   });
 
   it("keeps the zoom while the pointer stays inside the viewport", async () => {
-    const user = userEvent.setup();
+    await renderComponent({ isZoomEnabled: true });
 
-    renderComponent({ isZoomEnabled: true });
+    const { image, imageLocator } = await hoverFirstImageAtQuarter();
+    const pageElement = image.parentElement as HTMLElement;
 
-    const image = screen.getAllByRole("img")[0];
-    const page = image.parentElement as HTMLElement;
-    const pointerInsidePage = {
-      clientX: 240,
-      clientY: 140,
-      relatedTarget: page,
-    };
+    await page.elementLocator(pageElement).hover();
 
-    mockImageRect(image);
-    await user.pointer({
-      target: image,
-      coords: {
-        clientX: 60,
-        clientY: 45,
-      },
-    });
-    await user.pointer({
-      target: page,
-      coords: pointerInsidePage,
-    });
-
-    expect(image).toHaveStyle({
-      transform: "scale(1.4)",
-      transformOrigin: "25% 25%",
-    });
+    await expect.element(imageLocator).toHaveStyle({ transform: "scale(1.4)" });
   });
 
   it("removes the zoom when the pointer leaves the viewport", async () => {
-    const user = userEvent.setup();
+    await renderComponent({ isZoomEnabled: true });
 
-    renderComponent({ isZoomEnabled: true });
+    const { image } = await hoverFirstImageAtQuarter();
+    const outsideViewport = document.body.appendChild(
+      document.createElement("button"),
+    );
+    outsideViewport.style.position = "fixed";
+    outsideViewport.style.inset = "0 auto auto 0";
+    outsideViewport.style.zIndex = "9999";
 
-    const image = screen.getAllByRole("img")[0];
+    await page.elementLocator(outsideViewport).hover();
 
-    mockImageRect(image);
-    await user.pointer({
-      target: image,
-      coords: {
-        clientX: 60,
-        clientY: 45,
-      },
-    });
-    await user.pointer({ target: document.body });
+    await expect.poll(() => image.style.transform).toBe("");
 
-    expect(image.style.transform).toBe("");
+    outsideViewport.remove();
   });
 
   it("removes the zoom when zoom is disabled", async () => {
-    const user = userEvent.setup();
+    const { rerender } = await renderComponent({ isZoomEnabled: true });
 
-    const { rerender } = renderComponent({ isZoomEnabled: true });
+    await hoverFirstImageAtQuarter();
 
-    const image = screen.getAllByRole("img")[0];
+    await rerender(renderReaderViewport({ isZoomEnabled: false }));
 
-    mockImageRect(image);
-    await user.pointer({
-      target: image,
-      coords: {
-        clientX: 60,
-        clientY: 45,
-      },
-    });
-
-    rerender(renderReaderViewport({ isZoomEnabled: false }));
-
-    expect(screen.getAllByRole("img")[0].style.transform).toBe("");
+    expect(getImages()[0].style.transform).toBe("");
   });
 
-  it("renders no images when pages are empty", () => {
-    renderComponent({ pages: [] });
+  it("renders no images when pages are empty", async () => {
+    await renderComponent({ pages: [] });
 
-    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    await expect.element(page.getByRole("img")).not.toBeInTheDocument();
   });
 
-  it("applies background texture style when page has a background texture", () => {
+  it("applies background texture style when page has a background texture", async () => {
     const pagesWithTexture = pagesMock.filter(
       (page) => page.backgroundTexture !== null,
     );
 
-    renderComponent({ pages: pagesWithTexture.slice(0, 2) });
+    await renderComponent({ pages: pagesWithTexture.slice(0, 2) });
 
-    const images = screen.getAllByRole("img");
+    const images = getImages();
 
     for (const image of images) {
       expect(image.parentElement).toHaveStyle({
@@ -300,14 +248,14 @@ describe("<ComicReaderViewport />", () => {
     }
   });
 
-  it("does not apply background texture style when page has no background texture", () => {
+  it("does not apply background texture style when page has no background texture", async () => {
     const pagesWithoutTexture = pagesMock.filter(
       (page) => page.backgroundTexture === null,
     );
 
-    renderComponent({ pages: pagesWithoutTexture.slice(0, 2) });
+    await renderComponent({ pages: pagesWithoutTexture.slice(0, 2) });
 
-    const images = screen.getAllByRole("img");
+    const images = getImages();
 
     for (const image of images) {
       const style = image.parentElement?.style;
@@ -316,10 +264,10 @@ describe("<ComicReaderViewport />", () => {
     }
   });
 
-  it("renders with column direction for vertical reading axis", () => {
-    renderComponent({ user: signedInUserMock });
+  it("renders with column direction for vertical reading axis", async () => {
+    await renderComponent({ user: signedInUserMock });
 
-    const images = screen.getAllByRole("img");
+    const images = getImages();
     const slideContainer = images[0].parentElement?.parentElement;
 
     expect(slideContainer).toHaveStyle({
@@ -328,21 +276,21 @@ describe("<ComicReaderViewport />", () => {
     });
   });
 
-  it("falls back to column direction when no user is available", () => {
-    renderComponent({ user: null });
+  it("falls back to column direction when no user is available", async () => {
+    await renderComponent({ user: null });
 
-    const images = screen.getAllByRole("img");
+    const images = getImages();
     const slideContainer = images[0].parentElement?.parentElement;
 
     expect(slideContainer).toHaveStyle({ flexDirection: "column" });
   });
 
-  it("renders with row direction for horizontal reading axis and western comic", () => {
+  it("renders with row direction for horizontal reading axis and western comic", async () => {
     const horizontalUser = usersMock[2];
 
-    renderComponent({ user: horizontalUser, comic: westernComic });
+    await renderComponent({ user: horizontalUser, comic: westernComic });
 
-    const images = screen.getAllByRole("img");
+    const images = getImages();
     const slideContainer = images[0].parentElement?.parentElement;
 
     expect(slideContainer).toHaveStyle({
@@ -351,12 +299,12 @@ describe("<ComicReaderViewport />", () => {
     });
   });
 
-  it("renders with row-reverse direction for horizontal reading axis and eastern comic", () => {
+  it("renders with row-reverse direction for horizontal reading axis and eastern comic", async () => {
     const horizontalUser = usersMock[2];
 
-    renderComponent({ user: horizontalUser, comic: easternComic });
+    await renderComponent({ user: horizontalUser, comic: easternComic });
 
-    const images = screen.getAllByRole("img");
+    const images = getImages();
     const slideContainer = images[0].parentElement?.parentElement;
 
     expect(slideContainer).toHaveStyle({

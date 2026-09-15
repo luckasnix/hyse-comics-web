@@ -1,6 +1,5 @@
-// @vitest-environment jsdom
-import { act, renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { renderHook } from "vitest-browser-react/pure";
 
 import { useFullscreen } from "./use-fullscreen.ts";
 
@@ -116,112 +115,112 @@ afterEach(() => {
 });
 
 describe("useFullscreen()", () => {
-  it("is inactive by default", () => {
+  it("is inactive by default", async () => {
     const target = document.createElement("section");
     setFullscreenApi(target);
     const targetRef = { current: target };
 
-    const { result } = renderHook(() => useFullscreen(targetRef));
+    const { result } = await renderHook(() => useFullscreen(targetRef));
 
     expect(result.current[0]).toBe(false);
     expect(result.current[1].isEnabled).toBe(true);
   });
 
-  it("detects when its target is already fullscreen", () => {
+  it("detects when its target is already fullscreen", async () => {
     const target = document.createElement("section");
     setFullscreenApi(target, { fullscreenElement: target });
     const targetRef = { current: target };
 
-    const { result } = renderHook(() => useFullscreen(targetRef));
+    const { result } = await renderHook(() => useFullscreen(targetRef));
 
     expect(result.current[0]).toBe(true);
   });
 
-  it("enters fullscreen", () => {
+  it("enters fullscreen", async () => {
     const target = document.createElement("section");
     const { requestFullscreen } = setFullscreenApi(target);
     const targetRef = { current: target };
-    const { result } = renderHook(() => useFullscreen(targetRef));
+    const { act, result } = await renderHook(() => useFullscreen(targetRef));
 
-    act(() => result.current[1].enterFullscreen());
+    await act(() => result.current[1].enterFullscreen());
 
     expect(requestFullscreen).toHaveBeenCalledOnce();
     expect(result.current[0]).toBe(true);
   });
 
-  it("exits fullscreen", () => {
+  it("exits fullscreen", async () => {
     const target = document.createElement("section");
     const { exitFullscreen } = setFullscreenApi(target, {
       fullscreenElement: target,
     });
     const targetRef = { current: target };
-    const { result } = renderHook(() => useFullscreen(targetRef));
+    const { act, result } = await renderHook(() => useFullscreen(targetRef));
 
-    act(() => result.current[1].exitFullscreen());
+    await act(() => result.current[1].exitFullscreen());
 
     expect(exitFullscreen).toHaveBeenCalledOnce();
     expect(result.current[0]).toBe(false);
   });
 
-  it("toggles fullscreen using the document state", () => {
+  it("toggles fullscreen using the document state", async () => {
     const target = document.createElement("section");
     const { requestFullscreen, exitFullscreen } = setFullscreenApi(target);
     const targetRef = { current: target };
-    const { result } = renderHook(() => useFullscreen(targetRef));
+    const { act, result } = await renderHook(() => useFullscreen(targetRef));
 
-    act(() => result.current[1].toggleFullscreen());
+    await act(() => result.current[1].toggleFullscreen());
 
     expect(requestFullscreen).toHaveBeenCalledOnce();
     expect(result.current[0]).toBe(true);
 
-    act(() => result.current[1].toggleFullscreen());
+    await act(() => result.current[1].toggleFullscreen());
 
     expect(exitFullscreen).toHaveBeenCalledOnce();
     expect(result.current[0]).toBe(false);
   });
 
-  it("updates after fullscreen is exited externally", () => {
+  it("updates after fullscreen is exited externally", async () => {
     const target = document.createElement("section");
     const { changeFullscreenElement } = setFullscreenApi(target, {
       fullscreenElement: target,
     });
     const targetRef = { current: target };
-    const { result } = renderHook(() => useFullscreen(targetRef));
+    const { act, result } = await renderHook(() => useFullscreen(targetRef));
 
-    act(() => changeFullscreenElement(null));
+    await act(() => changeFullscreenElement(null));
 
     expect(result.current[0]).toBe(false);
   });
 
-  it("is inactive when another element is fullscreen", () => {
+  it("is inactive when another element is fullscreen", async () => {
     const target = document.createElement("section");
     const otherElement = document.createElement("div");
     setFullscreenApi(target, { fullscreenElement: otherElement });
     const targetRef = { current: target };
 
-    const { result } = renderHook(() => useFullscreen(targetRef));
+    const { result } = await renderHook(() => useFullscreen(targetRef));
 
     expect(result.current[0]).toBe(false);
   });
 
-  it("does nothing when fullscreen is unavailable", () => {
+  it("does nothing when fullscreen is unavailable", async () => {
     const target = document.createElement("section");
     const { requestFullscreen } = setFullscreenApi(target, { enabled: false });
     const targetRef = { current: target };
-    const { result } = renderHook(() => useFullscreen(targetRef));
+    const { act, result } = await renderHook(() => useFullscreen(targetRef));
 
-    act(() => result.current[1].enterFullscreen());
+    await act(() => result.current[1].enterFullscreen());
 
     expect(result.current[1].isEnabled).toBe(false);
     expect(requestFullscreen).not.toHaveBeenCalled();
     expect(result.current[0]).toBe(false);
   });
 
-  it("does nothing while the target is unavailable", () => {
+  it("does nothing while the target is unavailable", async () => {
     const target = document.createElement("section");
     const { requestFullscreen, exitFullscreen } = setFullscreenApi(target);
     const targetRef = { current: null };
-    const { result } = renderHook(() => useFullscreen(targetRef));
+    const { result } = await renderHook(() => useFullscreen(targetRef));
 
     expect(() => {
       result.current[1].enterFullscreen();
@@ -237,7 +236,7 @@ describe("useFullscreen()", () => {
     const requestError = new Error("Request failed");
     const { requestFullscreen } = setFullscreenApi(target, { requestError });
     const targetRef = { current: target };
-    const { result } = renderHook(() => useFullscreen(targetRef));
+    const { act, result } = await renderHook(() => useFullscreen(targetRef));
 
     await act(async () => {
       result.current[1].enterFullscreen();
@@ -256,7 +255,7 @@ describe("useFullscreen()", () => {
       exitError,
     });
     const targetRef = { current: target };
-    const { result } = renderHook(() => useFullscreen(targetRef));
+    const { act, result } = await renderHook(() => useFullscreen(targetRef));
 
     await act(async () => {
       result.current[1].exitFullscreen();
@@ -267,18 +266,18 @@ describe("useFullscreen()", () => {
     expect(result.current[0]).toBe(true);
   });
 
-  it("removes the fullscreen listener when unmounted", () => {
+  it("removes the fullscreen listener when unmounted", async () => {
     const target = document.createElement("section");
     setFullscreenApi(target);
     const targetRef = { current: target };
     const addEventListener = vi.spyOn(document, "addEventListener");
     const removeEventListener = vi.spyOn(document, "removeEventListener");
-    const { unmount } = renderHook(() => useFullscreen(targetRef));
+    const { unmount } = await renderHook(() => useFullscreen(targetRef));
     const listener = addEventListener.mock.calls.find(
       ([event]) => event === "fullscreenchange",
     )?.[1];
 
-    unmount();
+    await unmount();
 
     expect(listener).toEqual(expect.any(Function));
     expect(removeEventListener).toHaveBeenCalledWith(
@@ -287,14 +286,14 @@ describe("useFullscreen()", () => {
     );
   });
 
-  it("keeps the actions stable between fullscreen changes", () => {
+  it("keeps the actions stable between fullscreen changes", async () => {
     const target = document.createElement("section");
     setFullscreenApi(target);
     const targetRef = { current: target };
-    const { result } = renderHook(() => useFullscreen(targetRef));
+    const { act, result } = await renderHook(() => useFullscreen(targetRef));
     const initialActions = result.current[1];
 
-    act(() => result.current[1].enterFullscreen());
+    await act(() => result.current[1].enterFullscreen());
 
     expect(result.current[1]).toBe(initialActions);
   });

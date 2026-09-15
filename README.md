@@ -11,7 +11,7 @@ Hyse Comics is an application for reading comics.
 - [TanStack Start](https://tanstack.com/start) provides the full-stack application framework, including routing and data loading.
 - [React](https://react.dev) provides the user interface.
 - [Material UI](https://mui.com/material-ui), [Embla Carousel](https://www.embla-carousel.com), and [Tabler Icons](https://tabler.io/icons) provide the application's components and icons.
-- [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com) support reliable component and user-interaction tests.
+- [Vitest](https://vitest.dev) provides the test runner, using [Browser Mode](https://vitest.dev/guide/browser) with [Playwright](https://playwright.dev) for component and user-interaction tests in Chromium.
 
 ## 🚀 Getting started
 

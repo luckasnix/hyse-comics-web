@@ -1,50 +1,49 @@
-// @vitest-environment jsdom
-import { act, renderHook } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { renderHook } from "vitest-browser-react/pure";
 
 import { useBoolean } from "./use-boolean.ts";
 
 describe("useBoolean()", () => {
-  it("is false by default", () => {
-    const { result } = renderHook(() => useBoolean());
+  it("is false by default", async () => {
+    const { result } = await renderHook(() => useBoolean());
 
     expect(result.current[0]).toBe(false);
   });
 
-  it("uses the provided initial value", () => {
-    const { result } = renderHook(() => useBoolean(true));
+  it("uses the provided initial value", async () => {
+    const { result } = await renderHook(() => useBoolean(true));
 
     expect(result.current[0]).toBe(true);
   });
 
-  it("sets the value to true", () => {
-    const { result } = renderHook(() => useBoolean());
+  it("sets the value to true", async () => {
+    const { act, result } = await renderHook(() => useBoolean());
 
-    act(() => result.current[1].setTrue());
+    await act(() => result.current[1].setTrue());
 
     expect(result.current[0]).toBe(true);
   });
 
-  it("sets the value to false", () => {
-    const { result } = renderHook(() => useBoolean(true));
+  it("sets the value to false", async () => {
+    const { act, result } = await renderHook(() => useBoolean(true));
 
-    act(() => result.current[1].setFalse());
+    await act(() => result.current[1].setFalse());
 
     expect(result.current[0]).toBe(false);
   });
 
-  it("sets a specific value", () => {
-    const { result } = renderHook(() => useBoolean());
+  it("sets a specific value", async () => {
+    const { act, result } = await renderHook(() => useBoolean());
 
-    act(() => result.current[1].set(true));
+    await act(() => result.current[1].set(true));
 
     expect(result.current[0]).toBe(true);
   });
 
-  it("toggles using the latest value", () => {
-    const { result } = renderHook(() => useBoolean());
+  it("toggles using the latest value", async () => {
+    const { act, result } = await renderHook(() => useBoolean());
 
-    act(() => {
+    await act(() => {
       result.current[1].toggle();
       result.current[1].toggle();
       result.current[1].toggle();
@@ -53,11 +52,11 @@ describe("useBoolean()", () => {
     expect(result.current[0]).toBe(true);
   });
 
-  it("keeps the actions stable between renders", () => {
-    const { result } = renderHook(() => useBoolean());
+  it("keeps the actions stable between renders", async () => {
+    const { act, result } = await renderHook(() => useBoolean());
     const initialActions = result.current[1];
 
-    act(() => result.current[1].setTrue());
+    await act(() => result.current[1].setTrue());
 
     expect(result.current[1]).toBe(initialActions);
   });
