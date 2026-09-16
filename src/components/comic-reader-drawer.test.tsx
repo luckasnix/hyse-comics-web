@@ -1,9 +1,8 @@
-// @vitest-environment jsdom
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import { ComicProvider } from "#/contexts/comic.tsx";
 import {
@@ -97,48 +96,50 @@ const renderComponent = (
 afterEach(cleanup);
 
 describe("<ComicReaderDrawer />", () => {
-  it("renders the close button, comic title and synopsis", () => {
-    renderComponent();
+  it("renders the close button, comic title and synopsis", async () => {
+    await renderComponent();
 
-    expect(screen.getByRole("button", { name: "Close" })).toBeInTheDocument();
-    expect(screen.getByText(comic.title)).toBeInTheDocument();
-    expect(screen.getByText(comic.synopsis)).toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Close" }))
+      .toBeInTheDocument();
+    await expect.element(page.getByText(comic.title)).toBeInTheDocument();
+    await expect.element(page.getByText(comic.synopsis)).toBeInTheDocument();
   });
 
-  it("renders the chapter list", () => {
-    renderComponent();
+  it("renders the chapter list", async () => {
+    await renderComponent();
 
     for (const chapter of chapters) {
-      expect(screen.getByText(chapter.title)).toBeInTheDocument();
+      await expect.element(page.getByText(chapter.title)).toBeInTheDocument();
     }
   });
 
   it("calls onClose when the close button is clicked", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByRole("button", { name: "Close" }));
+    await user.click(page.getByRole("button", { name: "Close" }));
 
     expect(onCloseSpy).toHaveBeenCalledOnce();
   });
 
   it("requests credits for the current chapter", async () => {
-    renderComponent();
+    await renderComponent();
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(getChapterCreditsMock).toHaveBeenCalledWith(chapters[0].id);
     });
   });
 
-  it("does not request credits when there is no current chapter", () => {
-    renderComponent({}, { currentChapterId: null });
+  it("does not request credits when there is no current chapter", async () => {
+    await renderComponent({}, { currentChapterId: null });
 
     expect(getChapterCreditsMock).not.toHaveBeenCalled();
   });
 
-  it("does not request credits when the drawer is closed", () => {
-    renderComponent({ isOpen: false });
+  it("does not request credits when the drawer is closed", async () => {
+    await renderComponent({ isOpen: false });
 
     expect(getChapterCreditsMock).not.toHaveBeenCalled();
   });
@@ -146,53 +147,55 @@ describe("<ComicReaderDrawer />", () => {
   it("renders an empty credit list when there is no current chapter", async () => {
     const user = userEvent.setup();
 
-    renderComponent({}, { currentChapterId: null });
+    await renderComponent({}, { currentChapterId: null });
 
-    await user.click(screen.getByRole("tab", { name: "Credits" }));
+    await user.click(page.getByRole("tab", { name: "Credits" }));
 
-    expect(screen.getByText("No credits found")).toBeVisible();
+    await expect.element(page.getByText("No credits found")).toBeVisible();
   });
 
   it("renders the credit loading state while credits are pending", async () => {
     const user = userEvent.setup();
 
-    renderComponent({}, { keepChapterCreditsPending: true });
+    await renderComponent({}, { keepChapterCreditsPending: true });
 
-    await user.click(screen.getByRole("tab", { name: "Credits" }));
+    await user.click(page.getByRole("tab", { name: "Credits" }));
 
-    expect(screen.getByText("Loading credits...")).toBeVisible();
+    await expect.element(page.getByText("Loading credits...")).toBeVisible();
   });
 
   it("renders the credit error state when credits fail to load", async () => {
     const user = userEvent.setup();
 
-    renderComponent(
+    await renderComponent(
       {},
       { chapterCreditsError: new Error("Failed to fetch credits") },
     );
 
-    await user.click(screen.getByRole("tab", { name: "Credits" }));
+    await user.click(page.getByRole("tab", { name: "Credits" }));
 
-    expect(await screen.findByText("Failed to load credits.")).toBeVisible();
+    await expect
+      .element(page.getByText("Failed to load credits."))
+      .toBeVisible();
   });
 
   it("renders the credit list when the Credits tab is selected", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByRole("tab", { name: "Credits" }));
+    await user.click(page.getByRole("tab", { name: "Credits" }));
 
-    expect(await screen.findByText("@johndoe")).toBeInTheDocument();
-    expect(screen.getByText("Writer")).toBeInTheDocument();
+    await expect.element(page.getByText("@johndoe")).toBeInTheDocument();
+    await expect.element(page.getByText("Writer")).toBeInTheDocument();
   });
 
   it("navigates to the selected chapter when a chapter is clicked", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByText(chapters[1].title));
+    await user.click(page.getByText(chapters[1].title));
 
     expect(navigateSpy).toHaveBeenCalledWith({
       to: "/{-$locale}/chapters/$chapterId",
@@ -203,10 +206,10 @@ describe("<ComicReaderDrawer />", () => {
   it("navigates to the selected user when a credit is clicked", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByRole("tab", { name: "Credits" }));
-    await user.click(await screen.findByText("@johndoe"));
+    await user.click(page.getByRole("tab", { name: "Credits" }));
+    await user.click(page.getByText("@johndoe"));
 
     expect(navigateSpy).toHaveBeenCalledWith({
       to: "/{-$locale}/users/$userId",

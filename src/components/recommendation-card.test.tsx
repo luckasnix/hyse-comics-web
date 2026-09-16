@@ -1,7 +1,6 @@
-// @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import { UiProvider } from "#/contexts/ui.tsx";
 import { comicsMock } from "#/mocks/comics.ts";
@@ -61,29 +60,37 @@ const setupClipboard = (resolved: boolean) => {
 afterEach(cleanup);
 
 describe("<RecommendationCard />", () => {
-  it("renders the thumbnail, title and synopsis", () => {
-    renderComponent();
+  it("renders the thumbnail, title and synopsis", async () => {
+    await renderComponent();
 
-    expect(
-      screen.getByTitle(`${defaultProps.title} thumbnail`),
-    ).toBeInTheDocument();
-    expect(screen.getByText(defaultProps.title)).toBeInTheDocument();
-    expect(screen.getByText(defaultProps.synopsis)).toBeInTheDocument();
+    await expect
+      .element(page.getByTitle(`${defaultProps.title} thumbnail`))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByText(defaultProps.title))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByText(defaultProps.synopsis))
+      .toBeInTheDocument();
   });
 
-  it("renders the Share and Read buttons", () => {
-    renderComponent();
+  it("renders the Share and Read buttons", async () => {
+    await renderComponent();
 
-    expect(screen.getByRole("button", { name: "Share" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Read" })).toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Share" }))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Read" }))
+      .toBeInTheDocument();
   });
 
   it("calls onReadButtonClick with the comic ID when Read is clicked", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByRole("button", { name: "Read" }));
+    await user.click(page.getByRole("button", { name: "Read" }));
 
     expect(onReadButtonClickSpy).toHaveBeenCalledWith(defaultProps.comicId);
   });
@@ -92,9 +99,9 @@ describe("<RecommendationCard />", () => {
     const user = userEvent.setup();
     const { writeText } = setupClipboard(true);
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByRole("button", { name: "Share" }));
+    await user.click(page.getByRole("button", { name: "Share" }));
 
     expect(writeText).toHaveBeenCalledWith(
       `https://preview-123.comics.hyse.dev/en-US/comics/${defaultProps.comicId}`,
@@ -106,9 +113,9 @@ describe("<RecommendationCard />", () => {
     const { writeText } = setupClipboard(true);
     useParamsMock.mockReturnValueOnce({});
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByRole("button", { name: "Share" }));
+    await user.click(page.getByRole("button", { name: "Share" }));
 
     expect(writeText).toHaveBeenCalledWith(
       `https://preview-123.comics.hyse.dev/comics/${defaultProps.comicId}`,
@@ -119,27 +126,27 @@ describe("<RecommendationCard />", () => {
     const user = userEvent.setup();
     setupClipboard(true);
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByRole("button", { name: "Share" }));
+    await user.click(page.getByRole("button", { name: "Share" }));
 
-    expect(
-      await screen.findByText("Link copied to clipboard."),
-    ).toBeInTheDocument();
+    await expect
+      .element(page.getByText("Link copied to clipboard."))
+      .toBeInTheDocument();
   });
 
   it("shows an error toast when copying fails", async () => {
     const user = userEvent.setup();
     setupClipboard(false);
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByRole("button", { name: "Share" }));
+    await user.click(page.getByRole("button", { name: "Share" }));
 
-    expect(
-      await screen.findByText(
-        "Failed to copy link to clipboard. Please try again.",
-      ),
-    ).toBeInTheDocument();
+    await expect
+      .element(
+        page.getByText("Failed to copy link to clipboard. Please try again."),
+      )
+      .toBeInTheDocument();
   });
 });

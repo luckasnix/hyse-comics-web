@@ -1,7 +1,6 @@
-// @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import { creditsWithUserMock } from "#/mocks/comics.ts";
 
@@ -12,28 +11,30 @@ afterEach(cleanup);
 const onCreditClickSpy = vi.fn();
 
 describe("<CreditList />", () => {
-  it("renders the empty state when there are no credits", () => {
-    render(<CreditList credits={[]} onCreditClick={onCreditClickSpy} />);
+  it("renders the empty state when there are no credits", async () => {
+    await render(<CreditList credits={[]} onCreditClick={onCreditClickSpy} />);
 
-    expect(screen.getByText("No credits found")).toBeInTheDocument();
+    await expect
+      .element(page.getByText("No credits found"))
+      .toBeInTheDocument();
   });
 
-  it("renders the usernames and role labels", () => {
-    render(
+  it("renders the usernames and role labels", async () => {
+    await render(
       <CreditList
         credits={creditsWithUserMock}
         onCreditClick={onCreditClickSpy}
       />,
     );
 
-    expect(screen.getByText("@johndoe")).toBeInTheDocument();
-    expect(screen.getByText("Writer")).toBeInTheDocument();
-    expect(screen.getByText("@joaodasilva")).toBeInTheDocument();
-    expect(screen.getByText("Penciller")).toBeInTheDocument();
+    await expect.element(page.getByText("@johndoe")).toBeInTheDocument();
+    await expect.element(page.getByText("Writer")).toBeInTheDocument();
+    await expect.element(page.getByText("@joaodasilva")).toBeInTheDocument();
+    await expect.element(page.getByText("Penciller")).toBeInTheDocument();
   });
 
-  it("renders combined role labels", () => {
-    render(
+  it("renders combined role labels", async () => {
+    await render(
       <CreditList
         credits={[
           {
@@ -45,31 +46,31 @@ describe("<CreditList />", () => {
       />,
     );
 
-    expect(screen.getByText("@johndoe")).toBeInTheDocument();
-    expect(screen.getByText("Writer, Editor")).toBeInTheDocument();
+    await expect.element(page.getByText("@johndoe")).toBeInTheDocument();
+    await expect.element(page.getByText("Writer, Editor")).toBeInTheDocument();
   });
 
   it("calls onCreditClick with the user ID when a credit is clicked", async () => {
     const user = userEvent.setup();
 
-    render(
+    await render(
       <CreditList
         credits={creditsWithUserMock}
         onCreditClick={onCreditClickSpy}
       />,
     );
 
-    await user.click(screen.getByText("@johndoe"));
+    await user.click(page.getByText("@johndoe"));
 
     expect(onCreditClickSpy).toHaveBeenCalledWith("40gHsx5wC4xV");
 
-    await user.click(screen.getByText("@joaodasilva"));
+    await user.click(page.getByText("@joaodasilva"));
 
     expect(onCreditClickSpy).toHaveBeenCalledWith("sOXaMS9a6t8z");
   });
 
-  it("renders a fallback avatar when avatarUrl is null", () => {
-    render(
+  it("renders a fallback avatar when avatarUrl is null", async () => {
+    await render(
       <CreditList
         credits={[
           {
@@ -81,9 +82,8 @@ describe("<CreditList />", () => {
       />,
     );
 
-    expect(screen.getByRole("img")).toHaveAttribute(
-      "src",
-      "/fallbacks/avatar.webp",
-    );
+    await expect
+      .element(page.getByRole("img"))
+      .toHaveAttribute("src", "/fallbacks/avatar.webp");
   });
 });

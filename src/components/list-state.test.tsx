@@ -1,34 +1,38 @@
-// @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
+import { page } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import { ListState } from "./list-state.tsx";
 
 afterEach(cleanup);
 
 describe("<ListState />", () => {
-  it("renders an empty state with an icon and message", () => {
-    const { container } = render(
+  it("renders an empty state with an icon and message", async () => {
+    const { container } = await render(
       <ListState kind="empty" message="No items found" />,
     );
 
-    expect(screen.getByText("No items found")).toBeInTheDocument();
+    await expect.element(page.getByText("No items found")).toBeInTheDocument();
     expect(container.querySelector("svg")).not.toBeNull();
   });
 
-  it("renders a pending state with a progress indicator and message", () => {
-    render(<ListState kind="pending" message="Loading items..." />);
+  it("renders a pending state with a progress indicator and message", async () => {
+    await render(<ListState kind="pending" message="Loading items..." />);
 
-    expect(screen.getByText("Loading items...")).toBeInTheDocument();
-    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+    await expect
+      .element(page.getByText("Loading items..."))
+      .toBeInTheDocument();
+    await expect.element(page.getByRole("progressbar")).toBeInTheDocument();
   });
 
-  it("renders an error state with an icon and message", () => {
-    const { container } = render(
+  it("renders an error state with an icon and message", async () => {
+    const { container } = await render(
       <ListState kind="error" message="Failed to load items." />,
     );
 
-    expect(screen.getByText("Failed to load items.")).toBeInTheDocument();
+    await expect
+      .element(page.getByText("Failed to load items."))
+      .toBeInTheDocument();
     expect(container.querySelector("svg")).not.toBeNull();
   });
 });

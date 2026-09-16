@@ -1,7 +1,6 @@
-// @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import { Toast, type ToastProps } from "./toast.tsx";
 
@@ -20,37 +19,36 @@ const renderComponent = (overrides: Partial<ToastProps> = {}) =>
 afterEach(cleanup);
 
 describe("<Toast />", () => {
-  it("renders the message when open", () => {
-    renderComponent();
+  it("renders the message when open", async () => {
+    await renderComponent();
 
-    expect(
-      screen.getByText("Operation completed successfully."),
-    ).toBeInTheDocument();
+    await expect
+      .element(page.getByText("Operation completed successfully."))
+      .toBeInTheDocument();
   });
 
-  it("renders with the correct severity", () => {
-    renderComponent({ severity: "error" });
+  it("renders with the correct severity", async () => {
+    await renderComponent({ severity: "error" });
 
-    expect(screen.getByRole("alert")).toHaveClass(
-      "MuiAlert-colorError",
-      "MuiAlert-filled",
-    );
+    await expect
+      .element(page.getByRole("alert"))
+      .toHaveClass("MuiAlert-colorError", "MuiAlert-filled");
   });
 
-  it("does not render the message when closed", () => {
-    renderComponent({ open: false });
+  it("does not render the message when closed", async () => {
+    await renderComponent({ open: false });
 
-    expect(
-      screen.queryByText("Operation completed successfully."),
-    ).not.toBeInTheDocument();
+    await expect
+      .element(page.getByText("Operation completed successfully."))
+      .not.toBeInTheDocument();
   });
 
   it("calls onClose when the close button is clicked", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByRole("button", { name: "Close" }));
+    await user.click(page.getByRole("button", { name: "Close" }));
 
     expect(onCloseSpy).toHaveBeenCalledOnce();
   });

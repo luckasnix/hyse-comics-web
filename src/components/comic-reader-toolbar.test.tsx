@@ -1,10 +1,8 @@
-// @vitest-environment jsdom
-
 import { useHotkey } from "@tanstack/react-hotkeys";
-import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import { ComicProvider } from "#/contexts/comic.tsx";
 import { chaptersMock, comicsMock, pagesMock } from "#/mocks/comics.ts";
@@ -67,47 +65,47 @@ const renderComponent = (overrides: Partial<ComicReaderToolbarProps> = {}) =>
     </ComicProvider>,
   );
 
-afterEach(() => {
-  cleanup();
+afterEach(async () => {
+  await cleanup();
   vi.clearAllMocks();
 });
 
 describe("<ComicReaderToolbar />", () => {
-  it("renders the page counter with placeholders when carousel is not ready", () => {
-    renderComponent();
+  it("renders the page counter with placeholders when carousel is not ready", async () => {
+    await renderComponent();
 
-    expect(screen.getByText("? / ?")).toBeInTheDocument();
+    await expect.element(page.getByText("? / ?")).toBeInTheDocument();
   });
 
-  it("renders all eight toolbar buttons", () => {
-    renderComponent();
+  it("renders all eight toolbar buttons", async () => {
+    await renderComponent();
 
-    const buttons = screen.getAllByRole("button");
+    const buttons = page.getByRole("button").elements();
 
     expect(buttons).toHaveLength(8);
   });
 
-  it("renders the navigation buttons with RTL labels for an eastern-direction comic", () => {
-    renderComponent();
+  it("renders the navigation buttons with RTL labels for an eastern-direction comic", async () => {
+    await renderComponent();
 
-    expect(
-      screen.getByRole("button", { name: "Last page (shift + ←)" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Next page (←)" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Previous page (→)" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "First page (shift + →)" }),
-    ).toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Last page (shift + ←)" }))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Next page (←)" }))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Previous page (→)" }))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "First page (shift + →)" }))
+      .toBeInTheDocument();
   });
 
-  it("renders the navigation buttons with LTR labels for a western-direction comic", () => {
+  it("renders the navigation buttons with LTR labels for a western-direction comic", async () => {
     const westernComic = comicsMock[1];
 
-    render(
+    await render(
       <ComicProvider
         comic={westernComic}
         chapters={chapters}
@@ -119,99 +117,97 @@ describe("<ComicReaderToolbar />", () => {
       </ComicProvider>,
     );
 
-    expect(
-      screen.getByRole("button", { name: "First page (shift + ←)" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Previous page (←)" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Next page (→)" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Last page (shift + →)" }),
-    ).toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "First page (shift + ←)" }))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Previous page (←)" }))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Next page (→)" }))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Last page (shift + →)" }))
+      .toBeInTheDocument();
   });
 
-  it("disables all navigation buttons when carousel is not ready", () => {
-    renderComponent();
+  it("disables all navigation buttons when carousel is not ready", async () => {
+    await renderComponent();
 
-    expect(
-      screen.getByRole("button", { name: "Last page (shift + ←)" }),
-    ).toBeDisabled();
-    expect(
-      screen.getByRole("button", { name: "Next page (←)" }),
-    ).toBeDisabled();
-    expect(
-      screen.getByRole("button", { name: "Previous page (→)" }),
-    ).toBeDisabled();
-    expect(
-      screen.getByRole("button", { name: "First page (shift + →)" }),
-    ).toBeDisabled();
+    await expect
+      .element(page.getByRole("button", { name: "Last page (shift + ←)" }))
+      .toBeDisabled();
+    await expect
+      .element(page.getByRole("button", { name: "Next page (←)" }))
+      .toBeDisabled();
+    await expect
+      .element(page.getByRole("button", { name: "Previous page (→)" }))
+      .toBeDisabled();
+    await expect
+      .element(page.getByRole("button", { name: "First page (shift + →)" }))
+      .toBeDisabled();
   });
 
-  it("renders the enter fullscreen button when not in fullscreen", () => {
-    renderComponent({ isFullscreen: false });
+  it("renders the enter fullscreen button when not in fullscreen", async () => {
+    await renderComponent({ isFullscreen: false });
 
-    expect(
-      screen.getByRole("button", { name: "Enter fullscreen (f)" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.queryByRole("button", { name: "Exit fullscreen (f)" }),
-    ).not.toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Enter fullscreen (f)" }))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Exit fullscreen (f)" }))
+      .not.toBeInTheDocument();
   });
 
-  it("renders the exit fullscreen button when in fullscreen", () => {
-    renderComponent({ isFullscreen: true });
+  it("renders the exit fullscreen button when in fullscreen", async () => {
+    await renderComponent({ isFullscreen: true });
 
-    expect(
-      screen.getByRole("button", { name: "Exit fullscreen (f)" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.queryByRole("button", { name: "Enter fullscreen (f)" }),
-    ).not.toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Exit fullscreen (f)" }))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Enter fullscreen (f)" }))
+      .not.toBeInTheDocument();
   });
 
-  it("renders the Zoom button before the fullscreen button", () => {
-    renderComponent({ isFullscreen: false });
+  it("renders the Zoom button before the fullscreen button", async () => {
+    await renderComponent({ isFullscreen: false });
 
-    const endButtons = screen.getAllByRole("button").slice(-3);
+    const endButtons = page.getByRole("button").elements().slice(-3);
 
     expect(
       endButtons.map((button) => button.getAttribute("aria-label")),
     ).toEqual(["Zoom (z)", "Enter fullscreen (f)", "More (m)"]);
   });
 
-  it("marks the Zoom button as inactive when zoom is disabled", () => {
-    renderComponent({ isZoomEnabled: false });
+  it("marks the Zoom button as inactive when zoom is disabled", async () => {
+    await renderComponent({ isZoomEnabled: false });
 
-    expect(screen.getByRole("button", { name: "Zoom (z)" })).toHaveAttribute(
-      "aria-pressed",
-      "false",
-    );
+    await expect
+      .element(page.getByRole("button", { name: "Zoom (z)" }))
+      .toHaveAttribute("aria-pressed", "false");
   });
 
-  it("marks the Zoom button as active when zoom is enabled", () => {
-    renderComponent({ isZoomEnabled: true });
+  it("marks the Zoom button as active when zoom is enabled", async () => {
+    await renderComponent({ isZoomEnabled: true });
 
-    expect(screen.getByRole("button", { name: "Zoom (z)" })).toHaveAttribute(
-      "aria-pressed",
-      "true",
-    );
+    await expect
+      .element(page.getByRole("button", { name: "Zoom (z)" }))
+      .toHaveAttribute("aria-pressed", "true");
   });
 
   it("calls toggleZoom when the Zoom button is clicked", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByRole("button", { name: "Zoom (z)" }));
+    await user.click(page.getByRole("button", { name: "Zoom (z)" }));
 
     expect(toggleZoomSpy).toHaveBeenCalledOnce();
   });
 
-  it("registers keyboard shortcuts for reader actions", () => {
-    renderComponent();
+  it("registers keyboard shortcuts for reader actions", async () => {
+    await renderComponent();
 
     const useHotkeyMock = vi.mocked(useHotkey);
 
@@ -238,8 +234,8 @@ describe("<ComicReaderToolbar />", () => {
     });
   });
 
-  it("disables the drawer keyboard shortcut in fullscreen", () => {
-    renderComponent({ isFullscreen: true });
+  it("disables the drawer keyboard shortcut in fullscreen", async () => {
+    await renderComponent({ isFullscreen: true });
 
     expect(vi.mocked(useHotkey)).toHaveBeenCalledWith("M", toggleDrawerSpy, {
       enabled: false,
@@ -249,10 +245,10 @@ describe("<ComicReaderToolbar />", () => {
   it("calls enterFullscreen when the enter fullscreen button is clicked", async () => {
     const user = userEvent.setup();
 
-    renderComponent({ isFullscreen: false });
+    await renderComponent({ isFullscreen: false });
 
     await user.click(
-      screen.getByRole("button", { name: "Enter fullscreen (f)" }),
+      page.getByRole("button", { name: "Enter fullscreen (f)" }),
     );
 
     expect(enterFullscreenSpy).toHaveBeenCalledOnce();
@@ -261,41 +257,43 @@ describe("<ComicReaderToolbar />", () => {
   it("calls exitFullscreen when the exit fullscreen button is clicked", async () => {
     const user = userEvent.setup();
 
-    renderComponent({ isFullscreen: true });
+    await renderComponent({ isFullscreen: true });
 
-    await user.click(
-      screen.getByRole("button", { name: "Exit fullscreen (f)" }),
-    );
+    await user.click(page.getByRole("button", { name: "Exit fullscreen (f)" }));
 
     expect(exitFullscreenSpy).toHaveBeenCalledOnce();
   });
 
-  it("renders the More button enabled when not in fullscreen", () => {
-    renderComponent({ isFullscreen: false });
+  it("renders the More button enabled when not in fullscreen", async () => {
+    await renderComponent({ isFullscreen: false });
 
-    expect(screen.getByRole("button", { name: "More (m)" })).not.toBeDisabled();
+    await expect
+      .element(page.getByRole("button", { name: "More (m)" }))
+      .not.toBeDisabled();
   });
 
-  it("renders the More button disabled when in fullscreen", () => {
-    renderComponent({ isFullscreen: true });
+  it("renders the More button disabled when in fullscreen", async () => {
+    await renderComponent({ isFullscreen: true });
 
-    expect(screen.getByRole("button", { name: "More (m)" })).toBeDisabled();
+    await expect
+      .element(page.getByRole("button", { name: "More (m)" }))
+      .toBeDisabled();
   });
 
   it("calls openDrawer when the More button is clicked", async () => {
     const user = userEvent.setup();
 
-    renderComponent({ isFullscreen: false });
+    await renderComponent({ isFullscreen: false });
 
-    await user.click(screen.getByRole("button", { name: "More (m)" }));
+    await user.click(page.getByRole("button", { name: "More (m)" }));
 
     expect(openDrawerSpy).toHaveBeenCalledOnce();
   });
 
-  it("renders the Home link", () => {
-    renderComponent();
+  it("renders the Home link", async () => {
+    await renderComponent();
 
-    const homeLink = screen.getByRole("link");
+    const homeLink = page.getByRole("link");
 
     expect(homeLink).toHaveAttribute("href", "/en-US");
   });

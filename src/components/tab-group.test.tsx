@@ -1,7 +1,6 @@
-// @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import {
   type TabContainerProps,
@@ -28,73 +27,73 @@ const renderComponent = ({
 afterEach(cleanup);
 
 describe("<TabGroup />", () => {
-  it("renders children inside the compound container", () => {
-    render(
+  it("renders children inside the compound container", async () => {
+    await render(
       <TabGroup initialValue={0}>
         <span>Tabs content</span>
       </TabGroup>,
     );
 
-    expect(screen.getByText("Tabs content")).toBeInTheDocument();
+    await expect.element(page.getByText("Tabs content")).toBeInTheDocument();
   });
 
-  it("exposes all compound subcomponents", () => {
+  it("exposes all compound subcomponents", async () => {
     expect(TabGroup.List).toBeDefined();
     expect(TabGroup.Panel).toBeDefined();
   });
 });
 
 describe("<TabGroup.List />", () => {
-  it("renders one tab for each item", () => {
-    render(
+  it("renders one tab for each item", async () => {
+    await render(
       <TabGroup initialValue={0}>
         <TabGroup.List items={items} />
       </TabGroup>,
     );
 
-    expect(screen.getByRole("tab", { name: "Chapters" })).toBeInTheDocument();
-    expect(screen.getByRole("tab", { name: "Credits" })).toBeInTheDocument();
+    await expect
+      .element(page.getByRole("tab", { name: "Chapters" }))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByRole("tab", { name: "Credits" }))
+      .toBeInTheDocument();
   });
 
-  it("selects the tab matching the initialValue", () => {
-    render(
+  it("selects the tab matching the initialValue", async () => {
+    await render(
       <TabGroup initialValue={1}>
         <TabGroup.List items={items} />
       </TabGroup>,
     );
 
-    expect(screen.getByRole("tab", { name: "Chapters" })).toHaveAttribute(
-      "aria-selected",
-      "false",
-    );
-    expect(screen.getByRole("tab", { name: "Credits" })).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
+    await expect
+      .element(page.getByRole("tab", { name: "Chapters" }))
+      .toHaveAttribute("aria-selected", "false");
+    await expect
+      .element(page.getByRole("tab", { name: "Credits" }))
+      .toHaveAttribute("aria-selected", "true");
   });
 
   it("updates the selected tab when another tab is clicked", async () => {
     const user = userEvent.setup();
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getByRole("tab", { name: "Credits" }));
+    await user.click(page.getByRole("tab", { name: "Credits" }));
 
-    expect(screen.getByRole("tab", { name: "Chapters" })).toHaveAttribute(
-      "aria-selected",
-      "false",
-    );
-    expect(screen.getByRole("tab", { name: "Credits" })).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
+    await expect
+      .element(page.getByRole("tab", { name: "Chapters" }))
+      .toHaveAttribute("aria-selected", "false");
+    await expect
+      .element(page.getByRole("tab", { name: "Credits" }))
+      .toHaveAttribute("aria-selected", "true");
   });
 
-  it("links each tab to its matching panel", () => {
-    renderComponent();
+  it("links each tab to its matching panel", async () => {
+    await renderComponent();
 
-    const chaptersTab = screen.getByRole("tab", { name: "Chapters" });
-    const creditsTab = screen.getByRole("tab", { name: "Credits" });
+    const chaptersTab = page.getByRole("tab", { name: "Chapters" }).element();
+    const creditsTab = page.getByRole("tab", { name: "Credits" }).element();
     const chaptersPanelId = chaptersTab.getAttribute("aria-controls");
     const creditsPanelId = creditsTab.getAttribute("aria-controls");
 
@@ -122,8 +121,8 @@ describe("<TabGroup.List />", () => {
     expect(creditsPanel).toHaveAttribute("aria-labelledby", creditsTab.id);
   });
 
-  it("does not reuse tab and panel ids across instances", () => {
-    render(
+  it("does not reuse tab and panel ids across instances", async () => {
+    await render(
       <>
         <TabGroup initialValue={0}>
           <TabGroup.List items={items} />
@@ -136,11 +135,13 @@ describe("<TabGroup.List />", () => {
       </>,
     );
 
-    const chapterTabs = screen.getAllByRole("tab", { name: "Chapters" });
-    const chapterPanels = screen.getAllByRole("tabpanel", {
-      hidden: true,
-      name: "Chapters",
-    });
+    const chapterTabs = page.getByRole("tab", { name: "Chapters" }).elements();
+    const chapterPanels = page
+      .getByRole("tabpanel", {
+        includeHidden: true,
+        name: "Chapters",
+      })
+      .elements();
 
     expect(chapterTabs[0].id).not.toBe(chapterTabs[1].id);
     expect(chapterPanels[0].id).not.toBe(chapterPanels[1].id);
@@ -154,12 +155,12 @@ describe("<TabGroup.List />", () => {
     );
   });
 
-  it("throws when rendered outside TabGroup", () => {
+  it("throws when rendered outside TabGroup", async () => {
     const consoleErrorSpy = vi
       .spyOn(console, "error")
       .mockImplementation(() => undefined);
 
-    expect(() => render(<TabGroup.List items={items} />)).toThrow(
+    await expect(render(<TabGroup.List items={items} />)).rejects.toThrow(
       "TabGroup components must be used within TabGroup.",
     );
 
@@ -168,19 +169,19 @@ describe("<TabGroup.List />", () => {
 });
 
 describe("<TabGroup.Panel />", () => {
-  it("renders the panel content when its value matches the selected tab", () => {
-    renderComponent({ initialValue: 0 });
+  it("renders the panel content when its value matches the selected tab", async () => {
+    await renderComponent({ initialValue: 0 });
 
-    expect(screen.getByText("Chapters content")).toBeVisible();
-    expect(
-      screen.getByRole("tabpanel", { name: "Chapters" }),
-    ).not.toHaveAttribute("hidden");
+    await expect.element(page.getByText("Chapters content")).toBeVisible();
+    await expect
+      .element(page.getByRole("tabpanel", { name: "Chapters" }))
+      .not.toHaveAttribute("hidden");
   });
 
-  it("hides the panel content when its value does not match the selected tab", () => {
-    renderComponent({ initialValue: 0 });
+  it("hides the panel content when its value does not match the selected tab", async () => {
+    await renderComponent({ initialValue: 0 });
 
-    const creditsTab = screen.getByRole("tab", { name: "Credits" });
+    const creditsTab = page.getByRole("tab", { name: "Credits" }).element();
     const creditsPanelId = creditsTab.getAttribute("aria-controls");
 
     expect(creditsPanelId).toBeTruthy();
@@ -190,29 +191,29 @@ describe("<TabGroup.Panel />", () => {
     ) as HTMLElement;
 
     expect(creditsPanel).toBeInTheDocument();
-    expect(screen.getByText("Credits content")).not.toBeVisible();
+    await expect.element(page.getByText("Credits content")).not.toBeVisible();
     expect(creditsPanel).toHaveAttribute("hidden");
   });
 
   it("shows the matching panel after the selected tab changes", async () => {
     const user = userEvent.setup();
 
-    renderComponent({ initialValue: 0 });
+    await renderComponent({ initialValue: 0 });
 
-    await user.click(screen.getByRole("tab", { name: "Credits" }));
+    await user.click(page.getByRole("tab", { name: "Credits" }));
 
-    expect(screen.getByText("Chapters content")).not.toBeVisible();
-    expect(screen.getByText("Credits content")).toBeVisible();
+    await expect.element(page.getByText("Chapters content")).not.toBeVisible();
+    await expect.element(page.getByText("Credits content")).toBeVisible();
   });
 
-  it("throws when rendered outside TabGroup", () => {
+  it("throws when rendered outside TabGroup", async () => {
     const consoleErrorSpy = vi
       .spyOn(console, "error")
       .mockImplementation(() => undefined);
 
-    expect(() =>
+    await expect(
       render(<TabGroup.Panel value={0}>Chapters content</TabGroup.Panel>),
-    ).toThrow("TabGroup components must be used within TabGroup.");
+    ).rejects.toThrow("TabGroup components must be used within TabGroup.");
 
     consoleErrorSpy.mockRestore();
   });

@@ -1,7 +1,6 @@
-// @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import { UiProvider } from "#/contexts/ui.tsx";
 import { recommendationsMock } from "#/mocks/recommendations.ts";
@@ -14,12 +13,17 @@ import {
 const navigateSpy = vi.fn();
 
 vi.mock("@tanstack/react-router", () => ({
+  isRedirect: () => false,
   useNavigate: () => navigateSpy,
   useParams: () => ({ locale: "en-US" }),
 }));
 
 vi.mock("embla-carousel-react", () => ({
   default: () => [vi.fn(), undefined],
+}));
+
+vi.mock("#/utils/navigation.ts", () => ({
+  getBaseUrl: vi.fn().mockResolvedValue("https://comics.hyse.dev"),
 }));
 
 vi.mock("#/hooks/use-carousel-navigation.ts", () => ({
@@ -72,77 +76,81 @@ const renderComponent = (overrides: Partial<RecommendationShelfProps> = {}) =>
 afterEach(cleanup);
 
 describe("<RecommendationShelf />", () => {
-  it("renders the shelf title", () => {
-    renderComponent();
+  it("renders the shelf title", async () => {
+    await renderComponent();
 
-    expect(screen.getByText(recommendation.title)).toBeInTheDocument();
+    await expect
+      .element(page.getByText(recommendation.title))
+      .toBeInTheDocument();
   });
 
-  it("renders a card for each comic", () => {
-    renderComponent();
+  it("renders a card for each comic", async () => {
+    await renderComponent();
 
     for (const comic of recommendation.comics) {
-      expect(screen.getByText(comic.title)).toBeInTheDocument();
+      await expect.element(page.getByText(comic.title)).toBeInTheDocument();
     }
   });
 
-  it("renders no cards when comics are empty", () => {
-    renderComponent({ comics: [] });
+  it("renders no cards when comics are empty", async () => {
+    await renderComponent({ comics: [] });
 
-    expect(
-      screen.queryByRole("button", { name: "Read" }),
-    ).not.toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Read" }))
+      .not.toBeInTheDocument();
 
     for (const comic of recommendation.comics) {
-      expect(screen.queryByText(comic.title)).not.toBeInTheDocument();
+      await expect.element(page.getByText(comic.title)).not.toBeInTheDocument();
     }
   });
 
-  it("hides the Previous button when navigation is not available", () => {
+  it("hides the Previous button when navigation is not available", async () => {
     setupMock({ canNavigatePrev: false });
 
-    renderComponent();
+    await renderComponent();
 
-    expect(
-      screen.queryByRole("button", { name: "Previous" }),
-    ).not.toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Previous" }))
+      .not.toBeInTheDocument();
   });
 
-  it("hides the Next button when navigation is not available", () => {
+  it("hides the Next button when navigation is not available", async () => {
     setupMock({ canNavigateNext: false });
 
-    renderComponent();
+    await renderComponent();
 
-    expect(
-      screen.queryByRole("button", { name: "Next" }),
-    ).not.toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Next" }))
+      .not.toBeInTheDocument();
   });
 
-  it("renders the Previous button when navigation is available", () => {
+  it("renders the Previous button when navigation is available", async () => {
     setupMock({ canNavigatePrev: true });
 
-    renderComponent();
+    await renderComponent();
 
-    expect(
-      screen.getByRole("button", { name: "Previous" }),
-    ).toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Previous" }))
+      .toBeInTheDocument();
   });
 
-  it("renders the Next button when navigation is available", () => {
+  it("renders the Next button when navigation is available", async () => {
     setupMock({ canNavigateNext: true });
 
-    renderComponent();
+    await renderComponent();
 
-    expect(screen.getByRole("button", { name: "Next" })).toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Next" }))
+      .toBeInTheDocument();
   });
 
   it("navigates to the comic when the Read button is clicked", async () => {
     const user = userEvent.setup();
     setupMock();
 
-    renderComponent();
+    await renderComponent();
 
-    await user.click(screen.getAllByRole("button", { name: "Read" })[0]);
+    await user.click(page.getByRole("button", { name: "Read" }).first());
 
     expect(navigateSpy).toHaveBeenCalledWith({
       to: "/{-$locale}/comics/$comicId",

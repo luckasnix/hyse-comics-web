@@ -1,4 +1,3 @@
-// @vitest-environment jsdom
 import {
   createMemoryHistory,
   createRootRoute,
@@ -8,16 +7,16 @@ import {
   RouterContextProvider,
   RouterProvider,
 } from "@tanstack/react-router";
-import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { type ReactNode, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { renderToString } from "react-dom/server";
 import { useTranslation } from "react-i18next";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import { UserProvider } from "#/contexts/user.tsx";
-import * as translations from "#/i18n/index.ts";
+import { createI18n as originalCreateI18n } from "#/i18n/instance.ts";
 import { signedInUserMock } from "#/mocks/users.ts";
 import { NotFoundPage } from "#/pages/not-found-page.tsx";
 import type { SupportedLanguage, User } from "#/types/users.ts";
@@ -27,6 +26,10 @@ import {
   LanguageProvider,
   useLanguage,
 } from "./language.tsx";
+
+const createI18nMock = vi.hoisted(() => vi.fn());
+
+vi.mock("#/i18n/index.ts", () => ({ createI18n: createI18nMock }));
 
 const Content = () => {
   const { t } = useTranslation();
@@ -93,12 +96,13 @@ const userWithLanguage = (preferredLanguage: SupportedLanguage): User => ({
 });
 
 beforeEach(() => {
+  createI18nMock.mockImplementation(originalCreateI18n);
   vi.spyOn(window.navigator, "languages", "get").mockReturnValue(["pt-PT"]);
   vi.spyOn(window, "scrollTo").mockImplementation(() => {});
 });
 
-afterEach(() => {
-  cleanup();
+afterEach(async () => {
+  await cleanup();
   vi.restoreAllMocks();
 });
 
@@ -114,7 +118,7 @@ describe("LanguageProvider", () => {
     async (preference, href, expected) => {
       const router = await makeRouter(href);
       const replace = vi.spyOn(router.history, "replace");
-      render(
+      await render(
         <StrictMode>
           <UserProvider user={preference ? userWithLanguage(preference) : null}>
             <RouterProvider router={router} />
@@ -122,12 +126,16 @@ describe("LanguageProvider", () => {
         </StrictMode>,
       );
 
-      expect(
-        await screen.findByRole("heading", {
-          name: expected === "pt-BR" ? "Entrar" : "Sign In",
-        }),
-      ).toBeInTheDocument();
-      expect(screen.getByTestId("document")).toHaveAttribute("lang", expected);
+      await expect
+        .element(
+          page.getByRole("heading", {
+            name: expected === "pt-BR" ? "Entrar" : "Sign In",
+          }),
+        )
+        .toBeInTheDocument();
+      await expect
+        .element(page.getByTestId("document"))
+        .toHaveAttribute("lang", expected);
       expect(router.state.location.href).toBe(
         `/${expected}/comics/123?view=list#details`,
       );
@@ -139,20 +147,39 @@ describe("LanguageProvider", () => {
   );
 
   it("shows the splash until detection and navigation have finished", async () => {
+    let finishDetection: (() => Promise<unknown>) | undefined;
+    createI18nMock.mockImplementation((language) => {
+      const instance = originalCreateI18n(language);
+      const changeLanguage = instance.changeLanguage.bind(instance);
+      vi.spyOn(instance, "changeLanguage").mockImplementation(
+        (nextLanguage) =>
+          new Promise((resolve) => {
+            finishDetection = () => changeLanguage(nextLanguage).then(resolve);
+          }),
+      );
+      return instance;
+    });
     const router = await makeRouter("/sign-in");
-    render(
+    await render(
       <UserProvider>
         <RouterProvider router={router} />
       </UserProvider>,
     );
 
-    expect(
-      screen.getByRole("img", { name: "Hyse Comics logomark" }),
-    ).toBeVisible();
-    expect(screen.queryByRole("heading")).not.toBeInTheDocument();
-    await screen.findByRole("heading", { name: "Entrar" });
+    await expect
+      .element(page.getByRole("img", { name: "Hyse Comics logomark" }))
+      .toBeVisible();
+    await expect.element(page.getByRole("heading")).not.toBeInTheDocument();
+
+    await finishDetection?.();
+
+    await expect
+      .element(page.getByRole("heading", { name: "Entrar" }))
+      .toBeInTheDocument();
     expect(router.state.location.pathname).toBe("/pt-BR/sign-in");
-    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    await expect
+      .element(page.getByRole("img", { name: "Hyse Comics logomark" }))
+      .not.toBeInTheDocument();
   });
 
   it("updates the language on login, preference changes, logout and navigation", async () => {
@@ -162,42 +189,51 @@ describe("LanguageProvider", () => {
         <RouterProvider router={router} />
       </UserProvider>
     );
-    const { rerender } = render(tree(null));
-    await screen.findByRole("heading", { name: "Sign In" });
+    const { rerender } = await render(tree(null));
+    await expect
+      .element(page.getByRole("heading", { name: "Sign In" }))
+      .toBeInTheDocument();
 
-    rerender(tree(userWithLanguage("pt-BR")));
+    await rerender(tree(userWithLanguage("pt-BR")));
 
-    await screen.findByRole("heading", { name: "Entrar" });
+    await expect
+      .element(page.getByRole("heading", { name: "Entrar" }))
+      .toBeInTheDocument();
 
     expect(router.state.location.pathname).toBe("/pt-BR/sign-in");
 
-    rerender(tree(userWithLanguage("en-US")));
+    await rerender(tree(userWithLanguage("en-US")));
 
-    await screen.findByRole("heading", { name: "Sign In" });
+    await expect
+      .element(page.getByRole("heading", { name: "Sign In" }))
+      .toBeInTheDocument();
 
     expect(router.state.location.pathname).toBe("/en-US/sign-in");
 
-    rerender(tree(null));
+    await rerender(tree(null));
 
-    await screen.findByRole("heading", { name: "Sign In" });
-    await act(() => router.navigate({ href: "/pt-BR/sign-in" }));
-    await screen.findByRole("heading", { name: "Entrar" });
+    await expect
+      .element(page.getByRole("heading", { name: "Sign In" }))
+      .toBeInTheDocument();
+    await router.navigate({ href: "/pt-BR/sign-in" });
+    await expect
+      .element(page.getByRole("heading", { name: "Entrar" }))
+      .toBeInTheDocument();
 
-    expect(screen.getByTestId("document")).toHaveAttribute("lang", "pt-BR");
+    await expect
+      .element(page.getByTestId("document"))
+      .toHaveAttribute("lang", "pt-BR");
   });
 
   it("discards pending detection when a user arrives", async () => {
-    const originalFactory = translations.createI18n;
-    let finishDetection: (() => void) | undefined;
-    vi.spyOn(translations, "createI18n").mockImplementation((language) => {
-      const instance = originalFactory(language);
+    let finishDetection: (() => Promise<unknown>) | undefined;
+    createI18nMock.mockImplementation((language) => {
+      const instance = originalCreateI18n(language);
       const changeLanguage = instance.changeLanguage.bind(instance);
       vi.spyOn(instance, "changeLanguage").mockImplementation(
         (nextLanguage) =>
           new Promise((resolve) => {
-            finishDetection = () => {
-              changeLanguage(nextLanguage).then(resolve);
-            };
+            finishDetection = () => changeLanguage(nextLanguage).then(resolve);
           }),
       );
       return instance;
@@ -208,53 +244,64 @@ describe("LanguageProvider", () => {
         <RouterProvider router={router} />
       </UserProvider>
     );
-    const { rerender } = render(tree(null));
+    const { rerender } = await render(tree(null));
 
     expect(finishDetection).toBeDefined();
 
-    rerender(tree(userWithLanguage("en-US")));
+    await rerender(tree(userWithLanguage("en-US")));
 
-    await screen.findByRole("heading", { name: "Sign In" });
-    await act(async () => finishDetection?.());
+    await expect
+      .element(page.getByRole("heading", { name: "Sign In" }))
+      .toBeInTheDocument();
+    await finishDetection?.();
 
-    expect(screen.getByRole("heading", { name: "Sign In" })).toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Sign In" }))
+      .toBeVisible();
     expect(router.state.location.pathname).toBe("/en-US/sign-in");
   });
 
   it("detects again when navigating from an explicit locale to a URL without one", async () => {
     const router = await makeRouter("/en-US/sign-in");
-    render(
+    await render(
       <UserProvider>
         <RouterProvider router={router} />
       </UserProvider>,
     );
 
-    await screen.findByRole("heading", { name: "Sign In" });
-    await act(() => router.navigate({ href: "/comics/123" }));
-    await screen.findByRole("heading", { name: "Entrar" });
+    await expect
+      .element(page.getByRole("heading", { name: "Sign In" }))
+      .toBeInTheDocument();
+    await router.navigate({ href: "/comics/123" });
+    await expect
+      .element(page.getByRole("heading", { name: "Entrar" }))
+      .toBeInTheDocument();
 
     expect(router.state.location.pathname).toBe("/pt-BR/comics/123");
   });
 
   it("shows an error if detection fails instead of leaving a permanent splash", async () => {
-    const originalFactory = translations.createI18n;
-    vi.spyOn(translations, "createI18n").mockImplementation((language) => {
-      const instance = originalFactory(language);
+    createI18nMock.mockImplementation((language) => {
+      const instance = originalCreateI18n(language);
       vi.spyOn(instance, "changeLanguage").mockRejectedValue(
         new Error("Detection failed"),
       );
       return instance;
     });
     const router = await makeRouter("/sign-in");
-    render(
+    await render(
       <UserProvider>
         <RouterProvider router={router} />
       </UserProvider>,
     );
 
-    await screen.findByRole("heading", { name: "Error" });
+    await expect
+      .element(page.getByRole("heading", { name: "Error" }))
+      .toBeInTheDocument();
 
-    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    await expect
+      .element(page.getByRole("img", { name: "Hyse Comics logomark" }))
+      .not.toBeInTheDocument();
   });
 
   it.each(["/missing/page", "/pt-BR/missing/page"])(
@@ -262,20 +309,24 @@ describe("LanguageProvider", () => {
     async (href) => {
       const user = userEvent.setup();
       const router = await makeRouter(href);
-      render(
+      await render(
         <UserProvider>
           <RouterProvider router={router} />
         </UserProvider>,
       );
 
-      await screen.findByRole("heading", { name: "Página não encontrada" });
+      await expect
+        .element(page.getByRole("heading", { name: "Página não encontrada" }))
+        .toBeInTheDocument();
 
       expect(router.state.location.href).toBe(href);
 
       await user.click(
-        screen.getByRole("button", { name: "Voltar para o início" }),
+        page.getByRole("button", { name: "Voltar para o início" }),
       );
-      await screen.findByRole("heading", { name: "Entrar" });
+      await expect
+        .element(page.getByRole("heading", { name: "Entrar" }))
+        .toBeInTheDocument();
 
       expect(router.state.location.pathname).toBe("/pt-BR");
     },
@@ -310,15 +361,14 @@ describe("LanguageProvider", () => {
       container.innerHTML = html;
       document.body.append(container);
       const onRecoverableError = vi.fn();
-      let root: ReturnType<typeof hydrateRoot> | undefined;
-      await act(async () => {
-        root = hydrateRoot(container, tree, { onRecoverableError });
-      });
-      await waitFor(() => expect(container.querySelector("h1")).not.toBeNull());
+      const root = hydrateRoot(container, tree, { onRecoverableError });
+      await vi.waitFor(() =>
+        expect(container.querySelector("h1")).not.toBeNull(),
+      );
 
       expect(onRecoverableError).not.toHaveBeenCalled();
 
-      await act(async () => root?.unmount());
+      root.unmount();
 
       container.remove();
     },

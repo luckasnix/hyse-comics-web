@@ -1,7 +1,6 @@
-// @vitest-environment jsdom
-import { renderHook } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { describe, expect, it } from "vitest";
+import { renderHook } from "vitest-browser-react/pure";
 
 import { chaptersMock, comicsMock, pagesMock } from "#/mocks/comics.ts";
 
@@ -24,8 +23,8 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 );
 
 describe("ComicContext", () => {
-  it("provides the comic context value through ComicProvider", () => {
-    const { result } = renderHook(() => useComic(), { wrapper });
+  it("provides the comic context value through ComicProvider", async () => {
+    const { result } = await renderHook(() => useComic(), { wrapper });
 
     expect(result.current).toEqual({
       comic,
@@ -39,8 +38,8 @@ describe("ComicContext", () => {
     expect(result.current.pages).toBe(pages);
   });
 
-  it("throws when accessed outside ComicProvider", () => {
-    expect(() => renderHook(() => useComic())).toThrow(
+  it("throws when accessed outside ComicProvider", async () => {
+    await expect(renderHook(() => useComic())).rejects.toThrow(
       "The hook 'useComic' must be used inside 'ComicProvider'.",
     );
   });

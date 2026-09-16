@@ -1,7 +1,6 @@
-// @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { cleanup, render } from "vitest-browser-react/pure";
 
 import { fallbackLanguage } from "#/constants/users.ts";
 import { useLanguage } from "#/contexts/language.tsx";
@@ -52,22 +51,24 @@ describe("<NotFoundPage />", () => {
       await i18n.changeLanguage(language);
     });
 
-    it("renders the localized heading, description and home action", () => {
-      render(<NotFoundPage />);
+    it("renders the localized heading, description and home action", async () => {
+      await render(<NotFoundPage />);
 
-      expect(
-        screen.getByRole("heading", { level: 3, name: heading }),
-      ).toBeInTheDocument();
-      expect(screen.getByText(description)).toBeInTheDocument();
-      expect(screen.getByRole("button", { name: action })).toBeEnabled();
+      await expect
+        .element(page.getByRole("heading", { level: 3, name: heading }))
+        .toBeInTheDocument();
+      await expect.element(page.getByText(description)).toBeInTheDocument();
+      await expect
+        .element(page.getByRole("button", { name: action }))
+        .toBeEnabled();
       expect(navigateSpy).not.toHaveBeenCalled();
     });
 
     it("navigates home using the current language when clicked", async () => {
       const user = userEvent.setup();
-      render(<NotFoundPage />);
+      await render(<NotFoundPage />);
 
-      await user.click(screen.getByRole("button", { name: action }));
+      await user.click(page.getByRole("button", { name: action }));
 
       expect(navigateSpy).toHaveBeenCalledExactlyOnceWith({
         to: "/{-$locale}",
