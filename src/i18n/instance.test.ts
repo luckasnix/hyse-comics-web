@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { createI18n } from "./index.ts";
+import { createI18n } from "./instance.ts";
 
 afterEach(() => {
   vi.restoreAllMocks();
