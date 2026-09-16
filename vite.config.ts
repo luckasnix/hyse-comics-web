@@ -7,7 +7,7 @@ const viteConfig = defineConfig({
   plugins: [
     tanstackStart({ router: { addExtensions: true } }),
     nitro(),
-    viteReact(),
+    viteReact({ compiler: { logDiagnostics: true } }),
   ],
   resolve: {
     tsconfigPaths: true,
