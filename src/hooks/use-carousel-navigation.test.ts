@@ -114,6 +114,44 @@ describe("useCarouselNavigation()", () => {
   });
 
   describe("when carouselApi is provided", () => {
+    it("updates navigation when the api becomes available and resets when removed", async () => {
+      const { api, emit } = createCarouselApi({
+        currentIndex: 2,
+        totalSlides: 10,
+        canScrollPrev: true,
+      });
+      const initialProps: { api: EmblaCarouselType | undefined } = {
+        api: undefined,
+      };
+      const { act, result, rerender } = await renderHook(
+        (props) => useCarouselNavigation(props?.api),
+        { initialProps },
+      );
+
+      await rerender({ api });
+
+      expect(result.current).toMatchObject({
+        currentSlideNumber: 3,
+        slidesLength: 10,
+        canNavigateFirst: true,
+        canNavigatePrev: true,
+        canNavigateNext: true,
+        canNavigateLast: true,
+      });
+
+      await rerender({ api: undefined });
+      await act(() => emit("select"));
+
+      expect(result.current).toMatchObject({
+        currentSlideNumber: null,
+        slidesLength: null,
+        canNavigateFirst: false,
+        canNavigatePrev: false,
+        canNavigateNext: false,
+        canNavigateLast: false,
+      });
+    });
+
     it("reads slide info from the carousel on mount", async () => {
       const { api } = createCarouselApi({ currentIndex: 2, totalSlides: 10 });
 
@@ -306,6 +344,28 @@ describe("useCarouselNavigation()", () => {
     });
 
     describe("on reInit event", () => {
+      it("updates slide count and navigation even when the selected slide is unchanged", async () => {
+        const { api, emit, mocks } = createCarouselApi();
+        const { act, result } = await renderHook(() =>
+          useCarouselNavigation(api),
+        );
+
+        mocks.scrollSnapList.mockReturnValue([0]);
+        mocks.canScrollPrev.mockReturnValue(true);
+        mocks.canScrollNext.mockReturnValue(false);
+
+        await act(() => emit("reInit"));
+
+        expect(result.current).toMatchObject({
+          currentSlideNumber: 1,
+          slidesLength: 1,
+          canNavigateFirst: false,
+          canNavigatePrev: true,
+          canNavigateNext: false,
+          canNavigateLast: false,
+        });
+      });
+
       it("updates state from the carousel", async () => {
         const { api, emit, mocks } = createCarouselApi({
           currentIndex: 0,
