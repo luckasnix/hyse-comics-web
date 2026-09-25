@@ -43,6 +43,7 @@
   },
   "lists": {
     "noChaptersFound": "Nenhum capítulo encontrado",
+    "reverseChapterOrder": "Inverter ordem",
     "noCreditsFound": "Nenhum crédito encontrado",
     "noWorksFound": "Nenhuma obra encontrada"
   },
