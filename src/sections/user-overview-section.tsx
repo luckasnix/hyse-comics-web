@@ -20,9 +20,8 @@ const coverStyle: CSSProperties = {
 };
 
 const profileRowStyle: SxProps<Theme> = {
-  marginTop: -4,
-  paddingLeft: 2,
-  alignItems: "end",
+  marginTop: 1,
+  alignItems: "start",
 };
 
 const avatarStyle: CSSProperties = {
@@ -35,7 +34,7 @@ const avatarStyle: CSSProperties = {
 };
 
 const profileTextStyle: SxProps<Theme> = {
-  paddingBottom: 1,
+  paddingTop: 1,
 };
 
 const displayNameStyle: SxProps<Theme> = {
@@ -47,8 +46,7 @@ const usernameStyle: SxProps<Theme> = {
 };
 
 const socialLinksStyle: SxProps<Theme> = {
-  marginTop: 1,
-  paddingLeft: 2,
+  marginTop: 0.5,
 };
 
 const socialLinkButtonStyle: SxProps<Theme> = {
