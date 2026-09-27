@@ -24,14 +24,14 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pn install --frozen-lockfile
       - name: Install Chromium
-        run: pnpm exec playwright install --with-deps chromium
+        run: pn exec playwright install --with-deps chromium
       - name: Check types
-        run: pnpm type:check
+        run: pn type:check
       - name: Check format, lint and import sorting
-        run: pnpm check-ci
+        run: pn check-ci
       - name: Test
-        run: pnpm test:coverage
+        run: pn test:coverage
       - name: Build
-        run: pnpm build
+        run: pn build

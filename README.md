@@ -36,7 +36,7 @@ Before you begin, make sure [Node.js](https://nodejs.org/en/download) and [pnpm]
 3. Install dependencies:
 
     ```bash
-    pnpm install --frozen-lockfile
+    pn install --frozen-lockfile
     ```
 
 4. Set up environment variables:
@@ -52,7 +52,7 @@ Before you begin, make sure [Node.js](https://nodejs.org/en/download) and [pnpm]
 5. Run the development server:
 
     ```bash
-    pnpm dev
+    pn dev
     ```
 
 6. Open in your browser:
@@ -66,25 +66,25 @@ Tests use Vitest with Browser Mode and Playwright for browser-dependent behavior
 After installing the project dependencies, install Chromium once:
 
 ```bash
-pnpm exec playwright install chromium
+pn exec playwright install chromium
 ```
 
 Run the test suite once:
 
 ```bash
-pnpm test
+pn test
 ```
 
 Start Vitest in watch mode while developing:
 
 ```bash
-pnpm test:watch
+pn test:watch
 ```
 
 Generate the coverage report:
 
 ```bash
-pnpm test:coverage
+pn test:coverage
 ```
 
 ## 📦 Production preview
@@ -92,13 +92,13 @@ pnpm test:coverage
 Build the Nitro output:
 
 ```bash
-pnpm build
+pn build
 ```
 
 Run the generated Nitro server:
 
 ```bash
-pnpm start
+pn start
 ```
 
 ## 📄 License
