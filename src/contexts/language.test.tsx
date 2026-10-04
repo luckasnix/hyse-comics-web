@@ -356,7 +356,9 @@ describe("LanguageProvider", () => {
       const html = renderToString(tree);
       expect(html).toContain(`lang="${initialLanguage}"`);
       expect(html).toContain(text);
-      if (href === "/sign-in") expect(html).not.toContain("<h1>");
+      if (href === "/sign-in") {
+        expect(html).not.toContain("<h1>");
+      }
       const container = document.createElement("div");
       container.innerHTML = html;
       document.body.append(container);

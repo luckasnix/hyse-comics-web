@@ -28,6 +28,9 @@
     "enabled": true,
     "rules": {
       "preset": "recommended",
+      "style": {
+        "useBlockStatements": "error"
+      },
       "nursery": {
         "useReactCompiler": "warn"
       }

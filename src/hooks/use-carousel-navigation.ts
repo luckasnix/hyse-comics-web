@@ -21,7 +21,9 @@ const createGetSnapshot = (carouselApi: EmblaCarouselType | undefined) => {
   let snapshot = EMPTY_CAROUSEL_SNAPSHOT;
 
   return () => {
-    if (!carouselApi) return EMPTY_CAROUSEL_SNAPSHOT;
+    if (!carouselApi) {
+      return EMPTY_CAROUSEL_SNAPSHOT;
+    }
 
     const currentIndex = carouselApi.selectedScrollSnap();
     const slidesLength = carouselApi.scrollSnapList().length;
@@ -52,7 +54,9 @@ export const useCarouselNavigation = (
 ) => {
   const subscribe = useCallback(
     (onStoreChange: () => void) => {
-      if (!carouselApi) return () => {};
+      if (!carouselApi) {
+        return () => {};
+      }
 
       carouselApi.on("reInit", onStoreChange).on("select", onStoreChange);
 
@@ -91,7 +95,9 @@ export const useCarouselNavigation = (
   }, [carouselApi]);
 
   const navigateLast = useCallback(() => {
-    if (!carouselApi) return;
+    if (!carouselApi) {
+      return;
+    }
     const lastIndex = carouselApi.scrollSnapList().length - 1;
     carouselApi.scrollTo(lastIndex);
   }, [carouselApi]);

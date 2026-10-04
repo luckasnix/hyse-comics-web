@@ -76,16 +76,22 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const needsNavigation = canLocalize && locale !== language;
 
   useEffect(() => {
-    if (isCurrent && resolution.language) return;
+    if (isCurrent && resolution.language) {
+      return;
+    }
 
     let cancelled = false;
     // Each resolution owns its instance, so a stale asynchronous operation
     // cannot change the translations of the currently displayed tree.
     const instance = createI18n(source);
     const resolve = async () => {
-      if (!source) await instance.changeLanguage();
+      if (!source) {
+        await instance.changeLanguage();
+      }
 
-      if (cancelled) return;
+      if (cancelled) {
+        return;
+      }
 
       const detectedLanguage = instance.resolvedLanguage;
       setResolution({
@@ -99,7 +105,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     };
 
     resolve().catch(() => {
-      if (!cancelled) setHasError(true);
+      if (!cancelled) {
+        setHasError(true);
+      }
     });
 
     return () => {
@@ -129,7 +137,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         resetScroll: false,
       })
       .catch(() => {
-        if (!cancelled) setHasError(true);
+        if (!cancelled) {
+          setHasError(true);
+        }
       });
 
     return () => {
@@ -175,8 +185,12 @@ export const useLanguage = () => {
 export const LanguageBoundary = ({ children }: { children: ReactNode }) => {
   const { isReady, hasError } = useLanguage();
 
-  if (hasError) return <DefaultError />;
-  if (!isReady) return <SplashPage />;
+  if (hasError) {
+    return <DefaultError />;
+  }
+  if (!isReady) {
+    return <SplashPage />;
+  }
 
   return children;
 };

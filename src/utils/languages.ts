@@ -9,8 +9,12 @@ export const isSupportedLanguage = (
 export const normalizeDetectedLanguage = (language: string): string => {
   const baseLanguage = language.toLowerCase().split(/[-_]/)[0];
 
-  if (baseLanguage === "en") return "en-US";
-  if (baseLanguage === "pt") return "pt-BR";
+  if (baseLanguage === "en") {
+    return "en-US";
+  }
+  if (baseLanguage === "pt") {
+    return "pt-BR";
+  }
 
   return language;
 };
