@@ -7,7 +7,7 @@ Hyse Comics is an application for reading comics.
 ## 🛠️ Built with
 
 - [TypeScript](https://www.typescriptlang.org) keeps the application typed and maintainable.
-- [Vite](https://vite.dev) and [Nitro](https://nitro.build) power development, production builds, and the server output.
+- [Vite](https://vite.dev) and the [Cloudflare Vite plugin](https://developers.cloudflare.com/workers/vite-plugin/) power development and production builds for [Cloudflare Workers](https://developers.cloudflare.com/workers/).
 - [TanStack Start](https://tanstack.com/start) provides the full-stack application framework, including routing and data loading.
 - [React](https://react.dev) provides the user interface.
 - [Material UI](https://mui.com/material-ui), [Embla Carousel](https://www.embla-carousel.com), and [Tabler Icons](https://tabler.io/icons) provide the application's components and icons.
@@ -39,23 +39,13 @@ Before you begin, make sure [Node.js](https://nodejs.org/en/download) and [pnpm]
     pn install --frozen-lockfile
     ```
 
-4. Set up environment variables:
-
-    Copy the `.env.example` file to `.env`:
-
-    ```bash
-    cp .env.example .env
-    ```
-
-    Update the values in `.env` if needed. Internal API calls use the active runtime origin.
-
-5. Run the development server:
+4. Run the development server in the local Workers runtime:
 
     ```bash
     pn dev
     ```
 
-6. Open in your browser:
+5. Open in your browser:
 
     Open [http://localhost:3001](http://localhost:3001) in your browser to view the result.
 
@@ -89,17 +79,19 @@ pn test:coverage
 
 ## 📦 Production preview
 
-Build the Nitro output:
+Build the Worker and its static assets:
 
 ```bash
 pn build
 ```
 
-Run the generated Nitro server:
+Preview the production build in the local Workers runtime:
 
 ```bash
-pn start
+pn preview
 ```
+
+For deployment validation, publishing, custom domains, and automatic deployments, see the [deployment guide](docs/deployment.md).
 
 ## 📄 License
 

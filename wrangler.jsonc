@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hyse-comics-web",
+  "main": "@tanstack/react-start/server-entry",
+  "compatibility_date": "2026-10-08",
+  // SSR loaders fetch this Worker's own /api routes using the request origin.
+  // Route those requests through Cloudflare instead of bypassing the Worker.
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": true,
+  "observability": {
+    "enabled": true
+  }
+}

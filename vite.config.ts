@@ -1,18 +1,21 @@
+import { cloudflare } from "@cloudflare/vite-plugin";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
-import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 
 const viteConfig = defineConfig({
   plugins: [
+    cloudflare({ viteEnvironment: { name: "ssr" } }),
     tanstackStart({ router: { addExtensions: true } }),
-    nitro(),
     viteReact({ compiler: { logDiagnostics: true } }),
   ],
   resolve: {
     tsconfigPaths: true,
   },
   server: {
+    port: 3001,
+  },
+  preview: {
     port: 3001,
   },
 });

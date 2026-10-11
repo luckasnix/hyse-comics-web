@@ -16,7 +16,8 @@
       "tsconfig.json",
       "vite.config.ts",
       "vitest.config.ts",
-      "vitest.setup.ts"
+      "vitest.setup.ts",
+      "wrangler.jsonc"
     ],
     "ignoreUnknown": false
   },
