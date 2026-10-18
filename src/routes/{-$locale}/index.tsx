@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { PageLayout } from "#/layouts/page-layout.tsx";
 import { RecommendationsSection } from "#/sections/recommendations-section.tsx";
-import { getRecommendations } from "#/services/comics.ts";
+import { getRecommendations } from "#/services/recommendations.ts";
 
 const HomeRoute = () => {
   const { recommendations } = Route.useLoaderData();

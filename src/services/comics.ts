@@ -1,10 +1,4 @@
-import type {
-  Chapter,
-  Comic,
-  CreditWithUser,
-  Page,
-  Recommendation,
-} from "#/types/comics.ts";
+import type { Chapter, Comic, CreditWithUser, Page } from "#/types/comics.ts";
 import { getBaseUrl } from "#/utils/navigation.ts";
 
 export const getComics = async (): Promise<Array<Comic>> => {
@@ -111,36 +105,6 @@ export const getPage = async (pageId: string): Promise<Page> => {
     );
   }
   const data = (await response.json()) as Page;
-
-  return data;
-};
-
-export const getRecommendations = async (): Promise<Array<Recommendation>> => {
-  const baseUrl = await getBaseUrl();
-  const response = await fetch(`${baseUrl}/api/recommendations`);
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch comic recommendations: ${response.status} ${response.statusText}`,
-    );
-  }
-  const data = (await response.json()) as Array<Recommendation>;
-
-  return data;
-};
-
-export const getRecommendation = async (
-  recommendationId: string,
-): Promise<Recommendation> => {
-  const baseUrl = await getBaseUrl();
-  const response = await fetch(
-    `${baseUrl}/api/recommendations/${recommendationId}`,
-  );
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch recommendation "${recommendationId}": ${response.status} ${response.statusText}`,
-    );
-  }
-  const data = (await response.json()) as Recommendation;
 
   return data;
 };

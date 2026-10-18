@@ -101,9 +101,3 @@ export type UserComicWork = {
   comic: Comic;
   roles: Array<UserRoles>;
 };
-
-export type Recommendation = {
-  id: string;
-  title: string;
-  comics: Array<Comic>;
-};

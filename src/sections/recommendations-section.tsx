@@ -2,7 +2,7 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 
 import { RecommendationShelf } from "#/components/recommendation-shelf.tsx";
-import type { Recommendation } from "#/types/comics.ts";
+import type { Recommendation } from "#/types/recommendations.ts";
 
 const containerStyle: SxProps<Theme> = {
   width: "100%",

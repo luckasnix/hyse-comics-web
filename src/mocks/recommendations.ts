@@ -1,4 +1,5 @@
-import type { Comic, Recommendation } from "#/types/comics.ts";
+import type { Comic } from "#/types/comics.ts";
+import type { Recommendation } from "#/types/recommendations.ts";
 
 import { comicsMock } from "./comics.ts";
 
