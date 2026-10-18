@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root.tsx'
 import { Route as Char123LocaleChar125RouteRouteImport } from './routes/{-$locale}/route.tsx'
+import { Route as ApiAdvertisementsRouteImport } from './routes/api/advertisements.ts'
 import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index.tsx'
 import { Route as Char123LocaleChar125SettingsRouteImport } from './routes/{-$locale}/settings.tsx'
 import { Route as Char123LocaleChar125SignInRouteImport } from './routes/{-$locale}/sign-in.tsx'
@@ -34,6 +35,11 @@ const Char123LocaleChar125RouteRoute =
     path: '/{-$locale}',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiAdvertisementsRoute = ApiAdvertisementsRouteImport.update({
+  id: '/api/advertisements',
+  path: '/api/advertisements',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char123LocaleChar125IndexRoute =
   Char123LocaleChar125IndexRouteImport.update({
     id: '/',
@@ -134,6 +140,7 @@ const ApiUsersUserIdWorksRoute = ApiUsersUserIdWorksRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
+  '/api/advertisements': typeof ApiAdvertisementsRoute
   '/{-$locale}/settings': typeof Char123LocaleChar125SettingsRoute
   '/{-$locale}/sign-in': typeof Char123LocaleChar125SignInRoute
   '/{-$locale}/sign-up': typeof Char123LocaleChar125SignUpRoute
@@ -153,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/api/users/$userId/works': typeof ApiUsersUserIdWorksRoute
 }
 export interface FileRoutesByTo {
+  '/api/advertisements': typeof ApiAdvertisementsRoute
   '/{-$locale}/settings': typeof Char123LocaleChar125SettingsRoute
   '/{-$locale}/sign-in': typeof Char123LocaleChar125SignInRoute
   '/{-$locale}/sign-up': typeof Char123LocaleChar125SignUpRoute
@@ -174,6 +182,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
+  '/api/advertisements': typeof ApiAdvertisementsRoute
   '/{-$locale}/settings': typeof Char123LocaleChar125SettingsRoute
   '/{-$locale}/sign-in': typeof Char123LocaleChar125SignInRoute
   '/{-$locale}/sign-up': typeof Char123LocaleChar125SignUpRoute
@@ -196,6 +205,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/{-$locale}'
+    | '/api/advertisements'
     | '/{-$locale}/settings'
     | '/{-$locale}/sign-in'
     | '/{-$locale}/sign-up'
@@ -215,6 +225,7 @@ export interface FileRouteTypes {
     | '/api/users/$userId/works'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/api/advertisements'
     | '/{-$locale}/settings'
     | '/{-$locale}/sign-in'
     | '/{-$locale}/sign-up'
@@ -235,6 +246,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/{-$locale}'
+    | '/api/advertisements'
     | '/{-$locale}/settings'
     | '/{-$locale}/sign-in'
     | '/{-$locale}/sign-up'
@@ -256,6 +268,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   Char123LocaleChar125RouteRoute: typeof Char123LocaleChar125RouteRouteWithChildren
+  ApiAdvertisementsRoute: typeof ApiAdvertisementsRoute
   ApiChaptersChapterIdRoute: typeof ApiChaptersChapterIdRouteWithChildren
   ApiComicsChar123ComicIdChar125Route: typeof ApiComicsChar123ComicIdChar125Route
   ApiPagesPageIdRoute: typeof ApiPagesPageIdRoute
@@ -272,6 +285,13 @@ declare module '@tanstack/react-router' {
       path: '/{-$locale}'
       fullPath: '/{-$locale}'
       preLoaderRoute: typeof Char123LocaleChar125RouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/advertisements': {
+      id: '/api/advertisements'
+      path: '/api/advertisements'
+      fullPath: '/api/advertisements'
+      preLoaderRoute: typeof ApiAdvertisementsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/{-$locale}/': {
@@ -451,6 +471,7 @@ const ApiUsersUserIdRouteWithChildren = ApiUsersUserIdRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   Char123LocaleChar125RouteRoute: Char123LocaleChar125RouteRouteWithChildren,
+  ApiAdvertisementsRoute: ApiAdvertisementsRoute,
   ApiChaptersChapterIdRoute: ApiChaptersChapterIdRouteWithChildren,
   ApiComicsChar123ComicIdChar125Route: ApiComicsChar123ComicIdChar125Route,
   ApiPagesPageIdRoute: ApiPagesPageIdRoute,
