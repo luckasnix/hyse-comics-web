@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import { useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
+import { imageDimensions } from "#/constants/common.ts";
 import { useUi } from "#/contexts/ui.tsx";
 import { getClampedTextStyle } from "#/styles/common.ts";
 import { getBaseUrl } from "#/utils/navigation.ts";
@@ -21,14 +22,14 @@ export type RecommendationCardProps = Readonly<{
 }>;
 
 const containerStyle: SxProps<Theme> = {
-  minWidth: 320,
-  width: 320,
+  minWidth: imageDimensions.thumbnail.width,
+  width: imageDimensions.thumbnail.width,
   height: 460,
 };
 
 const imageStyle: SxProps<Theme> = {
-  width: 320,
-  height: 240,
+  width: imageDimensions.thumbnail.width,
+  height: imageDimensions.thumbnail.height,
 };
 
 const titleStyle: SxProps<Theme> = {

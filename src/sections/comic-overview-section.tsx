@@ -4,6 +4,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { CSSProperties } from "react";
 
+import { imageDimensions } from "#/constants/common.ts";
 import type { Comic } from "#/types/comics.ts";
 
 const containerStyle: SxProps<Theme> = {
@@ -12,8 +13,8 @@ const containerStyle: SxProps<Theme> = {
 
 const imageStyle: CSSProperties = {
   width: "100%",
-  maxWidth: "852px",
-  height: "365px",
+  maxWidth: imageDimensions.cover.width,
+  height: imageDimensions.cover.height,
   borderRadius: "4px",
   objectFit: "cover",
 };

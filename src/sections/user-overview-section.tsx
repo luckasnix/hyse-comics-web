@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import { IconBrandInstagram, IconBrandX } from "@tabler/icons-react";
 import type { CSSProperties } from "react";
 
+import { imageDimensions } from "#/constants/common.ts";
 import type { UserSocialLinks } from "#/types/users.ts";
 
 const containerStyle: SxProps<Theme> = {
@@ -13,8 +14,8 @@ const containerStyle: SxProps<Theme> = {
 
 const coverStyle: CSSProperties = {
   width: "100%",
-  maxWidth: "852px",
-  height: "365px",
+  maxWidth: imageDimensions.cover.width,
+  height: imageDimensions.cover.height,
   borderRadius: "4px",
   objectFit: "cover",
 };
