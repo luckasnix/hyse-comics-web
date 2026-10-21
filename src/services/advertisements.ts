@@ -13,3 +13,20 @@ export const getAdvertisements = async (): Promise<Array<Advertisement>> => {
 
   return data;
 };
+
+export const getAdvertisement = async (
+  advertisementId: string,
+): Promise<Advertisement> => {
+  const baseUrl = await getBaseUrl();
+  const response = await fetch(
+    `${baseUrl}/api/advertisements/${advertisementId}`,
+  );
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch advertisement "${advertisementId}": ${response.status} ${response.statusText}`,
+    );
+  }
+  const data = (await response.json()) as Advertisement;
+
+  return data;
+};

@@ -14,7 +14,10 @@ export type AdvertisementCtaTone = "light" | "dark";
 export type Advertisement = {
   id: string;
   imageUrl: string;
-  targetUrl: string;
-  ctaPosition: AdvertisementCtaPosition;
-  ctaTone: AdvertisementCtaTone;
+  cta: {
+    url: string;
+    label: string;
+    position: AdvertisementCtaPosition;
+    tone: AdvertisementCtaTone;
+  };
 };
