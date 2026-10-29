@@ -1,9 +1,8 @@
 import {
   type RefObject,
   useCallback,
-  useEffect,
   useMemo,
-  useState,
+  useSyncExternalStore,
 } from "react";
 
 export type FullscreenActions = Readonly<{
@@ -13,23 +12,37 @@ export type FullscreenActions = Readonly<{
   isEnabled: boolean;
 }>;
 
+const subscribeToFullscreen = (onStoreChange: () => void) => {
+  document.addEventListener("fullscreenchange", onStoreChange);
+
+  return () => {
+    document.removeEventListener("fullscreenchange", onStoreChange);
+  };
+};
+
+const getServerSnapshot = () => false;
+
 export const useFullscreen = <TargetElement extends Element>(
-  target: RefObject<TargetElement | null>,
+  targetRef: RefObject<TargetElement | null>,
 ) => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const getSnapshot = useCallback(
+    () =>
+      targetRef.current !== null &&
+      document.fullscreenElement === targetRef.current,
+    [targetRef],
+  );
+
+  const isFullscreen = useSyncExternalStore(
+    subscribeToFullscreen,
+    getSnapshot,
+    getServerSnapshot,
+  );
 
   const isEnabled =
     typeof document !== "undefined" && document.fullscreenEnabled;
 
-  const updateFullscreenState = useCallback(() => {
-    setIsFullscreen(
-      typeof document !== "undefined" &&
-        document.fullscreenElement === target.current,
-    );
-  }, [target]);
-
   const enterFullscreen = useCallback(() => {
-    const element = target.current;
+    const element = targetRef.current;
 
     if (
       !isEnabled ||
@@ -44,10 +57,10 @@ export const useFullscreen = <TargetElement extends Element>(
     } catch {
       // Fullscreen is optional and must not interrupt the reader.
     }
-  }, [isEnabled, target]);
+  }, [isEnabled, targetRef]);
 
   const exitFullscreen = useCallback(() => {
-    const element = target.current;
+    const element = targetRef.current;
 
     if (
       typeof document === "undefined" ||
@@ -63,10 +76,10 @@ export const useFullscreen = <TargetElement extends Element>(
     } catch {
       // Exiting fullscreen may fail if the browser has already left it.
     }
-  }, [target]);
+  }, [targetRef]);
 
   const toggleFullscreen = useCallback(() => {
-    const element = target.current;
+    const element = targetRef.current;
 
     if (!element) {
       return;
@@ -81,20 +94,7 @@ export const useFullscreen = <TargetElement extends Element>(
     }
 
     enterFullscreen();
-  }, [enterFullscreen, exitFullscreen, target]);
-
-  useEffect(() => {
-    if (typeof document === "undefined") {
-      return;
-    }
-
-    updateFullscreenState();
-    document.addEventListener("fullscreenchange", updateFullscreenState);
-
-    return () => {
-      document.removeEventListener("fullscreenchange", updateFullscreenState);
-    };
-  }, [updateFullscreenState]);
+  }, [enterFullscreen, exitFullscreen, targetRef]);
 
   const actions = useMemo<FullscreenActions>(
     () => ({

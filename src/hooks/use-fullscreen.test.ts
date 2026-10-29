@@ -222,6 +222,7 @@ describe("useFullscreen()", () => {
     const targetRef = { current: null };
     const { result } = await renderHook(() => useFullscreen(targetRef));
 
+    expect(result.current[0]).toBe(false);
     expect(() => {
       result.current[1].enterFullscreen();
       result.current[1].exitFullscreen();
